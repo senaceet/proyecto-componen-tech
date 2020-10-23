@@ -1,4 +1,7 @@
-
+body{
+	padding:0;
+	margin:0;
+}
 /*Inicio de la Barra Lateral*/
 
 .btn{
@@ -76,7 +79,7 @@
 	font-weight: 200;
 	display: block;
 	width: 100%;
-	border-left: 15px solid transparent:  
+	border-left: 15px solid transparent;  
 }
 .Barra ul li.active a{
 	color: #981a1a;
@@ -116,20 +119,14 @@
 /*Tabla CRUD*/
 
 .TablaBD{
-
-	padding: 50px;
-	left:100px; 
-	margin: 0 auto;
-	margin-top:30px; 
-	width: 90%;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100vh;
 	color: black;
-	border-radius: 4px;
 	background:#f7fafa;
-	list-style: none;
-	box-shadow: 15px 20px 17px 0 rgba(0,0,0,.1);
-	
+	overflow: auto;
 }
-
 .material-icons{
 	font-size: 20px;
 	
@@ -140,7 +137,10 @@
 	padding:12px;
 	display: flex;
 	align-items: baseline;
-	
+	position: sticky;
+	background: #F7FAFA;
+	top: 0;
+	left: 0;
 }
 .TablaBD .CabezaHerramientas .Buscar{
 	width: 40%;
@@ -208,7 +208,7 @@
 
 .TablaBD .PieHerramientas .PaginasTabla ul li button,
 .TablaBD .CabezaHerramientas .PaginasTabla ul li button{
-	font-family: sans-serif;
+	
 	color: black;
 	width: 100%;
 	box-sizing: border-box;
@@ -237,6 +237,8 @@
 }
 
 .TablaBD .TableroDatos{
+	font-family: sans-serif;
+	font-weight: 100;
 	border-collapse: collapse;
 	width: 100%;
 }

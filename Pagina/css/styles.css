@@ -84,6 +84,12 @@ header{
 	margin-top: 50px;
 }
 
+#secciones{
+	width: 100%; height: 95vh;
+	padding: 20px;
+	padding-top: 70px;
+}
+
 
 section{
 	width: 100%;
