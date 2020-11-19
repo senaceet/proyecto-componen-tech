@@ -1,31 +1,13 @@
 
 <div class="TablaBD">
     <div class="CabezaHerramientas">
-   	  	
    	    <div class="Herramientas">
    	  		<ul>
-   	  		    <li>
-   	  		    	<button>
-   	  		    		<i class="material-icons">Añadir ➕</i>
-   	  		    	</button>
-   	  		    </li>
-   	  		    <li>
-   	  				<button>
-   	  	    			<i class="material-icons">Editar 📝</i>
-   	  	    		</button>
-   		    	</li>
-   	  		    <li>
-   	  				<li>
-   	  	    		<button>
-   	  	    			<i class="material-icons">Eliminar ✖</i>
-   			    	</button>
-  		    	</li>
-   	  		    <li>
-   	  		    	<button>
-   	  		    		<i class="material-icons">Buscar 🔎</i>
-   	  		    	</button>
-   	  		    </li>
-   	  		</ul>    
+                <ul>
+                <li><button>Añadir ➕</button></li>
+                <li><button>Eliminar ✖</button></li>
+                <li><button>Buscar 🔎</button></li>
+            </ul>  
    	  	</div>	
     </div>
    	<table class="TableroDatos">
@@ -39,6 +21,7 @@
             <th>Celular</th>
             <th>Dirección</th>
             <th>Correo</th>
+            <th></th>
         </thead>
         <?php
             require_once 'modelo/usuario.php';
@@ -56,6 +39,10 @@
             <td><?php echo $usuario['celular']; ?></td>
             <td><?php echo $usuario['direccion']; ?></td>
             <td><?php echo $usuario['correo']; ?></td>
+            <td ><form action="controlador/userEdit.php" method="post">
+                <input type="hidden" name="documento" value="<?php echo $usuario['documento'] ?>">
+                <input type="submit" value="📝">
+            </form></td>
         </tbody>
         <?php $num++; } ?>
         

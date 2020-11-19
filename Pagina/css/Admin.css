@@ -129,10 +129,6 @@ body{
 	background:#f7fafa;
 	overflow: auto;
 }
-.material-icons{
-	font-size: 20px;
-	
-}
 
 .TablaBD .CabezaHerramientas{
 	border-bottom: solid 2px;
@@ -144,27 +140,8 @@ body{
 	top: 0;
 	left: 0;
 }
-.TablaBD .CabezaHerramientas .Buscar{
-	width: 40%;
-	justify-content: start;
-	
-}
-
-
-.TablaBD .CabezaHerramientas .Buscar .BarraBuscar{
-	width: 40%;
-	background:#f3f2f3;
-	display: block;
-	box-sizing: border-box;
-	border-radius: 4px;
-	border:solid 2px;
-	color: #981a1a;
-	
-}
-
-.TablaBD .CabezaHerramientas .Herramientas{
-	width: 70%;
-	
+.TablaBD .Herramientas button{
+	font-size: 18px;
 }
 .TablaBD .CabezaHerramientas .Herramientas ul{
 	margin: 0;
@@ -210,15 +187,13 @@ body{
 
 .TablaBD .PieHerramientas .PaginasTabla ul li button,
 .TablaBD .CabezaHerramientas .PaginasTabla ul li button{
-	
 	color: black;
 	width: 100%;
-	box-sizing: border-box;
 	border: 0;
 	border-radius: 2px;
 	background: white;
-	font-size: 15px;
 	cursor: pointer;
+	font-size: 15px;
 }
 
 .TablaBD .PieHerramientas .PaginasTabla ul li button:hover,
@@ -239,7 +214,6 @@ body{
 }
 
 .TablaBD .TableroDatos{
-	font-family: sans-serif;
 	font-weight: 100;
 	border-collapse: collapse;
 	width: 100%;
@@ -251,6 +225,9 @@ body{
 	padding: 12px 12px;
 }
 
+.TablaBD .TableroDatos tr{
+	color: var(--texto-gris);
+}
 .TablaBD .TableroDatos th{
 	font-weight: bolder;
 	text-align: left;
@@ -271,78 +248,30 @@ body{
 
 .TablaBD .TableroDatos tbody tr:hover{
 	background-color:#981a1a; 
+	color: #fff;
 }
-
-.TablaBD .TableroDatos tbody tr:hover{
-	color: white;
+.TableroDatos td input[type=submit]{
+	background: transparent;
+	border:none;
+	font-size: 20px; 
 }
 
 /*Fin Tabla BD*/
 
-
-/*Inicio Gestion de Componentes*/
-
-section{
-	width: 100%;
-}
-.sec1{
-	display: flex;
-}
-.slider{
-	height: 350px;
-	width: 100%;
-}
-.slider iframe{
-	width: 100%;
-	height: 100%;
-}
-.categorias{
-	width: 30%;
-	min-width: 200px;
-	background: #fff;
-	overflow-y: auto;
-	height: 390px;
-	position: relative;
-	color: var(--texto-gris);
-}
-.categorias h1{
-	position: sticky;
-	top: 0;
-	box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
-	background: #fff;
-	width: 100%;
-	text-align: center;
-	padding: 5px;
-}
-.categorias li{
-	text-align: center;
-	height: 30px;
-	font-size: 20px;
-	
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.categorias li:hover{
-	box-shadow: 0 100px 0 rgba(0,0,0,0.1) inset;
-}
-
-/*Fin gestión de productos*/
-
 /*Inicio Formularios de creación: Productos*/
 
-
+.cat2{
+	box-shadow: 0 9px 9px 0 rgba(0,0,0,.2);
+} 
 .SeccionImagen{
 	width: 26%;
 	padding: 10px; 
 	background: #fff;
 	box-shadow: 0 9px 9px 0 rgba(0,0,0,.2);
 	border-radius: 4px;
-	margin: 0 10px;
 	min-width: 200px;
 	display: block;
- 	margin-bottom: 20px;
+	overflow: hidden;
 }
 .SeccionImagen img{
 	width: 100%;
@@ -372,17 +301,15 @@ section{
 }
 
 .BotonSubir {
-margin-top: 0px;	 
- height: 45px; 
- width: 100%; 
- overflow: hidden; 
- position: relative; 
- cursor: pointer; 
- background-color: #ecebec;
- 
- font-size: 35px;
- font-weight: bold;
- text-align: center; 
+	height: 45px; 
+	width: 100%; 
+	overflow: hidden; 
+	position: relative; 
+	cursor: pointer; 
+	background-color: #ecebec; 
+	font-size: 35px;
+	font-weight: bold;
+	text-align: center; 
 } 
 .SubirArchivo { 
  cursor: pointer; 
@@ -407,54 +334,40 @@ margin-top: 0px;
 	background: #fff;
 	box-shadow: 0 9px 9px 0 rgba(0,0,0,.2);
 	border-radius: 4px;
-	margin: 0 10px;
 	min-width: 200px;
 	display: block;
- 	margin-bottom: 20px;
 }
 
 .CajaFormulario{
-	margin-top: 20px;
 	padding: 10px;
 	display: block;
 } 
 
-.CajaFormulario .Caja1{
+.CajaFormulario input[type=text],.CajaFormulario textarea,
+.CajaFormulario .BotonProducto{
 	width: 100%;
-	font-size: 25px;
+	padding: 5px 10px;
+	border-radius:3px;
+	border: 1px solid #bababa;
+	margin-bottom: 8px;
+	font-size: 20px;
+	color: var(--texto-gris);
 }
-.CajaFormulario .Caja2{
-	margin-top: 10px;
-	width: 100%;
-	height: 100%;
-	font-size: 25px;
-}
-
-.CajaFormulario .Caja3{
+.CajaFormulario textarea{
 	resize: none;
-	margin-top: 20px;
-	width: 100%;
-	height: 100%;
-	font-size: 25px;
-	border-radius:5px;
-	border-color:#981a1a; 
+	height: 180px;
 }
 
 .CajaFormulario .BotonProducto{
-	margin-top: 15px;
-	width: 100%;
-	height: 40px;
-	font-size: 20px;
-	font-weight: bolder;
-	
-	border-radius: 9px;
+	font-weight: bold;
 	background:#e64b4b;
-	border-color: #ff8989;
-	color: #ffffff;
+	border: 2px solid #e64b4b;
+	color: #fff;
 	cursor: pointer;
 }
 .CajaFormulario .BotonProducto:hover{
 	color:#e64b4b;
-   background:#FFFFFF;
+	transition: 0.3s;
+   	background:#FFF;
 }
 

@@ -53,9 +53,8 @@ $con_cats = $objCat->getCategorias();
 				<iframe src="slider.html" frameborder="0"></iframe>
 			</div>
 		</section>
-		<br>
-		<hr>
-		<br>
+		<br><hr><br>
+		
 		<section class="recientes">
 			<?php if (isset($_GET['c'])) {
 				echo "<h1>".$actualCat['categoria']."</h1>";

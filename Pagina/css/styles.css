@@ -34,7 +34,6 @@ header{
 	width: 100%;
 }
 
-
 .busqueda{
 	width: 50%;
 	padding: 10px;
@@ -77,9 +76,10 @@ header{
 	text-decoration: none;
 }
 .navegador li a:hover{
-	border-bottom: 1px solid var(--texto-gris);
-	
+	transition: 0.6s;
+	border-bottom: 1px solid var(--texto-gris);	
 }
+
 .navegador img{
 	width: 25px;
 	opacity: .8
@@ -97,6 +97,8 @@ section{
 /* slider */
 .sec1{
 	display: flex;
+	height: 350px;
+	justify-content: space-between;
 }
 .slider{
 	height: 350px;
@@ -131,6 +133,9 @@ section{
 	width: 100%;
 	text-align: center;
 	padding: 5px;
+	font-size: 27px;
+	color: var(--texto-gris);
+	font-weight: 100;
 }
 .categorias li{
 	text-align: center;
@@ -145,9 +150,13 @@ section{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 }
 .categorias li:hover{
 	box-shadow: 0 100px 0 rgba(0,0,0,0.1) inset;
+}
+.categorias li .actual{
+	box-shadow: 0 100px 0 rgba(0,0,0,0.2) inset;
 }
 /* fin slider */
 
