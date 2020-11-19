@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php 
+	function secciones(){
+		if (isset($_GET['sec'])) {
+			include "administracion/".$_GET['sec'].".php";
+		} else {
+			include 'administracion/usuarios.php';
+		}
+	}
+ ?>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/Admin.css">
-  <link rel="stylesheet" href="css/styles.css">
+  
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -36,15 +45,15 @@
 		 	<li>
 		 		<a href="#" class="Base-btn">Administración ▼</a>
 		 		<ul class="Base-show">
-		 			<li><a href="#" onclick="ifr('usuarios')">Usuarios</a></li>
-		 			<li><a href="#">Proveedores</a></li>
+		 			<li><a href="administracion.php?sec=usuarios">Usuarios</a></li>
+		 			<li><a href="administracion.php">Proveedores</a></li>
 		 		</ul>
 		 	</li>
 		 	<li>
 		 		<a href="#" class="Productos-btn">Productos ▼</a>
 
 		 		<ul class="Productos-show">
-		 			<li><a href="#" onclick="ifr('productos')">Gestionar Productos</a></li>
+		 			<li><a href="administracion.php?sec=productos">Gestionar Productos</a></li>
 		 		</ul>
 		 	</li>
 		 	<li><a href="#">Configuraciones 🔧</a></li>
@@ -52,11 +61,9 @@
 		 </ul>
 	</nav>
 
-	
-
-
-
-	<iframe src="Administración/Usuarios.html" id="secciones" frameborder="0"></iframe>
+	<div class="secciones">
+		<?php secciones(); ?>
+	</div>
 </body>
 
 <!-- Barra deslizable lateral izquierda -->
@@ -77,24 +84,4 @@
        });
 	</script>
   <!-- Fin Deslizamiento -->
-  
-  	<script>
-  		// script de la navegacion entre secciones
-  		function ifr(frame){
-  			let url_frame;
-  			let frame_tag = document.getElementById("secciones");
-  			switch(frame){
-  				case "usuarios":
-  					frame_tag.src = "Administración/usuarios.html";
-  					break;
-  				case "productos":
-  					frame_tag.src = "Administración/productos.html";
-  					break;
-  				default:
-  					alert("Error: url: "+frame);
-  					frame_tag.src = "Administración/usuarios.html";
-  					break;
-  			}
-  		}
-  	</script>
 </html>
