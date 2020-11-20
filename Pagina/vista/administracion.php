@@ -3,9 +3,9 @@
 <?php 
 	function secciones(){
 		if (isset($_GET['sec'])) {
-			include "administracion/".$_GET['sec'].".php";
+			include "../administracion/".$_GET['sec'].".php";
 		} else {
-			include 'administracion/usuarios.php';
+			include '../administracion/usuarios.php';
 		}
 	}
  ?>
@@ -22,7 +22,7 @@
 </head>
 <body>
 	<header>
-		<div class="logo"><img src="icons/logo.png" alt="l"></div>
+		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
 		
 		</div>
 		<div class="navegador">

@@ -3,7 +3,7 @@
  * @access public
  * @author Marlon, Yeren, Jhon, Kevin
  */
-require_once ('controlador/cn.php');
+require_once ('../controlador/cn.php');
 
 class Producto {
 	

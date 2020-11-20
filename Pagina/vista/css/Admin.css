@@ -1,7 +1,3 @@
-body{
-	padding:0;
-	margin:0;
-}
 /*Inicio de la Barra Lateral*/
 
 .btn{
@@ -344,7 +340,7 @@ body{
 } 
 
 .CajaFormulario input[type=text],.CajaFormulario textarea,
-.CajaFormulario .BotonProducto{
+.CajaFormulario .submitButton{
 	width: 100%;
 	padding: 5px 10px;
 	border-radius:3px;
@@ -358,16 +354,51 @@ body{
 	height: 180px;
 }
 
-.CajaFormulario .BotonProducto{
+.submitButton{
 	font-weight: bold;
 	background:#e64b4b;
 	border: 2px solid #e64b4b;
 	color: #fff;
 	cursor: pointer;
 }
-.CajaFormulario .BotonProducto:hover{
+.submitButton:hover{
 	color:#e64b4b;
 	transition: 0.3s;
    	background:#FFF;
 }
 
+/* Formulario de actualización */
+
+.actForm{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.actForm div{
+	width: 49%;
+}
+.actForm h1{
+	width: 100%;
+	margin-bottom: 10px;
+	text-align: center;
+	color: var(--texto-gris);
+}
+.actForm p{
+	color: var(--texto-gris);
+	margin-bottom: 5px;
+}
+.actForm input{
+	min-width: 250px;
+	width: 100%;
+	padding: 5px 10px;
+	border-radius:3px;
+	border: 1px solid #bababa;
+	margin-bottom: 8px;
+	font-size: 20px;
+	color: var(--texto-gris);
+}
+.actForm .submitButton{
+	color: #fff;
+	margin-top: 5px;
+}

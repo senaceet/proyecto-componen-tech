@@ -1,8 +1,6 @@
 <?php
 require_once(realpath(dirname(__FILE__)) . '/Factura.php');
-require_once(realpath(dirname(__FILE__)) . '/Usuarios.php');
-
-use Factura;
+require_once('/Usuarios.php');
 use Usuarios;
 
 /**

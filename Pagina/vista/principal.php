@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php 
-require_once 'modelo/producto.php';
-require_once 'modelo/categoria.php';
+require_once '../modelo/Producto.php';
+require_once '../modelo/categoria.php';
 $objProducto = new Producto();
 $objCat = new Categoria();
 $con_productos = $objProducto->getProductos();
@@ -22,10 +22,10 @@ $con_cats = $objCat->getCategorias();
 </head>
 <body>
 	<header>
-		<div class="logo"><img src="icons/logo.png" alt="l"></div>
+		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
 		<label class="busqueda">
 			<input type="" placeholder="Buscar productos">
-			<img src="icons/lupa.svg">
+			<img src="../icons/lupa.svg">
 		</label>
 			
 		</div>
@@ -33,7 +33,7 @@ $con_cats = $objCat->getCategorias();
 			<ul>
 				<li><a href="#">Cuenta</a></li>
 				<li><a href="administracion.php">Administracion</a></li>
-				<li><img src="icons/carrito.svg" alt=""></li>
+				<li><img src="../icons/carrito.svg" alt=""></li>
 			</ul>
 		</nav>
 	</header>
@@ -67,7 +67,7 @@ $con_cats = $objCat->getCategorias();
 				while ($producto = $con_productos->fetch_array()) { ?>
 					<div class="card">
 						<figure>
-							<img src="img/<?php echo $producto['idProducto'] ?>.jpg">
+							<img src="../img/<?php echo $producto['idProducto'] ?>.jpg">
 						</figure>
 						<div class="contenido-card">
 							<h3><?php echo $producto['productoNombre']; ?></h3>

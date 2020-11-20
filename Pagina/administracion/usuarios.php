@@ -24,7 +24,7 @@
             <th></th>
         </thead>
         <?php
-            require_once 'modelo/usuario.php';
+            require_once '../modelo/usuario.php';
             $objUsuario = new Usuario();
             $consulta = $objUsuario->getUsuarios();
             $num = 1;
@@ -39,7 +39,7 @@
             <td><?php echo $usuario['celular']; ?></td>
             <td><?php echo $usuario['direccion']; ?></td>
             <td><?php echo $usuario['correo']; ?></td>
-            <td ><form action="controlador/userEdit.php" method="post">
+            <td ><form action="../vista/administracion.php?sec=actForm" method="post">
                 <input type="hidden" name="documento" value="<?php echo $usuario['documento'] ?>">
                 <input type="submit" value="📝">
             </form></td>

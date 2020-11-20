@@ -1,6 +1,6 @@
 <?php 
 
-require_once ('controlador/cn.php');
+require_once ('../controlador/cn.php');
 
 class Categoria {
 	private $_idCategoria,$_categoria;

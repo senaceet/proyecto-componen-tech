@@ -3,7 +3,7 @@
  * @access public
  * @author Marlon, Yeren, Jhon, Kevin
  */
-require_once 'controlador/cn.php';
+require_once '../controlador/cn.php';
 class Usuario {
 	/**
 	 * @AttributeType string
@@ -12,11 +12,19 @@ class Usuario {
 	/**
 	 * @AttributeType string
 	 */
-	protected $_nombre;
+	protected $_nombres;
 	/**
 	 * @AttributeType string
 	 */
 	protected $_apellidos;
+	/**
+	 * @AttributeType string
+	 */
+	protected $_fechaNacimiento;
+	/**
+	 * @AttributeType string
+	 */
+	protected $_edad;
 	/**
 	 * @AttributeType string
 	 */
@@ -32,15 +40,7 @@ class Usuario {
 	/**
 	 * @AttributeType string
 	 */
-	protected $_contraseña;
-	/**
-	 * @AttributeType int
-	 */
 	protected $_cargo;
-	/**
-	 * @AttributeType string
-	 */
-	protected $_fechaNacimiento;
 	/**
 	 * @AttributeType int
 	 */
@@ -49,18 +49,31 @@ class Usuario {
 	 * @AttributeType int
 	 */
 	protected $_estado;
-	/**
-	 * @AttributeType string
-	 */
-	protected $_clave;
 
 	/**
 	 * @access public
 	 * @return boolean
 	 * @ReturnType boolean
 	 */
+
+	// crear usuario
+
+	public function crearUsuario($_documento,$_nombres,$_apellidos,$_fechaNacimiento,$_edad,$_celular,$_direccion,$_correo,$_cargo,$_tipodocumento,$_estado){
+		$this->_documento = $_documento;
+		$this->_nombres = $_nombres;
+		$this->_apellidos = $_apellidos;
+		$this->_fechaNacimiento = $_fechaNacimiento;
+		$this->_edad = $_edad;
+		$this->_celular = $_celular;
+		$this->_direccion = $_direccion;
+		$this->_correo = $_correo;
+		$this->_cargo = $_cargo;
+		$this->_tipodocumento = $_tipodocumento;
+		$this->_estado = $_estado;
+	}
+
 	public function Registrarse() {
-		// Not yet implemented
+		$sql = "";
 	}
 
 	/**
@@ -68,8 +81,38 @@ class Usuario {
 	 * @return boolean
 	 * @ReturnType boolean
 	 */
-	public function ActualizarDatos() {
-		// Not yet implemented
+	public function actualizarDatos($doc) {
+		$sql = "UPDATE usuario SET documento='$this->$_documento', nombres='$this->$_nombres', apellidos='$this->$_apellidos', fechaNto='$this->$_fechaNacimiento', edad='$this->$_edad', celular='$this->$_celular', direccion='$this->$_direccion', correo='$this->$_correo', CARGO_idCargo='$this->$_cargo', TIPODOCUMENTO_idTipo='$this->$_tipodocumento', ESTADO_idEstado='$this->$_estado' WHERE documento = '$doc'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	// seleccionar a todos los usuarios activos
+
+	public function getUsuarios(){
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 AND ESTADO_idEstado = 9";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	// seleccionar unico usuario
+
+	/**
+	 * @access public
+	 * @return array
+	 * @ReturnType array
+	 */
+
+	public function getUsuario($u){
+		$sql = "SELECT * FROM usuario WHERE documento = $u";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
 
 	/**
@@ -119,8 +162,8 @@ class Usuario {
 	 * @param string aNombre
 	 * @ParamType aNombre string
 	 */
-	public function setNombre($aNombre) {
-		$this->_nombre = $aNombre;
+	public function setNombres($aNombres) {
+		$this->_nombres = $aNombres;
 	}
 
 	/**
@@ -415,14 +458,6 @@ class Usuario {
 	 */
 	public function getClave() {
 		return $this->_clave;
-	}
-
-	public function getUsuarios(){
-		$sql = "select * from usuario where CARGO_idCargo=3 and ESTADO_idEstado = 9";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$cn->close();
-		return $res;
 	}
 }
 ?>
