@@ -175,7 +175,7 @@ create table FACTURA (
     foreign key (USUARIO_documento)
     references USUARIO (documento)
     on delete no action
-    on update no action,
+    on update cascade,
   constraint fk_FACTURA_ESTADO1
     foreign key (ESTADO_idEstado)
     references ESTADO (idEstado)
@@ -296,7 +296,7 @@ create table PEDIDO (
     foreign key (USUARIO_documento)
     references USUARIO (documento)
     on delete no action
-    on update no action,
+    on update cascade,
   constraint fk_PEDIDO_PROVEEDOR1
     foreign key (PROVEEDOR_idProveedor)
     references PROVEEDOR (idProveedor)
