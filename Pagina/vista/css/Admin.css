@@ -19,7 +19,7 @@
 }
 
 .btn span{
-	color:#981a1a;
+	color:var(--rojo-principal);
 	font-size: 28px;
 	line-height: 45px;
 }
@@ -28,12 +28,11 @@
 }
 .Barra{
 	z-index: 100;
-	
 	position: fixed;
 	width: 250px;
 	height: 100%;
 	left: -250px;
-	top: 65px;
+	top: 60px;
 	background: #cecece;
 	transition: left 0.4s ease;
 }
@@ -47,7 +46,7 @@
 	font-weight: bolder;
 	line-height: 40px;
 	text-align: center;
-	background: #981a1a;
+	background: var(--rojo-principal);
 	letter-spacing: 1px;
 }
 
@@ -62,10 +61,7 @@
 
 .Barra ul li{
 	line-height: 40px;
-	border-bottom: 1px solid rgb(136 0 0);
-}
-.Barra ul li:last-child{
-	border-bottom: 1px solid red;
+	border-bottom: 1px solid #ccc;
 }
 
 .Barra ul li a{
@@ -127,12 +123,11 @@
 	padding: 0;
 	margin: 0;
 	width: 100%;
-	height: 100%;
+	height: 85vh;
 	color: black;
-	background:#f7fafa;
+	background:transparent;
 	overflow: auto;
 }
-
 .TablaBD .CabezaHerramientas{
 	border-bottom: solid 2px;
 	padding:12px;
@@ -232,25 +227,21 @@
 	color: var(--texto-gris);
 }
 .TablaBD .TableroDatos th{
-	font-weight: bolder;
 	text-align: left;
-	border-bottom: solid 2px;
-	border-color: #981a1a;
+	border-bottom: solid 2px var(--rojo-principal);
 }
 
 .TablaBD .TableroDatos td{
 	font-weight: bolder;
 	text-align: left;
-	border-bottom: solid 1px;
-	border-color: #981a1a;
+	border-bottom: solid 1px var(--rojo-principal);
 }
 
-.TablaBD .TableroDatos tbody tr:nth-child(even){
-	background-color: #e1e0e1; 
-}
+
 
 .TablaBD .TableroDatos tbody tr:hover{
-	background-color:#981a1a; 
+	transition: 0.3s;
+	background-color: var(--rojo-principal); 
 	color: #fff;
 }
 .TableroDatos td input[type=submit]{
@@ -263,15 +254,14 @@
 
 /*Inicio Formularios de creación: Productos*/
 
-.cat2{
-	box-shadow: 0 9px 9px 0 rgba(0,0,0,.2);
-} 
+.sec1sombra > div{
+	box-shadow: 0 5px 5px rgba(0,0,0,.2);
+	background: #fff;
+	border-radius: 3px;
+}
 .SeccionImagen{
 	width: 26%;
-	padding: 10px; 
-	background: #fff;
-	box-shadow: 0 9px 9px 0 rgba(0,0,0,.2);
-	border-radius: 4px;
+	padding: 10px;
 	min-width: 200px;
 	display: block;
 	overflow: hidden;
@@ -333,9 +323,7 @@
 
 .SeccionFormulario{
 	width: 40%;
-	padding: 10px; 
-	background: #fff;
-	box-shadow: 0 9px 9px 0 rgba(0,0,0,.2);
+	padding: 10px;
 	border-radius: 4px;
 	min-width: 200px;
 	display: block;
@@ -367,77 +355,31 @@
 
 .submitButton{
 	font-weight: bold;
-	background:#e64b4b;
-	border: 2px solid #e64b4b;
+	background:var(--rojo-principal);
+	border: 2px solid var(--rojo-principal);
 	color: #fff;
 	cursor: pointer;
 }
 .submitButton:hover{
+	border-color: var(--rojo-principal);
 	color:#e64b4b;
 	transition: 0.3s;
    	background:#FFF;
 }
 
-
-
-
-
-
-/*Inicio de Sección de busqueda*/
-
-
-.BusquedaProductos{
-	margin-top: 6%;
-	margin-left: 1%;
-	width: 50%;
-	padding: 10px;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 1px 5px 0 rgba(0,0,0,.9);
-	display: flex;
-	align-items: center;
+.busqueda2{
+	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
 }
-
-.BusquedaProductos input{
-	width: calc(100% - 20px);
-	border:none;
-	outline: none;
-	padding-left: 10px;
-	font-size: 16px;
-}
-
-.BusquedaProductos img{
-	width: 20px;
-	padding-left: 5px; 
-	opacity: .9;
-	border-left: 1px solid rgb(100,100,100); 
-}
-
-/*Fin Barra de busqueda Productos*/
-
-
-
-
 
 
 /*Inicio Contenedor de las Cartas*/
 
 
 .ContenedorCartas{
-	width: 98%;
-	margin-top: 6px;
-	margin-left: 1%;
 	background-color: #f3f2f3;
 	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
 
 }
-
-
-
-
-
-
-
 
 /*Inicio de las cartas: Productos recientes*/
 

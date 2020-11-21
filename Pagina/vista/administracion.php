@@ -65,7 +65,7 @@
 		 </ul>
 	</nav>
 
-	<div class="secciones">
+	<div class="contenedor secciones">
 		<?php secciones(); ?>
 	</div>
 </body>

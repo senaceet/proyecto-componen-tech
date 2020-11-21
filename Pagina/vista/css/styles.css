@@ -1,5 +1,6 @@
 :root{
 	--texto-gris: rgb(60,60,60);
+	--rojo-principal:#CE3F3F;
 }
 *{
 	margin:0;
@@ -11,6 +12,22 @@ body{
  background: #F3F2F3;
 }
 
+/* Mensajes */
+.getMensaje{
+	width: 100%;
+	margin-bottom: 5px;
+	padding: 10px 25px;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.correcto{
+	background: #01B1F2;
+}
+.incorrecto{
+	background: #28a745;
+}
 
 /* header */
 header{
@@ -98,6 +115,7 @@ section{
 .sec1{
 	display: flex;
 	height: 350px;
+	margin-bottom: 20px;
 	justify-content: space-between;
 }
 .slider{
@@ -110,10 +128,8 @@ section{
 }
 .secciones{
 	width: 95%;
+	height: auto;
 	margin:auto;
-	height: 85vh;
-	overflow: auto;
-	margin-top: 20px;
 	z-index: 10;
 }
 .categorias{
@@ -184,6 +200,7 @@ section{
 }
 .card{
 	min-width: 200px;
+	max-width: 300px;
 	width: 20%;
 	margin: 20px;
 	border-radius: 6px;
@@ -195,8 +212,8 @@ section{
 }
 /*BORDE CARTA CON HOVER*/
 .card:hover{
-	box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
-	transform: translateY(-3%);
+	box-shadow: 2px 5px 5px rgba(0,0,0,0.4);
+	transform: translateY(-2%);
 }
 .card img{
 	width: 100%;
@@ -219,17 +236,38 @@ section{
 /*CONTENIDO TEXTO DEL BOTÓN*/
 .card .contenido-card a{
 	display: inline-block;
-	padding: 10px;
-	margin-top: 10px;
+	padding: 5px 10px;
+	margin: 5px 10px;
 	text-decoration: none;
-	color: #08f11b;
-	border: 1px solid #10f509;
+	border: 1px solid #098400;
 	border-radius: 4px;
 	transition: all 400ms ease;
-	margin-bottom: 5px;
 }
-.card .contenido-card a:hover{
-	background: #1aee07;
+
+.card .contenido-card .verde{
+	background: #098400;
 	color: #fff;
+}
+.card .contenido-card .rojo{
+	border-color:#D92626;
+	background: #D92626;
+	color: #fff;
+}
+.card .contenido-card .azul{
+	border-color:#14A0E1;
+	background: #14A0E1;
+	color: #fff;
+}
+.card .contenido-card .azul:hover{
+	background:#fff;
+	color: #14A0E1;
+}
+.card .contenido-card .verde:hover{
+	background: #fff;
+	color: #098400;
+}
+.card .contenido-card .rojo:hover{
+	background: #fff;
+	color: #D92626;
 }
 

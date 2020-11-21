@@ -1,14 +1,21 @@
 <?php 
+require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
+$objProducto = new Producto();
 $objCat = new Categoria();
+$con_productos = $objProducto->getProductos();
 if (isset($_GET['c'])) {
+	$con_productos = $objProducto->getProductosCat($_GET['c']);
 	$con_cat = $objCat->getCategoria($_GET['c']);
 	$actualCat = $con_cat->fetch_array();
 }
 $con_cats = $objCat->getCategorias();
+
  ?>
+ <!-- Mensaje -->
+ 
 <!-- Sección de Categorías: Gestión producto -->
-<form class="sec1" enctype="multipart/form-data" action="../controlador/insProducto.php" method="post">
+<form class="sec1 sec1sombra class=""" enctype="multipart/form-data" action="../controlador/insProducto.php" method="post">
 	<input type="hidden" name="prodCat" value="<?php echo $_GET['c'] ?>">
 	<div class="categorias cat2">
 		<h1>Categorías</h1>
@@ -43,104 +50,41 @@ $con_cats = $objCat->getCategorias();
 			<textarea class="Caja3" name="prodDesc" placeholder="Descripción" rows="5"></textarea>
 			<button type="submit" class="submitButton">Subir producto</button>
 		</div>
+	</div>
 </form>
 
 
+
 <!-- Sección de busqueda de productos -->
-<section>
-
-	<div class="BusquedaProductos">
-		<input type="text" name="" placeholder="Buscar Producto">
-		<img src="icons/lupa.svg">
-	</div>
-</section>
-
-
+<div class="busqueda busqueda2">
+	<input type="text" name="" placeholder="Buscar Producto">
+	<img src="../icons/lupa.svg">
+</div>
+<br>
 <section class="ContenedorCartas">
-
 	<section class="recientes">
-   
-				<div class="carta">
-					<div class="contenidoCarta">
-						<img src="./img/1012.jpg">
-						<h3>Tarjeta De Video Asrock Radeon RTX 5600 XT Challenger 6GB OC</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
+		<div class="container-card">
+		<?php 
+		while ($producto = $con_productos->fetch_array()) { ?>
+			<div class="card">
+				<figure>
+					<img src="../img/<?php echo $producto['idProducto'] ?>.jpg">
+				</figure>
+				<div class="contenido-card">
+					<h3><?php echo $producto['productoNombre']; ?></h3>
+					<a class="azul" href="#">EDITAR</a>
+					<a class="rojo" href="#">ELIMINAR</a>
 				</div>
-
-				<div class="carta">
-					<div class="contenidoCarta">
-						<img src="./img/1033.jpg">
-						<h3>Fuente De Poder Corsair Hx 1000w 80 Plus Platinum</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-
-				<div class="carta">
-					<div class="contenidoCarta">
-						<img src="./img/1009.jpg">
-						<h3>Memoria Ram Adata Xpg Spectrix D50 16gb 3600 Mhz</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-
-				<div class="carta">
-					
-						
-					
-					<div class="contenidoCarta">
-						<img src="./img/1022.jpg">
-						<h3>Monitor Samsung 24 F24t350fhl Ips 75hz</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-				<div class="carta">
-					
-					<div class="contenidoCarta">
-						<img src="./img/1034.jpg">
-						<h3>Teclado Mecanico Corsair K65 Rgb Rapidfire Tkl</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-				<div class="carta">
-					
-						
-					
-					<div class="contenidoCarta">
-						<img src="./img/1017.jpg">
-						<h3>Chasis Corsair Carbide Spec Omega, Blanco Rgb, Vidrio Templa</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-				<div class="carta">
-					
-					<div class="contenidoCarta">
-						<img src="./img/1035.jpg">
-						<h3>Carcasa Corsair Carbide Spec-05 Acero-plástico</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-				<div class="carta">
-					
-					<div class="contenidoCarta">
-						<img src="./img/1036.jpg">
-						<h3>Chasis Corsair Spec-delta Rgb Vt + Fuente 650w 80 White</h3>
-						<a class="ActualizarCarta" href="#">Editar</a>
-						<a class="EliminarCarta" href="#">Borrar</a>
-					</div>
-				</div>
-				
-	 </section>
+			</div>
+		<?php } ?>	
+		</div>			
+	</section>
+</section>
 
 	
-</section>
+
+
+
 
 <!-- Fin sección de busqueda de productos -->
 

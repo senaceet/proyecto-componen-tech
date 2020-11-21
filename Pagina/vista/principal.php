@@ -53,7 +53,7 @@ $con_cats = $objCat->getCategorias();
 				<iframe src="slider.html" frameborder="0"></iframe>
 			</div>
 		</section>
-		<br><hr><br>
+		<hr><br>
 		
 		<section class="recientes">
 			<?php if (isset($_GET['c'])) {
@@ -73,7 +73,7 @@ $con_cats = $objCat->getCategorias();
 							<h3><?php echo $producto['productoNombre']; ?></h3>
 					
 							<p><?php echo $producto['detalles']; ?></p>
-							<p><?php echo $producto['precio'];?></p>
+							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
 							<a href="#">COMPRAR</a>
 						</div>
 					</div>

@@ -90,7 +90,7 @@ class Usuario {
 	 * @ReturnType boolean
 	 */
 	public function actualizarDatos($doc) {
-		$sql = "UPDATE usuario SET documento='$this->$_documento', nombres='$this->$_nombres', apellidos='$this->$_apellidos', fechaNto='$this->$_fechaNacimiento', edad='$this->$_edad', celular='$this->$_celular', direccion='$this->$_direccion', correo='$this->$_correo', CARGO_idCargo='$this->$_cargo', TIPODOCUMENTO_idTipo='$this->$_tipodocumento', ESTADO_idEstado='$this->$_estado' WHERE documento = '$doc'";
+		$sql = "UPDATE usuario SET documento='$this->_documento', nombres='$this->_nombres', apellidos='$this->_apellidos', fechaNto='$this->_fechaNacimiento', edad='$this->_edad', celular='$this->_celular', direccion='$this->_direccion', correo='$this->_correo', CARGO_idCargo='$this->_cargo', TIPODOCUMENTO_idTipo='$this->_tipodocumento', ESTADO_idEstado='$this->_estado' WHERE documento = '$doc'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -184,8 +184,8 @@ class Usuario {
 	 * @return string
 	 * @ReturnType string
 	 */
-	public function getNombre() {
-		return $this->_nombre;
+	public function getNombres() {
+		return $this->_nombres;
 	}
 
 	/**

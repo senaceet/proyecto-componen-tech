@@ -1,3 +1,23 @@
+<?php 
+if (isset($_GET['m'])) {
+    switch ($_GET['m']) {
+        case 1:
+            echo "<div class='getMensaje correcto'>Operario insertado correctamente</div>";
+            break;
+        
+        case 2:
+            echo "<div class='getMensaje incorrecto'>¡Error al insertar operario!</div>";
+            break;
+        case 3:
+            echo "<div class='getMensaje correcto'>Usuario actualizado</div>";
+            break;
+        case 4:
+            echo "<div class='getMensaje incorrecto'>¡Error al actualizar usuario!</div>";
+            break;
+    }
+}
+
+ ?>
 
 <div class="TablaBD">
     <div class="CabezaHerramientas">
@@ -5,11 +25,11 @@
    	  		<ul>
                 <ul>
                 <li><button>Añadir ➕</button></li>
-                <li><button>Eliminar ✖</button></li>
                 <li><button>Buscar 🔎</button></li>
             </ul>  
    	  	</div>	
     </div>
+    <!--✖-->
    	<table class="TableroDatos">
         <thead>
             <th>  </th>
@@ -28,10 +48,26 @@
             $objUsuario = new Usuario();
             $consulta = $objUsuario->getUsuarios();
             $num = 1;
-            while ($usuario = $consulta->fetch_array()) { ?>
+            while ($usuario = $consulta->fetch_array()) { 
+                switch ($usuario['TIPODOCUMENTO_idTipo']) {
+                    case 1:
+                        $documento = "CC_".$usuario['documento'];
+                        break;
+                    case 2:
+                        $documento = "TI_".$usuario['documento'];
+                        break;
+                    case 3:
+                        $documento = "CE_".$usuario['documento'];
+                        break;
+                    case 4:
+                        $documento = "PA_".$usuario['documento'];
+                        break;
+                }
+
+        ?>
         <tbody>
             <td><?php echo $num; ?></td>
-            <td><?php echo $usuario['documento']; ?></td>
+            <td><?php echo $documento; ?></td>
             <td><?php echo $usuario['nombres']; ?></td>
             <td><?php echo $usuario['apellidos']; ?></td>
             <td><?php echo $usuario['fechaNto']; ?></td>

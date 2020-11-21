@@ -10,15 +10,15 @@
 	<h1>Actualizacion de datos de usuario</h1>
 	<div>
 		<p>Numero de documento</p>
-		<input name="documento" type="text" value="<?php echo $actUsuario['documento']; ?>">
+		<input name="documento" maxlength="10" type="text" value="<?php echo $actUsuario['documento']; ?>" >
 	</div>
 	<div>
 		<p>Nombres</p>
-		<input name="nombres" type="text" value="<?php echo $actUsuario['nombres']; ?>">
+		<input name="nombres" maxlength="50" type="text" value="<?php echo $actUsuario['nombres']; ?>">
 	</div>
 	<div>
 		<p>Apellidos</p>
-		<input name="apellidos" type="text" value="<?php echo $actUsuario['apellidos']; ?>">
+		<input name="apellidos" type="text" maxlength="50" value="<?php echo $actUsuario['apellidos']; ?>">
 	</div>
 	<div>
 		<p>Fecha de nacimiento</p>
