@@ -72,8 +72,16 @@ class Usuario {
 		$this->_estado = $_estado;
 	}
 
-	public function Registrarse() {
-		$sql = "";
+	public function Registrarse($_clave) {
+		$sql = "INSERT INTO usuario values('$this->_documento','$this->_nombres','$this->_apellidos','$this->_fechaNacimiento','$this->_edad','$this->_celular','$this->_direccion','$this->_correo','$this->_cargo','$this->_tipodocumento','$this->_estado')";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		if($res){
+			$sql = "INSERT INTO clave values('$this->_correo','$_clave')";
+			$res = $cn->query($sql);
+		}
+		$cn->close();
+		return $res;
 	}
 
 	/**

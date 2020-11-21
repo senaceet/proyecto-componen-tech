@@ -94,6 +94,13 @@
 .Barra ul .Productos-show.show2{
  display: block;
 }
+
+.Barra ul .Cuenta-show.show{
+ display: block;
+}
+.Barra ul .Cuenta-show.show3{
+ display: block;
+}
 .Barra ul ul li{
 	line-height: 42px;
 	border-bottom: none;
@@ -349,6 +356,10 @@
 	font-size: 20px;
 	color: var(--texto-gris);
 }
+
+.CajaFormulario .submitButton{
+	color: #fff;
+}
 .CajaFormulario textarea{
 	resize: none;
 	height: 180px;
@@ -366,6 +377,237 @@
 	transition: 0.3s;
    	background:#FFF;
 }
+
+
+
+
+
+
+/*Inicio de Sección de busqueda*/
+
+
+.BusquedaProductos{
+	margin-top: 6%;
+	margin-left: 1%;
+	width: 50%;
+	padding: 10px;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 1px 5px 0 rgba(0,0,0,.9);
+	display: flex;
+	align-items: center;
+}
+
+.BusquedaProductos input{
+	width: calc(100% - 20px);
+	border:none;
+	outline: none;
+	padding-left: 10px;
+	font-size: 16px;
+}
+
+.BusquedaProductos img{
+	width: 20px;
+	padding-left: 5px; 
+	opacity: .9;
+	border-left: 1px solid rgb(100,100,100); 
+}
+
+/*Fin Barra de busqueda Productos*/
+
+
+
+
+
+
+/*Inicio Contenedor de las Cartas*/
+
+
+.ContenedorCartas{
+	width: 98%;
+	margin-top: 6px;
+	margin-left: 1%;
+	background-color: #f3f2f3;
+	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
+
+}
+
+
+
+
+
+
+
+
+/*Inicio de las cartas: Productos recientes*/
+
+.carta{
+	min-width: 200px;
+	width: 20%;
+	height: auto;
+	margin: 25px;
+	border-radius: 6px;
+	overflow: hidden;
+	background:#fff;
+	box-shadow: 0px 10px 10px rgba(0,0,0,0.5);
+	transition: all 400ms ease-out;
+	display: inline-block;
+	cursor: default;
+}
+
+
+
+
+/*BORDE CARTA CON HOVER*/
+.carta:hover{
+	box-shadow: 5px 5px 20px rgba(5,0,0,0.9);
+	transform: translateY(-4%);
+	transition: all 400ms ease-out;
+}
+.contenidoCarta img{
+	width: 100%;
+	height: 100%;
+	
+	
+}
+.carta .contenidoCarta{
+	padding: 15px;
+	text-align: center;
+}
+.carta .contenidoCarta h3{
+	margin-bottom: 15px;
+	color: #7a7a7a;
+}
+
+
+
+
+
+/*CONTENIDO TEXTO DEL BOTÓN*/
+.carta .contenidoCarta .ActualizarCarta{
+	display: inline-block;
+	padding: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+	
+	border: 1px solid #10f509;
+	border-radius: 4px;
+	transition: all 400ms ease;
+	margin-bottom: 5px;
+}
+
+.carta .contenidoCarta .EliminarCarta{
+	display: inline-block;
+	padding: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+	border: 1px solid #DE2525;;
+	border-radius: 4px;
+	transition: all 400ms ease;
+	margin-bottom: 5px;
+}
+
+.carta .contenidoCarta .ActualizarCarta{
+	color: #08f11b;
+}
+
+.carta .contenidoCarta .EliminarCarta{
+	color: #DE2525;
+}
+.carta .contenidoCarta .ActualizarCarta:hover{
+	background: #1aee07;
+	color: #fff;
+}
+
+.carta .contenidoCarta .EliminarCarta:hover{
+	background: #DE2525;
+	color: #FFF;
+}
+/*FIN de las cartas: Productos recientes*/
+
+
+
+
+
+/*Inicio estilos de datos: "Mi cuenta"*/
+
+.ContenedorDatosPersonales{
+	width: 35%;
+	height: auto;
+	margin-top: 60px;
+	margin-left: 35%; 
+	box-shadow: 0 10px 10px 0 rgba(0,0,0,.2);
+	
+	
+}
+.ContenedorInputs li{
+	height: 28px;
+	 
+	list-style: none;
+
+}
+
+.ContenedorInputs li input{
+	font-size: 20px;
+	padding-top:1px; 
+	width: 100%;
+	color: black;
+	
+	
+	
+	
+
+}
+
+.TituloSuperior h1{
+	background-color:  #981a1a;
+	text-align: center;
+	color: #f7fafa;
+	font-weight: bolder;
+	font-style: oblique;
+}
+
+
+.TitulosLaterales h2{
+	height: auto;
+	width: auto;
+	padding-left: 15px;
+	padding-right:15px; 
+	background-color: #f3f2f3;
+	color: black;
+	font-size: 24px;
+	font-weight: 100;
+	font-style: oblique;
+	text-align: center;
+}
+
+.ContenedorDatosPersonales .TitulosLaterales, .ContenedorInputs {
+	display: inline-block;
+}
+
+.TituloInferior input{
+	margin-top: 10px;
+	width: 100%;
+	background-color: #981a1a;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: bolder;
+	border:none;
+	cursor: pointer;
+}
+
+.TituloInferior input:hover{
+	background-color: #FFFFFF;
+	color: #981a1a;
+	transition: all 400ms ease;
+}
+
+/*Fin estilos de datos: "Mi cuenta"*/
+
+
+
+
 
 /* Formulario de actualización */
 

@@ -56,7 +56,11 @@
 		 			<li><a href="administracion.php?sec=productos">Gestionar Productos</a></li>
 		 		</ul>
 		 	</li>
-		 	<li><a href="#">Configuraciones 🔧</a></li>
+		 	<li><a href="#" class="Configuraciones-btn">Configuraciones ▼</a>
+		 	<ul class="Cuenta-show">
+		 			<li><a href="administracion.php?sec=CambiarCuenta">Mi cuenta ✎</a></li>
+		 		</ul>	
+		 	</li>
 		 	<li><a href="#">Detalles 📊</a></li>
 		 </ul>
 	</nav>
@@ -77,6 +81,9 @@
        });
        $('.Productos-btn').click(function(){
            $('.Barra ul .Productos-show').toggleClass("show2");
+       });
+       $('.Configuraciones-btn').click(function(){
+           $('.Barra ul .Cuenta-show').toggleClass("show3");
        });
 
        $('.Barra ul li').click(function(){
