@@ -20,8 +20,10 @@ if (isset($_GET['m'])) {
  ?>
 
 <div class="TablaBD">
+
     <div class="CabezaHerramientas">
    	    <div class="Herramientas">
+           <h1>Tabla Usuarios</h1>
    	  		<ul>
                 <ul>
                 <li><button>Añadir ➕</button></li>

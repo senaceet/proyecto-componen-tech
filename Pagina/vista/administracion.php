@@ -46,7 +46,8 @@
 		 		<a href="#" class="Base-btn">Administración ▼</a>
 		 		<ul class="Base-show">
 		 			<li><a href="administracion.php?sec=usuarios">Usuarios</a></li>
-		 			<li><a href="administracion.php">Proveedores</a></li>
+					 <li><a href="administracion.php?sec=Operadores">Operadores</a></li>
+		 			<li><a href="administracion.php?sec=Proveedores">Proveedores</a></li>
 		 		</ul>
 		 	</li>
 		 	<li>

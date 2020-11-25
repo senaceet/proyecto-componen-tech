@@ -112,8 +112,8 @@
 	background:#FFF;
 }
 .Barra ul ul li a:Hover{
-   color: #981a1a!important;
-   background: #F3F2F3!important; 
+   color: #981a1a !important;
+   background: #F3F2F3 !important; 
 }
 
 
@@ -220,7 +220,7 @@
 .TablaBD .TableroDatos,
 .TablaBD .TableroDatos th,
 .TablaBD .TableroDatos td{
-	padding: 12px 12px;
+	padding: 8px 8px;
 }
 
 .TablaBD .TableroDatos tr{
@@ -360,12 +360,7 @@
 	color: #fff;
 	cursor: pointer;
 }
-.submitButton:hover{
-	border-color: var(--rojo-principal);
-	color:#e64b4b;
-	transition: 0.3s;
-   	background:#FFF;
-}
+
 
 .busqueda2{
 	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
@@ -549,8 +544,6 @@
 
 
 
-
-
 /* Formulario de actualización */
 
 .actForm{
@@ -572,12 +565,12 @@
 	color: var(--texto-gris);
 	margin-bottom: 5px;
 }
-.actForm input{
+.actForm input, .actForm select{
 	min-width: 250px;
 	width: 100%;
 	padding: 5px 10px;
 	border-radius:3px;
-	border: 1px solid #bababa;
+	border: 2px solid #bababa;
 	margin-bottom: 8px;
 	font-size: 20px;
 	color: var(--texto-gris);
@@ -585,4 +578,50 @@
 .actForm .submitButton{
 	color: #fff;
 	margin-top: 5px;
+}
+.submitButton:hover{
+	border-color: var(--rojo-principal);
+	color:#e64b4b;
+	transition: 0.3s;
+	background:#FFF;
+	
+	   
+}
+
+/* Formulario de actualizacion flotante */
+
+.actF_form{
+	display: none;
+	position: absolute;
+	top:0;
+	left:0;
+	background: rgba(128, 125, 125, 0.4);
+	width: 100%;
+	height: 100vh;
+	padding: 20px;
+	align-items:center;
+	justify-content: center;
+	z-index: 50;
+}
+
+.actF_form  .actForm{
+	background:#fff;
+	width: 70%;
+	height: fit-content;
+	padding: 20px 30px;
+	border-radius: 3px;
+	z-index:100;
+}
+.cerrarForm{
+	border-radius: 50%;
+	background: var(--rojo-principal);
+	color:#fff;
+	position: relative;
+	outline:none;
+	font-size:20px;
+	top:0;
+	right:0;
+	width: 35px;
+	height: 35px;
+	cursor:pointer;
 }

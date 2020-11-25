@@ -23,10 +23,10 @@ body{
 }
 
 .correcto{
-	background: #01B1F2;
+	background: #28a745;
 }
 .incorrecto{
-	background: #28a745;
+	background: #d12020;
 }
 
 /* header */

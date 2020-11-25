@@ -63,7 +63,7 @@ class Usuario {
 		$this->_nombres = $_nombres;
 		$this->_apellidos = $_apellidos;
 		$this->_fechaNacimiento = $_fechaNacimiento;
-		$this->_edad = $_edad;
+		$this->_edad = $_edad; 
 		$this->_celular = $_celular;
 		$this->_direccion = $_direccion;
 		$this->_correo = $_correo;
@@ -72,14 +72,19 @@ class Usuario {
 		$this->_estado = $_estado;
 	}
 
-	public function Registrarse($_clave) {
-		$sql = "INSERT INTO usuario values('$this->_documento','$this->_nombres','$this->_apellidos','$this->_fechaNacimiento','$this->_edad','$this->_celular','$this->_direccion','$this->_correo','$this->_cargo','$this->_tipodocumento','$this->_estado')";
+	public function Registrarse() {
+		$sql = "INSERT INTO usuario values('$this->_documento','$this->_nombres','$this->_apellidos','$this->_fechaNacimiento',
+		'$this->_edad','$this->_celular','$this->_direccion','$this->_correo','$this->_cargo','$this->_tipodocumento','$this->_estado')";
 		$cn = conectar();
 		$res = $cn->query($sql);
-		if($res){
-			$sql = "INSERT INTO clave values('$this->_correo','$_clave')";
-			$res = $cn->query($sql);
-		}
+		$cn->close();
+		return $res;
+	}
+	
+	public function registrarClave($c,$p){
+		$sql="insert into clave values('$c','$p') ";
+		$cn = conectar();
+		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
 	}
@@ -106,6 +111,36 @@ class Usuario {
 		$cn->close();
 		return $res;
 	}
+	// verificar usuario
+
+	public function verifUsuario($tipo,$doc){
+		$sql = "SELECT * FROM usuario WHERE documento = $doc and TIPODOCUMENTO_idTipo=$tipo";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+
+
+	public function verifCorreo($c){
+		$sql = "SELECT * FROM usuario WHERE correo = '$c'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	
+
+	public function getOperadores(){
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 AND ESTADO_idEstado = 9";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
 
 	// seleccionar unico usuario
 
@@ -303,15 +338,15 @@ class Usuario {
 	/**
 	 * /**
 	 *  * @access public
-	 *  * @param string aContraseña
-	 *  * @ParamType aContraseña string
+	 *  * @param string aContraseï¿½a
+	 *  * @ParamType aContraseï¿½a string
 	 *  * /
 	 * @access public
-	 * @param string aContraseña
-	 * @ParamType aContraseña string
+	 * @param string aContraseï¿½a
+	 * @ParamType aContraseï¿½a string
 	 */
-	public function setContraseña($aContraseña) {
-		$this->_contraseña = $aContraseña;
+	public function setContraseï¿½a($aContraseï¿½a) {
+		$this->_contraseï¿½a = $aContraseï¿½a;
 	}
 
 	/**
@@ -324,8 +359,8 @@ class Usuario {
 	 * @return string
 	 * @ReturnType string
 	 */
-	public function getContraseña() {
-		return $this->_contraseña;
+	public function getContraseï¿½a() {
+		return $this->_contraseï¿½a;
 	}
 
 	/**
