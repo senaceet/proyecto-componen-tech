@@ -67,7 +67,7 @@ $con_cats = $objCat->getCategorias();
 				while ($producto = $con_productos->fetch_array()) { ?>
 					<div class="card">
 						<figure>
-							<img src="../img/<?php echo $producto['idProducto'] ?>.jpg">
+							<img src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
 							<h3><?php echo $producto['productoNombre']; ?></h3>
