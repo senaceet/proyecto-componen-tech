@@ -335,7 +335,7 @@
 } 
 
 .CajaFormulario input[type=text],.CajaFormulario textarea,
-.CajaFormulario .submitButton{
+.CajaFormulario .submitButton,.CajaFormulario select{
 	width: 100%;
 	padding: 5px 10px;
 	border-radius:3px;
@@ -350,7 +350,7 @@
 }
 .CajaFormulario textarea{
 	resize: none;
-	height: 180px;
+	height: 140px;
 }
 
 .submitButton{

@@ -23,10 +23,10 @@ class Proveedor{
 		$this->Estado_idEstado = $Estado_idEstado;
     }
 
-    public function actualizarDatos($doc) {
+    public function actualizarDatos($id) {
 		$sql = "UPDATE proveedor SET idProveedor='$this->$idProveedor', nEmpresa='$this->$nEmpresa', 
         cNombre='$this->$cNombre', cApellido='$this->$cApellido', cCelular='$this->$cCelular', eTelefono='$this->$eTelefono', 
-        ESTADO_idEstado='$this->$ESTADO_idEstado' WHERE idProveedor = '$idProveedor'";
+        ESTADO_idEstado='$this->$ESTADO_idEstado' WHERE idProveedor = '$id'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -35,6 +35,13 @@ class Proveedor{
     
     public function getProveedores(){
 		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where proveedor.ESTADO_idEstado=estado.idEstado";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+	public function getProveedoresActivos(){
+		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = 4";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

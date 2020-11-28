@@ -1,6 +1,8 @@
 <?php 
 require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
+require_once '../modelo/proveedor.php';
+
 $objProducto = new Producto();
 $objCat = new Categoria();
 $con_productos = $objProducto->getProductos();
@@ -11,11 +13,15 @@ if (isset($_GET['c'])) {
 }
 $con_cats = $objCat->getCategorias();
 
+$objProveedor = new Proveedor();
+$proveedores = $objProveedor->getProveedoresActivos();
+
+
  ?>
  <!-- Mensaje -->
  
 <!-- Sección de Categorías: Gestión producto -->
-<form class="sec1 sec1sombra class=""" enctype="multipart/form-data" action="../controlador/insProducto.php" method="post">
+<form class="sec1 sec1sombra"  enctype="multipart/form-data" action="../controlador/insProducto.php" method="post">
 	<input type="hidden" name="prodCat" value="<?php echo $_GET['c'] ?>">
 	<div class="categorias cat2">
 		<h1>Categorías</h1>
@@ -47,6 +53,12 @@ $con_cats = $objCat->getCategorias();
 		<div class="CajaFormulario">
 			<input type="text" name="prodName" placeholder="Nombre del Producto">
 			<input type="text" name="prodPrec" placeholder="Precio">
+			<select name="proveedor">
+				<option value="" selected disabled>-- Seleccione proveedor --</option>
+			<?php while ($prov = $proveedores->fetch_array()) { ?>
+				<option value="<?php echo $prov['idProveedor'] ?>"><?php echo $prov['nEmpresa'] ?></option>
+			<?php } ?>		
+			</select>
 			<textarea class="Caja3" name="prodDesc" placeholder="Descripción" rows="5"></textarea>
 			<button type="submit" class="submitButton">Subir producto</button>
 		</div>
@@ -68,33 +80,18 @@ $con_cats = $objCat->getCategorias();
 		while ($producto = $con_productos->fetch_array()) { ?>
 			<div class="card">
 				<figure>
-					<img src="../img/<?php echo $producto['idProducto'] ?>.jpg">
+					<img src="<?php echo $producto['prodImg'] ?>">
 				</figure>
 				<div class="contenido-card">
 					<h3><?php echo $producto['productoNombre']; ?></h3>
 					<a class="azul" href="#">EDITAR</a>
-					<a class="rojo" href="#">ELIMINAR</a>
+					<a class="rojo" href="../controlador/eliminarProducto.php?prod=<?php echo $producto['idProducto'] ?>&file=<?php echo $producto['prodImg'] ?>">ELIMINAR</a>
 				</div>
 			</div>
 		<?php } ?>	
 		</div>			
 	</section>
 </section>
-
-	
-
-
-
-
-<!-- Fin sección de busqueda de productos -->
-
-
-
-
-
-
-
-
 <script>
    	const $inpFile = document.querySelector("#inpFile"),
 	$prevImg = document.querySelector("#prevImg");
