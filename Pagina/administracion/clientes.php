@@ -2,37 +2,36 @@
 if (isset($_GET['m'])) {
     switch ($_GET['m']) {
         case 1:
-            echo "<div class='getMensaje correcto'>Operador insertado correctamente</div>";
+            echo "<div class='getMensaje correcto'>Cliente insertado correctamente</div>";
             break;
         
         case 2:
-            echo "<div class='getMensaje incorrecto'>¡Error al insertar operador!</div>";
+            echo "<div class='getMensaje incorrecto'>¡Error al insertar cliente!</div>";
             break;
         case 3:
-            echo "<div class='getMensaje correcto'>operador actualizado</div>";
+            echo "<div class='getMensaje correcto'>Usuario actualizado</div>";
             break;
         case 4:
-            echo "<div class='getMensaje incorrecto'>¡Error al actualizar operador!</div>";
+            echo "<div class='getMensaje incorrecto'>¡Error al actualizar usuario!</div>";
             break;
         case 5:
             echo "<div class='getMensaje incorrecto'>¡Error al validar la contraseña!</div>";
             break;
         case 6:
-            echo "<div class='getMensaje incorrecto'>El operador ya está registrado.</div>";
+            echo "<div class='getMensaje incorrecto'>El usuario ya está registrado.</div>";
             break;
         case 7:
             echo "<div class='getMensaje incorrecto'>Este correo ya está en uso.</div>";
             break;      
     }
 }
-
  ?>
 
 <div class="TablaBD">
-  
+
     <div class="CabezaHerramientas">
    	    <div class="Herramientas">
-           <h1>Tabla Operadores</h1>
+           <h1>Tabla clientes</h1>
    	  		<ul>
                 <ul>
                 <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir ➕</button></li>
@@ -55,23 +54,23 @@ if (isset($_GET['m'])) {
             <th></th>
         </thead>
         <?php
-            require_once '../modelo/Operador.php';
-            $objOperador = new Operador();
-            $consulta = $objOperador->getOperadores();
+            require_once '../modelo/Cliente.php';
+            $objCliente = new Cliente();
+            $consulta = $objCliente->getClientes();
             $num = 1;
-            while ($operador = $consulta->fetch_array()) { 
-                switch ($operador['TIPODOCUMENTO_idTipo']) {
+            while ($cliente = $consulta->fetch_array()) { 
+                switch ($cliente['TIPODOCUMENTO_idTipo']) {
                     case 1:
-                        $documento = "CC_".$operador['documento'];
+                        $documento = "CC_".$cliente['documento'];
                         break;
                     case 2:
-                        $documento = "TI_".$operador['documento'];
+                        $documento = "TI_".$cliente['documento'];
                         break;
                     case 3:
-                        $documento = "CE_".$operador['documento'];
+                        $documento = "CE_".$cliente['documento'];
                         break;
                     case 4:
-                        $documento = "PA_".$operador['documento'];
+                        $documento = "PA_".$cliente['documento'];
                         break;
                 }
 
@@ -79,15 +78,15 @@ if (isset($_GET['m'])) {
         <tbody>
             <td><?php echo $num; ?></td>
             <td><?php echo $documento; ?></td>
-            <td><?php echo $operador['nombres']; ?></td>
-            <td><?php echo $operador['apellidos']; ?></td>
-            <td><?php echo $operador['fechaNto']; ?></td>
-            <td><?php echo $operador['edad']; ?></td>
-            <td><?php echo $operador['celular']; ?></td>
-            <td><?php echo $operador['direccion']; ?></td>
-            <td><?php echo $operador['correo']; ?></td>
+            <td><?php echo $cliente['nombres']; ?></td>
+            <td><?php echo $cliente['apellidos']; ?></td>
+            <td><?php echo $cliente['fechaNto']; ?></td>
+            <td><?php echo $cliente['edad']; ?></td>
+            <td><?php echo $cliente['celular']; ?></td>
+            <td><?php echo $cliente['direccion']; ?></td>
+            <td><?php echo $cliente['correo']; ?></td>
             <td ><form action="../vista/administracion.php?sec=actForm" method="post">
-                <input type="hidden" name="documento" value="<?php echo $operador['documento'] ?>">
+                <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
                 <input type="submit" value="📝">
             </form></td>
         </tbody>
@@ -97,12 +96,11 @@ if (isset($_GET['m'])) {
    	<div class="PieHerramientas">
     </div>
 </div>
-
 <div class="actF_form" id="actF_form" >
     
-    <form class="actForm" method="post" action="../controlador/Insoperador.php">
+    <form class="actForm" method="post" action="../controlador/InsUsuario.php">
     <button class="cerrarForm" type="button"  onclick="hideForm(document.getElementById('actF_form'))">✖</button>
-        <h1>Insertar operador</h1>
+        <h1>Insertar cliente</h1>
         <div>
             <p>Numero de documento</p>
             <select name="idTipo" required>
@@ -139,7 +137,7 @@ if (isset($_GET['m'])) {
         </div>
         <div>
             <p>Direccion de residencia</p>
-            <input name="direccion" type="text" value="" required>	
+            <input name="direccion" type="text" value="" required>  
         </div>
         <div>
             <p>Correo electrónico</p>
@@ -153,9 +151,9 @@ if (isset($_GET['m'])) {
             <p>Confirmar contraseña</p>
             <input name="password2" type="text" value="" required>
         </div>
-        <input type="hidden" name="idCargo" value="2">
+        <input type="hidden" name="idCargo" value="3">
         <input type="hidden" name="idEstado" value="9">
-        <input type="hidden" name="tabla" value="operadores">
+        <input type="hidden" name="tabla" value="clientes">
         <input type="submit" class="submitButton" value="Registrar">      
     </form>
     <script>

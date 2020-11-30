@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php 
+session_start();
+
 require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
 $objProducto = new Producto();
@@ -31,9 +33,18 @@ $con_cats = $objCat->getCategorias();
 		</div>
 		<nav class="navegador">
 			<ul>
-				<li><a href="#">Cuenta</a></li>
-				<li><a href="administracion.php">Administracion</a></li>
+			<?php if (isset($_SESSION['user'])): ?>
+				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
+				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
+					<li><a href="administracion.php">Administracion</a></li>
+				<?php endif ?>
+				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
 				<li><img src="../icons/carrito.svg" alt=""></li>
+			<?php else: ?>
+				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
+				<li><a href="../index.php?r=1">Crear cuenta</a></li>
+			<?php endif ?>
+				
 			</ul>
 		</nav>
 	</header>

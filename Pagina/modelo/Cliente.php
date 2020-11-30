@@ -1,24 +1,21 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Factura.php');
-require_once('/Usuarios.php');
-use Usuarios;
-
+require_once('Usuario.php');
 /**
  * @access public
  * @author Marlon, Yeren, Jhon, Kevin
  */
-class Cliente extends Usuarios {
-	/**
-	 * @AttributeType Factura
-	 * /**
-	 *  * @AssociationType Factura
-	 *  * /
-	 */
-	public $_unnamed_Factura_;
-
+class Cliente extends Usuario {
 	/**
 	 * @access public
 	 */
+
+	public function getClientes(){
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 AND ESTADO_idEstado = 9";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
 	public function SeleccionarProducto() {
 		// Not yet implemented
 	}

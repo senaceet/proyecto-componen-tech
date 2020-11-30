@@ -240,6 +240,7 @@ section{
 	margin: 5px 10px;
 	text-decoration: none;
 	border: 1px solid #098400;
+	color:#098400;
 	border-radius: 4px;
 	transition: all 400ms ease;
 }

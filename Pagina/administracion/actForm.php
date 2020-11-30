@@ -2,7 +2,7 @@
 	require_once '../modelo/Usuario.php';
 
 	$objUsuario = new Usuario();
-	$con_usuarios = $objUsuario->getUsuario($_POST['documento']);
+	$con_usuarios = $objUsuario->getUsuario($_POST['documento'],1);
 	$actUsuario = $con_usuarios->fetch_array(); 	
 ?>
 

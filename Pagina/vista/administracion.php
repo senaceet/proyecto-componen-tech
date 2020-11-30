@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php 
+	session_start();
+	if (!$_SESSION['user']) {
+		header('location:principal.php');
+	}
+	if ($_SESSION['user']['CARGO_idCargo']==3) {
+		header('location:principal.php');
+	}
 	function secciones(){
 		if (isset($_GET['sec'])) {
 			include "../administracion/".$_GET['sec'].".php";
 		} else {
-			include '../administracion/usuarios.php';
+			include '../administracion/clientes.php';
 		}
 	}
  ?>
@@ -23,15 +30,21 @@
 <body>
 	<header>
 		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
-		
+		<label class="busqueda">
+			<input type="" placeholder="Buscar productos">
+			<img src="../icons/lupa.svg">
+		</label>
+			
 		</div>
-		<div class="navegador">
-			<nav>
-				<ul>
-					<li>Cerrar sesión ➤</li>
-				</ul>
-			</nav>
-		</div>
+		<nav class="navegador">
+			<ul>
+			<?php if (isset($_SESSION['user'])): ?>
+				<li><a href="#"><?php echo $_SESSION['user']['correo']; ?></a></li>
+				<li><a href="principal.php">Inicio</a></li>
+				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
+			<?php endif ?>
+			</ul>
+		</nav>
 	</header>
    <div class="btn">
    	<span class="fas fa-bars"></span>
@@ -43,23 +56,26 @@
 		 	<li><a href="#">Administrador 👔</a></li>
 
 		 	<li>
-		 		<a href="#" class="Base-btn">Administración ▼</a>
+		 		<a href="#" class="Base-btn">Usuarios ▼</a>
 		 		<ul class="Base-show">
-		 			<li><a href="administracion.php?sec=usuarios">Usuarios</a></li>
-					 <li><a href="administracion.php?sec=Operadores">Operadores</a></li>
-		 			<li><a href="administracion.php?sec=Proveedores">Proveedores</a></li>
+		 			<li><a href="administracion.php?sec=clientes">Clientes</a></li>
+					<li><a href="administracion.php?sec=Operadores">Operadores</a></li>
 		 		</ul>
 		 	</li>
 		 	<li>
 		 		<a href="#" class="Productos-btn">Productos ▼</a>
 
 		 		<ul class="Productos-show">
-		 			<li><a href="administracion.php?sec=productos">Gestionar Productos</a></li>
+		 			<li><a href="administracion.php?sec=productos">Gestionar productos</a></li>
+		 			<li><a href="administracion.php?sec=Proveedores">Gestionar proveedores</a></li>
 		 		</ul>
 		 	</li>
-		 	<li><a href="#" class="Configuraciones-btn">Configuraciones ▼</a>
-		 	<ul class="Cuenta-show">
-		 			<li><a href="administracion.php?sec=CambiarCuenta">Mi cuenta ✎</a></li>
+		 	<li><a href="#" class="Configuraciones-btn">Inventario ▼</a>
+		 		<ul class="Cuenta-show">
+		 			<li><a href="administracion.php?sec=CambiarCuenta">Movimientos</a></li>
+		 		</ul>
+		 		<ul class="Cuenta-show">
+		 			<li><a href="administracion.php?sec=CambiarCuenta">Productos</a></li>
 		 		</ul>	
 		 	</li>
 		 	<li><a href="#">Detalles 📊</a></li>

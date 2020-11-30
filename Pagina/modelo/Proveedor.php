@@ -32,6 +32,14 @@ class Proveedor{
 		$cn->close();
 		return $res;
     }
+
+    public function insertar(){
+    	$sql = "INSERT INTO proveedor values ('$this->$idProveedor','$this->$nEmpresa', '$this->$cNombre', '$this->$cApellido', '$this->$cCelular', '$this->$eTelefono', '$this->$ESTADO_idEstado')";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+    }
     
     public function getProveedores(){
 		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where proveedor.ESTADO_idEstado=estado.idEstado";
@@ -49,11 +57,6 @@ class Proveedor{
 	}
 
 }
-
-
-
-
-
 
 
 ?>

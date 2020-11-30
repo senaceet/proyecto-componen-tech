@@ -1,22 +1,24 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Producto.php');
-require_once(realpath(dirname(__FILE__)) . '/Usuarios.php');
-
-use Producto;
-use Usuarios;
+require_once('Usuario.php');
 
 /**
  * @access public
  * @author Marlon, Yeren, Jhon, Kevin
  */
-class Operario extends Usuarios {
+class Operador extends Usuario {
 	/**
 	 * @AttributeType Producto
 	 * /**
 	 *  * @AssociationType Producto
 	 *  * /
 	 */
-	public $_unnamed_Producto_;
+	public function getOperadores(){
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 AND ESTADO_idEstado = 9";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
 
 	/**
 	 * @access public

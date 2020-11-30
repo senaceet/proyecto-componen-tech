@@ -131,16 +131,6 @@ class Usuario {
 		return $res;
 	}
 
-	
-
-	public function getOperadores(){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 AND ESTADO_idEstado = 9";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$cn->close();
-		return $res;
-	}
-
 
 	// seleccionar unico usuario
 
@@ -150,8 +140,13 @@ class Usuario {
 	 * @ReturnType array
 	 */
 
-	public function getUsuario($u){
-		$sql = "SELECT * FROM usuario WHERE documento = $u";
+	public function getUsuario($u,$tipo){
+		if ($tipo == 1) {
+			$sql = "SELECT * FROM usuario WHERE documento = $u";
+		} elseif ($tipo == 2) {
+			$sql = "SELECT * FROM usuario WHERE correo = '$u'";
+		}
+		
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -163,8 +158,12 @@ class Usuario {
 	 * @return boolean
 	 * @ReturnType boolean
 	 */
-	public function IniciarSesion() {
-		// Not yet implemented
+	public function iniciarSesion($c,$p) {
+		$sql = "SELECT * FROM clave WHERE correo = '$c' and clave = '$p'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
 
 	/**
