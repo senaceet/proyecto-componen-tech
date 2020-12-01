@@ -1,0 +1,627 @@
+/*Inicio de la Barra Lateral*/
+
+.btn{
+	position: fixed;
+	top:60px;
+	left: 0px;
+	height: 45px;
+	width: 45px;
+	text-align: center;
+	background: #FFF;
+	border-radius: 3px;
+	cursor: pointer;
+	box-shadow: 0 9px 9px 0 rgba(0,0,0,.1);
+	transition: left 0.4s ease; 
+	z-index: 100;
+}
+.btn.click{
+	left: 251px;
+}
+
+.btn span{
+	color:var(--rojo-principal);
+	font-size: 28px;
+	line-height: 45px;
+}
+.btn.click span:before{
+	content: '\f00d';
+}
+.Barra{
+	z-index: 100;
+	position: fixed;
+	width: 250px;
+	height: 100%;
+	left: -250px;
+	top: 60px;
+	background: #cecece;
+	transition: left 0.4s ease;
+}
+.Barra.show{
+	left: 0px;
+}
+
+.Barra .texto{
+	color: white;
+	font-size: 30px;
+	font-weight: bolder;
+	line-height: 40px;
+	text-align: center;
+	background: var(--rojo-principal);
+	letter-spacing: 1px;
+}
+
+.Barra ul{
+	background: #fff;
+	height: 100%;
+	width: 100%;
+	list-style: none;
+	box-shadow: 0 9px 9px 0 rgba(0,0,0,.1);
+
+}
+
+.Barra ul li{
+	line-height: 40px;
+	border-bottom: 1px solid #ccc;
+}
+
+.Barra ul li a{
+	position: relative;
+	color:black;
+	text-decoration: none;
+	font-size: 20px;
+	padding-left:10px;
+	font-weight: 200;
+	display: block;
+	width: 100%;
+	border-left: 15px solid transparent;  
+}
+.Barra ul li.active a{
+	color: #981a1a;
+	background: #F3F2F3;
+}
+.Barra ul ul{
+	position: static;
+	display: none;
+}
+
+.Barra ul .Base-show.show{
+ display: block;
+}
+.Barra ul .Productos-show.show2{
+ display: block;
+}
+
+.Barra ul .Cuenta-show.show{
+ display: block;
+}
+.Barra ul .Cuenta-show.show3{
+ display: block;
+}
+.Barra ul ul li{
+	line-height: 42px;
+	border-bottom: none;
+}
+
+.Barra ul ul li a{
+	font-size: 18px;
+	color: black;
+	padding-left: 20px;
+}
+.Barra ul li.active ul li a{
+	color: black;
+	background:#FFF;
+}
+.Barra ul ul li a:Hover{
+   color: #981a1a !important;
+   background: #F3F2F3 !important; 
+}
+
+
+/*Tabla CRUD*/
+
+.TablaBD{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 85vh;
+	color: black;
+	background:transparent;
+	overflow: auto;
+}
+.TablaBD .CabezaHerramientas{
+	border-bottom: solid 2px;
+	padding:12px;
+	display: flex;
+	align-items: baseline;
+	position: sticky;
+	background: #F7FAFA;
+	top: 0;
+	left: 0;
+}
+.TablaBD .Herramientas button{
+	font-size: 18px;
+}
+.TablaBD .CabezaHerramientas .Herramientas ul{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: start;
+	align-items: baseline;
+}
+
+.TablaBD .CabezaHerramientas .Herramientas ul li{
+	display: inline-block;
+	margin: 0 2px;
+	align-items: baseline;
+}
+.TablaBD .PieHerramientas{
+	padding: 12px;
+	display: flex;
+	align-items: baseline;
+}
+
+.TablaBD .PieHerramientas .ListaItems{
+	width: 60%;
+}
+
+.TablaBD .PieHerramientas .PaginasTabla{
+	margin-left: auto;
+	margin-right: 0;
+	width: 50%; 
+}
+
+.TablaBD .PieHerramientas .PaginasTabla ul{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: baseline;
+	justify-content: flex-end;
+}
+
+.TablaBD .PieHerramientas .PaginasTabla ul li{
+	display: inline-block;
+	margin: 0 2px;
+}
+
+.TablaBD .PieHerramientas .PaginasTabla ul li button,
+.TablaBD .CabezaHerramientas .PaginasTabla ul li button{
+	color: black;
+	width: 100%;
+	border: 0;
+	border-radius: 2px;
+	background: white;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.TablaBD .PieHerramientas .PaginasTabla ul li button:hover,
+.TablaBD .CabezaHerramientas .PaginasTabla ul li button:hover{
+	background: #981a1a;
+	color: white;
+}
+
+.TablaBD .PieHerramientas .PaginasTabla ul li span.activo{
+	background: #981a1a;
+	color: white;
+}
+
+.TablaBD .PieHerramientas .PaginasTabla ul li button,
+.TablaBD .PieHerramientas .PaginasTabla ul li span,
+.TablaBD .CabezaHerramientas .Herramientas ul li button{
+	padding: 6px 12px;
+}
+
+.TablaBD .TableroDatos{
+	font-weight: 100;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.TablaBD .TableroDatos,
+.TablaBD .TableroDatos th,
+.TablaBD .TableroDatos td{
+	padding: 8px 8px;
+}
+
+.TablaBD .TableroDatos tr{
+	color: var(--texto-gris);
+}
+.TablaBD .TableroDatos th{
+	text-align: left;
+	border-bottom: solid 2px var(--rojo-principal);
+}
+
+.TablaBD .TableroDatos td{
+	font-weight: bolder;
+	text-align: left;
+	border-bottom: solid 1px var(--rojo-principal);
+}
+
+
+
+.TablaBD .TableroDatos tbody tr:hover{
+	transition: 0.3s;
+	background-color: var(--rojo-principal); 
+	color: #fff;
+}
+.TableroDatos td input[type=submit]{
+	background: transparent;
+	border:none;
+	font-size: 20px; 
+}
+
+/*Fin Tabla BD*/
+
+/*Inicio Formularios de creación: Productos*/
+
+.sec1sombra > div{
+	box-shadow: 0 5px 5px rgba(0,0,0,.2);
+	background: #fff;
+	border-radius: 3px;
+}
+.SeccionImagen{
+	width: 26%;
+	padding: 10px;
+	min-width: 200px;
+	display: block;
+	overflow: hidden;
+}
+.SeccionImagen img{
+	width: 100%;
+}
+.SeccionImagen p{
+	font-size: 22px;
+	margin-top: auto;
+}
+.SeccionImagen input{
+	font-size: 18px;
+}
+.SeccionImagen .BotonEnviar{
+	margin-top: auto;
+	width: 100%;
+	height: 40px;
+	background:#e64b4b;
+	border-color: #ff8989;
+	color: #ffffff;
+	border-radius: 10px;
+	border-bottom: 8px;
+	font-weight: bolder;
+	cursor: pointer; 
+}
+.SeccionImagen .BotonEnviar:hover{
+   color:#e64b4b;
+   background:#FFFFFF;
+}
+
+.BotonSubir {
+	height: 45px; 
+	width: 100%; 
+	overflow: hidden; 
+	position: relative; 
+	cursor: pointer; 
+	background-color: #ecebec; 
+	font-size: 35px;
+	font-weight: bold;
+	text-align: center; 
+} 
+.SubirArchivo { 
+ cursor: pointer; 
+ height: 100%; 
+ position:absolute; 
+ top: 0; 
+ right: 0; 
+ z-index: 99;  
+ font-size:50px;  
+ opacity: 0; 
+ -moz-opacity: 0; 
+ filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0) 
+}
+
+/* Fin sección Imagen*/
+
+/*Inicio sección formularios de producto*/
+
+.SeccionFormulario{
+	width: 40%;
+	padding: 10px;
+	border-radius: 4px;
+	min-width: 200px;
+	display: block;
+}
+
+.CajaFormulario{
+	padding: 10px;
+	display: block;
+} 
+
+.CajaFormulario input[type=text],.CajaFormulario textarea,
+.CajaFormulario .submitButton,.CajaFormulario select{
+	width: 100%;
+	padding: 5px 10px;
+	border-radius:3px;
+	border: 1px solid #bababa;
+	margin-bottom: 8px;
+	font-size: 20px;
+	color: var(--texto-gris);
+}
+
+.CajaFormulario .submitButton{
+	color: #fff;
+}
+.CajaFormulario textarea{
+	resize: none;
+	height: 140px;
+}
+
+.submitButton{
+	font-weight: bold;
+	background:var(--rojo-principal);
+	border: 2px solid var(--rojo-principal);
+	color: #fff;
+	cursor: pointer;
+}
+
+
+.busqueda2{
+	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
+}
+
+
+/*Inicio Contenedor de las Cartas*/
+
+
+.ContenedorCartas{
+	background-color: #f3f2f3;
+	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
+
+}
+
+/*Inicio de las cartas: Productos recientes*/
+
+.carta{
+	min-width: 200px;
+	width: 20%;
+	height: auto;
+	margin: 25px;
+	border-radius: 6px;
+	overflow: hidden;
+	background:#fff;
+	box-shadow: 0px 10px 10px rgba(0,0,0,0.5);
+	transition: all 400ms ease-out;
+	display: inline-block;
+	cursor: default;
+}
+
+
+
+
+/*BORDE CARTA CON HOVER*/
+.carta:hover{
+	box-shadow: 5px 5px 20px rgba(5,0,0,0.9);
+	transform: translateY(-4%);
+	transition: all 400ms ease-out;
+}
+.contenidoCarta img{
+	width: 100%;
+	height: 100%;
+	
+	
+}
+.carta .contenidoCarta{
+	padding: 15px;
+	text-align: center;
+}
+.carta .contenidoCarta h3{
+	margin-bottom: 15px;
+	color: #7a7a7a;
+}
+
+
+
+
+
+/*CONTENIDO TEXTO DEL BOTÓN*/
+.carta .contenidoCarta .ActualizarCarta{
+	display: inline-block;
+	padding: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+	
+	border: 1px solid #10f509;
+	border-radius: 4px;
+	transition: all 400ms ease;
+	margin-bottom: 5px;
+}
+
+.carta .contenidoCarta .EliminarCarta{
+	display: inline-block;
+	padding: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+	border: 1px solid #DE2525;;
+	border-radius: 4px;
+	transition: all 400ms ease;
+	margin-bottom: 5px;
+}
+
+.carta .contenidoCarta .ActualizarCarta{
+	color: #08f11b;
+}
+
+.carta .contenidoCarta .EliminarCarta{
+	color: #DE2525;
+}
+.carta .contenidoCarta .ActualizarCarta:hover{
+	background: #1aee07;
+	color: #fff;
+}
+
+.carta .contenidoCarta .EliminarCarta:hover{
+	background: #DE2525;
+	color: #FFF;
+}
+/*FIN de las cartas: Productos recientes*/
+
+
+
+
+
+/*Inicio estilos de datos: "Mi cuenta"*/
+
+.ContenedorDatosPersonales{
+	width: 35%;
+	height: auto;
+	margin-top: 60px;
+	margin-left: 35%; 
+	box-shadow: 0 10px 10px 0 rgba(0,0,0,.2);
+	
+	
+}
+.ContenedorInputs li{
+	height: 28px;
+	 
+	list-style: none;
+
+}
+
+.ContenedorInputs li input{
+	font-size: 20px;
+	padding-top:1px; 
+	width: 100%;
+	color: black;
+	
+	
+	
+	
+
+}
+
+.TituloSuperior h1{
+	background-color:  #981a1a;
+	text-align: center;
+	color: #f7fafa;
+	font-weight: bolder;
+	font-style: oblique;
+}
+
+
+.TitulosLaterales h2{
+	height: auto;
+	width: auto;
+	padding-left: 15px;
+	padding-right:15px; 
+	background-color: #f3f2f3;
+	color: black;
+	font-size: 24px;
+	font-weight: 100;
+	font-style: oblique;
+	text-align: center;
+}
+
+.ContenedorDatosPersonales .TitulosLaterales, .ContenedorInputs {
+	display: inline-block;
+}
+
+.TituloInferior input{
+	margin-top: 10px;
+	width: 100%;
+	background-color: #981a1a;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: bolder;
+	border:none;
+	cursor: pointer;
+}
+
+.TituloInferior input:hover{
+	background-color: #FFFFFF;
+	color: #981a1a;
+	transition: all 400ms ease;
+}
+
+/*Fin estilos de datos: "Mi cuenta"*/
+
+
+
+/* Formulario de actualización */
+
+.actForm{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.actForm div{
+	width: 49%;
+}
+.actForm h1{
+	width: 100%;
+	margin-bottom: 10px;
+	text-align: center;
+	color: var(--texto-gris);
+}
+.actForm p{
+	color: var(--texto-gris);
+	margin-bottom: 5px;
+}
+.actForm input, .actForm select{
+	min-width: 250px;
+	width: 100%;
+	padding: 5px 10px;
+	border-radius:3px;
+	border: 2px solid #bababa;
+	margin-bottom: 8px;
+	font-size: 20px;
+	color: var(--texto-gris);
+}
+.actForm .submitButton{
+	color: #fff;
+	margin-top: 5px;
+}
+.submitButton:hover{
+	border-color: var(--rojo-principal);
+	color:#e64b4b;
+	transition: 0.3s;
+	background:#FFF;
+	
+	   
+}
+
+/* Formulario de actualizacion flotante */
+
+.actF_form{
+	display: none;
+	position: absolute;
+	top:0;
+	left:0;
+	background: rgba(128, 125, 125, 0.4);
+	width: 100%;
+	height: 100vh;
+	padding: 20px;
+	align-items:center;
+	justify-content: center;
+	z-index: 50;
+}
+
+.actF_form  .actForm{
+	background:#fff;
+	width: 70%;
+	height: fit-content;
+	padding: 20px 30px;
+	border-radius: 3px;
+	z-index:100;
+}
+.cerrarForm{
+	border-radius: 50%;
+	background: var(--rojo-principal);
+	color:#fff;
+	position: relative;
+	outline:none;
+	font-size:20px;
+	top:0;
+	right:0;
+	width: 35px;
+	height: 35px;
+	cursor:pointer;
+}
