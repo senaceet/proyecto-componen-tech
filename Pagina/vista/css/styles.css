@@ -119,6 +119,7 @@ section{
 	height: 350px;
 	margin-bottom: 20px;
 	justify-content: space-between;
+	
 }
 .slider{
 	height: 350px;
@@ -476,10 +477,22 @@ section{
 .detImg img{
 	width: 80%;
 }
+
+/*DETALLES PRODUCTO*/
 .detallesProducto{
 	width: 60%;
 	padding: 15px;
-	background: #bbb;
+	background: rgba(255, 248, 248, 0.979);
+	color: black;
+	font-family: arial;
+	font-size: 18px;
+	
+	
+}
+
+.detallesProducto h1{
+  font-weight: 600;
+
 }
 .detalles p{
 	color: var(--texto-gris);
@@ -488,18 +501,47 @@ section{
 	overflow: auto;
 	padding: 15px;
 	margin-top: 5px;
+	
 }
 
 .precioDetalles{
-	font-size: 20px;
+	font-size: 25px;
+	font-weight:700;
 }
+/*BOTONES DETALLES DEL PRODUCTO*/
 .botonesDetalles{
 	left: 0;
 	display: inline-flex;
 	width: 100%;
-	padding: 0 10px;
+	padding:10px;
 }
 .botonesDetalles button{
-	width: 50%;
+	width: 70%;
+	Margin:80px;
 	padding: 7px
+	¿cxvg
+}
+
+.atras{
+  background: red;
+  color: white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.atras:hover{
+	background: rgb(177, 4, 4);
+}
+
+.añadircarrito{
+	background: rgb(45, 202, 6);
+	color:white;
+	font-weight:700;
+	cursor:pointer;
+
+}
+
+.añadircarrito:hover{
+	background: rgb(29, 133, 4);
+
 }

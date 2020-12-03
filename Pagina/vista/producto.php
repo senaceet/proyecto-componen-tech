@@ -42,6 +42,9 @@ $productoActual = $producto->fetch_array();
 			</ul>
 		</nav>
 	</header>
+
+
+	<!---CONTENEDOR DE PRODUCTOS (-ETALLES)--->
 	<div class="contenedor">
 		<section class="sec1 detalles">
 			<div class="detImg">
@@ -58,8 +61,8 @@ $productoActual = $producto->fetch_array();
 				</div>
 
 				<div class="botonesDetalles">
-					<button>ATRÁS</button>
-					<button>AÑADIR AL CARRITO</button>
+					<button class="atras">ATRÁS</button>
+					<button class="añadircarrito">AÑADIR AL CARRITO</button>
 				</div>
 			</div>
 		</section>
@@ -76,9 +79,9 @@ $productoActual = $producto->fetch_array();
 						<div class="contenido-card">
 							<h3><?php echo $producto['productoNombre']; ?></h3>
 					
-							<p><?php echo $producto['detalles']; ?></p>
+							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">COMPRAR</a>
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver Componentes</a>
 						</div>
 					</div>
 			<?php } ?>	

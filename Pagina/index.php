@@ -5,7 +5,6 @@
     } elseif (!isset($_GET['r'])){
         header('location:vista/principal.php');
     }
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
