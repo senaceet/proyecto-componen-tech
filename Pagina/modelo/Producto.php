@@ -115,6 +115,14 @@ class Producto {
 		$cn->close();
 		return $res;
 	}
+
+	public function getProducto($p){
+		$sql = "select * from producto where idProducto = '$p'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
 	public function getProductosCat($cat){
 		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat";
 		$cn = conectar();

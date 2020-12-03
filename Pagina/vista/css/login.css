@@ -188,15 +188,20 @@ input:focus {
 }
 /*esto es para que se adapte el formulario */
 @media screen and (max-width: 500px) {
-  .fila-arriba div {
-    width: 100%;
-  }
-  .fila-arriba div:last-child {
-    margin-bottom: 40px;
-  }
+  	.fila-arriba div {
+    	width: 100%;
+  	}
+  	.fila-arriba div:last-child {
+    	margin-bottom: 40px;
+  	}
 }
 @media screen and (max-width: 400px) {
   .contenedor-tabs li a {
     width: 100%;
   }
+  .contenedor-formularios{
+  	margin: 0 auto;
+  	padding: 10px;
+  }
+  
 }

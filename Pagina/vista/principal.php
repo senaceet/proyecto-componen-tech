@@ -3,6 +3,7 @@
 <?php 
 session_start();
 
+
 require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
 $objProducto = new Producto();
@@ -83,9 +84,9 @@ $con_cats = $objCat->getCategorias();
 						<div class="contenido-card">
 							<h3><?php echo $producto['productoNombre']; ?></h3>
 					
-							<p><?php echo $producto['detalles']; ?></p>
+							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="#">COMPRAR</a>
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver Componente</a>
 						</div>
 					</div>
 			<?php } ?>	
