@@ -29,7 +29,7 @@
 </head>
 <body>
 	<header>
-		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
+		<div class="logo"><img  src="../icons/logo.png" alt="l"></div>
 		<label class="busqueda">
 			<input type="" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
@@ -41,7 +41,7 @@
 			<?php if (isset($_SESSION['user'])): ?>
 				<li><a href="#"><?php echo $_SESSION['user']['correo']; ?></a></li>
 				<li><a href="principal.php">Inicio</a></li>
-				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
+				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php endif ?>
 			</ul>
 		</nav>

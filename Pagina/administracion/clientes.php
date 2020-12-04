@@ -33,9 +33,9 @@ if (isset($_GET['m'])) {
    	    <div class="Herramientas">
            <h1>Tabla clientes</h1>
    	  		<ul>
-                <ul>
-                <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir ➕</button></li>
-                <li><button>Buscar 🔎</button></li>
+                <li class="search">
+                    <label><input id="search" type="text" placeholder="Buscar"><img onclick="buscarTabla(this.parentElement.querySelector('#search').value)" src="../icons/lupa.svg" alt=""></label></li>
+                <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir <i class="fas fa-plus"></i></button></li>
             </ul>  
    	  	</div>	
     </div>
@@ -52,11 +52,16 @@ if (isset($_GET['m'])) {
             <th>Dirección</th>
             <th>Correo</th>
             <th></th>
+            <th></th>
         </thead>
         <?php
             require_once '../modelo/Cliente.php';
             $objCliente = new Cliente();
-            $consulta = $objCliente->getClientes();
+            if (isset($_GET['search'])) {
+                $consulta = $objCliente->getClientesBusqueda($_GET['search']);
+            } else {
+                $consulta = $objCliente->getClientes();
+            }
             $num = 1;
             while ($cliente = $consulta->fetch_array()) { 
                 switch ($cliente['TIPODOCUMENTO_idTipo']) {
@@ -87,8 +92,9 @@ if (isset($_GET['m'])) {
             <td><?php echo $cliente['correo']; ?></td>
             <td ><form action="../vista/administracion.php?sec=actForm" method="post">
                 <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
-                <input type="submit" value="📝">
+                <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
+            <td><button><i class="far fa-trash-alt"></i></button></td>
         </tbody>
         <?php $num++; } ?>
         
@@ -157,11 +163,20 @@ if (isset($_GET['m'])) {
         <input type="submit" class="submitButton" value="Registrar">      
     </form>
     <script>
+        var search = document.getElementById('search');
+        search.addEventListener('keydown',(e)=>{
+            if (e.key=='Enter') {
+                buscarTabla(search.value);
+            }
+        })
         function hideForm(e){
                 e.style.display="none";            
         }
         function showForm(e){
                 e.style.display="flex";            
+        }
+        function buscarTabla(e){
+            location.href = 'administracion.php?sec=clientes&search='+e;
         }
     </script>
 </div>

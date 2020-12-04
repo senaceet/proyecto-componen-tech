@@ -48,8 +48,16 @@ class Proveedor{
 		$cn->close();
 		return $res;
 	}
+
 	public function getProveedoresActivos(){
-		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = 4";
+		$sql = "SELECT * FROM proveedor where ESTADO_idEstado = 4";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+	public function getProveedoresSearch($s){
+		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where (proveedor.ESTADO_idEstado=estado.idEstado) and (idProveedor like '%$s%' or nEmpresa like '%$s%' or cNombre like '%$s%' or cApellido like '%$s%' or cCelular like '%$s%' or eTelefono like '%$s%' or estado like '%$s%')";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

@@ -34,9 +34,9 @@ if (isset($_GET['m'])) {
    	    <div class="Herramientas">
            <h1>Tabla Operadores</h1>
    	  		<ul>
-                <ul>
-                <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir ➕</button></li>
-                <li><button>Buscar 🔎</button></li>
+                <li class="search">
+                    <label><input id="search" type="text" placeholder="Buscar"><img onclick="buscarTabla(this.parentElement.querySelector('#search').value)" src="../icons/lupa.svg" alt=""></label></li>
+                <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir <i class="fas fa-plus"></i></button></li>
             </ul>  
    	  	</div>	
     </div>
@@ -53,11 +53,16 @@ if (isset($_GET['m'])) {
             <th>Dirección</th>
             <th>Correo</th>
             <th></th>
+            <th></th>
         </thead>
         <?php
             require_once '../modelo/Operador.php';
             $objOperador = new Operador();
-            $consulta = $objOperador->getOperadores();
+            if (isset($_GET['search'])) {
+                $consulta = $objOperador->getOperadoresBusqueda($_GET['search']);
+            } else {
+                $consulta = $objOperador->getOperadores();
+            }
             $num = 1;
             while ($operador = $consulta->fetch_array()) { 
                 switch ($operador['TIPODOCUMENTO_idTipo']) {
@@ -88,8 +93,9 @@ if (isset($_GET['m'])) {
             <td><?php echo $operador['correo']; ?></td>
             <td ><form action="../vista/administracion.php?sec=actForm" method="post">
                 <input type="hidden" name="documento" value="<?php echo $operador['documento'] ?>">
-                <input type="submit" value="📝">
+                <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
+            <td><button><i class="far fa-trash-alt"></i></button></td>
         </tbody>
         <?php $num++; } ?>
         
@@ -103,6 +109,7 @@ if (isset($_GET['m'])) {
     <form class="actForm" method="post" action="../controlador/Insoperador.php">
     <button class="cerrarForm" type="button"  onclick="hideForm(document.getElementById('actF_form'))">✖</button>
         <h1>Insertar operador</h1>
+
         <div>
             <p>Numero de documento</p>
             <select name="idTipo" required>
@@ -159,11 +166,20 @@ if (isset($_GET['m'])) {
         <input type="submit" class="submitButton" value="Registrar">      
     </form>
     <script>
+        var search = document.getElementById('search');
+        search.addEventListener('keydown',(e)=>{
+            if (e.key=='Enter') {
+                buscarTabla(search.value);
+            }
+        })
         function hideForm(e){
                 e.style.display="none";            
         }
         function showForm(e){
                 e.style.display="flex";            
+        }
+        function buscarTabla(e){
+            location.href = 'administracion.php?sec=Operadores&search='+e;
         }
     </script>
 </div>

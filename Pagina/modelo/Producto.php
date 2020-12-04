@@ -117,12 +117,21 @@ class Producto {
 	}
 
 	public function getProducto($p){
-		$sql = "select * from producto where idProducto = '$p'";
+		$sql = "select * from producto where idProducto = '$p' and ESTADO_idEstado = 1";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
 	}
+
+	public function getProductosSearch($s){
+		$sql = "SELECT * from producto where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and ESTADO_idEstado = 1";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
 	public function getProductosCat($cat){
 		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat";
 		$cn = conectar();
@@ -142,7 +151,7 @@ class Producto {
 	public function subirFoto($foto,$destino){
 		if (!$foto['error']>0) {
 			if ($foto['size']<8192000){
-				if ($foto['type'] == "image/jpeg") {
+				if (substr($foto['type'],0,5) == "image") {
 					if (!file_exists($destino)) {
 						if (move_uploaded_file($foto['tmp_name'], $destino)){
 							$m = "ya se guardo la imagen";
@@ -152,6 +161,8 @@ class Producto {
 					} else {
 						$m = "El archivo ya existe";
 					}
+				} else {
+					$m = "error tipo de imagen";
 				}
 			} else {
 				$m = "la imagen es muy pesada";

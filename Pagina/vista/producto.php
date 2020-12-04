@@ -10,8 +10,6 @@ if (!isset($_SESSION['user'])) {
 require_once '../modelo/Producto.php';
 $objProducto = new Producto();
 $con_productos = $objProducto->getProductos();
-$producto = $objProducto->getProducto($_GET['p']);
-$productoActual = $producto->fetch_array();
  ?>
 <head>
 	<meta charset="UTF-8">
@@ -29,16 +27,25 @@ $productoActual = $producto->fetch_array();
 	<header>
 		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
 		<label class="busqueda">
-			<input type="" placeholder="Buscar productos">
+			<input type="text" id="prodSearch" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
 		</label>
 			
 		</div>
 		<nav class="navegador">
 			<ul>
-				<li><a href="#">Cuenta</a></li>
-				<li><a href="administracion.php">Administracion</a></li>
+			<?php if (isset($_SESSION['user'])): ?>
+				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
+				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
+					<li><a href="administracion.php">Administracion</a></li>
+				<?php endif ?>
+				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
 				<li><a href="#" class="ListarProductos" ><img src="../icons/carrito.svg" alt=""></a></li>
+			<?php else: ?>
+				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
+				<li><a href="../index.php?r=1">Crear cuenta</a></li>
+			<?php endif ?>
+				
 			</ul>
 		</nav>
 	</header>
@@ -46,6 +53,13 @@ $productoActual = $producto->fetch_array();
 
 	<!---CONTENEDOR DE PRODUCTOS (-ETALLES)--->
 	<div class="contenedor">
+		<?php if (isset($_GET['p'])): 
+			$producto = $objProducto->getProducto($_GET['p']);
+			if ($producto->num_rows == 0) {
+				header('location:principal.php');
+			}
+			$productoActual = $producto->fetch_array();
+		?>
 		<section class="sec1 detalles">
 			<div class="detImg">
 				<img src="<?php echo $productoActual['prodImg']; ?>">
@@ -66,6 +80,34 @@ $productoActual = $producto->fetch_array();
 				</div>
 			</div>
 		</section>
+
+		<!-- Busqueda de productos -->
+
+		<?php elseif (isset($_GET['search'])): 
+			$busqRes = $objProducto->getProductosSearch($_GET['search']);
+
+		?>
+		<section>
+			<h1>Resultados de "<?php echo $_GET['search']; ?>"</h1>
+			<div class="container-card">
+			<?php 
+				while ($producto = $busqRes->fetch_array()) { ?>
+					<div class="card">
+						<figure>
+							<img src="<?php echo $producto['prodImg'] ?>">
+						</figure>
+						<div class="contenido-card">
+							<h3><?php echo $producto['productoNombre']; ?></h3>
+					
+							
+							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
+						</div>
+					</div>
+			<?php } ?>	
+			</div>	
+		</section>
+		<?php endif ?>
 		<section class="recientes">
 			<h1>Otros productos</h1>
 			<br>
@@ -81,7 +123,7 @@ $productoActual = $producto->fetch_array();
 					
 							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver Componentes</a>
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
 						</div>
 					</div>
 			<?php } ?>	
@@ -151,23 +193,19 @@ $productoActual = $producto->fetch_array();
 			<button>Comprar</button>
 		</div>
 		<!-- Fin de los contenedores importantes para comprar productos -->
-	</nav>
-
-
-	<section class="ContenedorDetallesProducto">
-		
-
-	</section>
-
-
-
-	
+	</nav>	
 
 </body>
 <script>
 	$('.ListarProductos').click(function(){
           
-           $('.BarraCarrito').toggleClass("show");
-		});
+        $('.BarraCarrito').toggleClass("show");
+	});
+	$('#prodSearch').keydown(function(e){
+		if (e.key=='Enter') {
+			location.href='producto.php?search='+this.value;
+		}
+		
+	})
 </script>
 </html>

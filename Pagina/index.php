@@ -14,10 +14,6 @@
 
     <!-- tipo de letra -->
     <link href="https://fonts.googleapis.com/css?family=Raleway|Ubuntu" rel="stylesheet">
-
-    <!-- Estilos -->
-    
-
     <title>ComponenTech</title>
     <link rel="stylesheet" href="vista/css/login.css">
 </head>

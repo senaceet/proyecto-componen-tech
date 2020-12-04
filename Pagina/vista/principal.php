@@ -20,6 +20,8 @@ $con_cats = $objCat->getCategorias();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 	<link rel="stylesheet" href="css/styles.css">
 	<title>ComponenTech</title>
 </head>
@@ -27,7 +29,7 @@ $con_cats = $objCat->getCategorias();
 	<header>
 		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
 		<label class="busqueda">
-			<input type="" placeholder="Buscar productos">
+			<input type="text" id="prodSearch" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
 		</label>
 			
@@ -39,8 +41,8 @@ $con_cats = $objCat->getCategorias();
 				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
 					<li><a href="administracion.php">Administracion</a></li>
 				<?php endif ?>
-				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
-				<li><img src="../icons/carrito.svg" alt=""></li>
+				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
+				<li><a href="#" class="ListarProductos" ><img src="../icons/carrito.svg" alt=""></a></li>
 			<?php else: ?>
 				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
 				<li><a href="../index.php?r=1">Crear cuenta</a></li>
@@ -86,7 +88,7 @@ $con_cats = $objCat->getCategorias();
 					
 							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver Componente</a>
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
 						</div>
 					</div>
 			<?php } ?>	
@@ -94,5 +96,80 @@ $con_cats = $objCat->getCategorias();
 		</section>
 		
 	</div>
+	<nav class="BarraCarrito">
+		<div class="TituloCarrito">
+			<h1>TUS PRODUCTOS</h1>
+		</div>
+		<div class="ContenedorProductosCarrito">
+			<div class="ProductosCarrito">
+			<div class="ImagenProductoCarrito">
+				<img src="">  
+			</div>
+
+			<div class="TextoProductoCarrito">
+					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
+			</div>
+			<div class="PrecioProductoCarrito">
+					<p>$1.256.000</p>
+			</div>
+			<div class="SacarProductoCarrito">
+				<button > ✖</button>
+			</div>	
+		</div>
+		
+		<div class="ProductosCarrito">
+			<div class="ImagenProductoCarrito">
+				<img src="">  
+			</div>
+			<div class="TextoProductoCarrito">
+					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
+			</div>
+			<div class="PrecioProductoCarrito">
+					<p>$1.256.000</p>
+			</div>
+			<div class="SacarProductoCarrito">
+				<button > ✖</button>
+			</div>	
+		</div>
+
+		<div class="ProductosCarrito">
+			<div class="ImagenProductoCarrito">
+				<img src="">  
+			</div>
+			<div class="TextoProductoCarrito">
+					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
+			</div>
+			<div class="PrecioProductoCarrito">
+					<p>$1.256.000</p>
+			</div>
+			<div class="SacarProductoCarrito">
+				<button>✖</button>
+			</div>	
+		</div>
+		
+		</div>		
+
+		<!-- Contenedor del total final (IMPORTANTE) -->
+		<div class="TituloCarrito2">
+			<h1>TOTAL:</h1>
+			<h2>$1.256.000</h2>
+		</div>
+		<div class="BarraBotonComprarProductosCarrito">
+			<button>Comprar</button>
+		</div>
+		<!-- Fin de los contenedores importantes para comprar productos -->
+	</nav>
 </body>
+<script>
+	$('.ListarProductos').click(function(){
+          
+        $('.BarraCarrito').toggleClass("show");
+	});
+	$('#prodSearch').keydown(function(e){
+		if (e.key=='Enter') {
+			location.href='producto.php?search='+this.value;
+		}
+		
+	})
+</script>
 </html>

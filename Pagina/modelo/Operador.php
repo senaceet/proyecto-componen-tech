@@ -6,20 +6,22 @@ require_once('Usuario.php');
  * @author Marlon, Yeren, Jhon, Kevin
  */
 class Operador extends Usuario {
-	/**
-	 * @AttributeType Producto
-	 * /**
-	 *  * @AssociationType Producto
-	 *  * /
-	 */
+	
 	public function getOperadores(){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 AND ESTADO_idEstado = 9";
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 ";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
 	}
 
+	public function getOperadoresBusqueda($s){
+		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and CARGO_idCargo=2";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
 	/**
 	 * @access public
 	 * @return boolean

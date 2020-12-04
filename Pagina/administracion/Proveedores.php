@@ -25,10 +25,9 @@ if (isset($_GET['m'])) {
    	    <div class="Herramientas">
            <h1>Tabla Proveedores</h1>
    	  		<ul>
-                
-                <ul>
+                <li class="search">
+                    <label><input id="search" type="text" placeholder="Buscar"><img onclick="buscarTabla(this.parentElement.querySelector('#search').value)" src="../icons/lupa.svg" alt=""></label></li>
                 <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir ➕</button></li>
-                <li><button>Buscar 🔎</button></li>
             </ul>  
    	  	</div>	
     </div>
@@ -50,8 +49,11 @@ if (isset($_GET['m'])) {
         <?php
             require_once '../modelo/Proveedor.php';
             $objUsuario = new Proveedor();
-            $consulta = $objUsuario->getProveedores();
-
+            if (isset($_GET['search'])) {
+                $consulta = $objUsuario->getProveedoresSearch($_GET['search']);
+            } else {
+                $consulta = $objUsuario->getProveedores();
+            }
             while ($usuario = $consulta->fetch_array()){
 
         ?>
@@ -66,7 +68,7 @@ if (isset($_GET['m'])) {
             <td><?php echo $usuario['estado']; ?></td>
             <td ><form action="" method="post">
                 <input type="hidden" name="idProveedor" value="<?php echo $usuario['idProveedor'] ?>">
-                <input type="submit" value="📝">
+                <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
         </tbody>
         <?php } ?>
@@ -104,10 +106,20 @@ if (isset($_GET['m'])) {
         <input type="submit" class="submitButton" value="Insertar">      
     </form>
     <script>
+        var search = document.getElementById('search');
+        search.addEventListener('keydown',(e)=>{
+            if (e.key=='Enter') {
+                buscarTabla(search.value);
+            }
+        })
         function hideForm(e){
                 e.style.display="none";            
         }
         function showForm(e){
                 e.style.display="flex";            
         }
+        function buscarTabla(e){
+            location.href = 'administracion.php?sec=proveedores&search='+e;
+        }
     </script>
+</div>

@@ -41,6 +41,9 @@ header{
 	top: 0;
 	z-index: 100;
 }
+.i{
+	font-size: 50px;
+}
 .logo{
 	width: 100px;
 	height: 100%;
@@ -95,6 +98,13 @@ header{
 .navegador li a:hover{
 	transition: 0.6s;
 	border-bottom: 1px solid var(--texto-gris);	
+}
+header i{
+	font-size: 23px;
+	transition: 0.3s;
+}
+header i:hover{
+	color: #666;
 }
 
 .navegador img{
@@ -517,31 +527,18 @@ section{
 }
 .botonesDetalles button{
 	width: 70%;
-	Margin:80px;
-	padding: 7px
-	¿cxvg
+	margin: 10px;
+	padding: 7px;
+	color: #fff;
+	font-weight: bold;
+}
+.botonesDetalles button:hover{
+	box-shadow: 0 50px 0 inset rgba(0,0,0,0.3);
 }
 
 .atras{
   background: red;
-  color: white;
-  font-weight:700;
-  cursor:pointer;
 }
-
-.atras:hover{
-	background: rgb(177, 4, 4);
-}
-
 .añadircarrito{
 	background: rgb(45, 202, 6);
-	color:white;
-	font-weight:700;
-	cursor:pointer;
-
-}
-
-.añadircarrito:hover{
-	background: rgb(29, 133, 4);
-
 }

@@ -10,7 +10,15 @@ class Cliente extends Usuario {
 	 */
 
 	public function getClientes(){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 AND ESTADO_idEstado = 9";
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	public function getClientesBusqueda($s){
+		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and CARGO_idCargo=3";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

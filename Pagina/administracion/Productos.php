@@ -1,4 +1,5 @@
 <?php 
+
 require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
 require_once '../modelo/proveedor.php';
@@ -43,7 +44,7 @@ $proveedores = $objProveedor->getProveedoresActivos();
 	<!-- Inicio Sección Imagen(Añadir imagen): Gestión Producto -->
 	<div class="SeccionImagen">
 		<div class="BotonSubir"> 📷
- 			<input class="SubirArchivo" type="file" name="prodImg" accept="image/*" id="inpFile"> 
+ 			<input required class="SubirArchivo" type="file" name="prodImg" accept="image/*" id="inpFile"> 
 		</div>
 		<img id="prevImg">
 	</div>
@@ -51,15 +52,15 @@ $proveedores = $objProveedor->getProveedoresActivos();
 	<!-- Incicio Sección Formulario(Creación de nuevos productos): Gestión Producto -->
 	<div class="SeccionFormulario">
 		<div class="CajaFormulario">
-			<input type="text" name="prodName" placeholder="Nombre del Producto">
-			<input type="text" name="prodPrec" placeholder="Precio">
-			<select name="proveedor">
+			<input type="text" name="prodName" placeholder="Nombre del Producto" required>
+			<input type="text" name="prodPrec" placeholder="Precio" required>
+			<select name="proveedor" required>
 				<option value="" selected disabled>-- Seleccione proveedor --</option>
 			<?php while ($prov = $proveedores->fetch_array()) { ?>
 				<option value="<?php echo $prov['idProveedor'] ?>"><?php echo $prov['nEmpresa'] ?></option>
 			<?php } ?>		
 			</select>
-			<textarea class="Caja3" name="prodDesc" placeholder="Descripción" rows="5"></textarea>
+			<textarea required class="Caja3" name="prodDesc" placeholder="Descripción" rows="5"></textarea>
 			<button type="submit" class="submitButton">Subir producto</button>
 		</div>
 	</div>
@@ -80,7 +81,7 @@ $proveedores = $objProveedor->getProveedoresActivos();
 		while ($producto = $con_productos->fetch_array()) { ?>
 			<div class="card">
 				<figure>
-					<img src="<?php echo $producto['prodImg'] ?>">
+					<img draggable="false" src="<?php echo $producto['prodImg'] ?>">
 				</figure>
 				<div class="contenido-card">
 					<h3><?php echo $producto['productoNombre']; ?></h3>

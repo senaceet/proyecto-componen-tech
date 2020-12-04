@@ -15,13 +15,10 @@
 	 if ($resFoto == "ya se guardo la imagen" || $resFoto == "El archivo ya existe") {
 	 	$producto->crearProducto($_POST['prodName'],str_replace("=","<br>☛",$_POST['prodDesc']),$_POST['prodPrec'],$_POST['prodCat'],$proveedor,1,$new_file);
 	 	if($producto->insertar()){
-	 		echo "productoinsertado";
+	 		echo "producto insertado";
 	 	} else {
 	 		echo "error al insertar";
 	 	}
 	 }
 	
-	
-	
-
  ?>
