@@ -24,8 +24,10 @@ $con_productos = $objProducto->getProductos();
 	<title>ComponenTech</title>
 </head>
 <body>
+
+
 	<header>
-		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
+		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="text" id="prodSearch" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
@@ -39,7 +41,7 @@ $con_productos = $objProducto->getProductos();
 				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
 					<li><a href="administracion.php">Administracion</a></li>
 				<?php endif ?>
-				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
+				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				<li><a href="#" class="ListarProductos" ><img src="../icons/carrito.svg" alt=""></a></li>
 			<?php else: ?>
 				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
@@ -75,8 +77,8 @@ $con_productos = $objProducto->getProductos();
 				</div>
 
 				<div class="botonesDetalles">
-					<button class="atras">ATRÁS</button>
-					<button class="añadircarrito">AÑADIR AL CARRITO</button>
+					<a class="LinkBoton" href="principal.php"><button class="atras">ATRÁS</button></a>
+					<a class="LinkBoton" href="#"><button class="añadircarrito">AÑADIR AL CARRITO</button></a>
 				</div>
 			</div>
 		</section>
@@ -109,7 +111,7 @@ $con_productos = $objProducto->getProductos();
 		</section>
 		<?php endif ?>
 		<section class="recientes">
-			<h1>Otros productos</h1>
+			<h1>Productos que te podrían interesar</h1>
 			<br>
 			<div class="container-card">
 			<?php 
@@ -190,7 +192,7 @@ $con_productos = $objProducto->getProductos();
 			<h2>$1.256.000</h2>
 		</div>
 		<div class="BarraBotonComprarProductosCarrito">
-			<button>Comprar</button>
+			<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
 		</div>
 		<!-- Fin de los contenedores importantes para comprar productos -->
 	</nav>	

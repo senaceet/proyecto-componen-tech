@@ -15,7 +15,7 @@
 </head>
 <body>
 	<header>
-		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
+		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">

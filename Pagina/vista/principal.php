@@ -27,7 +27,7 @@ $con_cats = $objCat->getCategorias();
 </head>
 <body>
 	<header>
-		<div class="logo"><img src="../icons/logo.png" alt="l"></div>
+		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="text" id="prodSearch" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
@@ -37,18 +37,18 @@ $con_cats = $objCat->getCategorias();
 		<nav class="navegador">
 			<ul>
 			<?php if (isset($_SESSION['user'])): ?>
-				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
+				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
 				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
-					<li><a href="administracion.php">Administracion</a></li>
+					<li><a href="administracion.php">Administracion</a> </li>
 				<?php endif ?>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				<li><a href="#" class="ListarProductos" ><img src="../icons/carrito.svg" alt=""></a></li>
 			<?php else: ?>
 				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
 				<li><a href="../index.php?r=1">Crear cuenta</a></li>
-			<?php endif ?>
-				
+			<?php endif ?>	
 			</ul>
+
 		</nav>
 	</header>
 	<div class="contenedor">
@@ -155,7 +155,7 @@ $con_cats = $objCat->getCategorias();
 			<h2>$1.256.000</h2>
 		</div>
 		<div class="BarraBotonComprarProductosCarrito">
-			<button>Comprar</button>
+			<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
 		</div>
 		<!-- Fin de los contenedores importantes para comprar productos -->
 	</nav>

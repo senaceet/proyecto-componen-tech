@@ -107,16 +107,7 @@ if (isset($_GET['m'])) {
     <form class="actForm" method="post" action="../controlador/InsUsuario.php">
     <button class="cerrarForm" type="button"  onclick="hideForm(document.getElementById('actF_form'))">✖</button>
         <h1>Insertar cliente</h1>
-        <div>
-            <p>Numero de documento</p>
-            <select name="idTipo" required>
-                <option value="" disabled selected>-- Seleccione tipo de documento</option>
-                <option value="1">Cédula</option>
-                <option value="2">Targeta de identidad</option>
-                <option value="3">Cédula de extranjeria</option>
-                <option value="4">Pasaporte</option>
-            </select>
-        </div>
+        
         <div>
             <p>Numero de documento</p>
             <input name="documento" maxlength="10" type="text" value="" required>

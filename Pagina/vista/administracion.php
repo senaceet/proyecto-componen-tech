@@ -29,7 +29,7 @@
 </head>
 <body>
 	<header>
-		<div class="logo"><img  src="../icons/logo.png" alt="l"></div>
+		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
@@ -72,10 +72,10 @@
 		 	</li>
 		 	<li><a href="#" class="Configuraciones-btn">Inventario ▼</a>
 		 		<ul class="Cuenta-show">
-		 			<li><a href="administracion.php?sec=CambiarCuenta">Movimientos</a></li>
+		 			<li><a href="#">Movimientos</a></li>
 		 		</ul>
 		 		<ul class="Cuenta-show">
-		 			<li><a href="administracion.php?sec=CambiarCuenta">Productos</a></li>
+		 			<li><a href="#">Productos</a></li>
 		 		</ul>	
 		 	</li>
 		 	<li><a href="#">Detalles 📊</a></li>
