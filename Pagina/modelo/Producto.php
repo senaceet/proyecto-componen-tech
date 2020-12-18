@@ -108,8 +108,8 @@ class Producto {
 		return $res;
 	}
 
-	public function getProductos(){
-		$sql = "select * from producto where ESTADO_idEstado = 1";
+	public function getProductos($startpage,$endpage){
+		$sql = "select * from producto where ESTADO_idEstado = 1 limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -124,6 +124,15 @@ class Producto {
 		return $res;
 	}
 
+	public function getProdCantidad(){
+		$sql = "SELECT count(*) as c from producto where ESTADO_idEstado = 1";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
+
 	public function getProductosSearch($s){
 		$sql = "SELECT * from producto where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and ESTADO_idEstado = 1";
 		$cn = conectar();
@@ -133,7 +142,7 @@ class Producto {
 	}
 
 	public function getProductosCat($cat){
-		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat";
+		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

@@ -2,6 +2,11 @@
 	require_once '../modelo/Usuario.php';
 
 	$objUsuario = new Usuario();
+
+	if (empty($_POST['documento'])) {
+		header('location:../vista/administracion.php');
+	}
+	
 	$con_usuarios = $objUsuario->getUsuario($_POST['documento'],1);
 	$actUsuario = $con_usuarios->fetch_array(); 	
 ?>

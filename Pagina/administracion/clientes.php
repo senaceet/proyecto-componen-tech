@@ -57,12 +57,27 @@ if (isset($_GET['m'])) {
         <?php
             require_once '../modelo/Cliente.php';
             $objCliente = new Cliente();
-            if (isset($_GET['search'])) {
-                $consulta = $objCliente->getClientesBusqueda($_GET['search']);
-            } else {
-                $consulta = $objCliente->getClientes();
+
+            $limitpage = 8;
+            $page = 1;
+            if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
+            $startpage = 0;
+            $endpage = $limitpage;
+            if($page>1){ 
+                $startpage=($page-1)*$limitpage;
             }
-            $num = 1;
+  
+            $count = $objCliente->getClientesCantidad();
+            $npages = $count/$limitpage;
+            if (isset($_GET['search'])) {
+                $consulta = $objCliente->getClientesBusqueda($_GET['search'],$startpage,$endpage);
+            } else {
+                $consulta = $objCliente->getClientes($startpage,$endpage);
+            }
+            if ($consulta->num_rows == 0) {
+                echo "<tr><td colspan='100%'><center>Sin resultados</center></td></tr>";
+            } 
+            $num = $startpage+1;
             while ($cliente = $consulta->fetch_array()) { 
                 switch ($cliente['TIPODOCUMENTO_idTipo']) {
                     case 1:
@@ -80,6 +95,7 @@ if (isset($_GET['m'])) {
                 }
 
         ?>
+
         <tbody>
             <td><?php echo $num; ?></td>
             <td><?php echo $documento; ?></td>
@@ -90,7 +106,7 @@ if (isset($_GET['m'])) {
             <td><?php echo $cliente['celular']; ?></td>
             <td><?php echo $cliente['direccion']; ?></td>
             <td><?php echo $cliente['correo']; ?></td>
-            <td ><form action="../vista/administracion.php?sec=actForm" method="post">
+            <td ><form action="../vista/administracion.php?sec=actForm&tabla=cliente" method="post">
                 <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
                 <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
@@ -99,8 +115,30 @@ if (isset($_GET['m'])) {
         <?php $num++; } ?>
         
    	</table>
-   	<div class="PieHerramientas">
+    <?php if ($count>$limitpage): ?>
+   	<div class="paginas">
+        <ul>
+            <?php if ($page>1): ?>
+                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($page-1); ?>">&laquo;</a></li>
+            <?php endif ?>
+
+            
+            <?php for ($i=1;$i<$npages+1;$i+=1): ?>
+                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.$i; ?>"><?php echo $i; ?></a></li>
+            <?php endfor ?>
+
+            <?php if ($page<$npages): ?>
+                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($page+1); ?>">&raquo;</a></li>
+            <?php endif ?>
+
+        </ul>
     </div>
+    <?php endif ?>
+
+
+    
+
+    
 </div>
 <div class="actF_form" id="actF_form" >
     

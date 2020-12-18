@@ -8,9 +8,22 @@ require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
 $objProducto = new Producto();
 $objCat = new Categoria();
-$con_productos = $objProducto->getProductos();
+
+$limitpage = 20;
+$page = 1;
+if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
+$startpage = 0;
+$endpage = $limitpage;
+if($page>1){ 
+    $startpage=($page-1)*$limitpage;
+}
+
+$prodCount = $objProducto->getProdCantidad();
+$npages = $prodCount/$limitpage;
+
+$con_productos = $objProducto->getProductos($startpage,$endpage);
 if (isset($_GET['c'])) {
-	$con_productos = $objProducto->getProductosCat($_GET['c']);
+	$con_productos = $objProducto->getProductosCat($_GET['c'],$startpage,$endpage);
 	$con_cat = $objCat->getCategoria($_GET['c']);
 	$actualCat = $con_cat->fetch_array();
 }
@@ -27,7 +40,7 @@ $con_cats = $objCat->getCategorias();
 </head>
 <body>
 	<header>
-		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
+		<div class="logo"><a href="#recientes"><img src="../icons/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="text" id="prodSearch" placeholder="Buscar productos">
 			<img src="../icons/lupa.svg">
@@ -69,7 +82,7 @@ $con_cats = $objCat->getCategorias();
 		</section>
 		<hr><br>
 		
-		<section class="recientes">
+		<section id="recientes" class="recientes">
 			<?php if (isset($_GET['c'])) {
 				echo "<h1>".$actualCat['categoria']."</h1>";
 			} else {
@@ -88,11 +101,28 @@ $con_cats = $objCat->getCategorias();
 					
 							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
+							<a class="verde" href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
 						</div>
 					</div>
 			<?php } ?>	
-			</div>			
+			</div>	
+			<div class="paginas">
+		        <ul>
+		            <?php if ($page>1): ?>
+		                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($page-1); ?>">&laquo;</a></li>
+		            <?php endif ?>
+
+		            
+		            <?php for ($i=1;$i<$npages+1;$i+=1): ?>
+		                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.$i; ?>"><?php echo $i; ?></a></li>
+		            <?php endfor ?>
+
+		            <?php if ($page<$npages): ?>
+		                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($page+1); ?>">&raquo;</a></li>
+		            <?php endif ?>
+
+		        </ul>
+		    </div>	
 		</section>
 		
 	</div>

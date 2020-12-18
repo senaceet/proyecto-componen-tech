@@ -7,12 +7,21 @@ require_once('Usuario.php');
  */
 class Operador extends Usuario {
 	
-	public function getOperadores(){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 ";
+	public function getOperadores($startpage,$limitpage){
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 limit $startpage,$limitpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
+	}
+
+	public function getOperadoresCantidad(){
+		$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=2";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
 	}
 
 	public function getOperadoresBusqueda($s){

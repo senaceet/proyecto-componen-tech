@@ -21,7 +21,6 @@ body{
 	padding: 10px 25px;
 	color: #fff;
 	font-weight: bold;
-	cursor: pointer;
 }
 
 .correcto{
@@ -250,19 +249,18 @@ section{
 	margin-bottom: 5px;
 }
 /*CONTENIDO TEXTO DEL BOTÓN*/
-.card .contenido-card a{
+.card .contenido-card a,.card .contenido-card input{
 	display: inline-block;
 	padding: 5px 10px;
 	margin: 5px 10px;
 	text-decoration: none;
-	border: 1px solid #098400;
-	color:#098400;
 	border-radius: 4px;
+	border: none;
 	transition: all 400ms ease;
 }
 
 .card .contenido-card .verde{
-	background: #098400;
+	background: #20A217;
 	color: #fff;
 }
 .card .contenido-card .rojo{
@@ -281,12 +279,37 @@ section{
 }
 .card .contenido-card .verde:hover{
 	background: #fff;
-	color: #098400;
+	color: #20A217;
 }
 .card .contenido-card .rojo:hover{
 	background: #fff;
 	color: #D92626;
 }
+
+.paginas ul{
+	padding: 10px;
+	display: flex; width: 80%;
+	margin: auto;
+	justify-content: space-between;
+	list-style: none;
+	border-top: 1px solid #bbb;
+}
+
+.paginas a{
+	border-radius: 2px;
+    padding: 5px 10px;
+    background: #fff;
+    box-shadow: 2px 2px 2px #555;
+	color: #090478;
+	text-decoration: none;
+	font-size: 18px;
+	transition: .2s;
+}
+.paginas a:hover{
+    background: #090478;
+	color: #fff;
+}
+
 
 /* carrito  */
 .BarraCarrito{
@@ -309,7 +332,16 @@ section{
 	
 }
 
-
+.BarraCarrito .TituloCarrito:before{
+	content: "";
+    position: absolute;
+    top: -30px;
+    left: 285px;
+    border: 15px solid black;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
 .BarraCarrito.show{
 	right:0px;
 	transition: right 0.4s ease;
@@ -329,6 +361,7 @@ section{
 	background-color:black;
 	height: auto;
 	width: 100%;
+	padding: 5px;
 	
 }
 
@@ -374,7 +407,9 @@ section{
 	text-align: center;
 }
 
-
+.ContenedorProductosCarrito{
+	background: #ccc;
+}
 
 .BarraCarrito .ProductosCarrito{
 	margin-top: 5px;
@@ -382,6 +417,7 @@ section{
 	height: auto;
 	padding: 2px;
 	box-shadow: 0 4px 4px  rgba(0,0,0,.4);
+	background: #eee;
 }
 
 .BarraCarrito .ProductosCarrito:hover{
@@ -452,8 +488,6 @@ section{
 }
 
 .TituloCarrito2 h1{
-	
-	
 	padding-left:70px; 
 	color: white;
 	font-weight: 700;
@@ -480,16 +514,19 @@ section{
 
 /* detalles de producto */
 .detalles{
-	height: auto;
+
+	box-shadow: 3px 3px 2px #aaa;
 }
 .detalles > div{
 	position: relative;
 }
 .detImg{
+	overflow: hidden;
 	background: #fff;
 	display: flex;
 	align-items: center;
 	width:40%;
+	padding: 10px;
 	justify-content: center;
 }
 .detImg img{
@@ -500,7 +537,7 @@ section{
 .detallesProducto{
 	width: 60%;
 	padding: 15px;
-	background: rgba(255, 248, 248, 0.979);
+	background: #eee;
 	color: black;
 	font-family: arial;
 	font-size: 18px;
@@ -533,12 +570,18 @@ section{
 	width: 100%;
 	padding:10px;
 }
+.botonesDetalles button{
+	box-shadow: 2px 2px 2px #aaa;
+
+}
 .botonesDetalles button, .LinkBoton{
 	width: 70%;
 	margin: 10px;
 	padding: 7px;
 	color: #fff;
 	font-weight: bold;
+	border-radius: 3px;
+	border:none;
 	cursor: pointer;
 }
 .botonesDetalles button:hover{
@@ -773,9 +816,7 @@ section{
  margin-top:60px;
  margin-left:5px;
  padding: 15px;
- font-weight: 700px;
- ;
- 
+ font-weight: 700px; 
 }
 
 

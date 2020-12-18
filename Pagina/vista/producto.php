@@ -9,7 +9,19 @@ if (!isset($_SESSION['user'])) {
 
 require_once '../modelo/Producto.php';
 $objProducto = new Producto();
-$con_productos = $objProducto->getProductos();
+$limitpage = 20;
+$page = 1;
+if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
+$startpage = 0;
+$endpage = $limitpage;
+if($page>1){ 
+    $startpage=($page-1)*$limitpage;
+}
+
+$prodCount = $objProducto->getProdCantidad();
+$npages = $prodCount/$limitpage;
+
+$con_productos = $objProducto->getProductos($startpage,$endpage);
  ?>
 <head>
 	<meta charset="UTF-8">
@@ -87,10 +99,15 @@ $con_productos = $objProducto->getProductos();
 
 		<?php elseif (isset($_GET['search'])): 
 			$busqRes = $objProducto->getProductosSearch($_GET['search']);
+			if ($busqRes->num_rows == 0) {
+				echo "<h1>No se encontraron resultados de '".$_GET['search']."'</h1>";
+			} else { ?>
+				<h1>Resultados de "<?php echo $_GET['search']; ?>"</h1>
+			<?php }
 
 		?>
 		<section>
-			<h1>Resultados de "<?php echo $_GET['search']; ?>"</h1>
+			
 			<div class="container-card">
 			<?php 
 				while ($producto = $busqRes->fetch_array()) { ?>
@@ -103,12 +120,13 @@ $con_productos = $objProducto->getProductos();
 					
 							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
+							<a class="verde" href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
 						</div>
 					</div>
 			<?php } ?>	
 			</div>	
 		</section>
+		<hr><br>
 		<?php endif ?>
 		<section class="recientes">
 			<h1>Productos que te podrían interesar</h1>
@@ -125,11 +143,28 @@ $con_productos = $objProducto->getProductos();
 					
 							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
+							<a class="verde" href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
 						</div>
 					</div>
 			<?php } ?>	
-			</div>			
+			</div>
+			<div class="paginas">
+		        <ul>
+		            <?php if ($page>1): ?>
+		                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?p='.$_GET['p'].'&page='.($page-1); ?>">&laquo;</a></li>
+		            <?php endif ?>
+
+		            
+		            <?php for ($i=1;$i<$npages+1;$i+=1): ?>
+		                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?p='.$_GET['p'].'&page='.$i; ?>"><?php echo $i; ?></a></li>
+		            <?php endfor ?>
+
+		            <?php if ($page<$npages): ?>
+		                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?p='.$_GET['p'].'&page='.($page+1); ?>">&raquo;</a></li>
+		            <?php endif ?>
+
+		        </ul>
+		    </div>			
 		</section>
 	</div>
 

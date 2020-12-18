@@ -6,9 +6,22 @@ require_once '../modelo/proveedor.php';
 
 $objProducto = new Producto();
 $objCat = new Categoria();
-$con_productos = $objProducto->getProductos();
+
+$limitpage = 20;
+$page = 1;
+if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
+$startpage = 0;
+$endpage = $limitpage;
+if($page>1){ 
+    $startpage=($page-1)*$limitpage;
+}
+
+$prodCount = $objProducto->getProdCantidad();
+$npages = $prodCount/$limitpage;
+
+$con_productos = $objProducto->getProductos($startpage,$endpage);
 if (isset($_GET['c'])) {
-	$con_productos = $objProducto->getProductosCat($_GET['c']);
+	$con_productos = $objProducto->getProductosCat($_GET['c'],$startpage,$endpage);
 	$con_cat = $objCat->getCategoria($_GET['c']);
 	$actualCat = $con_cat->fetch_array();
 }
@@ -17,8 +30,30 @@ $con_cats = $objCat->getCategorias();
 $objProveedor = new Proveedor();
 $proveedores = $objProveedor->getProveedoresActivos();
 
+if (isset($_GET['m'])) {
+    switch ($_GET['m']) {
+        case 1:
+            echo "<div class='getMensaje correcto'>Producto insertado correctamente</div>";
+            break;
+        
+        case 2:
+            echo "<div class='getMensaje incorrecto'>¡Error al insertar producto!</div>";
+            break;
 
- ?>
+        case 3:
+            echo "<div class='getMensaje correcto'>Producto eliminado</div>";
+            break;
+
+        case 4:
+            echo "<div class='getMensaje incorrecto'>¡Error al eliminar producto!</div>";
+            break;
+
+        default:  
+        	echo "<div class='getMensaje incorrecto'>".$_GET['m']."</div>";
+    }
+}
+
+?>
  <!-- Mensaje -->
  
 <!-- Sección de Categorías: Gestión producto -->
@@ -85,12 +120,32 @@ $proveedores = $objProveedor->getProveedoresActivos();
 				</figure>
 				<div class="contenido-card">
 					<h3><?php echo $producto['productoNombre']; ?></h3>
-					<a class="azul" href="#">EDITAR</a>
-					<a class="rojo" href="../controlador/eliminarProducto.php?prod=<?php echo $producto['idProducto'] ?>&file=<?php echo $producto['prodImg'] ?>">ELIMINAR</a>
+					<input class="azul" type="button" value="EDITAR">
+					<form action="../controlador/eliminarProducto.php" method="post">
+						<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
+						<input class="rojo" type="button" value="Eliminar" onclick="if (confirm('¿Esta seguro de eliminar este producto?')){this.parentElement.submit()}">
+					</form>
 				</div>
 			</div>
 		<?php } ?>	
-		</div>			
+		</div>
+		<div class="paginas">
+		        <ul>
+		            <?php if ($page>1): ?>
+		                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=productos&page='.($page-1); ?>">&laquo;</a></li>
+		            <?php endif ?>
+
+		            
+		            <?php for ($i=1;$i<$npages+1;$i+=1): ?>
+		                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=productos&page='.$i; ?>"><?php echo $i; ?></a></li>
+		            <?php endfor ?>
+
+		            <?php if ($page<$npages): ?>
+		                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=productos&page='.($page+1); ?>">&raquo;</a></li>
+		            <?php endif ?>
+
+		        </ul>
+		    </div>			
 	</section>
 </section>
 <script>

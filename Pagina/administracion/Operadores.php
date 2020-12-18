@@ -58,12 +58,27 @@ if (isset($_GET['m'])) {
         <?php
             require_once '../modelo/Operador.php';
             $objOperador = new Operador();
-            if (isset($_GET['search'])) {
-                $consulta = $objOperador->getOperadoresBusqueda($_GET['search']);
-            } else {
-                $consulta = $objOperador->getOperadores();
+            $limitpage = 8;
+            $page = 1;
+            if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
+            $startpage = 0;
+            $endpage = $limitpage;
+            if($page>1){ 
+                $startpage=($page-1)*$limitpage;
             }
-            $num = 1;
+  
+            $count = $objOperador->getOperadoresCantidad();
+            $npages = $count/$limitpage;
+            if (isset($_GET['search'])) {
+                $consulta = $objCliente->getOperadoresBusqueda($_GET['search'],$startpage,$endpage);
+            } else {
+                $consulta = $objOperador->getOperadores($startpage,$endpage);
+            }
+            if ($consulta->num_rows == 0) {
+                echo "<tr><td colspan='100%'><center>Sin resultados</center></td></tr>";
+            } 
+            $num = $startpage+1;
+
             while ($operador = $consulta->fetch_array()) { 
                 switch ($operador['TIPODOCUMENTO_idTipo']) {
                     case 1:
@@ -91,7 +106,7 @@ if (isset($_GET['m'])) {
             <td><?php echo $operador['celular']; ?></td>
             <td><?php echo $operador['direccion']; ?></td>
             <td><?php echo $operador['correo']; ?></td>
-            <td ><form action="../vista/administracion.php?sec=actForm" method="post">
+            <td ><form action="../vista/administracion.php?sec=actForm&tabla=operador" method="post">
                 <input type="hidden" name="documento" value="<?php echo $operador['documento'] ?>">
                 <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
@@ -100,13 +115,30 @@ if (isset($_GET['m'])) {
         <?php $num++; } ?>
         
    	</table>
-   	<div class="PieHerramientas">
+   	<?php if ($count>$limitpage): ?>
+    <div class="paginas">
+        <ul>
+            <?php if ($page>1): ?>
+                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=operadores'.'&page='.($page-1); ?>">&laquo;</a></li>
+            <?php endif ?>
+
+            
+            <?php for ($i=1;$i<$npages+1;$i+=1): ?>
+                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=operadores'.'&page='.$i; ?>"><?php echo $i; ?></a></li>
+            <?php endfor ?>
+
+            <?php if ($page<$npages): ?>
+                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=operadores'.'&page='.($page+1); ?>">&raquo;</a></li>
+            <?php endif ?>
+
+        </ul>
     </div>
+    <?php endif ?>
 </div>
 
 <div class="actF_form" id="actF_form" >
     
-    <form class="actForm" method="post" action="../controlador/Insoperador.php">
+    <form class="actForm" method="post" action="../controlador/insUsuario.php">
     <button class="cerrarForm" type="button"  onclick="hideForm(document.getElementById('actF_form'))">✖</button>
         <h1>Insertar operador</h1>
 
