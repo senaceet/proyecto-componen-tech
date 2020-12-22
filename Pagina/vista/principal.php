@@ -127,68 +127,8 @@ $con_cats = $objCat->getCategorias();
 		
 	</div>
 	<nav class="BarraCarrito">
-		<div class="TituloCarrito">
-			<h1>TUS PRODUCTOS</h1>
-		</div>
-		<div class="ContenedorProductosCarrito">
-			<div class="ProductosCarrito">
-			<div class="ImagenProductoCarrito">
-				<img src="">  
-			</div>
-
-			<div class="TextoProductoCarrito">
-					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
-			</div>
-			<div class="PrecioProductoCarrito">
-					<p>$1.256.000</p>
-			</div>
-			<div class="SacarProductoCarrito">
-				<button > ✖</button>
-			</div>	
-		</div>
-		
-		<div class="ProductosCarrito">
-			<div class="ImagenProductoCarrito">
-				<img src="">  
-			</div>
-			<div class="TextoProductoCarrito">
-					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
-			</div>
-			<div class="PrecioProductoCarrito">
-					<p>$1.256.000</p>
-			</div>
-			<div class="SacarProductoCarrito">
-				<button > ✖</button>
-			</div>	
-		</div>
-
-		<div class="ProductosCarrito">
-			<div class="ImagenProductoCarrito">
-				<img src="">  
-			</div>
-			<div class="TextoProductoCarrito">
-					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
-			</div>
-			<div class="PrecioProductoCarrito">
-					<p>$1.256.000</p>
-			</div>
-			<div class="SacarProductoCarrito">
-				<button>✖</button>
-			</div>	
-		</div>
-		
-		</div>		
-
-		<!-- Contenedor del total final (IMPORTANTE) -->
-		<div class="TituloCarrito2">
-			<h1>TOTAL:</h1>
-			<h2>$1.256.000</h2>
-		</div>
-		<div class="BarraBotonComprarProductosCarrito">
-			<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
-		</div>
-		<!-- Fin de los contenedores importantes para comprar productos -->
-	</nav>
+		<?php include 'minicarrito.php'; ?>
+	</nav>	
 </body>
 <script>
 	$('.ListarProductos').click(function(){

@@ -141,7 +141,7 @@ class Producto {
 		return $res;
 	}
 
-	public function getProductosCat($cat){
+	public function getProductosCat($cat,$startpage,$endpage){
 		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);

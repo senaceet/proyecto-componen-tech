@@ -80,18 +80,29 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 			</div>
 
 			<div class="detallesProducto">
-				<h1><?php echo $productoActual['productoNombre']; ?></h1>
-				<div class="textoDetalles">
-					<p><?php echo $productoActual['detalles']; ?></p>
-				</div>
-				<div class="precioDetalles">
-						<p>Precio: <?php echo "$".number_format($productoActual['precio'],0,",",".")?></p>
-				</div>
+				<article>
+					<h1><?php echo $productoActual['productoNombre']; ?></h1>
+					<div class="textoDetalles">
+						<p><?php echo $productoActual['detalles']; ?></p>
+					</div>
+					<div class="precioDetalles">
+							<p>Precio: <?php echo "$".number_format($productoActual['precio'],0,",",".")?></p>
+					</div>
 
-				<div class="botonesDetalles">
-					<a class="LinkBoton" href="principal.php"><button class="atras">ATRÁS</button></a>
-					<a class="LinkBoton" href="#"><button class="añadircarrito">AÑADIR AL CARRITO</button></a>
-				</div>
+					<div class="botonesDetalles">
+						<a href="principal.php"><input type="button" class="rojo" value="ATRAS"></a>
+						<form action="producto.php?p=<?php echo $_GET['p'] ?>" method="post">
+							<input type="hidden" name="prodId" value="<?php echo $productoActual['idProducto'] ?>">
+							<input class="verde" type="submit" name="addCarrito" value="AÑADIR AL CARRITO">
+						</form>
+						<?php if (isset($_POST['addCarrito'])) {
+							$_SESSION['carrito'][$_POST['prodId']]['img'] = $productoActual['prodImg'];
+							$_SESSION['carrito'][$_POST['prodId']]['nombre'] = $productoActual['productoNombre'];
+							$_SESSION['carrito'][$_POST['prodId']]['precio'] = $productoActual['precio'];
+						} ?>
+					</div>
+				</article>
+				
 			</div>
 		</section>
 
@@ -169,67 +180,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 	</div>
 
 	<nav class="BarraCarrito">
-		<div class="TituloCarrito">
-			<h1>TUS PRODUCTOS</h1>
-		</div>
-		<div class="ContenedorProductosCarrito">
-			<div class="ProductosCarrito">
-			<div class="ImagenProductoCarrito">
-				<img src="">  
-			</div>
-
-			<div class="TextoProductoCarrito">
-					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
-			</div>
-			<div class="PrecioProductoCarrito">
-					<p>$1.256.000</p>
-			</div>
-			<div class="SacarProductoCarrito">
-				<button > ✖</button>
-			</div>	
-		</div>
-		
-		<div class="ProductosCarrito">
-			<div class="ImagenProductoCarrito">
-				<img src="">  
-			</div>
-			<div class="TextoProductoCarrito">
-					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
-			</div>
-			<div class="PrecioProductoCarrito">
-					<p>$1.256.000</p>
-			</div>
-			<div class="SacarProductoCarrito">
-				<button > ✖</button>
-			</div>	
-		</div>
-
-		<div class="ProductosCarrito">
-			<div class="ImagenProductoCarrito">
-				<img src="">  
-			</div>
-			<div class="TextoProductoCarrito">
-					<p>Tarjeta De Video Asrock Radeon RTX 5600 XT Ch </p>
-			</div>
-			<div class="PrecioProductoCarrito">
-					<p>$1.256.000</p>
-			</div>
-			<div class="SacarProductoCarrito">
-				<button>✖</button>
-			</div>	
-		</div>
-		
-		</div>		
-
-		<!-- Contenedor del total final (IMPORTANTE) -->
-		<div class="TituloCarrito2">
-			<h1>TOTAL:</h1>
-			<h2>$1.256.000</h2>
-		</div>
-		<div class="BarraBotonComprarProductosCarrito">
-			<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
-		</div>
-		<!-- Fin de los contenedores importantes para comprar productos -->
+		<?php include 'minicarrito.php'; ?>
 	</nav>	
 
 </body>

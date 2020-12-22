@@ -166,6 +166,20 @@ class Usuario {
 		return $res;
 	}
 
+
+	public function desactivar($u) {
+		if($this->getUsuario($u,1)->num_rows==1){
+			$sql = "UPDATE usuario set ESTADO_idEstado = 10 where documento = $u";
+			$cn = conectar();
+			$res = $cn->query($sql);
+			$cn->close();
+		} else {
+			$res = 2;
+		}
+		
+		return $res;
+	}
+
 	/**
 	 * /**
 	 *  * @access public

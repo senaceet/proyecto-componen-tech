@@ -34,7 +34,7 @@
 			<h1>Modificar datos de la cuenta</h1>
 			<div>
 				<p>Numero de documento</p>
-				<input name="documento" maxlength="10" type="text" value="<?php echo $_SESSION['user']['documento']; ?>" >
+				<input disabled type="text" value="<?php echo $_SESSION['user']['documento']; ?>" >
 			</div>
 			<div>
 				<p>Nombres</p>

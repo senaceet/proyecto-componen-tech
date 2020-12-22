@@ -10,7 +10,7 @@ class Cliente extends Usuario {
 	 */
 
 	public function getClientes($startpage,$limitpage){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 limit $startpage,$limitpage";
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 9 limit $startpage,$limitpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -28,7 +28,7 @@ class Cliente extends Usuario {
 
 
 	public function getClientesBusqueda($s){
-		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and CARGO_idCargo=3";
+		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and (CARGO_idCargo=3 and ESTADO_idEStado = 9)";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

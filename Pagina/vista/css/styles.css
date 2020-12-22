@@ -249,7 +249,7 @@ section{
 	margin-bottom: 5px;
 }
 /*CONTENIDO TEXTO DEL BOTÓN*/
-.card .contenido-card a,.card .contenido-card input{
+.card .contenido-card a,.card .contenido-card input, .botonesDetalles input{
 	display: inline-block;
 	padding: 5px 10px;
 	margin: 5px 10px;
@@ -259,30 +259,30 @@ section{
 	transition: all 400ms ease;
 }
 
-.card .contenido-card .verde{
+.verde{
 	background: #20A217;
 	color: #fff;
 }
-.card .contenido-card .rojo{
+.rojo{
 	border-color:#D92626;
 	background: #D92626;
 	color: #fff;
 }
-.card .contenido-card .azul{
+.azul{
 	border-color:#14A0E1;
 	background: #14A0E1;
 	color: #fff;
 }
-.card .contenido-card .azul:hover{
-	background:#fff;
+.azul:hover{
+	background:#ccc;
 	color: #14A0E1;
 }
-.card .contenido-card .verde:hover{
-	background: #fff;
+.verde:hover{
+	background: #ccc;
 	color: #20A217;
 }
-.card .contenido-card .rojo:hover{
-	background: #fff;
+.rojo:hover{
+	background: #ccc;
 	color: #D92626;
 }
 
@@ -316,7 +316,6 @@ section{
 	z-index: 100;
 	position: fixed;
 	width: 340px;
-	height: 50%;
 	right: -340px;
 	top:60px;
 	background: rgba(230,229,230,1);
@@ -327,9 +326,12 @@ section{
 	background: -ms-linear-gradient(left, rgba(230,229,230,1) 0%, rgba(255,255,255,1) 38%, rgba(255,255,255,1) 44%, rgba(230,229,230,1) 100%);
 	background: linear-gradient(to right, rgba(230,229,230,1) 0%, rgba(255,255,255,1) 38%, rgba(255,255,255,1) 44%, rgba(230,229,230,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e5e6', endColorstr='#e6e5e6', GradientType=1 );
-	
+
 	transition: right 0.4s ease;
 	
+}
+.BarraCarrito center{
+	padding: 10px;
 }
 
 .BarraCarrito .TituloCarrito:before{
@@ -349,12 +351,8 @@ section{
 
 .BarraCarrito .ContenedorProductosCarrito{
 	width: 100%;
-	height: 354px;
-
-}
-
-.ContenedorProductosCarrito{
-	overflow: scroll;
+	max-height: 50vh;
+	overflow: auto;
 }
 
 .BarraCarrito .TituloCarrito{
@@ -363,6 +361,17 @@ section{
 	width: 100%;
 	padding: 5px;
 	
+}
+
+.Vaciar{
+	width: 100%;
+    border: none;
+    background: #ccc;
+    padding: 5px;
+    color: var(--rojo-principal);
+}
+.Vaciar:hover{
+	font-weight: bolder;
 }
 
 .BarraCarrito .BarraBotonComprarProductosCarrito{
@@ -412,34 +421,30 @@ section{
 }
 
 .BarraCarrito .ProductosCarrito{
-	margin-top: 5px;
 	width: 100%;
-	height: auto;
-	padding: 2px;
-	box-shadow: 0 4px 4px  rgba(0,0,0,.4);
+	box-shadow: 0 2px 2px  rgba(0,0,0,.4);
 	background: #eee;
+	margin: 4px 0;
+	display: inline-flex;
+	align-items: center;
+	transition: .2s;
 }
 
 .BarraCarrito .ProductosCarrito:hover{
-	background-color: #f3f2f3;
-	box-shadow: 0 2px 2px  rgba(0,0,0,.4);
-}
+	box-shadow: 0 4px 4px  rgba(0,0,0,.4);
 
-.ProductosCarrito{
-	display: inline-flex;
 }
 .ProductosCarrito .ImagenProductoCarrito{
 	height: auto;
-	width: 140px;
+	width: 150px;
+	background: #fff;
 }
 
 .ImagenProductoCarrito img{
 	width: 100%;
-	height: 100%;
 }
 
 .TextoProductoCarrito{
-	margin-left: 5px; 
 	width: 190px;
 	height: 100%;
 }
@@ -448,26 +453,22 @@ section{
 	margin-left: 5px; 
 	text-align: center;
 	width: auto;
-	
 }
 
 .TextoProductoCarrito p{
 	text-align: left;
 	font-weight: 100;
 	font-style: oblique;
+	padding: 3px 5px;
 }
 
 .PrecioProductoCarrito p{
 	text-align: right;
-	padding-top: 25px;
-	padding-left:5px; 
 	font-style: oblique;
 	font-weight: 400;
-	
 }
 
 .SacarProductoCarrito{
-	margin-top: 5px;
 	margin-left: 25px; 
 	height: 100%;
 	width: 100px;
@@ -480,11 +481,11 @@ section{
 	cursor: pointer;
 	font-weight: bolder;
 	background-color: transparent;
+	transition: .2s ease-in;
 }
 
 .SacarProductoCarrito button:hover{
 	color:#ff0000;
-	transition: all 200ms ease-out;
 }
 
 .TituloCarrito2 h1{
@@ -514,11 +515,17 @@ section{
 
 /* detalles de producto */
 .detalles{
-
 	box-shadow: 3px 3px 2px #aaa;
 }
-.detalles > div{
+.detallesProducto{
+	display: flex;
+    align-items: center;
+}
+.detalles  > div{
 	position: relative;
+}
+.detalles h1{
+	font-size: 28px;
 }
 .detImg{
 	overflow: hidden;
@@ -541,8 +548,9 @@ section{
 	color: black;
 	font-family: arial;
 	font-size: 18px;
-	
-	
+}
+.detallesProducto article {
+	width: 100%;
 }
 
 .detallesProducto h1{
@@ -555,7 +563,7 @@ section{
 .textoDetalles{
 	overflow: auto;
 	padding: 15px;
-	margin-top: 5px;
+	max-height: 50vh;
 	
 }
 
@@ -564,37 +572,16 @@ section{
 	font-weight:700;
 }
 /*BOTONES DETALLES DEL PRODUCTO*/
-.botonesDetalles{
-	left: 0;
-	display: inline-flex;
-	width: 100%;
-	padding:10px;
-}
-.botonesDetalles button{
-	box-shadow: 2px 2px 2px #aaa;
-
-}
-.botonesDetalles button, .LinkBoton{
-	width: 70%;
-	margin: 10px;
+.botonesDetalles input{
+	min-width: 180px;
 	padding: 7px;
-	color: #fff;
-	font-weight: bold;
-	border-radius: 3px;
-	border:none;
-	cursor: pointer;
 }
-.botonesDetalles button:hover{
-	box-shadow: 0 50px 0 inset rgba(0,0,0,0.3);
+.botonesDetalles{
+	display:flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
 
-.atras{
-	background-color: red;
-
-}
-.añadircarrito{
-	background: rgb(45, 202, 6);
-}
 
 /*FIN DETALLES PRODUCTO*/
 

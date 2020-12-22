@@ -22,7 +22,13 @@ if (isset($_GET['m'])) {
             break;
         case 7:
             echo "<div class='getMensaje incorrecto'>Este correo ya está en uso.</div>";
-            break;      
+            break;
+        case 8:
+            echo "<div class='getMensaje correcto'>Usuario desactivado</div>";
+            break;
+        case 9:
+            echo "<div class='getMensaje incorrecto'>Error a desactivar usuario</div>";
+            break;  
     }
 }
  ?>
@@ -110,7 +116,11 @@ if (isset($_GET['m'])) {
                 <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
                 <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
-            <td><button><i class="far fa-trash-alt"></i></button></td>
+            <td><form action="../controlador/desactivarUsuario.php" method="post">
+                <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
+                <input type="hidden" name="tabla" value="clientes">
+                <button type="button" onclick="if (confirm('¿Está seguro de desactivar a este usuario?')) {this.parentElement.submit()}"><i class="far fa-trash-alt"></i></button>
+            </form></td>
         </tbody>
         <?php $num++; } ?>
         
