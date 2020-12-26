@@ -76,7 +76,7 @@ if (isset($_GET['m'])) {
             $count = $objCliente->getClientesCantidad();
             $npages = $count/$limitpage;
             if (isset($_GET['search'])) {
-                $consulta = $objCliente->getClientesBusqueda($_GET['search'],$startpage,$endpage);
+                $consulta = $objCliente->getClientesBusqueda($_GET['search']);
             } else {
                 $consulta = $objCliente->getClientes($startpage,$endpage);
             }

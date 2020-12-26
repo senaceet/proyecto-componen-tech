@@ -9,11 +9,18 @@ if (!isset($_SESSION['user'])) {
 
 if (!isset($_SESSION['carrito'])) {
 	header('location:principal.php?m=1');
+} else {
+	if (count( $_SESSION['carrito'] ) == 0) {
+		header('location:principal.php?m=1');
+	}
 }
 
-//$Subtotal =  0;
-//$Total    =  0;
-
+if (isset($_POST['sacarproducto'])) {
+	unset($_SESSION['carrito'][$_POST['prod']]);
+	if (count( $_SESSION['carrito'] ) == 0) {
+		header('location:principal.php?m=1');
+	}
+}
 
  ?>
 <head>
@@ -51,7 +58,6 @@ if (!isset($_SESSION['carrito'])) {
 			</ul>
 		</nav>
 	</header>
-
 <h1 class="TituloFactura">Factura</h1>
 	<section class="SecciónFactura">
 		<!-- Productos factura -->
@@ -77,9 +83,10 @@ if (!isset($_SESSION['carrito'])) {
 						<h2 class="totalCantidad"></h2>
 					</div>
 
-					<div class="SacarProductoFactura">
-						<button>Quitar</button>
-					</div>
+					<form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" class="SacarProductoFactura">
+						<input type="hidden" name="prod" value="<?php echo $key ?>">
+						<button type="submit" name="sacarproducto">Quitar</button>
+					</form>
 
 				</div>
 			<?php

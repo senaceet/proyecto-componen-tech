@@ -4,11 +4,11 @@ require_once('Usuario.php');
 /**
  * @access public
  * @author Marlon, Yeren, Jhon, Kevin
- */
+ */ 
 class Operador extends Usuario {
 	
 	public function getOperadores($startpage,$limitpage){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 ESTADO_idEStado = 9 limit $startpage,$limitpage";
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=2 and ESTADO_idEStado = 9 limit $startpage,$limitpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

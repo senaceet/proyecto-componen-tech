@@ -70,7 +70,7 @@ if (isset($_GET['m'])) {
             $count = $objOperador->getOperadoresCantidad();
             $npages = $count/$limitpage;
             if (isset($_GET['search'])) {
-                $consulta = $objCliente->getOperadoresBusqueda($_GET['search'],$startpage,$endpage);
+                $consulta = $objCliente->getOperadoresBusqueda($_GET['search']);
             } else {
                 $consulta = $objOperador->getOperadores($startpage,$endpage);
             }

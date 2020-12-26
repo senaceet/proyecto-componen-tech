@@ -7,11 +7,17 @@
 if (isset($_POST['Vaciar'])) {
 	unset($_SESSION['carrito']);
 }
+if (isset($_POST['sacarProd'])) {
+	unset($_SESSION['carrito'][$_POST['prodCarrito']]);
+}
 
 $total = 0;
 if (!isset($_SESSION['carrito'])) {
 	echo "<center>Tu carrito está vacio</center>";
 }else{
+	if (count($_SESSION['carrito'])==0) {
+		echo "<center>Tu carrito está vacio</center>";
+	}
 
 foreach ($_SESSION['carrito'] as $key => $value) { ?>
 	<div class="ProductosCarrito">
@@ -24,9 +30,10 @@ foreach ($_SESSION['carrito'] as $key => $value) { ?>
 		<div class="PrecioProductoCarrito">
 			<p><?php echo "$".number_format($value['precio'],0,",","."); ?></p>
 		</div>
-		<div class="SacarProductoCarrito">
-			<button>✖</button>
-		</div>
+		<form method="post" class="SacarProductoCarrito">
+			<input type="hidden" name="prodCarrito" value="<?php echo $key ?>">
+			<button type="submit" name="sacarProd">✖</button>
+		</form>
 	</div>
 <?php $total += $value['precio']; } ?>
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
@@ -45,4 +52,5 @@ foreach ($_SESSION['carrito'] as $key => $value) { ?>
 <div class="BarraBotonComprarProductosCarrito">
 	<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
 </div>
+
 

@@ -64,7 +64,18 @@ $con_cats = $objCat->getCategorias();
 
 		</nav>
 	</header>
+	
+
 	<div class="contenedor">
+		<?php 
+		    if (isset($_GET['m'])) {
+		        switch ($_GET['m']) {
+		            case 1:
+		                echo "<div class='getMensaje correcto'>El carrito está vacio</div>";
+		                break;
+		        }
+		    }
+     	?>
 		<section class="sec1">
 			<div class="categorias">
 				<h1>Categorías</h1>
