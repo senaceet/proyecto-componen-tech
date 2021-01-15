@@ -75,7 +75,7 @@
 		 			<li><a href="#">Movimientos</a></li>
 		 		</ul>
 		 		<ul class="Cuenta-show">
-		 			<li><a href="#">Productos</a></li>
+		 			<li><a href="administracion.php?sec=Inventario">Productos</a></li>
 		 		</ul>	
 		 	</li>
 		 	<li><a href="#">Detalles 📊</a></li>
