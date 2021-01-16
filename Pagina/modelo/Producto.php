@@ -115,6 +115,13 @@ class Producto {
 		$cn->close();
 		return $res;
 	}
+	public function getProductosInventario($startpage,$endpage){
+		$sql = "select * from producto left join inventario ON idProducto = PRODUCTO_idProducto limit $startpage,$endpage";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
 
 	public function getProducto($p){
 		$sql = "select * from producto where idProducto = '$p' and ESTADO_idEstado = 1";
@@ -132,6 +139,14 @@ class Producto {
 		$res = $res->fetch_array();
 		return $res['c'];
 	}
+	public function getProdInventarioCantidad(){
+		$sql = "SELECT count(*) as c from producto left join inventario ON idProducto = PRODUCTO_idProducto";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
 
 	public function getProductosSearch($s){
 		$sql = "SELECT * from producto where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and ESTADO_idEstado = 1";
@@ -143,6 +158,15 @@ class Producto {
 
 	public function getProductosCat($cat,$startpage,$endpage){
 		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+	
+
+	public function getProductosInventarioCat($cat,$startpage,$endpage){
+		$sql = "select * from producto where CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

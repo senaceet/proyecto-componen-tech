@@ -126,7 +126,7 @@
 	height: 85vh;
 	color: black;
 	background:transparent;
-	overflow: scroll;
+	overflow: auto;
 }
 .TablaBD .CabezaHerramientas{
 	border-bottom: solid 2px;
