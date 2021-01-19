@@ -332,10 +332,12 @@
 	margin-bottom: 8px;
 	font-size: 20px;
 	color: var(--texto-gris);
+	outline:none;
 }
 
 .CajaFormulario .submitButton{
 	color: #fff;
+	border-color: transparent;
 }
 .CajaFormulario textarea{
 	resize: none;
@@ -563,6 +565,7 @@
 	margin-bottom: 8px;
 	font-size: 20px;
 	color: var(--texto-gris);
+	outline:none;
 }
 .actForm .submitButton{
 	color: #fff;
@@ -612,5 +615,68 @@
 	right:0;
 	width: 35px;
 	height: 35px;
+	cursor:pointer;
+}
+
+
+/* actualizar producto */
+
+.updProd{
+	background-color: rgba(0,0,0,.5);
+	height: 100vh;
+	width: 100%;
+	position: fixed;
+	top:0;
+	left: 0;
+	z-index: 200;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.cerrarUpd{
+	background-color: transparent;
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+	z-index: 200;
+}
+.updProd form{
+	z-index: inherit;
+	height: 80vh;
+	width: 90%;
+	overflow: auto;
+	background-color: #fff;
+	border-radius: 3px;
+	
+}
+.updProd p{
+	color: var(--texto-gris);
+	font-size: 20px;
+	padding: 0px 10px 6px ;
+}
+
+.upd_img{
+	text-align: center;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.upd_img img{
+	min-height: 200px;
+	max-height: 200px;
+	max-width: 80%;
+	border: 2px solid #999;
+}
+
+.upd_img .edit{
+	color: #999;
+	border-radius: 50%;
+	background-color: #fff;
+	border: 2px solid #999;
+	padding: 10px;
+	font-size: 27px;
+	position: absolute;
+	transform: translateX(-50%);
 	cursor:pointer;
 }

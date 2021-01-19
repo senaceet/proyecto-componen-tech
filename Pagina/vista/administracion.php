@@ -24,7 +24,7 @@
   
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
 	<title>ComponenTech</title>
 </head>
 <body>
@@ -107,5 +107,6 @@
            $(this).addClass("active").siblings().removeClass("active");
        });
 	</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Fin Deslizamiento -->
 </html>

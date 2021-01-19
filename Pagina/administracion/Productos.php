@@ -18,14 +18,19 @@ if($page>1){
 
 $prodCount = $objProducto->getProdCantidad();
 $npages = $prodCount/$limitpage;
-
-$con_productos = $objProducto->getProductos($startpage,$endpage);
+$ruta = $_SERVER['PHP_SELF']."?sec=productos";
+$con_productos = $objProducto->getProductosInventario($startpage,$endpage);
 if (isset($_GET['c'])) {
-	$con_productos = $objProducto->getProductosCat($_GET['c'],$startpage,$endpage);
+	$ruta = $_SERVER['PHP_SELF']."?sec=productos&c=".$_GET['c'];
+	$con_productos = $objProducto->getProductosInventarioCat($_GET['c'],$startpage,$endpage);
 	$con_cat = $objCat->getCategoria($_GET['c']);
 	$actualCat = $con_cat->fetch_array();
 }
 $con_cats = $objCat->getCategorias();
+
+if (isset($_GET['search'])) {
+	$con_productos = $objProducto->getProductosSearchInventario($_GET['search']);
+}
 
 $objProveedor = new Proveedor();
 $proveedores = $objProveedor->getProveedoresActivos();
@@ -46,8 +51,15 @@ if (isset($_GET['m'])) {
 
         case 4:
             echo "<div class='getMensaje incorrecto'>¡Error al eliminar producto!</div>";
+			break;
+		
+		case 5:
+            echo "<div class='getMensaje correcto'>Producto actualizado</div>";
             break;
-
+		case 6:
+            echo "<div class='getMensaje incorrecto'>¡Error al actualizar producto!</div>";
+			break;
+			
         default:  
         	echo "<div class='getMensaje incorrecto'>".$_GET['m']."</div>";
     }
@@ -96,7 +108,11 @@ if (isset($_GET['m'])) {
 			<?php } ?>		
 			</select>
 			<textarea required class="Caja3" name="prodDesc" placeholder="Descripción" rows="5"></textarea>
-			<button type="submit" class="submitButton">Subir producto</button>
+			<?php if(isset($_GET['c'])): ?>
+				<button id="insProd" type="button" class="submitButton">Subir producto</button>
+			<?php else: ?>
+				<button type="button" onclick="swal('Seleccione una categoría','','info')" class="submitButton">Subir producto</button>
+			<?php endif; ?>
 		</div>
 	</div>
 </form>
@@ -105,22 +121,37 @@ if (isset($_GET['m'])) {
 
 <!-- Sección de busqueda de productos -->
 <div class="busqueda busqueda2">
-	<input type="text" name="" placeholder="Buscar Producto">
+	<input type="text" id="busq2" placeholder="Buscar Producto">
 	<img src="../icons/lupa.svg">
 </div>
 <br>
 <section class="ContenedorCartas">
 	<section class="recientes">
 		<div class="container-card">
+			
 		<?php 
+		if ($con_productos->num_rows == 0) {
+			echo "<h1 style='padding: 16px'>No se encontraron productos</h1>";
+		}
+
 		while ($producto = $con_productos->fetch_array()) { ?>
 			<div class="card">
 				<figure>
+				<?php if($producto['ESTADO_idEstado'] == 1): ?>
+					<div class="estado enventa">En venta</div>
+				<?php else: ?>
+					<div class="estado agotado">Agotado</div>
+				<?php endif; ?>
+					
 					<img draggable="false" src="<?php echo $producto['prodImg'] ?>">
 				</figure>
 				<div class="contenido-card">
 					<h3><?php echo $producto['productoNombre']; ?></h3>
-					<input class="azul" type="button" value="EDITAR">
+					<form action="<?php echo $ruta ?>" method="post">
+						<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
+						<input class="azul" type="submit" value="EDITAR">
+					</form>
+					
 					<form action="../controlador/eliminarProducto.php" method="post">
 						<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
 						<input class="rojo" type="button" value="Eliminar" onclick="if (confirm('¿Esta seguro de eliminar este producto?')){this.parentElement.submit()}">
@@ -148,9 +179,95 @@ if (isset($_GET['m'])) {
 		    </div>			
 	</section>
 </section>
+
+
+
+
+<?php if(isset($_POST['prod'])):
+	$upd = $objProducto->getProductoInventario($_POST['prod']);
+	$upd = $upd->fetch_array(); 
+	$cats=$objCat->getCategorias();
+	$estado = $objProducto->getEstado($upd['ESTADO_idEstado']);
+	$estados = $objProducto->getEstados();
+	$proveedores = $objProveedor->getProveedoresActivos();
+	$upd_cat = $objProducto->getCategoriaText($upd['CATEGORIA_idCategoria']);
+	$updprov = $objProveedor->getProveedor($upd['PROVEEDOR_idProveedor']);
+	?>
+	<style>.secciones{position: static}</style>
+<div class="updProd">
+	<div class="cerrarUpd" onclick="this.parentElement.style.display='none'"></div>
+	<form action="../controlador/actualizarProd.php" enctype="multipart/form-data" method="post" class="CajaFormulario">
+		<input type="hidden" name="id" value="<?php echo $upd['idProducto'] ?>">
+		<input name="oldImg" type="hidden" value="<?php echo $upd['prodImg'] ?>">
+		<input name="newImg" accept="image/*" type="file" id="upd_img" style="display:none">
+		<div class="upd_img">
+			<img id="img2" src="<?php echo $upd['prodImg'] ?>" alt="imagen del producto">
+			<label for="upd_img"><i class="edit fa fa-pencil"></i></label> 
+		</div>
+		<p>Nombre</p>
+		<input name="nombre" type="text" value="<?php echo $upd['productoNombre'] ?>">
+		<p>precio</p>
+		<input name="precio" type="text" value="<?php echo $upd['precio'] ?>">
+		<p>Descripción</p>
+		<textarea name="descripcion"  cols="30" rows="10"><?php echo str_replace("<br>☛","=",$upd['detalles']) ?></textarea>
+		<p>Categoria</p>
+		<select name="categoria" >
+			<option value="<?php echo $upd_cat['idCategoria'] ?>"><?php echo $upd_cat['categoria'] ?></option>
+		<?php while($cat = $cats->fetch_array()):  ?>
+			<option value="<?php echo $cat['idCategoria'] ?>"><?php echo $cat['categoria'] ?></option>
+		<?php endwhile; ?>
+		</select>
+		<p>Proveedor</p>
+		<select name="proveedor" required>
+			<option value="<?php echo $updprov['idProveedor'] ?>"><?php echo $updprov['nEmpresa'] ?></option>
+			<?php while ($prov = $proveedores->fetch_array()) { ?>
+			<option value="<?php echo $prov['idProveedor'] ?>"><?php echo $prov['nEmpresa'] ?></option>
+			<?php } ?>		
+		</select>
+		<p>Estado</p>
+		<select name="estado" >
+			<option value="<?php echo $estado['idEstado'] ?>"><?php echo $estado['estado'] ?></option>
+		<?php while($e = $estados->fetch_array()): ?>
+			<option value="<?php echo $e['idEstado'] ?>"><?php echo $e['estado'] ?></option>
+		<?php endwhile; ?>
+		</select>
+		<button type="button" id="actualizar" class="submitButton">Actualizar</button>
+			
+	</form>
+	<script>
+		const file = document.querySelector('#upd_img');
+		const img2 = document.querySelector('#img2');
+		file.addEventListener("change",e=>{
+			if (!file.files || !file.files.length) {
+				swal('No cargó la imagen','','error');
+				img2.src="";
+	  		} else {
+				  img2.src=URL.createObjectURL(file.files[0]);
+			  }
+		});
+
+		const actBoton = document.querySelector('#actualizar');
+
+		actBoton.addEventListener('click',e=>{
+			verifInput(actBoton.form);
+		});
+
+		actBoton.form.addEventListener("keydown",e=>{
+			if(e.key=="Enter"){
+				verifInput(actBoton.form);
+			}
+		});
+		
+		
+
+	</script>
+</div>
+<?php endif; ?>
+
+
 <script>
-   	const $inpFile = document.querySelector("#inpFile"),
-	$prevImg = document.querySelector("#prevImg");
+   	const $inpFile = document.querySelector("#inpFile");
+	const $prevImg = document.querySelector("#prevImg");
 
 	$inpFile.addEventListener("change", () => {
 	 	const archivos = $inpFile.files;
@@ -161,5 +278,57 @@ if (isset($_GET['m'])) {
 	  	const primerArchivo = archivos[0];
 	  	const objectURL = URL.createObjectURL(primerArchivo);
 	  	$prevImg.src = objectURL;
+	});
+
+		
+
+
+
+
+		const insBoton = document.querySelector('#insProd');
+
+		if (insBoton != null) {
+			insBoton.addEventListener('click',e=>{
+				const img = insBoton.form.querySelector('input[type=file]');
+				if(img.value == ""){
+					swal("Debe seleccionar una imagen","","info");
+				} else{
+					verifInput(insBoton.form);
+				}
+				
+			});
+		}
+	
+		
+
+
+
+
+		
+		function verifInput(form){
+			const inputs = form.querySelectorAll("input[type=text], select, textarea");
+			var vacios = 0;
+			inputs.forEach(e => {
+				if(e.value == ""){
+					vacios++;
+					e.style.borderColor="#e55";
+				}
+				e.addEventListener('input',() =>{
+					e.style.borderColor="#bababa";
+				});
+			});
+			if (vacios>0) {
+				swal("faltan "+vacios+" campos",'','info');
+			} else{
+				form.submit();
+			}
+			
+		}
+
+	const busq2 = document.querySelector('#busq2');
+	busq2.addEventListener('keydown',e=>{
+		if (e.key=='Enter') {
+			location.href='administracion.php?sec=productos&search='+busq2.value;
+		}
 	});
 </script>

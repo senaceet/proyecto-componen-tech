@@ -40,7 +40,7 @@
                 echo "Error: el correo ya está registrado";
                 break;
             case 7:
-                echo "Error al iniciar sesión";
+                echo "Error: Contraseña incorrecta";
                 break;
             case 8:
                 echo "Error: el usuario no existe";

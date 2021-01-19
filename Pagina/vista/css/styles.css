@@ -402,6 +402,7 @@ section{
 	box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
 	transition: all 400ms ease-out;
 	cursor: default;
+	position: relative;
 }
 /*BORDE CARTA CON HOVER*/
 .card:hover{
@@ -412,6 +413,17 @@ section{
 	width: 100%;
 	object-fit: contain;
 }
+.card .estado{
+	text-align: center;
+	padding: 5px;
+	position: absolute;
+	width: 100%;
+	opacity: .7;
+	transform: translate(70px,15px) rotate(45deg);
+	color:#fff;
+}
+.enventa{background-color: #00aa00;}
+.agotado{background-color: #aa0000;}
 .card .contenido-card{
 	padding: 15px;
 	text-align: center;

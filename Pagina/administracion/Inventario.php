@@ -31,7 +31,7 @@ $con_cats = $objCat->getCategorias();
 							<ul>
 							<?php 
 								while ($cat = $con_cats->fetch_array()) { $catId=$cat['idCategoria'] ?>
-									<li><a href="principal.php?c=<?php echo $catId ?>"><?php echo $cat['categoria']; ?></a></li>
+									<li><a href="?sec=inventario&c=<?php echo $catId ?>"><?php echo $cat['categoria']; ?></a></li>
 							<?php }	 ?>
 								
 							</ul>

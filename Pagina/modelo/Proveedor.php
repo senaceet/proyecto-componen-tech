@@ -39,7 +39,16 @@ class Proveedor{
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
-    }
+	}
+	
+	public function getProveedor($p){
+		$sql = "SELECT * FROM proveedor where idproveedor = $p";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res;
+	}
     
     public function getProveedores(){
 		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where proveedor.ESTADO_idEstado=estado.idEstado";

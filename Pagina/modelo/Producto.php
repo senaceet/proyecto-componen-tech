@@ -77,10 +77,7 @@ class Producto {
 		$this->_estado = $aEstado;
 	}
 
-	public function getEstado() {
-		return $this->_estado;
-	}
-
+	
 	public function setProdImg($aProdImg) {
 		$this->_prodImg = $aProdImg;
 	}
@@ -100,8 +97,27 @@ class Producto {
 		$this->setProdImg($img);
 	}
 
+	public function getCategoriaText($c){
+		$sql = "select * from categoria where idCategoria=$c ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res;
+	}
+
 	public function insertar(){
 		$sql = "insert into producto values('','$this->_nombreProducto','$this->_detalles','$this->_precio','$this->_iva','$this->_categoria','$this->_proveedor','$this->_estado','$this->_prodImg')";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+		
+	public function actualizar($id){
+		$sql = "update producto set productoNombre='$this->_nombreProducto', detalles='$this->_detalles', precio='$this->_precio', CATEGORIA_idCategoria='$this->_categoria', PROVEEDOR_idProveedor='$this->_proveedor', ESTADO_idEStado='$this->_estado', prodImg='$this->_prodImg'
+				where idProducto='$id'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -125,6 +141,14 @@ class Producto {
 
 	public function getProducto($p){
 		$sql = "select * from producto where idProducto = '$p' and ESTADO_idEstado = 1";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	public function getProductoInventario($p){
+		$sql = "select * from producto where idProducto = '$p'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -156,6 +180,14 @@ class Producto {
 		return $res;
 	}
 
+	public function getProductosSearchInventario($s){
+		$sql = "SELECT * from producto where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%')";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
 	public function getProductosCat($cat,$startpage,$endpage){
 		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
 		$cn = conectar();
@@ -166,7 +198,7 @@ class Producto {
 	
 
 	public function getProductosInventarioCat($cat,$startpage,$endpage){
-		$sql = "select * from producto where CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
+		$sql = "select * from producto left join inventario ON idProducto = PRODUCTO_idProducto where CATEGORIA_idCategoria=$cat limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -205,5 +237,26 @@ class Producto {
 		}
 		return $m;
 	}
+
+	public function getEstado($e){
+		$sql = "select * from estado where idEstado=$e ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		
+		$res = $res->fetch_array();
+		return $res;
+	}
+
+	public function getEstados(){
+		$sql = "select * from estado where idEstado=1 or idEstado =2 ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+
+
 }
 ?>

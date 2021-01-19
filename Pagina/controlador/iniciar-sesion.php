@@ -12,11 +12,11 @@
 			$_SESSION['user'] = $con_usuario;
 			header('location:../vista/principal.php');
 		} else{
-			header('location:../index.php?m=7');
+			header('location:../index.php?m=7&r=1');
 		}
 	} else {
-		header('location:../index.php?m=8');
+		header('location:../index.php?m=8&r=1');
 	}
 
 	
- ?>
+ ?> 
