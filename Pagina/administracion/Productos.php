@@ -280,51 +280,20 @@ if (isset($_GET['m'])) {
 	  	$prevImg.src = objectURL;
 	});
 
-		
+	const insBoton = document.querySelector('#insProd');
 
-
-
-
-		const insBoton = document.querySelector('#insProd');
-
-		if (insBoton != null) {
-			insBoton.addEventListener('click',e=>{
-				const img = insBoton.form.querySelector('input[type=file]');
-				if(img.value == ""){
-					swal("Debe seleccionar una imagen","","info");
-				} else{
-					verifInput(insBoton.form);
-				}
-				
-			});
-		}
-	
-		
-
-
-
-
-		
-		function verifInput(form){
-			const inputs = form.querySelectorAll("input[type=text], select, textarea");
-			var vacios = 0;
-			inputs.forEach(e => {
-				if(e.value == ""){
-					vacios++;
-					e.style.borderColor="#e55";
-				}
-				e.addEventListener('input',() =>{
-					e.style.borderColor="#bababa";
-				});
-			});
-			if (vacios>0) {
-				swal("faltan "+vacios+" campos",'','info');
+	if (insBoton != null) {
+		insBoton.addEventListener('click',e=>{
+			const img = insBoton.form.querySelector('input[type=file]');
+			if(img.value == ""){
+				swal("Debe seleccionar una imagen","","info");
 			} else{
-				form.submit();
+				verifInput(insBoton.form);
 			}
 			
-		}
-
+		});
+	}
+	
 	const busq2 = document.querySelector('#busq2');
 	busq2.addEventListener('keydown',e=>{
 		if (e.key=='Enter') {

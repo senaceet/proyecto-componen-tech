@@ -1,9 +1,5 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Factura.php');
-require_once(realpath(dirname(__FILE__)) . '/Inventario.php');
-
-use Factura;
-use Inventario;
+require_once '../controlador/cn.php';
 
 /**
  * @access public
@@ -224,6 +220,32 @@ class Movimiento {
 	 */
 	public function getFacturaIdFactura() {
 		return $this->_facturaIdFactura;
+	}
+
+	public function getMovimientos(){
+		$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
+		where movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+	public function getMovFecha($desde,$hasta){
+		if($desde == ""){
+			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha<'$hasta')";
+		} elseif($hasta == ""){
+			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde')";
+		} else {
+			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde' and fecha<'$hasta')";
+		}
+		
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
 }
 ?>

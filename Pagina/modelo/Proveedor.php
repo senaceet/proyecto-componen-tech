@@ -12,21 +12,20 @@ class Proveedor{
     private $ESTADO_idEstado;
 
 
-    public function crearProveedor($idProveedor,$nEmpresa,$cNombre,$cApellido,$cCelular,$eTelefono,$USUARIO_documento,$ESTADO_idEstado){
+    public function crearProveedor($idProveedor,$nEmpresa,$cNombre,$cApellido,$cCelular,$eTelefono,$ESTADO_idEstado){
         $this->idProveedor = $idProveedor;
 		$this->nEmpresa = $nEmpresa;
 		$this->cNombre = $cNombre;
 		$this->cApellido = $cApellido;
 		$this->cCelular = $cCelular;
 		$this->eTelefono = $eTelefono;
-		$this->USUARIO_documento = $USUARIO_documento;
-		$this->Estado_idEstado = $Estado_idEstado;
+		$this->ESTADO_idEstado = $ESTADO_idEstado;
     }
 
-    public function actualizarDatos($id) {
-		$sql = "UPDATE proveedor SET idProveedor='$this->$idProveedor', nEmpresa='$this->$nEmpresa', 
-        cNombre='$this->$cNombre', cApellido='$this->$cApellido', cCelular='$this->$cCelular', eTelefono='$this->$eTelefono', 
-        ESTADO_idEstado='$this->$ESTADO_idEstado' WHERE idProveedor = '$id'";
+    public function actualizar() {
+		$sql = "UPDATE proveedor SET idProveedor='$this->idProveedor', nEmpresa='$this->nEmpresa', 
+        cNombre='$this->cNombre', cApellido='$this->cApellido', cCelular='$this->cCelular', eTelefono='$this->eTelefono', 
+        ESTADO_idEstado='$this->ESTADO_idEstado' WHERE idProveedor = '$this->idProveedor'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -34,8 +33,17 @@ class Proveedor{
     }
 
     public function insertar(){
-    	$sql = "INSERT INTO proveedor values ('$this->$idProveedor','$this->$nEmpresa', '$this->$cNombre', '$this->$cApellido', '$this->$cCelular', '$this->$eTelefono', '$this->$ESTADO_idEstado')";
+    	$sql = "INSERT INTO proveedor values ('$this->idProveedor','$this->nEmpresa', '$this->cNombre', '$this->cApellido', '$this->cCelular', '$this->eTelefono', '$this->ESTADO_idEstado')";
 		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	public function eliminar($p){
+    	$sql = "delete from proveedores where idProveedor=$p";
+		$cn = conectar();
+		echo $cn->error;
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;

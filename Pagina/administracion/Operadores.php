@@ -70,7 +70,7 @@ if (isset($_GET['m'])) {
             $count = $objOperador->getOperadoresCantidad();
             $npages = $count/$limitpage;
             if (isset($_GET['search'])) {
-                $consulta = $objCliente->getOperadoresBusqueda($_GET['search']);
+                $consulta = $objOperador->getOperadoresBusqueda($_GET['search']);
             } else {
                 $consulta = $objOperador->getOperadores($startpage,$endpage);
             }
@@ -195,7 +195,7 @@ if (isset($_GET['m'])) {
         <input type="hidden" name="idCargo" value="2">
         <input type="hidden" name="idEstado" value="9">
         <input type="hidden" name="tabla" value="operadores">
-        <input type="submit" class="submitButton" value="Registrar">      
+        <input type="button" onclick="verifInput(this.form)" class="submitButton" value="Registrar">      
     </form>
     <script>
         var search = document.getElementById('search');

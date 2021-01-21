@@ -155,6 +155,16 @@ if (isset($_GET['m'])) {
     <form class="actForm" method="post" action="../controlador/InsUsuario.php">
     <button class="cerrarForm" type="button"  onclick="hideForm(document.getElementById('actF_form'))">✖</button>
         <h1>Insertar cliente</h1>
+        <div>
+            <p>Tipo de documento</p>
+            <select name="idTipo" required>
+                <option value="" selected disabled>Tipo de documento *</option>
+                <option value="1">Cédula</option>
+                <option value="2">Targeta de identidad</option>
+                <option value="3">Cedula de extrangería</option>
+                <option value="4">Pasaporte</option>
+            </select>
+        </div>
         
         <div>
             <p>Numero de documento</p>
@@ -199,7 +209,7 @@ if (isset($_GET['m'])) {
         <input type="hidden" name="idCargo" value="3">
         <input type="hidden" name="idEstado" value="9">
         <input type="hidden" name="tabla" value="clientes">
-        <input type="submit" class="submitButton" value="Registrar">      
+        <input type="button" onclick="verifInput(this.form)" class="submitButton" value="Registrar">      
     </form>
     <script>
         var search = document.getElementById('search');

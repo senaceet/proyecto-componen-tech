@@ -168,7 +168,7 @@ class Usuario {
 
 
 	public function desactivar($u) {
-		if($this->getUsuario($u,1)->num_rows==1){
+		if($this->getUsuario($u,1)->num_rows!=0){
 			$sql = "UPDATE usuario set ESTADO_idEstado = 10 where documento = $u";
 			$cn = conectar();
 			$res = $cn->query($sql);

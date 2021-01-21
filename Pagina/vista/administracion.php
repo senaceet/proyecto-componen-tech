@@ -72,7 +72,7 @@
 		 	</li>
 		 	<li><a href="#" class="Configuraciones-btn">Inventario ▼</a>
 		 		<ul class="Cuenta-show">
-		 			<li><a href="#">Movimientos</a></li>
+		 			<li><a href="administracion.php?sec=movimientos">Movimientos</a></li>
 		 		</ul>
 		 		<ul class="Cuenta-show">
 		 			<li><a href="administracion.php?sec=Inventario">Productos</a></li>
@@ -106,6 +106,31 @@
        $('.Barra ul li').click(function(){
            $(this).addClass("active").siblings().removeClass("active");
        });
+
+
+	   function verifInput(form){
+			const inputs = form.querySelectorAll("input[type=text],input[type=date], select, textarea");
+			var vacios = 0;
+			inputs.forEach(e => {
+				if(e.value == ""){
+					vacios++;
+					e.style.borderColor="#e55";
+				}
+				e.addEventListener('input',() =>{
+					e.style.borderColor="#bababa";
+				});
+			});
+			if (vacios>0) {
+				swal("faltan "+vacios+" campos",'','info');
+			} else{
+				form.submit();
+			}
+			
+		}
+		var mensaje = document.querySelector('.getMensaje');
+		mensaje.addEventListener('click',()=>{
+			mensaje.style.display='none';
+		});
 	</script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Fin Deslizamiento -->
