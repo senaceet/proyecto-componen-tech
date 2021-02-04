@@ -3,9 +3,6 @@
 <?php 
 session_start();
 
-if (!isset($_SESSION['user'])) {
-	header('location:principal.php?m=1');
-}
 
 require_once '../modelo/Producto.php';
 $objProducto = new Producto();
@@ -39,10 +36,10 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 
 
 	<header>
-		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
+		<div class="logo"><a href="principal.php"><img src="../img/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="text" id="prodSearch" placeholder="Buscar productos">
-			<img src="../icons/lupa.svg">
+			<i class="fas fa-search"></i>
 		</label>
 			
 		</div>
@@ -50,15 +47,16 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 			<ul>
 			<?php if (isset($_SESSION['user'])): ?>
 				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
-				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
-					<li><a href="administracion.php">Administracion</a></li>
-				<?php endif ?>
+				<li><a href="principal.php">Inicio</a></li>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
-				<li><a href="#" class="ListarProductos" ><img src="../icons/carrito.svg" alt=""></a></li>
+				
 			<?php else: ?>
+
 				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
 				<li><a href="../index.php?r=1">Crear cuenta</a></li>
+				
 			<?php endif ?>
+			<li><a href="#" class="ListarProductos" ><i class="fas fa-shopping-cart"></i></a></li>
 				
 			</ul>
 		</nav>
@@ -196,4 +194,5 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 		
 	})
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>

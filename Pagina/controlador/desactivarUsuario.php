@@ -1,5 +1,5 @@
 <?php 
-	require_once '../modelo/usuario.php';
+	require_once '../modelo/Usuario.php';
 
 	$usuario = new Usuario();
 	$r=$usuario->desactivar($_POST['documento']);

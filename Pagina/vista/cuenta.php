@@ -15,26 +15,65 @@
 </head>
 <body>
 	<header>
-		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"></a></div>
+		<div class="logo"><a href="principal.php"><img src="../img/logo.png" alt="l"></a></div>
 		<label class="busqueda">
-			<input type="" placeholder="Buscar productos">
-			<img src="../icons/lupa.svg">
+			<input type="text" id="prodSearch" placeholder="Buscar productos">
+			<i class="fas fa-search"></i>
 		</label>
 			
 		</div>
 		<nav class="navegador">
 			<ul>
 				<li><a href="principal.php">Inicio</a></li>
-				<li><a href="../controlador/salir.php">Cerrar sesión</a></li>
+				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			</ul>
 		</nav>
 	</header>
-	<div class="contenedor">
+	<div class="contenedor modCuenta">
+		<?php 
+		    if (isset($_GET['m'])) {
+		        switch ($_GET['m']) {
+		            case 1:
+		                echo "<div class='getMensaje correcto'>Usuario Actualizado</div>";
+		                break;
+		            case 2:
+		                echo "<div class='getMensaje incorrecto'>Error al actualizar</div>";
+		                break;
+		            case 3:
+		                echo "<div class='getMensaje correcto'>Contraseña actualizada</div>";
+		                break;
+		            case 4:
+		                echo "<div class='getMensaje incorrecto'>Error al actualizar contraseña</div>";
+		                break;
+		            case 5:
+		                echo "<div class='getMensaje incorrecto'>Las contraseñas deben ser identicas</div>";
+		                break;
+		        }
+		    }
+     	?>
 		<form class="actForm" method="post" action="../controlador/editarCuenta.php">
 			<h1>Modificar datos de la cuenta</h1>
 			<div>
-				<p>Numero de documento</p>
-				<input disabled type="text" value="<?php echo $_SESSION['user']['documento']; ?>" >
+				<p>Documento</p>
+				<?php switch ($_SESSION['user']['TIPODOCUMENTO_idTipo']) {
+					case 1:
+						$doc = 'Cedula';
+						break;
+					case 2:
+						$doc = 'Targeta de identidad';
+						break;
+					case 3:
+						$doc = 'Cedula de extrangería';
+						break;
+					case 4:
+						$doc = 'Pasaporte';
+						break;
+					
+					default:
+						$doc = 'error';
+						break;
+				} $doc = $doc.': '.$_SESSION['user']['documento'] ?>
+				<input disabled type="text" value="<?php echo $doc; ?>" >
 			</div>
 			<div>
 				<p>Nombres</p>
@@ -62,27 +101,25 @@
 			</div>
 			<div>
 				<p>Correo electrónico</p>
-				<input name="correo" type="text" value="<?php echo $_SESSION['user']['correo']; ?>">
+				<input disabled="" type="text" value="<?php echo $_SESSION['user']['correo']; ?>">
 			</div>
-			<input type="hidden" name="actDoc" value="<?php echo $_SESSION['user']['documento']; ?>">
-			<input type="hidden" name="idCargo" value="<?php echo $_SESSION['user']['CARGO_idCargo']; ?>">
-			<input type="hidden" name="idTipo" value="<?php echo $_SESSION['user']['TIPODOCUMENTO_idTipo']; ?>">
-			<input type="hidden" name="idEstado" value="<?php echo $_SESSION['user']['ESTADO_idEstado']; ?>">
-			<input class="submitButton" type="submit" value="Actualizar">
+			<input name="uptDatos" class="submitButton" type="submit" value="Actualizar">
 		</form>
-		<form class="actForm" action="">
+		<form class="actForm" method="post" action="../controlador/editarCuenta.php">
 			<h1>Actualizar contraseña</h1>
 			<div>
 				<p>Contraseña</p>
-				<input name="password" type="password" value="">	
+				<input minlength="5" required name="clave" type="password" value="">	
 			</div>
 			<div>
 				<p>Confirmar contraseña</p>
-				<input name="password" type="password" value="">	
+				<input minlength="5" required name="clave2" type="password" value="">	
 			</div>
-			<input class="submitButton" type="submit" value="Actualizar">
+			<input name="uptClave" class="submitButton" type="submit" value="Actualizar contraseña">
 		</form>
 	</div>
+
+<script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
 	
 <!--  -->
 </body>

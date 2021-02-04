@@ -30,11 +30,13 @@
 	z-index: 100;
 	position: fixed;
 	width: 250px;
-	height: 100%;
+	height: calc(100% - 60px);
 	left: -250px;
 	top: 60px;
-	background: #cecece;
+	background: #fff;
 	transition: left 0.4s ease;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .Barra.show{
 	left: 0px;
@@ -52,11 +54,8 @@
 
 .Barra ul{
 	background: #fff;
-	height: 100%;
 	width: 100%;
 	list-style: none;
-	box-shadow: 0 9px 9px 0 rgba(0,0,0,.1);
-
 }
 
 .Barra ul li{
@@ -354,6 +353,8 @@
 
 
 .busqueda2{
+	width: 70%;
+	margin-left: 10px;
 	box-shadow: 0px 1px 7px rgba(0,0,0,0.4);
 }
 
@@ -644,11 +645,12 @@
 }
 .updProd form{
 	z-index: inherit;
-	height: 80vh;
+	height: 90vh;
 	width: 90%;
 	overflow: auto;
 	background-color: #fff;
 	border-radius: 3px;
+	max-width: 500px;
 	
 }
 .updProd p{
@@ -680,4 +682,7 @@
 	position: absolute;
 	transform: translateX(-50%);
 	cursor:pointer;
+}
+.modCuenta form{
+	position: static;
 }

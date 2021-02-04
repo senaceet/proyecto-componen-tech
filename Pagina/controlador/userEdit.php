@@ -1,5 +1,5 @@
 <?php 
-	require_once '../modelo/usuario.php';
+	require_once '../modelo/Usuario.php';
 
 	$objUsuario = new Usuario();
 

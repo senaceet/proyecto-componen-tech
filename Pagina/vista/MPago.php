@@ -39,7 +39,7 @@ if (isset($_POST['sacarproducto'])) {
 
 	
 	<header>
-		<div class="logo"><a href="principal.php"><img src="../icons/logo.png" alt="l"> </a></div>
+		<div class="logo"><a href="principal.php"><img src="../img/logo.png" alt="l"> </a></div>
 			
 		</div>
 		<nav class="navegador">
@@ -116,10 +116,10 @@ if (isset($_POST['sacarproducto'])) {
 
 			<div class="OpcionMetodoPago">
 				<form>
-					<input type="radio" name="MetodoP" values="Tarjeta Debito" ><h3>Tarjeta Debito</h3>	<br>	
-					<input type="radio" name="MetodoP" values="Tarjeta credito" ><h3>Tarjeta Cretido</h3> <br>
-					<input type="radio" name="MetodoP" values="Efecty" ><h3>Efecty</h3> <br>
-					<input type="radio" name="MetodoP" values="Efectivo" ><h3>Efectivo</h3> <br>
+					<input type="radio" name="MetodoP" value="Tarjeta Debito" ><h3>Tarjeta Debito</h3>	<br>	
+					<input type="radio" name="MetodoP" value="Tarjeta credito" ><h3>Tarjeta Cretido</h3> <br>
+					<input type="radio" name="MetodoP" value="Efecty" ><h3>Efecty</h3> <br>
+					<input type="radio" name="MetodoP" value="Efectivo" ><h3>Efectivo</h3> <br>
 
 				<label class="MarcadoFactura">
 					<input type="checkbox" name="" id="Terminos"><h3>He leido y estoy de acuerdo con los terminos y condiciones de la web.</h3>

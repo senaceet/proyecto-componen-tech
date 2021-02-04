@@ -19,16 +19,16 @@ if($verifcorreo->num_rows==1){
 
     if($objUsuario->Registrarse()){
         if($objUsuario->registrarClave($_REQUEST['correo'],$_REQUEST['password'])){
-            header('location:../index.php?m=1');  
+            header('location:../index.php?m=1&r=1');  
         } else {
-            header('location:../index.php?m=2'); 
+            header('location:../index.php?m=2&r=1'); 
         }
     } else {
-        header('location:../index.php?m=3'); 
+        header('location:../index.php?m=3&r=1'); 
     }
 
 } else {
-    header('location:../index.php?m=4'); 
+    header('location:../index.php?m=4&r=1'); 
 }
 
 ?>

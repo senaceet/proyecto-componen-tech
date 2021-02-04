@@ -1,55 +1,57 @@
 <?php 
-    session_start();
-    if (isset($_SESSION['user'])) {
-        header('location:vista/principal.php');
-    } elseif (!isset($_GET['r'])){
-        header('location:vista/principal.php');
-    }
- ?>
-<!DOCTYPE html>
-<html lang="es">
+session_start();
+if (isset($_SESSION['user'])) {
+    header('location:vista/principal.php');
+} elseif (!isset($_GET['r'])){
+    header('location:vista/principal.php');
+}
+?> 
+<!DOCTYPE html>   
+<html lang="es"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <!-- tipo de letra -->
+    <!-- tipo de letra --> 
     <link href="https://fonts.googleapis.com/css?family=Raleway|Ubuntu" rel="stylesheet">
     <title>ComponenTech</title>
     <link rel="stylesheet" href="vista/css/login.css">
+
 </head>
 <body>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php 
     if (isset($_GET['m'])) {
         switch ($_GET['m']) {
             case 1:
-                echo "Usuario registrado correctamente";
-                break;
+            $m = "Usuario registrado correctamente";
+            break;
             case 2:
-                echo "Error al guardar la contraseña";
-                break;
+            $m = "Error al guardar la contraseña";
+            break;
             case 3:
-                echo "Error al registrar usuario";
-                break;
+            $m = "Error al registrar usuario";
+            break;
             case 4:
-                echo "Error: las contraseñas deben ser iguales";
-                break;
+            $m = "Error: las contraseñas deben ser iguales";
+            break;
             case 5:
-                echo "Error: el documento ya está registrado";
-                break;
+            $m = "Error: el documento ya está registrado";
+            break;
             case 6:
-                echo "Error: el correo ya está registrado";
-                break;
+            $m = "Error: el correo ya está registrado";
+            break;
             case 7:
-                echo "Error: Contraseña incorrecta";
-                break;
+            $m = "Error: Contraseña incorrecta";
+            break;
             case 8:
-                echo "Error: el usuario no existe";
-                break;
-        }
-    }
-     ?>
+            $m = "Error: el usuario no existe";
+            break;
+        } ?>
+        <script>swal('<?php echo $m ?>','','info');</script>
+    <?php } ?>
 
-   <!-- Formularios -->
+    <!-- Formularios -->
     <div class="contenedor-formularios">
         <!-- Links de los formularios -->
         <ul class="contenedor-tabs">
@@ -66,7 +68,7 @@
                         <label>
                             Correo electrónico <span>*</span>
                         </label>
-                        <input type="text" name="correo" required maxlength="30">
+                        <input  type="email" name="correo" required maxlength="30">
                     </div>
 
                     <div class="contenedor-input">
@@ -76,7 +78,7 @@
                         <input type="password" name="clave" required maxlength="30">
                     </div>
                     <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p>
-                    <input type="submit" class="button button-block" value="Iniciar Sesión">
+                    <input id="iniciar_btn" type="button" class="button button-block" value="Iniciar Sesión">
                 </form>
             </div>
             <!-- Registrarse -->
@@ -125,9 +127,9 @@
                             <input type="number"  name="edad" required min="12" max="90">
                         </div>
                         <div class="contenedor-input">
-                                <label class="active">
-                                    Fecha de nacimiento <span>*</span>
-                                </label>
+                            <label class="active">
+                                Fecha de nacimiento <span>*</span>
+                            </label>
                             <input type="date"  name="fechaNto" required>
                         </div>
                     </div>
@@ -149,74 +151,127 @@
                         </label>
                         <input type="email"  name="correo" required maxlength="30">
                     </div>
-                <div class="fila-arriba">
-                    <div class="contenedor-input">
-                        <label>
-                            Contraseña <span  >*</span>
-                        </label>
-                        <input type="password"  name="password" required maxlength="30">
+                    <div class="fila-arriba">
+                        <div class="contenedor-input">
+                            <label>
+                                Contraseña <span  >*</span>
+                            </label>
+                            <input type="password"  name="password" required maxlength="30">
+                        </div>
+                        <div class="contenedor-input">
+                            <label>
+                                Confirmar contraseña <span  >*</span>
+                            </label>
+                            <input type="password"  name="password2" required maxlength="30">
+                        </div>
                     </div>
-                    <div class="contenedor-input">
-                        <label>
-                            Confirmar contraseña <span  >*</span>
-                        </label>
-                        <input type="password"  name="password2" required maxlength="30">
-                    </div>
-                </div>
 
-                    <input type="submit" class="button button-block" value="Registrarse">
+                    <input type="button" id="registrar_btn" class="button button-block" value="Registrarse">
                 </form>
             </div>
-            </form>
-        </div>
+        </form>
     </div>
-   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-   <script>
-       $(document).ready(function(){
-    
-            $(".contenedor-formularios").find("input, textarea").on("keyup blur focus", function (e) {
+</div>
 
-                var $this = $(this),
-                  label = $this.prev("label");
-                if (e.type === "keyup") {
-                    if ($this.val() === "") {
-                        label.addClass("active highlight");
-                    } else {
-                        label.addClass("active highlight");
-                    }
-                } else if (e.type === "blur") {
-                    if($this.val() === "") {
-                        label.removeClass("active highlight"); 
-                        } else {
-                        label.removeClass("highlight");   
-                        }   
-                } else if (e.type === "focus") {
-                    if($this.val() === "") {
-                        label.addClass("active highlight"); 
-                    } 
-                    else if($this.val() !== "") {
-                        label.addClass("highlight");
-                    }
-                } 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
-            });
+<script>
+   $(document).ready(function(){
 
-            $(".tab a").on("click", function (e) {
+    $(".contenedor-formularios").find("input, textarea").on("keyup blur focus", function (e) {
 
-                e.preventDefault();
-                $(this).parent().addClass("active");
-                $(this).parent().siblings().removeClass("active");
+        var $this = $(this),
+        label = $this.prev("label");
+        if (e.type === "keyup") {
+            if ($this.val() === "") {
+                label.addClass("active highlight");
+            } else {
+                label.addClass("active highlight");
+            }
+        } else if (e.type === "blur") {
+            if($this.val() === "") {
+                label.removeClass("active highlight"); 
+            } else {
+                label.removeClass("highlight");   
+            }   
+        } else if (e.type === "focus") {
+            if($this.val() === "") {
+                label.addClass("active highlight"); 
+            } 
+            else if($this.val() !== "") {
+                label.addClass("highlight");
+            }
+        } 
 
-                target = $(this).attr("href");
+    });
 
-                $(".contenido-tab > div").not(target).hide();
+    $(".tab a").on("click", function (e) {
 
-                $(target).fadeIn(500);
+        e.preventDefault();
+        $(this).parent().addClass("active");
+        $(this).parent().siblings().removeClass("active");
 
-            });
-            
+        target = $(this).attr("href");
+
+        $(".contenido-tab > div").not(target).hide();
+
+        $(target).fadeIn(500);
+
+    });
+
+});
+const iniciar_btn = document.querySelector('#iniciar_btn');
+
+iniciar_btn.addEventListener('click',()=>{
+    verifForm(iniciar_btn.form);
+});
+
+const registrar_btn = document.querySelector('#registrar_btn');
+
+registrar_btn.addEventListener('click',()=>{
+    verifForm(registrar_btn.form);
+});
+
+function verifForm(form){
+    const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    inps = form.querySelectorAll('input[type=text],input[type=email],input[type=password],input[type=date],input[type=number], select');
+    var vacios = 0;
+    inps.forEach(e=>{
+
+        if(e.value==''){
+            e.style.borderColor="#d33";
+            vacios++;
+        } else {
+            e.style.borderColor="#fff";
+        }
+
+
+        e.addEventListener('input',i=>{
+            if (i.value!="") {
+                 e.style.borderColor="#fff";
+            }
         });
-   </script>
+    });
+    if (vacios>0) {
+        swal('Quedan '+vacios+' campos vacios','','error');
+    } else if(!emailRegex.test(form.querySelector('input[type=email]').value)){
+        swal('El correo no es valido','','error');
+    } else if(form==registrar_btn.form){
+        const claves = form.querySelectorAll('input[type=password');
+        if (claves[0].value!==claves[1].value) {
+            swal('Las contraseñas deben ser identicas','','error');    
+        } else {
+            form.submit();
+        }
 
+    }else{
+        form.submit();
+    }
+    
+
+}
+</script>
+ 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php 
-	require_once '../modelo/producto.php';
+	require_once '../modelo/Producto.php';
 	$producto = new Producto();
 
 	$foto = $producto->getProducto($_POST['prod']);

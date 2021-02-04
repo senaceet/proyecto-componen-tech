@@ -119,7 +119,7 @@ if (isset($_GET['m'])) {
             <td><form action="../controlador/desactivarUsuario.php" method="post">
                 <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
                 <input type="hidden" name="tabla" value="clientes">
-                <button type="button" onclick="if (confirm('¿Está seguro de desactivar a este usuario?')) {this.parentElement.submit()}"><i class="far fa-trash-alt"></i></button>
+                <button type="button" onclick="confirmar(this)"><i class="far fa-trash-alt"></i></button>
             </form></td>
         </tbody>
         <?php $num++; } ?>
@@ -226,6 +226,22 @@ if (isset($_GET['m'])) {
         }
         function buscarTabla(e){
             location.href = 'administracion.php?sec=clientes&search='+e;
+        }
+
+        function confirmar(boton){
+            boton.addEventListener('click',()=>{
+                swal({
+                   title: "¿Está seguro?",
+                   text: "El usuario quedará desactivado, puede encontrarlo en usuarios desactivados",
+                   icon: "warning",
+                   buttons: true,
+                   dangerMode:true
+                }).then((val)=>{
+                   if(val){
+                      boton.form.submit();
+                   }
+                });
+            });
         }
     </script>
 </div>

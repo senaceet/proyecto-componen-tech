@@ -1,5 +1,5 @@
 <?php 
-require_once '../modelo/proveedor.php';
+require_once '../modelo/Proveedor.php';
 $objProv = new Proveedor();
 
 

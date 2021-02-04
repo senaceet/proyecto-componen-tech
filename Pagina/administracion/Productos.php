@@ -2,7 +2,7 @@
 
 require_once '../modelo/Producto.php';
 require_once '../modelo/categoria.php';
-require_once '../modelo/proveedor.php';
+require_once '../modelo/Proveedor.php';
 
 $objProducto = new Producto();
 $objCat = new Categoria();
@@ -122,7 +122,7 @@ if (isset($_GET['m'])) {
 <!-- Sección de busqueda de productos -->
 <div class="busqueda busqueda2">
 	<input type="text" id="busq2" placeholder="Buscar Producto">
-	<img src="../icons/lupa.svg">
+	<i class="fa fa-search"></i>
 </div>
 <br>
 <section class="ContenedorCartas">
@@ -147,15 +147,18 @@ if (isset($_GET['m'])) {
 				</figure>
 				<div class="contenido-card">
 					<h3><?php echo $producto['productoNombre']; ?></h3>
-					<form action="<?php echo $ruta ?>" method="post">
-						<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
-						<input class="azul" type="submit" value="EDITAR">
-					</form>
+					<div class="carta-botones">
+						<form action="<?php echo $ruta ?>" method="post">
+							<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
+							<input class="azul" type="submit" value="EDITAR">
+						</form>
+						
+						<form action="../controlador/eliminarProducto.php" method="post">
+							<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
+							<input class="rojo" type="button" value="Eliminar" onclick="if (confirm('¿Esta seguro de eliminar este producto?')){this.parentElement.submit()}">
+						</form>
+					</div>
 					
-					<form action="../controlador/eliminarProducto.php" method="post">
-						<input type="hidden" name="prod" value="<?php echo $producto['idProducto']  ?>">
-						<input class="rojo" type="button" value="Eliminar" onclick="if (confirm('¿Esta seguro de eliminar este producto?')){this.parentElement.submit()}">
-					</form>
 				</div>
 			</div>
 		<?php } ?>	

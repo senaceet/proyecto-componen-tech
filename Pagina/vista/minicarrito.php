@@ -50,7 +50,11 @@ foreach ($_SESSION['carrito'] as $key => $value) { ?>
 	<h2><?php echo "$".number_format($total,0,",","."); ?></h2>
 </div>
 <div class="BarraBotonComprarProductosCarrito">
-	<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
+	<?php if (!isset($_SESSION['user'])): ?>
+		<button><a class="LinkBotonCarrito" onclick="swal('Inicie sesión para comprar','','info')">Comprar</a></button>
+	<?php else: ?>
+		<button><a class="LinkBotonCarrito" href="MPago.php">Comprar</a></button>
+	<?php endif ?>
 </div>
 
 

@@ -18,37 +18,32 @@
     <script>
         $(document).ready(function(){
             function obtener_datos(){
-				$.ajax({
-					url: "../administracion/mov.php",
-					method: "POST",
-					success: function(data){
-						$("#result").html(data)
-					}
-				})
-			}
+  				   $.ajax({
+  					  url: "../administracion/mov.php",
+  					  method: "POST",
+  					  success: function(data){
+  				         $("#result").html(data)
+  					  }
+  				   })
+  		      }
             obtener_datos();
             $(document).on('input','#desde,#hasta',function(){
-                var desde = $('#desde').val();
-                var hasta = $('#hasta').val();
-                
-                $.ajax({
-					url: "../administracion/mov.php",
-					method: "POST",
-                    data: {desde,hasta},
-					success: function(data){
-                        $("#result").html(data);
-					}
-				})
+               var desde = $('#desde').val();
+               var hasta = $('#hasta').val();
+  
+               $.ajax({
+                  url: "../administracion/mov.php",
+                  method: "POST",
+                  data: {desde,hasta},
+                  success: function(data){
+                     $("#result").html(data);
+                  }
+				   })
             })
         })
 
     </script>
    	<table class="TableroDatos" id="result">
-        
-        
    	</table>
-
-    
-
 
 </div>

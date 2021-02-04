@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	require_once '../modelo/usuario.php';
+	require_once '../modelo/Usuario.php';
 	$usuario = new Usuario();
 	$inicio = $usuario->iniciarSesion($_POST['correo'],$_POST['clave']);
 	

@@ -40,10 +40,10 @@ $con_cats = $objCat->getCategorias();
 </head>
 <body>
 	<header>
-		<div class="logo"><a href="#recientes"><img src="../icons/logo.png" alt="l"></a></div>
+		<div class="logo"><a href="#recientes"><img src="../img/logo.png" alt="l"></a></div>
 		<label class="busqueda">
 			<input type="text" id="prodSearch" placeholder="Buscar productos">
-			<img src="../icons/lupa.svg">
+			<i class="fas fa-search"></i>
 		</label>
 			
 		</div>
@@ -55,11 +55,12 @@ $con_cats = $objCat->getCategorias();
 					<li><a href="administracion.php">Administracion</a> </li>
 				<?php endif ?>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
-				<li><a href="#" class="ListarProductos" ><img src="../icons/carrito.svg" alt=""></a></li>
 			<?php else: ?>
+				
 				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
 				<li><a href="../index.php?r=1">Crear cuenta</a></li>
-			<?php endif ?>	
+			<?php endif ?>
+			<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>	
 			</ul>
 
 		</nav>
@@ -153,4 +154,5 @@ $con_cats = $objCat->getCategorias();
 		
 	})
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>

@@ -180,6 +180,23 @@ class Usuario {
 		return $res;
 	}
 
+	public function modificar($u,array $d){
+		$sql = "UPDATE usuario set nombres='".$d['nombres']."',apellidos='".$d['apellidos']."',fechaNto='".$d['fechaNto']."',edad='".$d['edad']."',celular='".$d['celular']."',direccion='".$d['direccion']."' where documento = $u";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+	public function cambiarClave($u,$p){
+		$sql = "UPDATE clave set clave='$p' where correo='$u'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
+
 	/**
 	 * /**
 	 *  * @access public

@@ -1,5 +1,5 @@
 <?php 
-	require_once '../modelo/proveedor.php';
+	require_once '../modelo/Proveedor.php';
 
 	$prov = new Proveedor();
 	$prov->crearProveedor(0,$_POST['nEmpresa'],$_POST['cNombre'],$_POST['cApellido'],$_POST['cCelular'],$_POST['eTelefono'],$_POST['idEstado']);
