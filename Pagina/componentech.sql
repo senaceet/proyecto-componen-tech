@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2021 a las 01:44:04
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Servidor: localhost
+-- Tiempo de generación: 12-02-2021 a las 22:25:42
+-- Versión del servidor: 8.0.22
+-- Versión de PHP: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cargo` (
-  `idCargo` int(10) UNSIGNED NOT NULL,
+  `idCargo` int UNSIGNED NOT NULL,
   `cargo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,7 +48,7 @@ INSERT INTO `cargo` (`idCargo`, `cargo`) VALUES
 --
 
 CREATE TABLE `categoria` (
-  `idCategoria` int(10) UNSIGNED NOT NULL,
+  `idCategoria` int UNSIGNED NOT NULL,
   `categoria` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -108,7 +108,7 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 ('tsprules4@weebly.com', 'Tiena32'),
 ('vmacavaddy6@comcast.net', 'Vasili2'),
 ('wtutingb@army.mil', 'Wyatt12'),
-('yeren@gmail.com', '1234'),
+('yeren@gmail.com', '321'),
 ('yerendsda@gmail.com', '123');
 
 -- --------------------------------------------------------
@@ -118,11 +118,11 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 --
 
 CREATE TABLE `detalles` (
-  `idDetalles` int(10) UNSIGNED NOT NULL,
-  `cantidad` int(10) UNSIGNED NOT NULL,
-  `totalCantidad` int(10) UNSIGNED NOT NULL,
-  `FACTURA_idFactura` int(10) UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL
+  `idDetalles` int UNSIGNED NOT NULL,
+  `cantidad` int UNSIGNED NOT NULL,
+  `totalCantidad` int UNSIGNED NOT NULL,
+  `FACTURA_idFactura` int UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -146,7 +146,7 @@ INSERT INTO `detalles` (`idDetalles`, `cantidad`, `totalCantidad`, `FACTURA_idFa
 --
 
 CREATE TABLE `estado` (
-  `idEstado` int(10) UNSIGNED NOT NULL,
+  `idEstado` int UNSIGNED NOT NULL,
   `estado` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -173,13 +173,13 @@ INSERT INTO `estado` (`idEstado`, `estado`) VALUES
 --
 
 CREATE TABLE `factura` (
-  `idFactura` int(10) UNSIGNED NOT NULL,
+  `idFactura` int UNSIGNED NOT NULL,
   `fecha` date NOT NULL,
-  `subtotal` int(10) UNSIGNED NOT NULL,
-  `total` int(10) UNSIGNED NOT NULL,
-  `TIPOPAGO_idTipoPago` int(10) UNSIGNED NOT NULL,
-  `USUARIO_documento` int(10) UNSIGNED NOT NULL,
-  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL
+  `subtotal` int UNSIGNED NOT NULL,
+  `total` int UNSIGNED NOT NULL,
+  `TIPOPAGO_idTipoPago` int UNSIGNED NOT NULL,
+  `USUARIO_documento` int UNSIGNED NOT NULL,
+  `ESTADO_idEstado` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -203,11 +203,11 @@ INSERT INTO `factura` (`idFactura`, `fecha`, `subtotal`, `total`, `TIPOPAGO_idTi
 --
 
 CREATE TABLE `inventario` (
-  `idInventario` int(10) UNSIGNED NOT NULL,
-  `entradas` int(10) UNSIGNED NOT NULL,
-  `Salidas` int(10) UNSIGNED NOT NULL,
-  `Saldo` int(10) UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL
+  `idInventario` int UNSIGNED NOT NULL,
+  `entradas` int UNSIGNED NOT NULL,
+  `Salidas` int UNSIGNED NOT NULL,
+  `Saldo` int UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -250,12 +250,12 @@ INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODU
 --
 
 CREATE TABLE `movimiento` (
-  `idMovimiento` int(10) UNSIGNED NOT NULL,
+  `idMovimiento` int UNSIGNED NOT NULL,
   `fecha` date NOT NULL,
-  `cantidad` int(10) UNSIGNED NOT NULL,
-  `TIPOMOVIMIENTO_idTipoMovimiento` int(10) UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL,
-  `FACTURA_idFactura` int(10) UNSIGNED NOT NULL
+  `cantidad` int UNSIGNED NOT NULL,
+  `TIPOMOVIMIENTO_idTipoMovimiento` int UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int UNSIGNED NOT NULL,
+  `FACTURA_idFactura` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -279,11 +279,11 @@ INSERT INTO `movimiento` (`idMovimiento`, `fecha`, `cantidad`, `TIPOMOVIMIENTO_i
 --
 
 CREATE TABLE `pedido` (
-  `idPEDIDO` int(10) UNSIGNED NOT NULL,
+  `idPEDIDO` int UNSIGNED NOT NULL,
   `pedFecha` date NOT NULL,
-  `total` int(10) UNSIGNED NOT NULL,
-  `USUARIO_documento` int(10) UNSIGNED NOT NULL,
-  `PROVEEDOR_idProveedor` int(10) UNSIGNED NOT NULL
+  `total` int UNSIGNED NOT NULL,
+  `USUARIO_documento` int UNSIGNED NOT NULL,
+  `PROVEEDOR_idProveedor` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -300,11 +300,11 @@ INSERT INTO `pedido` (`idPEDIDO`, `pedFecha`, `total`, `USUARIO_documento`, `PRO
 --
 
 CREATE TABLE `pedidoorden` (
-  `idPedidoOrden` int(10) UNSIGNED NOT NULL,
-  `cantidad` int(10) UNSIGNED NOT NULL,
-  `totalCantidad` int(10) UNSIGNED NOT NULL,
-  `PEDIDO_idPEDIDO` int(10) UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL
+  `idPedidoOrden` int UNSIGNED NOT NULL,
+  `cantidad` int UNSIGNED NOT NULL,
+  `totalCantidad` int UNSIGNED NOT NULL,
+  `PEDIDO_idPEDIDO` int UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -322,14 +322,14 @@ INSERT INTO `pedidoorden` (`idPedidoOrden`, `cantidad`, `totalCantidad`, `PEDIDO
 --
 
 CREATE TABLE `producto` (
-  `idProducto` int(10) UNSIGNED NOT NULL,
+  `idProducto` int UNSIGNED NOT NULL,
   `productoNombre` varchar(45) NOT NULL,
   `detalles` varchar(500) NOT NULL,
-  `precio` int(10) UNSIGNED NOT NULL,
-  `iva` int(10) UNSIGNED NOT NULL,
-  `CATEGORIA_idCategoria` int(10) UNSIGNED NOT NULL,
-  `PROVEEDOR_idProveedor` int(10) UNSIGNED NOT NULL,
-  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL,
+  `precio` int UNSIGNED NOT NULL,
+  `iva` int UNSIGNED NOT NULL,
+  `CATEGORIA_idCategoria` int UNSIGNED NOT NULL,
+  `PROVEEDOR_idProveedor` int UNSIGNED NOT NULL,
+  `ESTADO_idEstado` int UNSIGNED NOT NULL,
   `prodImg` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -379,13 +379,13 @@ INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `i
 --
 
 CREATE TABLE `proveedor` (
-  `idProveedor` int(10) UNSIGNED NOT NULL,
+  `idProveedor` int UNSIGNED NOT NULL,
   `nEmpresa` varchar(45) NOT NULL,
   `cNombre` varchar(45) NOT NULL,
   `cApellido` varchar(45) NOT NULL,
   `cCelular` varchar(45) NOT NULL,
   `eTelefono` varchar(45) NOT NULL,
-  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL
+  `ESTADO_idEstado` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -411,7 +411,7 @@ INSERT INTO `proveedor` (`idProveedor`, `nEmpresa`, `cNombre`, `cApellido`, `cCe
 --
 
 CREATE TABLE `tipodocumento` (
-  `idTipo` int(10) UNSIGNED NOT NULL,
+  `idTipo` int UNSIGNED NOT NULL,
   `tipo` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -432,7 +432,7 @@ INSERT INTO `tipodocumento` (`idTipo`, `tipo`) VALUES
 --
 
 CREATE TABLE `tipomovimiento` (
-  `idTipoMovimiento` int(10) UNSIGNED NOT NULL,
+  `idTipoMovimiento` int UNSIGNED NOT NULL,
   `tipoMovimiento` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -452,7 +452,7 @@ INSERT INTO `tipomovimiento` (`idTipoMovimiento`, `tipoMovimiento`) VALUES
 --
 
 CREATE TABLE `tipopago` (
-  `idTipoPago` int(10) UNSIGNED NOT NULL,
+  `idTipoPago` int UNSIGNED NOT NULL,
   `tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -473,17 +473,17 @@ INSERT INTO `tipopago` (`idTipoPago`, `tipo`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `documento` int(10) UNSIGNED NOT NULL,
+  `documento` int UNSIGNED NOT NULL,
   `nombres` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
   `fechaNto` date NOT NULL,
-  `edad` int(10) UNSIGNED NOT NULL,
+  `edad` int UNSIGNED NOT NULL,
   `celular` varchar(15) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `CARGO_idCargo` int(10) UNSIGNED NOT NULL,
-  `TIPODOCUMENTO_idTipo` int(10) UNSIGNED NOT NULL,
-  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL
+  `CARGO_idCargo` int UNSIGNED NOT NULL,
+  `TIPODOCUMENTO_idTipo` int UNSIGNED NOT NULL,
+  `ESTADO_idEstado` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -496,7 +496,7 @@ INSERT INTO `usuario` (`documento`, `nombres`, `apellidos`, `fechaNto`, `edad`, 
 (427389387, 'Rae', 'Skill', '1998-01-05', 60, '588 348 6757', '0 Ruskin Parkway', 'rskille@admin.ch', 3, 2, 10),
 (607881456, 'Libbey', 'Yakobowitch', '1992-03-30', 53, '592 562 9508', '07 Morning Drive', 'lyakobowitchh@weebly.com', 3, 3, 9),
 (1014925189, 'Vasili', 'MacAvaddy', '1998-11-11', 43, '748 679 9637', '317 Meadow Valley Parkway', 'vmacavaddy6@comcast.net', 3, 3, 9),
-(1022322055, 'Yeren', 'Palacios', '2003-10-24', 15, '3006961901', 'tv 3 bis este 48 - 20', 'yeren@gmail.com', 1, 2, 9),
+(1022322055, 'Yeren', 'Palacios', '2003-10-24', 17, '3006961901', 'tv 3 bis este 48 - 20', 'yeren@gmail.com', 1, 2, 9),
 (1022322066, 'Yeren', 'Palacios', '2020-11-10', 17, '3006961901', 'bogotá', 'akldasdas@aslfkasd.casd', 3, 1, 9),
 (1022328832, 'Diego', 'Diaz', '1983-02-15', 12, '3006961901', 'tv 3 bis este 48 - 20', 'diego1@gmail.com', 2, 1, 9),
 (1090856204, 'Erna', 'Rudolf', '1988-11-28', 10, '799 187 1933', '1 Valley Edge Alley', 'erudolfg@dyndns.org', 3, 4, 9),
@@ -643,67 +643,67 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `idCargo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCargo` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCategoria` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idDetalles` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `idEstado` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idEstado` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5232;
+  MODIFY `idFactura` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5232;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPEDIDO` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPEDIDO` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidoorden`
 --
 ALTER TABLE `pedidoorden`
-  MODIFY `idPedidoOrden` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPedidoOrden` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1050;
+  MODIFY `idProducto` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1051;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idProveedor` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `tipodocumento`
 --
 ALTER TABLE `tipodocumento`
-  MODIFY `idTipo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idTipo` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipopago`
 --
 ALTER TABLE `tipopago`
-  MODIFY `idTipoPago` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idTipoPago` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -713,66 +713,66 @@ ALTER TABLE `tipopago`
 -- Filtros para la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  ADD CONSTRAINT `fk_DETALLES_FACTURA1` FOREIGN KEY (`FACTURA_idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_DETALLES_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_DETALLES_FACTURA1` FOREIGN KEY (`FACTURA_idFactura`) REFERENCES `factura` (`idFactura`),
+  ADD CONSTRAINT `fk_DETALLES_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `fk_FACTURA_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_FACTURA_TIPOPAGO1` FOREIGN KEY (`TIPOPAGO_idTipoPago`) REFERENCES `tipopago` (`idTipoPago`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_FACTURA_USUARIO1` FOREIGN KEY (`USUARIO_documento`) REFERENCES `usuario` (`documento`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_FACTURA_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`),
+  ADD CONSTRAINT `fk_FACTURA_TIPOPAGO1` FOREIGN KEY (`TIPOPAGO_idTipoPago`) REFERENCES `tipopago` (`idTipoPago`),
+  ADD CONSTRAINT `fk_FACTURA_USUARIO1` FOREIGN KEY (`USUARIO_documento`) REFERENCES `usuario` (`documento`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  ADD CONSTRAINT `fk_INVENTARIO_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_INVENTARIO_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `movimiento`
 --
 ALTER TABLE `movimiento`
-  ADD CONSTRAINT `fk_MOVIMIENTO_FACTURA1` FOREIGN KEY (`FACTURA_idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_MOVIMIENTO_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_MOVIMIENTO_TIPOMOVIMIENTO1` FOREIGN KEY (`TIPOMOVIMIENTO_idTipoMovimiento`) REFERENCES `tipomovimiento` (`idTipoMovimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_MOVIMIENTO_FACTURA1` FOREIGN KEY (`FACTURA_idFactura`) REFERENCES `factura` (`idFactura`),
+  ADD CONSTRAINT `fk_MOVIMIENTO_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`),
+  ADD CONSTRAINT `fk_MOVIMIENTO_TIPOMOVIMIENTO1` FOREIGN KEY (`TIPOMOVIMIENTO_idTipoMovimiento`) REFERENCES `tipomovimiento` (`idTipoMovimiento`);
 
 --
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `fk_PEDIDO_PROVEEDOR1` FOREIGN KEY (`PROVEEDOR_idProveedor`) REFERENCES `proveedor` (`idProveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PEDIDO_USUARIO1` FOREIGN KEY (`USUARIO_documento`) REFERENCES `usuario` (`documento`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_PEDIDO_PROVEEDOR1` FOREIGN KEY (`PROVEEDOR_idProveedor`) REFERENCES `proveedor` (`idProveedor`),
+  ADD CONSTRAINT `fk_PEDIDO_USUARIO1` FOREIGN KEY (`USUARIO_documento`) REFERENCES `usuario` (`documento`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pedidoorden`
 --
 ALTER TABLE `pedidoorden`
-  ADD CONSTRAINT `fk_PEDIDOORDEN_PEDIDO1` FOREIGN KEY (`PEDIDO_idPEDIDO`) REFERENCES `pedido` (`idPEDIDO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PEDIDOORDEN_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_PEDIDOORDEN_PEDIDO1` FOREIGN KEY (`PEDIDO_idPEDIDO`) REFERENCES `pedido` (`idPEDIDO`),
+  ADD CONSTRAINT `fk_PEDIDOORDEN_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `fk_PRODUCTO_CATEGORIA1` FOREIGN KEY (`CATEGORIA_idCategoria`) REFERENCES `categoria` (`idCategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PRODUCTO_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_PRODUCTO_PROVEEDOR1` FOREIGN KEY (`PROVEEDOR_idProveedor`) REFERENCES `proveedor` (`idProveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_PRODUCTO_CATEGORIA1` FOREIGN KEY (`CATEGORIA_idCategoria`) REFERENCES `categoria` (`idCategoria`),
+  ADD CONSTRAINT `fk_PRODUCTO_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`),
+  ADD CONSTRAINT `fk_PRODUCTO_PROVEEDOR1` FOREIGN KEY (`PROVEEDOR_idProveedor`) REFERENCES `proveedor` (`idProveedor`);
 
 --
 -- Filtros para la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD CONSTRAINT `fk_PROVEEDOR_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_PROVEEDOR_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`);
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_USUARIO_CARGO1` FOREIGN KEY (`CARGO_idCargo`) REFERENCES `cargo` (`idCargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_USUARIO_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_USUARIO_TIPODOCUMENTO1` FOREIGN KEY (`TIPODOCUMENTO_idTipo`) REFERENCES `tipodocumento` (`idTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_USUARIO_CARGO1` FOREIGN KEY (`CARGO_idCargo`) REFERENCES `cargo` (`idCargo`),
+  ADD CONSTRAINT `fk_USUARIO_ESTADO1` FOREIGN KEY (`ESTADO_idEstado`) REFERENCES `estado` (`idEstado`),
+  ADD CONSTRAINT `fk_USUARIO_TIPODOCUMENTO1` FOREIGN KEY (`TIPODOCUMENTO_idTipo`) REFERENCES `tipodocumento` (`idTipo`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

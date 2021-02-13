@@ -28,7 +28,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
   
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
 
 	<title>ComponenTech</title>
 </head>

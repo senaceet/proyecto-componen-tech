@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<?php 
+<?php  
 session_start();
 
 if (!isset($_SESSION['user'])) {
@@ -22,16 +22,14 @@ if (isset($_POST['sacarproducto'])) {
 	}
 }
 
- ?>
+?>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/Admin.css">
-  	<link href="https://fonts.google.com/specimen/Bebas+Neue?preview.text=Metodos%20de%20pago&preview.text_type=custom">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
 
 	<title>ComponenTech</title>
 </head>
@@ -40,97 +38,95 @@ if (isset($_POST['sacarproducto'])) {
 	
 	<header>
 		<div class="logo"><a href="principal.php"><img src="../img/logo.png" alt="l"> </a></div>
-			
-		</div>
-		<nav class="navegador">
-			<ul>
+		<h1 class="TituloFactura">Factura</h1>
+	</div>
+	<nav class="navegador">
+		<ul>
 			<?php if (isset($_SESSION['user'])): ?>
 				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
-				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
-					<li><a href="administracion.php">Administracion</a></li>
-				<?php endif ?>
+				<li><a href="principal.php">Inicio</a></li>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
-			<?php else: ?>
-				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
-				<li><a href="../index.php?r=1">Crear cuenta</a></li>
-			<?php endif ?>
+				<?php else: ?>
+					<li><a href="../index.php?r=1">Iniciar sesion</a></li>
+					<li><a href="../index.php?r=1">Crear cuenta</a></li>
+				<?php endif ?>
 				
 			</ul>
 		</nav>
 	</header>
-<h1 class="TituloFactura">Factura</h1>
-	<section class="SecciónFactura">
-		<!-- Productos factura -->
+	
+	<section class="SeccionFactura">
+
 		<div class="ProductosFactura">
-			<div class="ScrollFactura">
 			<?php foreach ($_SESSION['carrito'] as $key => $value): ?>
-				<div class="ListaProductoFactura producto">
+				<div class="producto">
 					<input class="precio" type="hidden" value="<?php echo $value['precio'] ?>">
-					<div class="ImagenListaProductoFactura">
+					<div class="prodImg">
 						<img src="<?php echo $value['img'] ?>">
 					</div>
-					<div class="TituloFacturaProducto">
-						<h2><?php echo $value['nombre'] ?></h2>
-					</div>
-					<div class="PrecioOriginalProductoFactura">
-						<h2><?php echo "$".number_format($value['precio'],0,",","."); ?></h2>
-					</div>
-					<div class="CantidadProductoFactura">
-						<input onkeyup="this.value=1;calcularTotalCantidad(this.parentElement.parentElement)" onkeypress="this.value=1;" class="cantidad" type="number" min="1" max="5" value="1" oninput="calcularTotalCantidad(this.parentElement.parentElement)" >
-					</div>
+					<div>
+						<div class="prodNombre">
+							<p><?php echo $value['nombre'] ?></p>
+						</div>
+						<div class="precios">
+							<div class="prodPrecio">
+								<p ><?php echo "$".number_format($value['precio'],0,",","."); ?></p>
+							</div>
+							<div class="ProdCant">
+								<input onkeyup="this.value=1;calcularTotalCantidad(this.parentElement.parentElement.parentElement.parentElement)" 
+								onkeypress="this.value=1;" class="cantidad" type="number" min="1" max="5" value="1" 
+								oninput="calcularTotalCantidad(this.parentElement.parentElement.parentElement.parentElement)" >
+							</div>
 
-					<div class="PrecioTotalProductoFactura">
-						<h2 class="totalCantidad"></h2>
-					</div>
+							<div class="prodTotal">
+								<p class="totalCantidad"></p>
+							</div>
 
-					<form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" class="SacarProductoFactura">
-						<input type="hidden" name="prod" value="<?php echo $key ?>">
-						<button type="submit" name="sacarproducto">Quitar</button>
-					</form>
+							<form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>" class="SacarProductoFactura">
+								<input type="hidden" name="prod" value="<?php echo $key ?>">
+								<button type="submit" name="sacarproducto"><i class="fa fa-trash-alt"></i></button>
+							</form>
+							
+						</div>
+						
+						
+					</div>
+					
 
 				</div>
-			<?php
-				//$Subtotal += $value['precio'];
-				endforeach;
-				//$Total = ($Subtotal * 0.19) + $Subtotal;
-
-			?>		
-			</div>
-
+				<?php
+			endforeach;
+			?>
 		</div>
-			<!-- Fin productos factura -->
 
-			<!-- Inicio Metodos de pago -->
-
-		<div class="MetodosPago" >
-			<div class="ContenedorMetodosPago">
+		<form class=" MetodosPago CajaFormulario">
+			<div>
 				<h1>Metodos de pago</h1>
-				<div class="SubtotalFactura">
-				<h2 class="SubtotalTitulo">Subtotal:</h2>
-				<h2 class="SubtotalMP"></h2>
-			</div>
-			<div class="TotalFactura">
-				<h2 class="TotalTitulo">Total:</h2>
-				<h2 class="TotalMP"> </h2>
+				<div class="totales">
+					<h2 class="SubtotalTitulo">Subtotal:</h2>
+					<h2 class="SubtotalMP"></h2>
+				</div>
+				<div class="totales">
+					<h2 class="TotalTitulo">Total:</h2>
+					<h2 class="TotalMP"> </h2>
+				</div>
 			</div>
 
 			<div class="OpcionMetodoPago">
-				<form>
-					<input type="radio" name="MetodoP" value="Tarjeta Debito" ><h3>Tarjeta Debito</h3>	<br>	
-					<input type="radio" name="MetodoP" value="Tarjeta credito" ><h3>Tarjeta Cretido</h3> <br>
-					<input type="radio" name="MetodoP" value="Efecty" ><h3>Efecty</h3> <br>
-					<input type="radio" name="MetodoP" value="Efectivo" ><h3>Efectivo</h3> <br>
-
-				<label class="MarcadoFactura">
-					<input type="checkbox" name="" id="Terminos"><h3>He leido y estoy de acuerdo con los terminos y condiciones de la web.</h3>
-				</label>
-
-				<div class="IniciarPagoFactura">
-					<button id="FCompra">Finalizar Compra</button>
-				</div>
-				</form>
+				
+				<label><input type="radio" name="MetodoP" value="Tarjeta Debito" ><p>Tarjeta Debito</p></label>
+				<label><input type="radio" name="MetodoP" value="Tarjeta credito" ><p>Tarjeta Cretido</p></label>
+				<label><input type="radio" name="MetodoP" value="Efecty" ><p>Efecty</p></label>
+				<label><input type="radio" name="MetodoP" value="Efectivo" ><p>Efectivo</p></label>				
 			</div>
-		</div>
+			<div>
+				<label class="MarcadoFactura">
+					<input type="checkbox" name="" id="Terminos"><p>He leido y estoy de acuerdo con los terminos y condiciones de la web.</p>
+				</label>
+				<button class="submitButton Verificado2" id="FCompra">Finalizar Compra</button>
+			</div>
+		</form>
+
 	</section>
 </body>
 <script>
@@ -152,7 +148,7 @@ if (isset($_POST['sacarproducto'])) {
 
 		facturaTotal.innerHTML = "$" + new Intl.NumberFormat().format(total);
 
-		subtotal = 0;
+		subtotal = 0; 
 
 	}
 
@@ -161,13 +157,14 @@ if (isset($_POST['sacarproducto'])) {
 	}
 
 	function calcularTotalCantidad(e){
+
 		let	precioInicial = e.querySelector('.precio').value;
+		
 		let cantidad = e.querySelector('.cantidad').value;
 		let totalCantidad = parseInt(precioInicial)*cantidad;
 
 		e.querySelector('.totalCantidad').innerHTML = "$" + new Intl.NumberFormat().format(totalCantidad);
 		calcularPrecio();
-		
 	}
 	calcularPrecio();
 	
@@ -184,7 +181,7 @@ if (isset($_POST['sacarproducto'])) {
 
 
 	$('#Terminos').click(function(){
-		$('.IniciarPagoFactura').toggleClass("Verificado2")
+		$('.submitButton').toggleClass("Verificado2");
 	});
 </script>
 </html>

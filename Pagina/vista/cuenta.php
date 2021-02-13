@@ -51,7 +51,7 @@
 		        }
 		    }
      	?>
-		<form class="actForm" method="post" action="../controlador/editarCuenta.php">
+		<form class="actForm" name="normalForm" method="post" action="../controlador/editarCuenta.php">
 			<h1>Modificar datos de la cuenta</h1>
 			<div>
 				<p>Documento</p>
@@ -89,38 +89,42 @@
 			</div>
 			<div>
 				<p>Edad</p>
-				<input name="edad" type="text" value="<?php echo $_SESSION['user']['edad']; ?>">
+				<input name="edad" type="text" maxlength="2" value="<?php echo $_SESSION['user']['edad']; ?>">
 			</div>
 			<div>
 				<p>Numero celular</p>
-				<input name="celular" type="text" value="<?php echo $_SESSION['user']['celular']; ?>">
+				<input name="celular" type="text" maxlength="15" value="<?php echo $_SESSION['user']['celular']; ?>">
 			</div>
 			<div>
 				<p>Direccion de residencia</p>
-				<input name="direccion" type="text" value="<?php echo $_SESSION['user']['direccion']; ?>">	
+				<input name="direccion" type="text" maxlength="100" value="<?php echo $_SESSION['user']['direccion']; ?>">	
 			</div>
 			<div>
 				<p>Correo electrónico</p>
-				<input disabled="" type="text" value="<?php echo $_SESSION['user']['correo']; ?>">
+				<input disabled="" type="text" maxlength="50" value="<?php echo $_SESSION['user']['correo']; ?>">
 			</div>
-			<input name="uptDatos" class="submitButton" type="submit" value="Actualizar">
+			<input type="hidden" name="uptDatos" value="1">
+			<input class="submitButton" type="button" value="Actualizar" onclick="verifInput(this.form)">
 		</form>
-		<form class="actForm" method="post" action="../controlador/editarCuenta.php">
+		<form name="normalForm" class="actForm" method="post" action="../controlador/editarCuenta.php">
 			<h1>Actualizar contraseña</h1>
 			<div>
 				<p>Contraseña</p>
-				<input minlength="5" required name="clave" type="password" value="">	
+				<input minlength="5" maxlength="30" required name="clave" type="password" value="">	
 			</div>
 			<div>
 				<p>Confirmar contraseña</p>
-				<input minlength="5" required name="clave2" type="password" value="">	
+				<input minlength="5" maxlength="30" required name="clave2" type="password" value="">	
 			</div>
-			<input name="uptClave" class="submitButton" type="submit" value="Actualizar contraseña">
+			<input type="hidden" name="uptClave" value="1">
+
+			<input class="submitButton" type="button" value="Actualizar contraseña" onclick="verifInput(this.form)">
 		</form>
 	</div>
 
 <script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
-	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/main.js"></script>
 <!--  -->
 </body>
 </html>

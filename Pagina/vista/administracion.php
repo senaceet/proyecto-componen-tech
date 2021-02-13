@@ -24,6 +24,7 @@ function secciones(){
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
 	
 	<title>ComponenTech</title>
 	
@@ -76,7 +77,7 @@ function secciones(){
 				<li><a href="administracion.php?sec=movimientos">Movimientos</a></li>
 			</ul>
 			<ul class="Cuenta-show">
-				<li><a href="administracion.php?sec=Inventario">Productos</a></li>
+				<li><a href="administracion.php?sec=inventario">Productos</a></li>
 			</ul>	
 		</li>
 		<li><a href="#">Detalles 📊</a></li>
@@ -111,6 +112,5 @@ function secciones(){
 </script>
 <script src="js/main.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
 <!-- Fin Deslizamiento -->
 </html>

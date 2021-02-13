@@ -4,12 +4,12 @@
    	    <div class="Herramientas">
            <h1>Movimientos</h1>
            <div>
-                Desde <br>
-               <input id="desde" type="date">
+                Desde<br>
+               <input id="desde" type="date" max="<?php echo date('Y-m-d') ?>">
            </div>
            <div>
                 Hasta <br>
-               <input id="hasta" type="date">
+               <input id="hasta" type="date" max="<?php echo date('Y-m-d') ?>">
            </div>
    	  		
    	  	</div>	

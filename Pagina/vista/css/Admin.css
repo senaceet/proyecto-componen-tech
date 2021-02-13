@@ -44,12 +44,11 @@
 
 .Barra .texto{
 	color: white;
-	font-size: 30px;
+	font-size: 26px;
 	font-weight: bolder;
 	line-height: 40px;
 	text-align: center;
 	background: var(--rojo-principal);
-	letter-spacing: 1px;
 }
 
 .Barra ul{
@@ -68,11 +67,10 @@
 	color:black;
 	text-decoration: none;
 	font-size: 20px;
-	padding-left:10px;
+	padding: 0 20px;
 	font-weight: 200;
 	display: block;
 	width: 100%;
-	border-left: 15px solid transparent;  
 }
 .Barra ul li.active a{
 	color: #981a1a;
@@ -114,6 +112,14 @@
    color: #981a1a !important;
    background: #F3F2F3 !important; 
 }
+@media(max-width: 930px){
+	.Barra{
+		top: 50px;
+	}
+	.btn {
+		top:50px;
+	}
+}
 
 
 /*Tabla CRUD*/
@@ -128,7 +134,7 @@
 	overflow: auto;
 }
 .TablaBD .CabezaHerramientas{
-	border-bottom: solid 2px;
+	border-bottom: solid 2px var(--texto-gris);
 	padding:12px;
 	display: flex;
 	align-items: baseline;
@@ -142,6 +148,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 }
 .Herramientas .search label{
 	display: flex;
@@ -311,14 +318,24 @@
 
 .SeccionFormulario{
 	width: 40%;
+	position: relative;
 	padding: 10px;
 	border-radius: 4px;
 	min-width: 200px;
 	display: block;
+	overflow: hidden;
+}
+.SeccionFormulario .disabledBox{
+	position: absolute;
+	background: rgba(0,0,0,.18);
+	width: 100%;
+	height: 100%;
+	top:0;
+	left: 0;
 }
 
 .CajaFormulario{
-	padding: 10px;
+	padding: 7px;
 	display: block;
 } 
 
@@ -327,29 +344,28 @@
 	width: 100%;
 	padding: 5px 10px;
 	border-radius:3px;
-	border: 1px solid #bababa;
+	border: 2px solid transparent;
+	background:  #dfdfdf;
 	margin-bottom: 8px;
 	font-size: 20px;
 	color: var(--texto-gris);
 	outline:none;
 }
-
-.CajaFormulario .submitButton{
-	color: #fff;
-	border-color: transparent;
+.CajaFormulario input:focus,.CajaFormulario textarea:focus,.CajaFormulario select:focus{
+	background: #fff;
+	border-color: #ccc;
 }
+
+.CajaFormulario .submitButton{ 
+	background: var(--rojo-principal);
+	color: #fff;
+	 }
+
 .CajaFormulario textarea{
 	resize: none;
-	height: 140px;
+	height: 135px;
 }
 
-.submitButton{
-	font-weight: bold;
-	background:var(--rojo-principal);
-	border: 2px solid var(--rojo-principal);
-	color: #fff;
-	cursor: pointer;
-}
 
 
 .busqueda2{
@@ -563,15 +579,28 @@
 	width: 100%;
 	padding: 5px 10px;
 	border-radius:3px;
-	border: 2px solid #bababa;
+	border: 2px solid transparent;
+	background:  #dfdfdf;
 	margin-bottom: 8px;
 	font-size: 20px;
 	color: var(--texto-gris);
 	outline:none;
 }
+.actForm input:focus,.actForm select:focus{
+	background: #fff;
+	border-color: #ccc;
+}
 .actForm .submitButton{
+	background: var(--rojo-principal);
 	color: #fff;
 	margin-top: 5px;
+}
+.submitButton{
+	background: var(--rojo-principal);
+	color: #fff;
+	border-color: transparent;
+	cursor: pointer;
+	font-weight: bold;
 }
 .submitButton:hover{
 	border-color: var(--rojo-principal);
@@ -605,6 +634,9 @@
 	padding: 20px 30px;
 	border-radius: 3px;
 	z-index:151;
+	max-height: 80vh;
+	overflow: auto;
+	padding-bottom: 10px;
 }
 .cerrarForm{
 	border-radius: 50%;
@@ -618,6 +650,13 @@
 	width: 35px;
 	height: 35px;
 	cursor:pointer;
+}
+
+@media(max-width: 800px){
+	.actF_form .actForm > div{
+		width: 100%;
+	}
+
 }
 
 
@@ -686,3 +725,8 @@
 .modCuenta form{
 	position: static;
 }
+input[disabled]{
+	color:#aaa;
+	cursor: not-allowed;
+}
+

@@ -30,11 +30,11 @@ if (isset($_GET['c'])) {
 $con_cats = $objCat->getCategorias();
 
  ?>
-<head>
+<head>  
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="css/styles.css">
 	<title>ComponenTech</title>
 </head>
@@ -78,7 +78,10 @@ $con_cats = $objCat->getCategorias();
 		    }
      	?>
 		<section class="sec1">
+			<input type="checkbox" id="hideCat">
+			<label for="hideCat" class="hideCatDiv"></label>
 			<div class="categorias">
+				<label for="hideCat" class="hideCat"><i class="fa fa-chevron-right"></i></label>
 				<h1>Categorías</h1>
 				<ul>
 				<?php 
@@ -105,7 +108,7 @@ $con_cats = $objCat->getCategorias();
 			<?php 
 				while ($producto = $con_productos->fetch_array()) { ?>
 					<div class="card">
-						<figure>
+						<figure onclick="zoomIn(this)">
 							<img src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
@@ -154,5 +157,7 @@ $con_cats = $objCat->getCategorias();
 		
 	})
 </script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/main.js" ></script>
 </html>

@@ -18,7 +18,7 @@ if (!isset($_SESSION['carrito'])) {
 	if (count($_SESSION['carrito'])==0) {
 		echo "<center>Tu carrito está vacio</center>";
 	}
-
+ 
 foreach ($_SESSION['carrito'] as $key => $value) { ?>
 	<div class="ProductosCarrito">
 		<div class="ImagenProductoCarrito">

@@ -24,9 +24,10 @@ if (isset($_POST['uptDatos'])) {
 		$_SESSION['user'] = $u;
 		header('location:../vista/cuenta.php?m=1');
 	} else {
-		//header('location:../vista/cuenta.php?m=2');
+		header('location:../vista/cuenta.php?m=2');
 	}
 }
+
 if(isset($_POST['uptClave'])){
 	if ($_POST['clave']===$_POST['clave2']) {
 		if ($Usuario->cambiarClave($_SESSION['user']['correo'],$_POST['clave'])) {
@@ -38,5 +39,6 @@ if(isset($_POST['uptClave'])){
 		header('location:../vista/cuenta.php?m=5');
 	}
 }
+var_dump($_POST);
 
  ?>
