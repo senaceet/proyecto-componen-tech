@@ -1,14 +1,6 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Movimiento.php');
-require_once(realpath(dirname(__FILE__)) . '/Producto.php');
+require_once('../controlador/cn.php');
 
-use Movimiento;
-use Producto;
-
-/**
- * @access public
- * @author Marlon, Yeren, Jhon, Kevin
- */
 class Inventario {
 	/**
 	 * @AttributeType int
@@ -156,7 +148,7 @@ class Inventario {
 	public function getSaldo() {
 		return $this->_saldo;
 	}
-
+ 
 	/**
 	 * /**
 	 *  * @access public
@@ -183,6 +175,16 @@ class Inventario {
 	 */
 	public function getIdProducto() {
 		return $this->_idProducto;
+	}
+
+
+	public function actualizar($entradas,$salidas,$producto){
+		$saldo = $entradas - $salidas;
+		$sql = "update inventario set entradas = $entradas, salidas = $salidas, saldo = $saldo where PRODUCTO_idProducto=$producto";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res; 
 	}
 }
 ?>

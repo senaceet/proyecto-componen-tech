@@ -97,11 +97,11 @@
 			</div>
 			<div>
 				<p>Direccion de residencia</p>
-				<input name="direccion" type="text" maxlength="100" value="<?php echo $_SESSION['user']['direccion']; ?>">	
+				<input name="direccion" type="text" maxlength="50" value="<?php echo $_SESSION['user']['direccion']; ?>">	
 			</div>
 			<div>
 				<p>Correo electrónico</p>
-				<input disabled="" type="text" maxlength="50" value="<?php echo $_SESSION['user']['correo']; ?>">
+				<input disabled="" type="text" maxlength="20" value="<?php echo $_SESSION['user']['correo']; ?>">
 			</div>
 			<input type="hidden" name="uptDatos" value="1">
 			<input class="submitButton" type="button" value="Actualizar" onclick="verifInput(this.form)">

@@ -68,6 +68,7 @@ if (isset($_POST['sacarproducto'])) {
 						<div class="prodNombre">
 							<p><?php echo $value['nombre'] ?></p>
 						</div>
+
 						<div class="precios">
 							<div class="prodPrecio">
 								<p ><?php echo "$".number_format($value['precio'],0,",","."); ?></p>
@@ -123,7 +124,7 @@ if (isset($_POST['sacarproducto'])) {
 				<label class="MarcadoFactura">
 					<input type="checkbox" name="" id="Terminos"><p>He leido y estoy de acuerdo con los terminos y condiciones de la web.</p>
 				</label>
-				<button class="submitButton Verificado2" id="FCompra">Finalizar Compra</button>
+				<button class="submitButton Verificado2" type="button" id="FCompra">Finalizar Compra</button>
 			</div>
 		</form>
 
@@ -177,11 +178,39 @@ if (isset($_POST['sacarproducto'])) {
 		calcularTotalCantidad(e);
 	});
 
-	
+	const terminar = document.querySelector('#FCompra');
+	terminar.addEventListener('click',()=>{
+		let selected = false;
+		let form = terminar.form;
+		let radios = form.querySelectorAll("input[type=radio]");
+		let terminos = document.querySelector('#Terminos');
+		radios.forEach(e=>{
+			if(e.checked==true){
+				selected = true;
+			}
+			
+		});
+
+		if(selected){
+			if (terminos.checked) {
+				form.submit();
+			} else {
+				swal('Debe aceptar los terminos','','error');
+			}
+		} else {
+			swal('No ha seleccionado un metodo de pago','','error');
+		} 
+
+	});
 
 
 	$('#Terminos').click(function(){
+
 		$('.submitButton').toggleClass("Verificado2");
 	});
+
 </script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </html>

@@ -107,6 +107,7 @@ class Producto {
 	}
 
 	public function insertar(){
+
 		$sql = "insert into producto values(0,'$this->_nombreProducto','$this->_detalles','$this->_precio','$this->_iva','$this->_categoria','$this->_proveedor','$this->_estado','$this->_prodImg')";
 		$cn = conectar();
 		$res = $cn->query($sql);

@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 12-02-2021 a las 22:25:42
--- Versión del servidor: 8.0.22
--- Versión de PHP: 7.4.15
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-02-2021 a las 06:59:36
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cargo` (
-  `idCargo` int UNSIGNED NOT NULL,
+  `idCargo` int(10) UNSIGNED NOT NULL,
   `cargo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,7 +48,7 @@ INSERT INTO `cargo` (`idCargo`, `cargo`) VALUES
 --
 
 CREATE TABLE `categoria` (
-  `idCategoria` int UNSIGNED NOT NULL,
+  `idCategoria` int(10) UNSIGNED NOT NULL,
   `categoria` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -86,7 +86,7 @@ CREATE TABLE `clave` (
 --
 
 INSERT INTO `clave` (`correo`, `clave`) VALUES
-('aboxhall8@lycos.com', 'Alex21'),
+('aboxhall8@lycos.com', 'alexboxhall'),
 ('akldasdas@aslfkasd.casd', '1234'),
 ('ameindl3@friendfeed.com', 'Aura92'),
 ('bkiddye5@usnews.com', 'Bronnie81'),
@@ -108,8 +108,7 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 ('tsprules4@weebly.com', 'Tiena32'),
 ('vmacavaddy6@comcast.net', 'Vasili2'),
 ('wtutingb@army.mil', 'Wyatt12'),
-('yeren@gmail.com', '321'),
-('yerendsda@gmail.com', '123');
+('yeren@gmail.com', '321');
 
 -- --------------------------------------------------------
 
@@ -118,11 +117,11 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 --
 
 CREATE TABLE `detalles` (
-  `idDetalles` int UNSIGNED NOT NULL,
-  `cantidad` int UNSIGNED NOT NULL,
-  `totalCantidad` int UNSIGNED NOT NULL,
-  `FACTURA_idFactura` int UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int UNSIGNED NOT NULL
+  `idDetalles` int(10) UNSIGNED NOT NULL,
+  `cantidad` int(10) UNSIGNED NOT NULL,
+  `totalCantidad` int(10) UNSIGNED NOT NULL,
+  `FACTURA_idFactura` int(10) UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -146,7 +145,7 @@ INSERT INTO `detalles` (`idDetalles`, `cantidad`, `totalCantidad`, `FACTURA_idFa
 --
 
 CREATE TABLE `estado` (
-  `idEstado` int UNSIGNED NOT NULL,
+  `idEstado` int(10) UNSIGNED NOT NULL,
   `estado` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -173,13 +172,13 @@ INSERT INTO `estado` (`idEstado`, `estado`) VALUES
 --
 
 CREATE TABLE `factura` (
-  `idFactura` int UNSIGNED NOT NULL,
+  `idFactura` int(10) UNSIGNED NOT NULL,
   `fecha` date NOT NULL,
-  `subtotal` int UNSIGNED NOT NULL,
-  `total` int UNSIGNED NOT NULL,
-  `TIPOPAGO_idTipoPago` int UNSIGNED NOT NULL,
-  `USUARIO_documento` int UNSIGNED NOT NULL,
-  `ESTADO_idEstado` int UNSIGNED NOT NULL
+  `subtotal` int(10) UNSIGNED NOT NULL,
+  `total` int(10) UNSIGNED NOT NULL,
+  `TIPOPAGO_idTipoPago` int(10) UNSIGNED NOT NULL,
+  `USUARIO_documento` int(10) UNSIGNED NOT NULL,
+  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -203,11 +202,11 @@ INSERT INTO `factura` (`idFactura`, `fecha`, `subtotal`, `total`, `TIPOPAGO_idTi
 --
 
 CREATE TABLE `inventario` (
-  `idInventario` int UNSIGNED NOT NULL,
-  `entradas` int UNSIGNED NOT NULL,
-  `Salidas` int UNSIGNED NOT NULL,
-  `Saldo` int UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int UNSIGNED NOT NULL
+  `idInventario` int(10) UNSIGNED NOT NULL,
+  `entradas` int(10) UNSIGNED NOT NULL,
+  `Salidas` int(10) UNSIGNED NOT NULL,
+  `Saldo` int(10) UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -215,10 +214,10 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODUCTO_idProducto`) VALUES
-(1, 40, 10, 30, 1000),
+(1, 41, 10, 31, 1000),
 (2, 20, 5, 15, 1001),
 (3, 10, 5, 5, 1002),
-(4, 15, 10, 5, 1003),
+(4, 10, 10, 0, 1003),
 (5, 30, 15, 15, 1004),
 (6, 60, 20, 40, 1005),
 (7, 20, 10, 10, 1006),
@@ -250,12 +249,12 @@ INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODU
 --
 
 CREATE TABLE `movimiento` (
-  `idMovimiento` int UNSIGNED NOT NULL,
+  `idMovimiento` int(10) UNSIGNED NOT NULL,
   `fecha` date NOT NULL,
-  `cantidad` int UNSIGNED NOT NULL,
-  `TIPOMOVIMIENTO_idTipoMovimiento` int UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int UNSIGNED NOT NULL,
-  `FACTURA_idFactura` int UNSIGNED NOT NULL
+  `cantidad` int(10) UNSIGNED NOT NULL,
+  `TIPOMOVIMIENTO_idTipoMovimiento` int(10) UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL,
+  `FACTURA_idFactura` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -279,11 +278,11 @@ INSERT INTO `movimiento` (`idMovimiento`, `fecha`, `cantidad`, `TIPOMOVIMIENTO_i
 --
 
 CREATE TABLE `pedido` (
-  `idPEDIDO` int UNSIGNED NOT NULL,
+  `idPEDIDO` int(10) UNSIGNED NOT NULL,
   `pedFecha` date NOT NULL,
-  `total` int UNSIGNED NOT NULL,
-  `USUARIO_documento` int UNSIGNED NOT NULL,
-  `PROVEEDOR_idProveedor` int UNSIGNED NOT NULL
+  `total` int(10) UNSIGNED NOT NULL,
+  `USUARIO_documento` int(10) UNSIGNED NOT NULL,
+  `PROVEEDOR_idProveedor` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -300,11 +299,11 @@ INSERT INTO `pedido` (`idPEDIDO`, `pedFecha`, `total`, `USUARIO_documento`, `PRO
 --
 
 CREATE TABLE `pedidoorden` (
-  `idPedidoOrden` int UNSIGNED NOT NULL,
-  `cantidad` int UNSIGNED NOT NULL,
-  `totalCantidad` int UNSIGNED NOT NULL,
-  `PEDIDO_idPEDIDO` int UNSIGNED NOT NULL,
-  `PRODUCTO_idProducto` int UNSIGNED NOT NULL
+  `idPedidoOrden` int(10) UNSIGNED NOT NULL,
+  `cantidad` int(10) UNSIGNED NOT NULL,
+  `totalCantidad` int(10) UNSIGNED NOT NULL,
+  `PEDIDO_idPEDIDO` int(10) UNSIGNED NOT NULL,
+  `PRODUCTO_idProducto` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -322,14 +321,14 @@ INSERT INTO `pedidoorden` (`idPedidoOrden`, `cantidad`, `totalCantidad`, `PEDIDO
 --
 
 CREATE TABLE `producto` (
-  `idProducto` int UNSIGNED NOT NULL,
+  `idProducto` int(10) UNSIGNED NOT NULL,
   `productoNombre` varchar(45) NOT NULL,
   `detalles` varchar(500) NOT NULL,
-  `precio` int UNSIGNED NOT NULL,
-  `iva` int UNSIGNED NOT NULL,
-  `CATEGORIA_idCategoria` int UNSIGNED NOT NULL,
-  `PROVEEDOR_idProveedor` int UNSIGNED NOT NULL,
-  `ESTADO_idEstado` int UNSIGNED NOT NULL,
+  `precio` int(10) UNSIGNED NOT NULL,
+  `iva` int(10) UNSIGNED NOT NULL,
+  `CATEGORIA_idCategoria` int(10) UNSIGNED NOT NULL,
+  `PROVEEDOR_idProveedor` int(10) UNSIGNED NOT NULL,
+  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL,
   `prodImg` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -372,6 +371,17 @@ INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `i
 (1031, 'Silla Gamer Corsair T2 Road Warrior Morado/Ve', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1422000, 19, 12, 7, 1, '../img/productos/7/1031.jpg'),
 (1032, 'Silla Gamer Corsair Silver Edition T12', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1622000, 19, 12, 7, 2, '../img/productos/7/1032.jpg');
 
+--
+-- Disparadores `producto`
+--
+DELIMITER $$
+CREATE TRIGGER `invetario_trigger` AFTER INSERT ON `producto` FOR EACH ROW BEGIN 
+		       INSERT INTO inventario
+		       VALUES (0, 0, 0, 0, NEW.idProducto);
+		    END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -379,13 +389,13 @@ INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `i
 --
 
 CREATE TABLE `proveedor` (
-  `idProveedor` int UNSIGNED NOT NULL,
+  `idProveedor` int(10) UNSIGNED NOT NULL,
   `nEmpresa` varchar(45) NOT NULL,
   `cNombre` varchar(45) NOT NULL,
   `cApellido` varchar(45) NOT NULL,
   `cCelular` varchar(45) NOT NULL,
   `eTelefono` varchar(45) NOT NULL,
-  `ESTADO_idEstado` int UNSIGNED NOT NULL
+  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -411,7 +421,7 @@ INSERT INTO `proveedor` (`idProveedor`, `nEmpresa`, `cNombre`, `cApellido`, `cCe
 --
 
 CREATE TABLE `tipodocumento` (
-  `idTipo` int UNSIGNED NOT NULL,
+  `idTipo` int(10) UNSIGNED NOT NULL,
   `tipo` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -432,7 +442,7 @@ INSERT INTO `tipodocumento` (`idTipo`, `tipo`) VALUES
 --
 
 CREATE TABLE `tipomovimiento` (
-  `idTipoMovimiento` int UNSIGNED NOT NULL,
+  `idTipoMovimiento` int(10) UNSIGNED NOT NULL,
   `tipoMovimiento` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -452,7 +462,7 @@ INSERT INTO `tipomovimiento` (`idTipoMovimiento`, `tipoMovimiento`) VALUES
 --
 
 CREATE TABLE `tipopago` (
-  `idTipoPago` int UNSIGNED NOT NULL,
+  `idTipoPago` int(10) UNSIGNED NOT NULL,
   `tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -473,17 +483,17 @@ INSERT INTO `tipopago` (`idTipoPago`, `tipo`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `documento` int UNSIGNED NOT NULL,
+  `documento` int(10) UNSIGNED NOT NULL,
   `nombres` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
   `fechaNto` date NOT NULL,
-  `edad` int UNSIGNED NOT NULL,
+  `edad` int(10) UNSIGNED NOT NULL,
   `celular` varchar(15) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `CARGO_idCargo` int UNSIGNED NOT NULL,
-  `TIPODOCUMENTO_idTipo` int UNSIGNED NOT NULL,
-  `ESTADO_idEstado` int UNSIGNED NOT NULL
+  `CARGO_idCargo` int(10) UNSIGNED NOT NULL,
+  `TIPODOCUMENTO_idTipo` int(10) UNSIGNED NOT NULL,
+  `ESTADO_idEstado` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -504,7 +514,7 @@ INSERT INTO `usuario` (`documento`, `nombres`, `apellidos`, `fechaNto`, `edad`, 
 (2056910799, 'Sibylle', 'Scrymgeour', '1986-10-21', 12, '498 563 5534', '31 Northland Place', 'sscrymgeour2@fc2.com', 3, 4, 9),
 (2195205439, 'Pebrook', 'Gentile', '1995-01-02', 53, '690 560 1577', '4212 Packers Hill', 'pgentile1@exblog.jp', 3, 1, 9),
 (2219978176, 'Wyatt', 'Tuting', '2004-08-30', 37, '200 354 3934', '89905 Artisan Place', 'wtutingb@army.mil', 3, 3, 9),
-(2773619313, 'Alex', 'Boxhall', '2005-04-15', 56, '457 615 0898', '0136 Pankratz Center', 'aboxhall8@lycos.com', 3, 2, 9),
+(2773619313, 'Alex', 'Boxhall', '2005-04-15', 56, '457 615 0899', '0136 Pankratz Center', 'aboxhall8@lycos.com', 3, 2, 9),
 (2864316033, 'Sholom', 'Welberry', '1990-07-07', 38, '643 189 2686', '2725 Reinke Hill', 'swelberry9@whitehouse.gov', 3, 1, 9),
 (3019400478, 'Gradeigh', 'Nevin', '1991-08-10', 64, '743 379 9038', '8131 Maple Way', 'gnevinc@jugem.jp', 3, 1, 9),
 (3467715564, 'Blane', 'Sandry', '1990-08-20', 16, '616 998 4626', '7 Melody Terrace', 'bsandryi@histats.com', 3, 1, 9),
@@ -643,67 +653,73 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `idCargo` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCargo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCategoria` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalles` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `idEstado` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idEstado` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5232;
+  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5232;
+
+--
+-- AUTO_INCREMENT de la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  MODIFY `idInventario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPEDIDO` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPEDIDO` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidoorden`
 --
 ALTER TABLE `pedidoorden`
-  MODIFY `idPedidoOrden` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPedidoOrden` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1051;
+  MODIFY `idProducto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1055;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idProveedor` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `tipodocumento`
 --
 ALTER TABLE `tipodocumento`
-  MODIFY `idTipo` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idTipo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipopago`
 --
 ALTER TABLE `tipopago`
-  MODIFY `idTipoPago` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idTipoPago` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -728,7 +744,7 @@ ALTER TABLE `factura`
 -- Filtros para la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  ADD CONSTRAINT `fk_INVENTARIO_PRODUCTO1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`);
+  ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`PRODUCTO_idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `movimiento`

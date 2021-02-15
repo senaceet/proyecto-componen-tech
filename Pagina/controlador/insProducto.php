@@ -15,6 +15,7 @@
 	 if ($resFoto == "ya se guardo la imagen" || $resFoto == "El archivo ya existe") {
 	 	$producto->crearProducto($_POST['prodName'],str_replace("=","<br>☛",$_POST['prodDesc']),$_POST['prodPrec'],$_POST['prodCat'],$proveedor,1,$new_file);
 	 	if($producto->insertar()){
+	 		
 	 		header('location:../vista/administracion.php?sec=productos&m=1');
 	 	} else {
 	 		header('location:../vista/administracion.php?sec=productos&m=2');

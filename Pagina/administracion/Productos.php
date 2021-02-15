@@ -98,6 +98,10 @@ if (isset($_GET['m'])) {
 
 	<!-- Incicio Sección Formulario(Creación de nuevos productos): Gestión Producto -->
 	<div class="SeccionFormulario">
+		<?php if (!isset($_GET['c'])): ?>
+			<div class="disabledBox" onclick="swal('¡Seleccione una categoria!','','info')"></div>
+		<?php endif ?>
+		
 		<div class="CajaFormulario">
 			<input type="text" name="prodName" placeholder="Nombre del Producto" required>
 			<input type="text" name="prodPrec" placeholder="Precio" required>
@@ -136,7 +140,7 @@ if (isset($_GET['m'])) {
 
 		while ($producto = $con_productos->fetch_array()) { ?>
 			<div class="card">
-				<figure>
+				<figure onclick="zoomIn(this)">
 				<?php if($producto['ESTADO_idEstado'] == 1): ?>
 					<div class="estado enventa">En venta</div>
 				<?php else: ?>

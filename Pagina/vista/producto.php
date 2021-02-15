@@ -98,6 +98,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 							$_SESSION['carrito'][$_POST['prodId']]['nombre'] = $productoActual['productoNombre'];
 							$_SESSION['carrito'][$_POST['prodId']]['precio'] = $productoActual['precio'];
 						} ?>
+
 					</div>
 				</article>
 				
@@ -144,7 +145,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 			<?php 
 				while ($producto = $con_productos->fetch_array()) { ?>
 					<div class="card">
-						<figure>
+						<figure onclick="zoomIn(this)">
 							<img src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
@@ -195,4 +196,5 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 	})
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/main.js" ></script>
 </html>
