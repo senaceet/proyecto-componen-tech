@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>  
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/styles.css">
+	<title>ComponenTech</title>
+</head>
+<body>
+	<header>
+		<div class="logo"><a href="#"><img src="logo.png" alt="l"></a></div>
+		<label class="busqueda">
+			<input type="text" id="prodSearch" placeholder="Buscar productos">
+			<i class="fas fa-search"></i>
+		</label>
+			
+		</div>
+		<nav class="navegador">
+			<ul>
+				<li><a href="#">Iniciar sesion</a></li>
+				<li><a href="#">Crear cuenta</a></li>
+			<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>	
+			</ul>
+
+		</nav>
+	</header>
+	
+
+	<div class="contenedor">
+		<section class="sec1">
+			<input type="checkbox" id="hideCat">
+			<label for="hideCat" class="hideCatDiv"></label>
+			<div class="categorias">
+				<label for="hideCat" class="hideCat"><i class="fa fa-chevron-right"></i></label>
+				<h1>Categorías</h1>
+				<ul>
+					<li><a href="#">Categoría 1</a></li>
+					<li><a href="#">Categoría 2</a></li>
+					<li><a href="#">Categoría 3</a></li>
+					<li><a href="#">Categoría n</a></li>
+				</ul>
+			</div>
+			<div class="slider">
+				<iframe src="slider.html" frameborder="0"></iframe>
+			</div>
+		</section>
+		<hr><br>
+		
+		<section id="recientes" class="recientes">
+			<h1>Productos recientes</h1>
+			<br>
+			<div class="container-card">
+						
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+	<nav class="BarraCarrito">
+		
+		<div class="TituloCarrito">
+			<h1>TUS PRODUCTOS</h1>
+		</div>
+		<div class="ContenedorProductosCarrito">
+			<div class="ProductosCarrito">
+				<div class="ImagenProductoCarrito">
+					<img src="productoEjemplo.png">  
+				</div>
+				<div class="TextoProductoCarrito">
+					<p>Producto 1</p>
+				</div>
+				<div class="PrecioProductoCarrito">
+					<p>$123.456</p>
+				</div>
+				<form method="post" class="SacarProductoCarrito">
+					<input type="hidden" name="prodCarrito" value="<?php echo $key ?>">
+					<button type="submit" name="sacarProd">✖</button>
+				</form>
+			</div>
+			<div class="ProductosCarrito">
+				<div class="ImagenProductoCarrito">
+					<img src="productoEjemplo.png">  
+				</div>
+				<div class="TextoProductoCarrito">
+					<p>Producto 2</p>
+				</div>
+				<div class="PrecioProductoCarrito">
+					<p>$123.456</p>
+				</div>
+				<form method="post" class="SacarProductoCarrito">
+					<input type="hidden" name="prodCarrito" value="<?php echo $key ?>">
+					<button type="submit" name="sacarProd">✖</button>
+				</form>
+			</div>
+			<div class="ProductosCarrito">
+				<div class="ImagenProductoCarrito">
+					<img src="productoEjemplo.png">  
+				</div>
+				<div class="TextoProductoCarrito">
+					<p>Producto 3</p>
+				</div>
+				<div class="PrecioProductoCarrito">
+					<p>$123.456</p>
+				</div>
+				<form method="post" class="SacarProductoCarrito">
+					<input type="hidden" name="prodCarrito" value="<?php echo $key ?>">
+					<button type="submit" name="sacarProd">✖</button>
+				</form>
+			</div>
+			<form action="#" method="post">
+				<input class="Vaciar" type="submit" value="Vaciar carrito" name="Vaciar">
+			</form>
+		</div>	
+
+		<div class="TituloCarrito2">
+			<h1>TOTAL:</h1>
+			<h2>$123.456</h2>
+		</div>
+		<div class="BarraBotonComprarProductosCarrito">
+			<button><a class="LinkBotonCarrito" href="#">Comprar</a></button>
+		</div>
+
+
+
+	</nav>	
+</body>
+<script>
+	$('.ListarProductos').click(function(){
+          
+        $('.BarraCarrito').toggleClass("show");
+	});
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/main.js" ></script>
+</html>

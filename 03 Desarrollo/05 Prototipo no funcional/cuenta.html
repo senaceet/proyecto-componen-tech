@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/Admin.css">
+	<title>ComponenTech</title>
+</head>
+<body>
+	<header>
+		<div class="logo"><a href="principal.php"><img src="logo.png" alt="l"></a></div>
+		<label class="busqueda">
+			<input type="text" id="prodSearch" placeholder="Buscar productos">
+			<i class="fas fa-search"></i>
+		</label>
+			
+		</div>
+		<nav class="navegador">
+			<ul>
+				<li><a href="principal.php">Inicio</a></li>
+				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="contenedor modCuenta">
+		<form class="actForm" name="normalForm" method="post" action="#">
+			<h1>Modificar datos de la cuenta</h1>
+			<div>
+				<p>Documento</p>
+				<input disabled type="text" value="123456789" >
+			</div>
+			<div>
+				<p>Nombres</p>
+				<input name="nombres" maxlength="50" type="text" value="sus nombres">
+			</div>
+			<div>
+				<p>Apellidos</p>
+				<input name="apellidos" type="text" maxlength="50" value="sus apellidos">
+			</div>
+			<div>
+				<p>Fecha de nacimiento</p>
+				<input name="fechaNto" type="date" value="1000/01/01">
+			</div>
+			<div>
+				<p>Edad</p>
+				<input name="edad" type="text" maxlength="2" value="01">
+			</div>
+			<div>
+				<p>Numero celular</p>
+				<input name="celular" type="text" maxlength="15" value="555 555 5555">
+			</div>
+			<div>
+				<p>Direccion de residencia</p>
+				<input name="direccion" type="text" maxlength="50" value="su dirección">	
+			</div>
+			<div>
+				<p>Correo electrónico</p>
+				<input disabled="" type="text" maxlength="20" value="alguien@correo.com">
+			</div>
+			<input type="hidden" name="uptDatos" value="1">
+			<input class="submitButton" type="button" value="Actualizar" onclick="verifInput(this.form)">
+		</form>
+		<form name="normalForm" class="actForm" method="post" action="../controlador/editarCuenta.php">
+			<h1>Actualizar contraseña</h1>
+			<div>
+				<p>Contraseña</p>
+				<input minlength="5" maxlength="30" required name="clave" type="password" value="">	
+			</div>
+			<div>
+				<p>Confirmar contraseña</p>
+				<input minlength="5" maxlength="30" required name="clave2" type="password" value="">	
+			</div>
+			<input type="hidden" name="uptClave" value="1">
+
+			<input class="submitButton" type="button" value="Actualizar contraseña" onclick="verifInput(this.form)">
+		</form>
+	</div>
+
+<script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/main.js"></script>
+<!--  -->
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/Admin.css">
+  
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
+
+	<title>ComponenTech</title>
+</head>
+<body>
+
+
+	<header>
+		<div class="logo"><a href="principal.php"><img src="logo.png" alt="l"></a></div>
+		<label class="busqueda">
+			<input type="text" id="prodSearch" placeholder="Buscar productos">
+			<i class="fas fa-search"></i>
+		</label>
+			
+		</div>
+		<nav class="navegador">
+			<ul>
+
+				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
+				<li><a href="../index.php?r=1">Crear cuenta</a></li>
+			<li><a href="#" class="ListarProductos" ><i class="fas fa-shopping-cart"></i></a></li>
+				
+			</ul>
+		</nav>
+	</header>
+
+
+	<!---CONTENEDOR DE PRODUCTOS (-ETALLES)--->
+	<div class="contenedor">
+		<section class="sec1 detalles">
+			<div class="detImg">
+				<img src="productoEjemplo.png">
+			</div>
+
+			<div class="detallesProducto">
+				<article>
+					<h1>producto1</h1>
+					<div class="textoDetalles">
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ab tempora, aut adipisci itaque cumque ratione.</p>
+					</div>
+					<div class="precioDetalles">
+							<p>$123.456</p>
+					</div>
+
+					<div class="botonesDetalles">
+						<a href="principal.php"><input type="button" class="rojo" value="ATRAS"></a>
+						<form action="#" method="post">
+							<input type="hidden" name="prodId" value="<?php echo $productoActual['idProducto'] ?>">
+							<input class="verde" type="submit" name="addCarrito" value="AÑADIR AL CARRITO">
+						</form>
+					</div>
+				</article>
+				
+			</div>
+		</section>
+
+		<!-- Busqueda de productos -->
+
+		<hr><br>
+		<section id="recientes" class="recientes">
+			<h1>Productos recientes</h1>
+			<br>
+			<div class="container-card">
+						
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure onclick="zoomIn(this)">
+						<img src="productoEjemplo.png">
+					</figure>
+					<div class="contenido-card">
+						<h3>Producto de ejemplo</h3>
+						<p>$123.456</p>
+						<a class="verde" href="#">Ver producto</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<nav class="BarraCarrito">
+		<?php include 'minicarrito.php'; ?>
+	</nav>	
+
+</body>
+<script>
+	$('.ListarProductos').click(function(){
+          
+        $('.BarraCarrito').toggleClass("show");
+	});
+	$('#prodSearch').keydown(function(e){
+		if (e.key=='Enter') {
+			location.href='producto.php?search='+this.value;
+		}
+		
+	})
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/main.js" ></script>
+</html>
