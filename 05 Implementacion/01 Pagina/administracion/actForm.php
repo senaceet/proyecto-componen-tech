@@ -11,7 +11,7 @@
 	$actUsuario = $con_usuarios->fetch_array(); 	
 ?>
 
-<form class="actForm" method="post" action="../controlador/userEdit.php">
+<form class="actForm actUser" method="post" action="../controlador/userEdit.php">
 	<h1>Actualizacion de datos de usuario</h1>
 	<div>
 		<p>Numero de documento</p>

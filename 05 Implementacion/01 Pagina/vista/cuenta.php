@@ -121,7 +121,7 @@
 			<input class="submitButton" type="button" value="Actualizar contraseña" onclick="verifInput(this.form)">
 		</form>
 	</div>
-
+<?php include 'footer.php' ?>
 <script src="https://kit.fontawesome.com/0b32f2b0be.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="js/main.js"></script>

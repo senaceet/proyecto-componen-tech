@@ -87,6 +87,7 @@ function secciones(){
 <div class="contenedor secciones">
 	<?php secciones(); ?>
 </div>
+<?php include 'footer.php' ?>
 </body>
 
 <!-- Barra deslizable lateral izquierda -->

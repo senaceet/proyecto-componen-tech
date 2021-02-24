@@ -52,8 +52,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 				
 			<?php else: ?>
 
-				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
-				<li><a href="../index.php?r=1">Crear cuenta</a></li>
+				<li><a href="../index.php?r=1">Iniciar sesion / crear cuenta</a></li>
 				
 			<?php endif ?>
 			<li><a href="#" class="ListarProductos" ><i class="fas fa-shopping-cart"></i></a></li>
@@ -96,6 +95,8 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 						<?php if (isset($_POST['addCarrito'])) {
 							$_SESSION['carrito'][$_POST['prodId']]['img'] = $productoActual['prodImg'];
 							$_SESSION['carrito'][$_POST['prodId']]['nombre'] = $productoActual['productoNombre'];
+							$_SESSION['carrito'][$_POST['prodId']]['detalles'] = $productoActual['detalles'];
+							$_SESSION['carrito'][$_POST['prodId']]['cantidad'] = 1;
 							$_SESSION['carrito'][$_POST['prodId']]['precio'] = $productoActual['precio'];
 						} ?>
 
@@ -181,7 +182,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 	<nav class="BarraCarrito">
 		<?php include 'minicarrito.php'; ?>
 	</nav>	
-
+<?php include 'footer.php' ?>
 </body>
 <script>
 	$('.ListarProductos').click(function(){

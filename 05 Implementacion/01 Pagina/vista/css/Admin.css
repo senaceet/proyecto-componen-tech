@@ -630,13 +630,11 @@
 .actF_form  .actForm{
 	background:#fff;
 	width: 70%;
-	height: fit-content;
 	padding: 20px 30px;
 	border-radius: 3px;
 	z-index:151;
 	max-height: 80vh;
 	overflow: auto;
-	padding-bottom: 10px;
 }
 .cerrarForm{
 	border-radius: 50%;
@@ -658,7 +656,10 @@
 	}
 
 }
-
+.actUser {
+	position: static;
+	max-height: all;
+}
 
 /* actualizar producto */
 
@@ -684,12 +685,14 @@
 }
 .updProd form{
 	z-index: inherit;
+	min-width: 300px;
 	height: 90vh;
 	width: 90%;
 	overflow: auto;
 	background-color: #fff;
 	border-radius: 3px;
-	max-width: 500px;
+	max-width: 600px;
+	padding-top: 30px;
 	
 }
 .updProd p{
@@ -721,6 +724,8 @@
 	position: absolute;
 	transform: translateX(-50%);
 	cursor:pointer;
+	top:-25px;
+	left: 50%;
 }
 .modCuenta form{
 	position: static;

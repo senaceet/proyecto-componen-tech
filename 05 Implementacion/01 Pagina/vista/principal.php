@@ -57,8 +57,7 @@ $con_cats = $objCat->getCategorias();
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php else: ?>
 				
-				<li><a href="../index.php?r=1">Iniciar sesion</a></li>
-				<li><a href="../index.php?r=1">Crear cuenta</a></li>
+				<li><a href="../index.php?r=1">Iniciar sesion / crear cuenta</a></li>
 			<?php endif ?>
 			<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>	
 			</ul>
@@ -144,6 +143,7 @@ $con_cats = $objCat->getCategorias();
 	<nav class="BarraCarrito">
 		<?php include 'minicarrito.php'; ?>
 	</nav>	
+	<?php include 'footer.php' ?>
 </body>
 <script>
 	$('.ListarProductos').click(function(){

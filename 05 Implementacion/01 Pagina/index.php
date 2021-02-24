@@ -1,10 +1,10 @@
 <?php 
-session_start();
-if (isset($_SESSION['user'])) {
-    header('location:vista/principal.php');
-} elseif (!isset($_GET['r'])){
-    header('location:vista/principal.php');
-}
+    session_start();
+    if (isset($_SESSION['user'])) {
+        header('location:vista/principal.php');
+    } elseif (!isset($_GET['r'])){
+        header('location:vista/principal.php');
+    }
 ?> 
 <!DOCTYPE html>   
 <html lang="es"> 
@@ -77,7 +77,7 @@ if (isset($_SESSION['user'])) {
                         </label>
                         <input type="password" name="clave" required maxlength="30">
                     </div>
-                    <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p>
+                    <p class="forgot"><a href="#">¿Olvidaste tu contraseña?</a></p>
                     <input id="iniciar_btn" type="button" class="button button-block" value="Iniciar Sesión">
                 </form>
             </div>
@@ -90,7 +90,7 @@ if (isset($_SESSION['user'])) {
                             <select name="idTipo" required>
                                 <option value="" selected disabled>Tipo de documento *</option>
                                 <option value="1">Cédula</option>
-                                <option value="2">Targeta de identidad</option>
+                                <option value="2">Tarjeta de identidad</option>
                                 <option value="3">Cedula de extrangería</option>
                                 <option value="4">Pasaporte</option>
                             </select>

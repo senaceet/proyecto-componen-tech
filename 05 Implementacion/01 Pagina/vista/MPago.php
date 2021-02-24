@@ -100,10 +100,10 @@ if (isset($_POST['sacarproducto'])) {
 			?>
 		</div>
 
-		<form class=" MetodosPago CajaFormulario">
-			<?php foreach ($_SESSION['carrito'] as $key => $value): ?>
-				<input type="text" name="<?php echo $key ?>">
-			<?php endforeach ?>
+		<form method="POST" action="../controlador/correo.php" class=" MetodosPago CajaFormulario">
+			<?php #foreach ($_SESSION['carrito'] as $key => $value): ?>
+				<!-- <input type="text" name="<?php #echo $key ?>"> -->
+			<?php #endforeach ?>
 			<div>
 				<h1>Metodos de pago</h1>
 				<div class="totales">
@@ -132,6 +132,7 @@ if (isset($_POST['sacarproducto'])) {
 		</form>
 
 	</section>
+<?php include 'footer.php' ?>
 </body>
 <script>
 	var total = 0;
