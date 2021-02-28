@@ -1,15 +1,5 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Detalles.php');
-require_once(realpath(dirname(__FILE__)) . '/Cliente.php');
-require_once(realpath(dirname(__FILE__)) . '/Pedidos.php');
-require_once(realpath(dirname(__FILE__)) . '/Movimiento.php');
-require_once(realpath(dirname(__FILE__)) . '/Orden.php');
-
-use Detalles;
-use Cliente;
-use Pedidos;
-use Movimiento;
-use Orden;
+require_once('../controlador/cn.php');
 
 /**
  * @access public
@@ -44,41 +34,6 @@ class Factura {
 	 * @AttributeType int
 	 */
 	private $_estado;
-	/**
-	 * @AttributeType Detalles
-	 * /**
-	 *  * @AssociationType Detalles
-	 *  * /
-	 */
-	public $_unnamed_Detalles_;
-	/**
-	 * @AttributeType Cliente
-	 * /**
-	 *  * @AssociationType Cliente
-	 *  * /
-	 */
-	public $_unnamed_Cliente_;
-	/**
-	 * @AttributeType Pedidos
-	 * /**
-	 *  * @AssociationType Pedidos
-	 *  * /
-	 */
-	public $_unnamed_Pedidos_;
-	/**
-	 * @AttributeType Movimiento
-	 * /**
-	 *  * @AssociationType Movimiento
-	 *  * /
-	 */
-	public $_unnamed_Movimiento_;
-	/**
-	 * @AttributeType Orden
-	 * /**
-	 *  * @AssociationType Orden
-	 *  * /
-	 */
-	public $_unnamed_Orden_;
 
 	/**
 	 * @access public
@@ -87,6 +42,40 @@ class Factura {
 	 */
 	public function EntregarFactura() {
 		// Not yet implemented
+	}
+
+	public function getLastFactura($u){
+		$sql = "SELECT * from factura where USUARIO_documento = $u order by idFactura desc limit 1";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		$this->crearFactura(
+			$this->_idFactura = $res['idFactura'],
+			$this->_fecha = $res['fecha'],
+			$this->_subTotal = $res['subtotal'],
+			$this->_total = $res['total'],
+			$this->_tipoPago = $res['TIPOPAGO_idTipoPago'],
+			$this->_iddocumento = $res['USUARIO_documento'],
+			$this->_estado = $res['ESTADO_idEstado']
+		);
+	}
+
+	Public function crearFactura($id,$fecha,$subtotal,$total,$pago,$documento,$estado){
+		$this->_idFactura = $id;
+		$this->_fecha = $fecha;
+		$this->_subTotal = $subtotal;
+		$this->_total = $total;
+		$this->_tipoPago = $pago;
+		$this->_iddocumento = $documento;
+		$this->_estado = $estado;
+	}
+	public function insertar(){
+		$sql = "INSERT into factura values ('$this->_idFactura','$this->_fecha','$this->_subTotal','$this->_total','$this->_tipoPago','$this->_iddocumento','$this->_estado')";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
 
 	/**

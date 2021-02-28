@@ -74,9 +74,10 @@ if (isset($_POST['sacarproducto'])) {
 								<p ><?php echo "$".number_format($value['precio'],0,",","."); ?></p>
 							</div>
 							<div class="ProdCant">
-								<input name="<?php echo $key ?>" onkeyup="this.value=1;calcularTotalCantidad(this.parentElement.parentElement.parentElement.parentElement)" 
-								onkeypress="this.value=1;" class="cantidad" type="number" min="1" max="5" value="1" 
-								oninput="calcularTotalCantidad(this.parentElement.parentElement.parentElement.parentElement)" >
+								<input name="<?php echo $key ?>" onkeyup="this.value=1;calcularTotalCantidad(this.parentElement.parentElement.parentElement.parentElement); "
+								onclick="cantidad(this)" 
+								onkeypress="this.value=1;" class="cantidad" type="number" min="1" max="5" value="<?php echo $value['cantidad']?>" 
+								oninput=" calcularTotalCantidad(this.parentElement.parentElement.parentElement.parentElement); " data-id_prod="<?php echo $key ?>">
 							</div>
 
 							<div class="prodTotal">
@@ -98,12 +99,21 @@ if (isset($_POST['sacarproducto'])) {
 				<?php
 			endforeach;
 			?>
+			<script>
+
+					function cantidad(input){
+						var id = $(input).data('id_prod');
+						var cant = $(input).val();
+						$.ajax({
+							url:'../controlador/cantidad.php',
+							method: 'post',
+							data:{id,cant}
+						});
+					}
+			</script>
 		</div>
 
 		<form method="POST" action="../controlador/correo.php" class=" MetodosPago CajaFormulario">
-			<?php #foreach ($_SESSION['carrito'] as $key => $value): ?>
-				<!-- <input type="text" name="<?php #echo $key ?>"> -->
-			<?php #endforeach ?>
 			<div>
 				<h1>Metodos de pago</h1>
 				<div class="totales">
@@ -118,10 +128,10 @@ if (isset($_POST['sacarproducto'])) {
 
 			<div class="OpcionMetodoPago">
 				
-				<label><input type="radio" name="MetodoP" value="Tarjeta Debito" ><p>Tarjeta Debito</p></label>
-				<label><input type="radio" name="MetodoP" value="Tarjeta credito" ><p>Tarjeta Cretido</p></label>
-				<label><input type="radio" name="MetodoP" value="Efecty" ><p>Efecty</p></label>
-				<label><input type="radio" name="MetodoP" value="Efectivo" ><p>Efectivo</p></label>				
+				<label><input type="radio" name="MetodoP" value="1" ><p>Tarjeta Debito</p></label>
+				<label><input type="radio" name="MetodoP" value="2" ><p>Tarjeta Cretido</p></label>
+				<label><input type="radio" name="MetodoP" value="3" ><p>Efecty</p></label>
+				<label><input type="radio" name="MetodoP" value="4" ><p>Efectivo</p></label>				
 			</div>
 			<div>
 				<label class="MarcadoFactura">
@@ -213,6 +223,9 @@ if (isset($_POST['sacarproducto'])) {
 		$('.submitButton').toggleClass("Verificado2");
 	});
 
+
+
+	
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

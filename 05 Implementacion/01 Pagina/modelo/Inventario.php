@@ -177,12 +177,41 @@ class Inventario {
 		return $this->_idProducto;
 	}
 
+	public function vender($prod,$cant){
+		$sql = "SELECT * from inventario where PRODUCTO_idProducto = $prod";
+		$cn = conectar();
+		$res = $cn->query($sql);
+
+		$res = $res->fetch_array();
+		$entradas = $res['entradas'];
+		$salidas = $res['Salidas'];
+		$salidas = $salidas + $cant;
+
+		$saldo = $entradas - $salidas;
+
+		if ($saldo == 0) {
+			$sql = "update producto set ESTADO_idEstado = 2 where idProducto = $prod";
+			$res = $cn->query($sql);
+		}
+
+		$sql = "update inventario set entradas = $entradas, salidas = $salidas, saldo = $saldo where PRODUCTO_idProducto=$prod";
+		$res = $cn->query($sql);
+
+		$cn->close();
+		return $res;
+
+	}
+
 
 	public function actualizar($entradas,$salidas,$producto){
 		$saldo = $entradas - $salidas;
 		$sql = "update inventario set entradas = $entradas, salidas = $salidas, saldo = $saldo where PRODUCTO_idProducto=$producto";
 		$cn = conectar();
 		$res = $cn->query($sql);
+		if ($res) {
+			$sql = "update producto set ESTADO_idEstado = 1 where idProducto = $producto";
+			$res = $cn->query($sql);
+		}
 		$cn->close();
 		return $res; 
 	}

@@ -57,7 +57,7 @@ $con_cats = $objCat->getCategorias();
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php else: ?>
 				
-				<li><a href="../index.php?r=1">Iniciar sesion / crear cuenta</a></li>
+				<li><a href="../index.php?r=1">Iniciar sesión / Crear cuenta</a></li>
 			<?php endif ?>
 			<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>	
 			</ul>
@@ -108,7 +108,7 @@ $con_cats = $objCat->getCategorias();
 				while ($producto = $con_productos->fetch_array()) { ?>
 					<div class="card">
 						<figure onclick="zoomIn(this)">
-							<img src="<?php echo $producto['prodImg'] ?>">
+							<img alt="<?php echo $producto['productoNombre']; ?>" src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
 							<h3><?php echo $producto['productoNombre']; ?></h3>

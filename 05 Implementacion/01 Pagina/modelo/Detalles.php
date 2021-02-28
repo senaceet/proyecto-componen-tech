@@ -1,9 +1,5 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Producto.php');
-require_once(realpath(dirname(__FILE__)) . '/Factura.php');
-
-use Producto;
-use Factura;
+require_once '../controlador/cn.php';
 
 /**
  * @access public
@@ -30,28 +26,26 @@ class Detalles {
 	 * @AttributeType int
 	 */
 	private $_idProducto;
-	/**
-	 * @AttributeType Producto
-	 * /**
-	 *  * @AssociationType Producto
-	 *  * /
-	 */
-	public $_unnamed_Producto_;
-	/**
-	 * @AttributeType Factura
-	 * /**
-	 *  * @AssociationType Factura
-	 *  * /
-	 */
-	public $_unnamed_Factura_;
 
-	/**
-	 * @access public
-	 * @return boolean
-	 * @ReturnType boolean
-	 */
-	public function almacenarProductos() {
-		// Not yet implemented
+	private $movimiento;
+
+
+
+	public function crearDetalle($id,$cant,$total,$factura,$prod){
+
+		$this->_idDetalles = $id;
+		$this->_cantidad = $cant;
+		$this->_totalCantidad = $total;
+		$this->_idFactura = $factura;
+		$this->_idProducto = $prod;
+	}
+
+	public function insertar(){
+		$sql = "INSERT into detalles values ('$this->_idDetalles','$this->_cantidad','$this->_totalCantidad','$this->_idFactura','$this->_idProducto')";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
 
 	/**

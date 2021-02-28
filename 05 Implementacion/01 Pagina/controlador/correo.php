@@ -1,10 +1,28 @@
 <style>
-.titulocorreo{
-    color: red;
-    font-size:20px;
-}
+   *{
+      font-family: sans-serif;
+   }
+   .titulocorreo{
+       color: red;
+       font-size:20px;
+   }
+   .facturaBody{
+      background-color: #fff;
+   }
+   .facturaBody h3{
+      text-align: center;
+   }
 </style>
-<?php
+<?php 
+
+require_once '../modelo/Detalles.php';
+require_once '../modelo/Factura.php';
+require_once '../modelo/Movimiento.php';
+require_once '../modelo/Inventario.php';
+
+
+
+
 
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
@@ -16,9 +34,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 session_start();
-	if (!$_SESSION['user']) {
-
-	}
+	if (!isset($_SESSION['user'])) {
+      header('location: ../vista/principal.php');
+	} elseif (!isset($_SESSION['carrito'])) {
+      header('location: ../vista/principal.php');
+   }
 
 
 
@@ -62,14 +82,61 @@ try {
    //HTML
     $mail->isHTML(true);   
     $prods = '';
+    $total = 0;
+    $totalProds = 0;
+
+
    foreach ($_SESSION['carrito'] as $key => $value) {
+      
+      $totalCant = $value['cantidad'] * $value['precio'];
+      $total += $totalCant;
+      $totalProds += $value['cantidad'];
       $prods = $prods."<tr>
-                  <td>".$value['detalles']."</td>
+                  <td>".$value['nombre']."</td>
                   <td>".$value['cantidad']."</td>
-                  <td>".$value['precio']."</td>
+                  <td>$". number_format($totalCant,0,",",".")  ."</td>
                </td>";
    }
-                                 // CORREO HTML
+
+
+   // creación de factura
+
+   $objFactura = new Factura();
+
+
+   $objFactura->crearFactura(0,date('Y-m-d'),0,$total,$_POST['MetodoP'],$_SESSION['user']['documento'],8);
+
+   $res = $objFactura->insertar();
+   if ($res) {
+      $objFactura->getLastFactura($_SESSION['user']['documento']);
+   }
+   
+
+   // insertar detalles, actualizar movimientos e inventario
+
+   $objDetalles = new Detalles();
+
+   foreach ($_SESSION['carrito'] as $key => $value) {
+     
+      $inTotalCant = $value['cantidad'] * $value['precio'];
+      $objDetalles->crearDetalle(0,$value['cantidad'],$inTotalCant,$objFactura->getIdFactura(),$key);
+      $res = $objDetalles->insertar();
+      if ($res) {
+         $objMov = new Movimiento();
+         $objMov->crearMovimiento(0,$objFactura->getFecha(),$objDetalles->getCantidad(),1,$key,$objFactura->getIdFactura());
+         $res = $objMov->insertar();
+         if ($res) {
+            $objInv = new Inventario();
+            $objInv->vender($key,$objDetalles->getCantidad());
+         }
+      }
+   }
+
+
+
+
+
+   // CORREO HTML
     $mail->Subject = 'Prueba numbre one  ';
     $mail->Body    =  '  
     <div style="background-color:#D8D8D8; width:100%;"  >  
@@ -81,13 +148,13 @@ try {
 
                            
                                
-      <div style="background-color:white;  margin:0 auto; height:800px;  ">
-         <h3 style="text-align:center; padding-top:15px; color:black;">¡Hola! '.$_SESSION['user']['nombres'] .' </h3>
+      <div class="facturaBody">
+         <h3 >¡Hola! '.$_SESSION['user']['nombres'] .' </h3>
 
          <h4 style="text-align:center; padding-top:7px; color:black;"> Gracias por comprar con <span style="color:crimson;">Componentech</span></h4>
                               
-         <h2 style="text-align:center;  font-weight:700; color:black; ">ID FACTURA: </h2>
-         <h2 style="text-align:center;  color:black;">¡Hola! '.$_SESSION['user']['nombres'] .' </h2>
+         <h2 style="text-align:center;  font-weight:700; color:black; ">ID FACTURA: '.$objFactura->getIdFactura().' </h2>
+         
                             
          <hr style=" width:190px; padding-left:50px; padding-right:50px;  font-weight:bolder; height:5px; background-color:black;" >
                            
@@ -131,6 +198,11 @@ try {
             </thead>
             <tbody>
                '.$prods.'
+               <tr>
+                  <td><b>Total</b></td>
+                  <td>'.$totalProds.'</td>
+                  <td>$'.number_format($total,0,",",".").'</td>
+               </tr>
             </tbody>
          </table>
                                 
@@ -140,8 +212,11 @@ try {
    echo $mail->Body;
 
     //$mail->send();
-    //echo "<img src='../icons/ct.png'>  ";
-    //echo "   <script > alert('Hola mamis ricas cositas lindas cositas bien melas caramelas');  window.location.href='../vista/MPago.php'</script>";
+
+   unset($_SESSION['carrito']);
+
+
+
 } catch (Exception $e) {
     echo "3312 tenemos un 3313: {$mail->ErrorInfo}";
 }

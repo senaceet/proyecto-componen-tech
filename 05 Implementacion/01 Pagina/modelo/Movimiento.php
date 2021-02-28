@@ -21,7 +21,7 @@ class Movimiento {
 	/**
 	 * @AttributeType int
 	 */
-	private $_tipoMovimientoIdTipoMovimiento;
+	private $_tipoMovimiento;
 	/**
 	 * @AttributeType int
 	 */
@@ -148,8 +148,8 @@ class Movimiento {
 	 * @param int aTipoMovimientoIdTipoMovimiento
 	 * @ParamType aTipoMovimientoIdTipoMovimiento int
 	 */
-	public function setTipoMovimientoIdTipoMovimiento($aTipoMovimientoIdTipoMovimiento) {
-		$this->_tipoMovimientoIdTipoMovimiento = $aTipoMovimientoIdTipoMovimiento;
+	public function setTipoMovimiento($aTipoMovimiento) {
+		$this->_tipoMovimiento = $aTipoMovimiento;
 	}
 
 	/**
@@ -162,8 +162,8 @@ class Movimiento {
 	 * @return int
 	 * @ReturnType int
 	 */
-	public function getTipoMovimientoIdTipoMovimiento() {
-		return $this->_tipoMovimientoIdTipoMovimiento;
+	public function getTipoMovimiento() {
+		return $this->_tipoMovimiento;
 	}
 
 	/**
@@ -221,6 +221,28 @@ class Movimiento {
 	public function getFacturaIdFactura() {
 		return $this->_facturaIdFactura;
 	}
+
+
+	public function crearMovimiento($id,$fecha,$cantidad,$tipo,$prod,$factura){
+		$this->_idMovimiento = $id;
+		$this->_fecha = $fecha;
+		$this->_cantidad = $cantidad;
+		$this->_tipoMovimiento = $tipo;
+		$this->_productoIdProducto = $prod;
+		$this->_facturaIdFactura = $factura;
+	}
+
+	public function insertar(){
+		$sql = "INSERT into movimiento values ('$this->_idMovimiento','$this->_fecha','$this->_cantidad','$this->_tipoMovimiento','$this->_productoIdProducto',$this->_facturaIdFactura) ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+		
+		
+	}
+
+
 
 	public function getMovimientos(){
 		$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 

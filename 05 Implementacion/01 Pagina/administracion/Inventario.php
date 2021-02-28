@@ -34,6 +34,9 @@ if (isset($_GET['m'])) {
 		case 2:
 		echo "<div class='getMensaje incorrecto'>Error al actualizar producto</div>";
 		break;
+		case 3:
+		echo "<div class='getMensaje incorrecto'>El número de entradas debe ser mayor al de salidas</div>";
+		break;
 	}
 }
 ?>

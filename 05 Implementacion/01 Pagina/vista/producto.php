@@ -52,7 +52,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 				
 			<?php else: ?>
 
-				<li><a href="../index.php?r=1">Iniciar sesion / crear cuenta</a></li>
+				<li><a href="../index.php?r=1">Iniciar sesión / Crear cuenta</a></li>
 				
 			<?php endif ?>
 			<li><a href="#" class="ListarProductos" ><i class="fas fa-shopping-cart"></i></a></li>
@@ -73,7 +73,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 		?>
 		<section class="sec1 detalles">
 			<div class="detImg">
-				<img src="<?php echo $productoActual['prodImg']; ?>">
+				<img alt="<?php echo $productoActual['productoNombre']; ?>" src="<?php echo $productoActual['prodImg']; ?>">
 			</div>
 
 			<div class="detallesProducto">
