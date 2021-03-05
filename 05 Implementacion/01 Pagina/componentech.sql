@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-02-2021 a las 06:59:36
+-- Tiempo de generación: 01-03-2021 a las 19:27:06
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -136,7 +136,10 @@ INSERT INTO `detalles` (`idDetalles`, `cantidad`, `totalCantidad`, `FACTURA_idFa
 (5, 4, 1836000, 4233, 1005),
 (6, 2, 1078000, 4412, 1006),
 (7, 6, 3234000, 5125, 1006),
-(8, 3, 8607000, 5231, 1004);
+(8, 3, 8607000, 5231, 1004),
+(29, 1, 2645000, 5260, 1000),
+(30, 2, 1742000, 5260, 1017),
+(35, 2, 5290000, 5265, 1000);
 
 -- --------------------------------------------------------
 
@@ -193,7 +196,9 @@ INSERT INTO `factura` (`idFactura`, `fecha`, `subtotal`, `total`, `TIPOPAGO_idTi
 (4233, '2020-06-26', 3234000, 3848460, 4, 1090856204, 8),
 (4412, '2020-09-15', 8607000, 10242330, 2, 1292020212, 8),
 (5125, '2020-06-05', 1078000, 1282820, 1, 1014925189, 8),
-(5231, '2020-05-29', 1836000, 2184840, 1, 607881456, 8);
+(5231, '2020-05-29', 1836000, 2184840, 1, 607881456, 8),
+(5260, '2021-02-27', 0, 4387000, 3, 1022322055, 8),
+(5265, '2021-02-27', 0, 5290000, 3, 2773619313, 8);
 
 -- --------------------------------------------------------
 
@@ -214,7 +219,7 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODUCTO_idProducto`) VALUES
-(1, 41, 10, 31, 1000),
+(1, 18, 16, 2, 1000),
 (2, 20, 5, 15, 1001),
 (3, 10, 5, 5, 1002),
 (4, 10, 10, 0, 1003),
@@ -222,8 +227,8 @@ INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODU
 (6, 60, 20, 40, 1005),
 (7, 20, 10, 10, 1006),
 (8, 50, 20, 30, 1007),
-(9, 40, 20, 20, 1008),
-(10, 14, 4, 10, 1008),
+(9, 6, 4, 2, 1008),
+(10, 6, 4, 2, 1008),
 (11, 10, 5, 5, 1009),
 (12, 5, 3, 2, 1010),
 (13, 70, 40, 30, 1011),
@@ -269,7 +274,10 @@ INSERT INTO `movimiento` (`idMovimiento`, `fecha`, `cantidad`, `TIPOMOVIMIENTO_i
 (6, '2020-06-26', 4, 3, 1004, 4233),
 (7, '2020-09-15', 2, 3, 1002, 4412),
 (8, '2020-06-05', 6, 3, 1005, 5125),
-(9, '2020-05-29', 3, 3, 1004, 5231);
+(9, '2020-05-29', 3, 3, 1004, 5231),
+(22, '2021-02-27', 1, 1, 1000, 5260),
+(23, '2021-02-27', 2, 1, 1017, 5260),
+(28, '2021-02-27', 2, 1, 1000, 5265);
 
 -- --------------------------------------------------------
 
@@ -665,7 +673,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -677,13 +685,19 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5232;
+  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5266;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de la tabla `movimiento`
+--
+ALTER TABLE `movimiento`
+  MODIFY `idMovimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`

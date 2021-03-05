@@ -22,33 +22,43 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php 
     if (isset($_GET['m'])) {
+        $m2 = "";
         switch ($_GET['m']) {
             case 1:
             $m = "Usuario registrado correctamente";
+            $t = "success";
+            $m2 = "Hemos enviado un mensaje a tu correo confirmando tu registro en ComponenTech.";
             break;
             case 2:
             $m = "Error al guardar la contraseña";
+            $t = "error";
             break;
             case 3:
             $m = "Error al registrar usuario";
+            $t = "error";
             break;
             case 4:
             $m = "Error: las contraseñas deben ser iguales";
+            $t = "error";
             break;
             case 5:
             $m = "Error: el documento ya está registrado";
+            $t = "error";
             break;
             case 6:
             $m = "Error: el correo ya está registrado";
+            $t = "error";
             break;
             case 7:
             $m = "Error: Contraseña incorrecta";
+            $t = "error";
             break;
             case 8:
             $m = "Error: el usuario no existe";
+            $t = "error";
             break;
         } ?>
-        <script>swal('<?php echo $m ?>','','info');</script>
+        <script>swal('<?php echo $m ?>','<?php echo $m2 ?>','<?php echo $t ?>');</script>
     <?php } ?>
 
     <!-- Formularios -->

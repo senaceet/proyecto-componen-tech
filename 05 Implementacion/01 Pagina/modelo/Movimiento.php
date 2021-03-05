@@ -246,7 +246,7 @@ class Movimiento {
 
 	public function getMovimientos(){
 		$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento";
+		where movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento order by fecha desc";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -255,10 +255,10 @@ class Movimiento {
 	public function getMovFecha($desde,$hasta){
 		if($desde == ""){
 			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha<'$hasta')";
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha<'$hasta') order by fecha desc";
 		} elseif($hasta == ""){
 			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde')";
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde') order by fecha desc";
 		} else {
 			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
 		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde' and fecha<'$hasta')";

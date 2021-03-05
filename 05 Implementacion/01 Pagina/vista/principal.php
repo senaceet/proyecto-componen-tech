@@ -52,7 +52,7 @@ $con_cats = $objCat->getCategorias();
 			<?php if (isset($_SESSION['user'])): ?>
 				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
 				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
-					<li><a href="administracion.php">Administracion</a> </li>
+					<li><a href="administracion.php">Administración</a> </li>
 				<?php endif ?>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php else: ?>

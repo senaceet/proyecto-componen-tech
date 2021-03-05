@@ -1,7 +1,5 @@
 <?php
-require "../modelo/Usuario.php";
-extract ($_REQUEST);
-
+require_once '../modelo/Usuario.php';
 
 $objUsuario = new Usuario();
 
@@ -19,6 +17,7 @@ if($verifcorreo->num_rows==1){
 
     if($objUsuario->Registrarse()){
         if($objUsuario->registrarClave($_REQUEST['correo'],$_REQUEST['password'])){
+            include 'PHPMailer/correo_bienvenida.php';
             header('location:../index.php?m=1&r=1');  
         } else {
             header('location:../index.php?m=2&r=1'); 

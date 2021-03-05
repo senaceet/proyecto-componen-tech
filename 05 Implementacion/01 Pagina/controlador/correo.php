@@ -1,18 +1,4 @@
-<style>
-   *{
-      font-family: sans-serif;
-   }
-   .titulocorreo{
-       color: red;
-       font-size:20px;
-   }
-   .facturaBody{
-      background-color: #fff;
-   }
-   .facturaBody h3{
-      text-align: center;
-   }
-</style>
+
 <?php 
 
 require_once '../modelo/Detalles.php';
@@ -20,7 +6,7 @@ require_once '../modelo/Factura.php';
 require_once '../modelo/Movimiento.php';
 require_once '../modelo/Inventario.php';
 
-
+$ruta = 'http://componentech.epizy.com/';
 
 
 
@@ -68,7 +54,7 @@ try {
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom('componentech9@gmail.com', 'RECIBO');
+    $mail->setFrom('componentech9@gmail.com', 'ComponenTech');
    
     $mail->addAddress($_SESSION['user']['correo']);
       
@@ -137,11 +123,26 @@ try {
 
 
    // CORREO HTML
-    $mail->Subject = 'Prueba numbre one  ';
-    $mail->Body    =  '  
+    $mail->Subject = 'Factura de compra';
+    $mail->Body    =  ' 
+    <style>
+     *{
+        font-family: sans-serif;
+     }
+     .titulocorreo{
+         color: red;
+         font-size:20px;
+     }
+     .facturaBody{
+        background-color: #fff;
+     }
+     .facturaBody h3{
+        text-align: center;
+     }
+  </style>
     <div style="background-color:#D8D8D8; width:100%;"  >  
       <div style="aling-items:center; text-align:center; padding:10px ">
-         <img src="../img/logo.png" width="100" >
+         <img src="'.$ruta.'img/logo.png" width="100" >
 
          <h2 style="text-align:center;  font-weight:700; color:black; ">¡Gracias Por la compra!</h2>
       </div>
@@ -209,11 +210,13 @@ try {
    </div>';
 
 
-   echo $mail->Body;
+// echo $mail->Body;
 
-    //$mail->send();
+  $mail->send();
 
    unset($_SESSION['carrito']);
+
+   header('location:../vista/principal.php');
 
 
 
