@@ -33,7 +33,7 @@ try {
     //Recipients
     $mail->setFrom('componentech9@gmail.com', 'ComponenTech');
    
-    $mail->addAddress('yerenagmt@gmail.com');    
+    $mail->addAddress($_REQUEST['correo']);    
    //HTML
     $mail->isHTML(true);   
 

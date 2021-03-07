@@ -35,7 +35,7 @@ if (isset($_GET['m'])) {
            <h1>Tabla Operadores</h1>
    	  		<ul>
                 <li class="search">
-                    <label><input id="search" type="text" placeholder="Buscar"><img onclick="buscarTabla(this.parentElement.querySelector('#search').value)" src="../icons/lupa.svg" alt=""></label></li>
+                    <label><input id="search" type="text" placeholder="Buscar"><i class="fas fa-search" onclick="buscarTabla(this.parentElement.querySelector('#search').value)"></i></label></li>
                 <li><button onclick="showForm(document.getElementById('actF_form'))">Añadir <i class="fas fa-plus"></i></button></li>
             </ul>  
    	  	</div>	

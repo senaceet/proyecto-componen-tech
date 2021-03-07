@@ -1,5 +1,5 @@
 function verifInput(form){
-	const inputs = form.querySelectorAll("input[type=text],input[type=date],input[type=password], select, textarea");
+	const inputs = form.querySelectorAll("input[type=text],input[type=date],input[type=password], select");
 	var vacios = 0;
 	var pass = false;
 
@@ -10,6 +10,7 @@ function verifInput(form){
 	}
 
 	inputs.forEach(e => {
+	
 
 		if (form.name == 'normalForm') {
 

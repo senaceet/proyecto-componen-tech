@@ -1156,12 +1156,6 @@ section{
 	box-shadow: 4px 4px 4px 2px rgba(0,0,0,.3);
 }
 
-/*separa las columnas y es la que le da los estilos*/
-*{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-}
 /*acomoda las columnas*/
 .container{
 	max-width: 1170px;

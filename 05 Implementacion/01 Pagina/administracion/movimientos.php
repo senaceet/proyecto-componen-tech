@@ -15,12 +15,19 @@
    	  	</div>	
     </div>
     <!--✖-->
+    <?php
+    $page = 1;
+    if (isset($_GET['page'])){
+      $page = $_GET['page'];
+    } ?>
     <script>
         $(document).ready(function(){
             function obtener_datos(){
+              var page = <?php echo $page; ?>;
   				   $.ajax({
   					  url: "../administracion/mov.php",
   					  method: "POST",
+              data: {page},
   					  success: function(data){
   				         $("#result").html(data)
   					  }
@@ -43,7 +50,7 @@
         })
 
     </script>
-   	<table class="TableroDatos" id="result">
-   	</table>
+    <div id="result"></div>
+   	
 
 </div>

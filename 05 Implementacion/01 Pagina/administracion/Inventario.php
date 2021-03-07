@@ -62,6 +62,7 @@ if (isset($_GET['m'])) {
 					<?php if (isset($_GET['c'])): ?>
 						<input type="hidden" name="c" value="<?php echo $_GET['c'] ?>">
 					<?php endif ?>
+					<input type="hidden" value="<?php echo $p['entradas']?>" name="entradasAnterior">
 					<input type="hidden" value="<?php echo $p['idProducto'] ?>" name="prod">
 					<input type="hidden" value="<?php echo $p['Salidas']?>" name="salidas">
 					<input type="number" min="1" value="<?php echo $p['entradas']?>" name="entradas">

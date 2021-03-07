@@ -236,17 +236,31 @@ class Movimiento {
 		$sql = "INSERT into movimiento values ('$this->_idMovimiento','$this->_fecha','$this->_cantidad','$this->_tipoMovimiento','$this->_productoIdProducto',$this->_facturaIdFactura) ";
 		$cn = conectar();
 		$res = $cn->query($sql);
+		if (!$res) {
+			echo $cn->error."<br>";
+			echo $sql;
+			die();
+		}
 		$cn->close();
 		return $res;
 		
 		
 	}
 
+	public function getMovCantidad(){
+		$sql = "SELECT count(*) as c from movimiento";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
 
 
-	public function getMovimientos(){
+
+	public function getMovimientos($startpage,$endpage){
 		$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento order by fecha desc";
+		where movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento order by fecha desc limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -255,13 +269,13 @@ class Movimiento {
 	public function getMovFecha($desde,$hasta){
 		if($desde == ""){
 			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha<'$hasta') order by fecha desc";
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha<='$hasta') order by fecha desc";
 		} elseif($hasta == ""){
 			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde') order by fecha desc";
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>='$desde') order by fecha desc";
 		} else {
 			$sql = "SELECT fecha,cantidad,tipoMovimiento as tipo,productoNombre as producto,FACTURA_idFactura as factura FROM movimiento,tipomovimiento,producto 
-		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>'$desde' and fecha<'$hasta')";
+		where (movimiento.PRODUCTO_idProducto = producto.idProducto and movimiento.TIPOMOVIMIENTO_idTipoMovimiento = tipomovimiento.idTipomovimiento) and (fecha>='$desde' and fecha<='$hasta') order by fecha desc";
 		}
 		
 		$cn = conectar();

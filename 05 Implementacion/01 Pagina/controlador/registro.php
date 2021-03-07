@@ -3,7 +3,7 @@ require_once '../modelo/Usuario.php';
 
 $objUsuario = new Usuario();
 
-$verif = $objUsuario->verifUsuario($_REQUEST['idTipo'],$_REQUEST['documento']);
+$verif = $objUsuario->verifUsuario($_REQUEST['documento']);
 
 $verifcorreo = $objUsuario->verifCorreo($_REQUEST['correo']);
 
@@ -23,6 +23,7 @@ if($verifcorreo->num_rows==1){
             header('location:../index.php?m=2&r=1'); 
         }
     } else {
+    
         header('location:../index.php?m=3&r=1'); 
     }
 

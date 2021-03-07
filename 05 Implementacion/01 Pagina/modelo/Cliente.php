@@ -18,7 +18,7 @@ class Cliente extends Usuario {
 	}
 
 	public function getClientesCantidad(){
-		$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3";
+		$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 9";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -34,24 +34,34 @@ class Cliente extends Usuario {
 		$cn->close();
 		return $res;
 	}
-	public function SeleccionarProducto() {
-		// Not yet implemented
+
+
+
+	public function getClientesDesac($startpage,$limitpage){
+		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 10 limit $startpage,$limitpage";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
 
-	/**
-	 * @access public
-	 */
-	public function DeseleccionarProducto() {
-		// Not yet implemented
+	public function getClientesDesacCantidad(){
+		$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 10";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
 	}
 
-	/**
-	 * @access public
-	 * @return boolean
-	 * @ReturnType boolean
-	 */
-	public function Comprar() {
-		// Not yet implemented
+
+	public function getClientesDesacBusqueda($s){
+		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and (CARGO_idCargo=3 and ESTADO_idEStado = 10)";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
 	}
+
 }
 ?>

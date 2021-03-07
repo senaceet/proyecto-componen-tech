@@ -24,7 +24,7 @@ if (isset($_GET['m'])) {
             echo "<div class='getMensaje incorrecto'>Este correo ya está en uso.</div>";
             break;
         case 8:
-            echo "<div class='getMensaje correcto'>Usuario desactivado</div>";
+            echo "<div class='getMensaje correcto'>Usuario activado</div>";
             break;
         case 9:
             echo "<div class='getMensaje incorrecto'>Error a desactivar usuario</div>";
@@ -37,7 +37,7 @@ if (isset($_GET['m'])) {
 
     <div class="CabezaHerramientas">
    	    <div class="Herramientas">
-           <h1>Tabla clientes</h1>
+           <h1>Clientes desactivados</h1>
    	  		<ul>
                 <li class="search">
                     <label><input id="search" type="text" placeholder="Buscar"><i class="fas fa-search" onclick="buscarTabla(this.parentElement.querySelector('#search').value)"></i></label></li>
@@ -73,12 +73,12 @@ if (isset($_GET['m'])) {
                 $startpage=($page-1)*$limitpage;
             }
   
-            $count = $objCliente->getClientesCantidad();
+            $count = $objCliente->getClientesDesacCantidad();
             $npages = $count/$limitpage;
             if (isset($_GET['search'])) {
-                $consulta = $objCliente->getClientesBusqueda($_GET['search']);
+                $consulta = $objCliente->getClientesDesacBusqueda($_GET['search']);
             } else {
-                $consulta = $objCliente->getClientes($startpage,$endpage);
+                $consulta = $objCliente->getClientesDesac($startpage,$endpage);
             }
             if ($consulta->num_rows == 0) {
                 echo "<tr><td colspan='100%'><center>Sin resultados</center></td></tr>";
@@ -116,10 +116,10 @@ if (isset($_GET['m'])) {
                 <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
                 <button type="submit" ><i class="fas fa-edit"></i></button>
             </form></td>
-            <td><form action="../controlador/desactivarUsuario.php" method="post">
+            <td><form action="../controlador/activarUsuario.php" method="post">
                 <input type="hidden" name="documento" value="<?php echo $cliente['documento'] ?>">
-                <input type="hidden" name="tabla" value="clientes">
-                <button type="button" onclick="confirmar(this)"><i class="far fa-trash-alt"></i></button>
+                <input type="hidden" name="tabla" value="clientesdesactivados">
+                <button type="button" onclick="confirmar(this)"><i class="fa fa-trash-restore-alt"></i></button>
             </form></td>
         </tbody>
         <?php $num++; } ?>
@@ -129,16 +129,16 @@ if (isset($_GET['m'])) {
    	<div class="paginas">
         <ul>
             <?php if ($page>1): ?>
-                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($page-1); ?>">&laquo;</a></li>
+                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=clientesdesactivados&page='.($page-1); ?>">&laquo;</a></li>
             <?php endif ?>
 
             
             <?php for ($i=1;$i<$npages+1;$i+=1): ?>
-                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.$i; ?>"><?php echo $i; ?></a></li>
+                 <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=clientesdesactivados&page='.$i; ?>"><?php echo $i; ?></a></li>
             <?php endfor ?>
 
             <?php if ($page<$npages): ?>
-                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?page='.($page+1); ?>">&raquo;</a></li>
+                <li><a href="<?php echo $_SERVER['PHP_SELF'].'?sec=clientesdesactivados&page='.($page+1); ?>">&raquo;</a></li>
             <?php endif ?>
 
         </ul>
@@ -225,17 +225,16 @@ if (isset($_GET['m'])) {
                 e.style.display="flex";            
         }
         function buscarTabla(e){
-            location.href = 'administracion.php?sec=clientes&search='+e;
+            location.href = 'administracion.php?sec=clientesdesactivados&search='+e;
         }
 
         function confirmar(boton){
             boton.addEventListener('click',()=>{
                 swal({
                    title: "¿Está seguro?",
-                   text: "El usuario quedará desactivado, puede encontrarlo en usuarios desactivados",
-                   icon: "warning",
-                   buttons: true,
-                   dangerMode:true
+                   text: "El usuario quedará activado",
+                   icon: "info",
+                   buttons: true
                 }).then((val)=>{
                    if(val){
                       boton.form.submit();

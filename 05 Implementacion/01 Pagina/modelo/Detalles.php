@@ -48,6 +48,14 @@ class Detalles {
 		return $res;
 	}
 
+	public function getDetallesFactura($fac){
+		$sql = "SELECT productoNombre,precio,totalCantidad,cantidad from detalles,producto where FACTURA_idFactura = '$fac' and producto.idProducto=detalles.PRODUCTO_idProducto";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
 	/**
 	 * /**
 	 *  * @access public

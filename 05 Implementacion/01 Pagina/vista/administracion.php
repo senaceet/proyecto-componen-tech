@@ -10,7 +10,12 @@ if ($_SESSION['user']['CARGO_idCargo']==3) {
 }
 function secciones(){
 	if (isset($_GET['sec'])) {
-		include "../administracion/".$_GET['sec'].".php";
+		if (file_exists("../administracion/".$_GET['sec'].".php")) {
+			include "../administracion/".$_GET['sec'].".php";
+		} else {
+			include '../administracion/clientes.php';
+		}
+		
 	} else {
 		include '../administracion/clientes.php';
 	}
@@ -61,6 +66,7 @@ function secciones(){
 			<a href="#" class="Base-btn">Usuarios ▼</a>
 			<ul class="Base-show">
 				<li><a href="administracion.php?sec=clientes">Clientes</a></li>
+				<li><a href="administracion.php?sec=clientesdesactivados">Clientes desactivados</a></li>
 				<li><a href="administracion.php?sec=Operadores">Operadores</a></li>
 			</ul>
 		</li>
@@ -78,16 +84,16 @@ function secciones(){
 			</ul>
 			<ul class="Cuenta-show">
 				<li><a href="administracion.php?sec=inventario">Productos</a></li>
-			</ul>	
+			</ul>
 		</li>
-		<li><a href="#">Detalles 📊</a></li>
+		<li><a href="administracion.php?sec=facturas">Facturas 📊</a></li>
 	</ul>
 </nav>
 
 <div class="contenedor secciones">
 	<?php secciones(); ?>
 </div>
-<?php include 'footer.php' ?>
+<?php //include 'footer.php' ?>
 </body>
 
 <!-- Barra deslizable lateral izquierda -->
