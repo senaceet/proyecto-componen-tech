@@ -104,7 +104,7 @@ a:hover{
 	<div class="contenedor">
 		<img draggable="false" src="'.$ruta.'img/logo.png" alt="ComponenTech logo">
 		<h1>¡Bienvenido '.$_REQUEST['nombres'].'!</h1>
-		<p>Lorem, ipsum dolor sit amet consectetur adipisicing, elit. Eum ullam eos, sapiente omnis laboriosam, nihil iure, quos quae, nesciunt consectetur fugiat? Eveniet ducimus deleniti blanditiis sunt, odio aliquam voluptatem, dolorum. (Texto de ejemplo)</p>
+		<p>Te has registrado correctamente a la Plataforma de ComponenTech, ahora podrás ingresar cuando quieras y disfrutar de los privilegios de estar registrado.</p>
 		<p><a href="http://componentech.epizy.com">http://componenTech.epizy.com</a></p>
 		<footer>
 			<img draggable="false" src="'.$ruta.'img/logo.png" alt="ComponenTech logo2">
