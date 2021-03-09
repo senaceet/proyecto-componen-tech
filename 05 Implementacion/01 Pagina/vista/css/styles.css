@@ -1251,3 +1251,84 @@ ul{
     width: 100%;
 }
 }
+
+
+/*Contenedor de Alerta emergente*/
+.AlertaFactura{
+	z-index: 100;
+	position: fixed;
+	width: 290px;
+	height: 140px;
+	right: 0px;
+	top:750px;
+	background:#f2f2f4;
+	box-shadow: 5px 10px 3px rgba(0,0,0,.3);
+	transition: right 0.4s ease;
+}
+
+.AlertaFactura .ContadorAlerta .MensajeAlertaF .BotonesAlertaF{
+	width: 100%;
+}
+
+.ContadorAlerta h1{
+	background: #fff;
+box-shadow: 5px 10px 3px rgba(78, 100, 140, 0.3);
+	margin-left:75px;
+	margin-right:75px;
+	height: 30px;
+	font-size:26px;
+	text-align: center;
+	border-radius:10px; 
+}
+
+.MensajeAlertaF h1{
+	font-size: 20px;
+	margin-top:20px;
+	margin-left:5px;
+	margin-right:5px; 
+}
+
+.BotonesAlertaF{
+	height: 35px;
+	margin-top:15px; 
+	
+	
+}
+
+.BotonesAlertaF .BotonAlertaSI, .BotonAlertaNO{
+	font-size: 25px;
+	width: 100px;
+	margin-left:25px; 
+}
+
+.BotonesAlertaF .BotonAlertaSI{
+	background:#20A217;
+	color: white;
+	font-weight: 100;
+	cursor: pointer;
+	border:none;
+	transition:0.4s ease;
+}
+.BotonesAlertaF .BotonAlertaNO{
+	background:var(--rojo-principal);
+	color: white;
+	font-weight: 100;
+	cursor: pointer;
+	border:none;
+	transition:0.4s ease;
+}
+
+.BotonesAlertaF .BotonAlertaSI:hover{
+	background:green;
+	transition:0.4s ease; 
+}
+.BotonesAlertaF .BotonAlertaNO:hover{
+	background:red;
+	transition:0.4s ease; 
+}
+
+.AlertaFactura.desaparecer{
+	right:-290px;
+	transition: right 0.4s ease;
+}
+/*Fin Alerta emergente*/

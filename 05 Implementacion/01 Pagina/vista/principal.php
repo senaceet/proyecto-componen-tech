@@ -64,7 +64,7 @@ $con_cats = $objCat->getCategorias();
 
 		</nav>
 	</header>
-	
+	 
 
 	<div class="contenedor">
 		<?php 
@@ -95,6 +95,9 @@ $con_cats = $objCat->getCategorias();
 			</div>
 		</section>
 		<hr><br>
+
+
+		
 		
 		<section id="recientes" class="recientes">
 			<?php if (isset($_GET['c'])) {
@@ -136,13 +139,33 @@ $con_cats = $objCat->getCategorias();
 		            <?php endif ?>
 
 		        </ul>
-		    </div>	
+		    </div>
+
 		</section>
 		
 	</div>
 	<nav class="BarraCarrito">
 		<?php include 'minicarrito.php'; ?>
-	</nav>	
+	</nav>
+	<div class="AlertaFactura">
+		 <div class="ContadorAlerta">
+		 	<h1 id="ContadorA">59</h1>
+		 </div>
+		 <div class="MensajeAlertaF">
+		 	<h1>¿Desea cancelar su compra?</h1>
+		 </div>
+
+		 <div class="BotonesAlertaF">
+		 	<button class="BotonAlertaSI">SÍ</button>
+		 	<button class="BotonAlertaNO">NO</button>
+		 </div>
+	   </div>
+
+
+	
+
+
+
 	<?php include 'footer.php' ?>
 </body>
 <script>
@@ -157,6 +180,33 @@ $con_cats = $objCat->getCategorias();
 		
 	})
 </script>
+
+<!-- Script de la ventana emergente luego de finalizar una compra -->
+<script type="text/javascript">
+	
+	var counter = 59;
+	setInterval( function(){
+		counter--;
+		if( counter>=0){
+			id = document.getElementById("ContadorA");
+			id.innerHTML = counter;
+		}
+		if( counter==0){
+			$('.AlertaFactura').toggleClass("desaparecer");
+		}
+	},1000);
+
+
+	$('.BotonAlertaSI').click(function(){
+		$('.AlertaFactura').toggleClass("desaparecer");
+	});
+
+	$('.BotonAlertaNO').click(function(){
+		$('.AlertaFactura').toggleClass("desaparecer");
+	});
+</script>
+
+<!-- Fin script ventana emergente -->
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="js/main.js" ></script>
