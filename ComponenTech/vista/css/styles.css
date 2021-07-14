@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root{
@@ -764,7 +763,7 @@ section{
 	align-items: center;
 	overflow: hidden;
 	flex-basis: 60%;
-	cursor: -moz-zoom-in;
+	cursor: zoom-in;
 }
 .card img{
 	width: 100%;
@@ -801,14 +800,14 @@ section{
 	align-items: center;
 	justify-content: flex-end;
 }
-.card .contenido-card h3{
+.card .contenido-card h2{
 	margin-bottom: 5px;
-	color: #7a7a7a;
+	color: var(--texto-gris);
 	font-size: 16px
 }
 .card .contenido-card p{
 	line-height: 1.8;
-	color: #6a6a6a;
+	color: var(--texto-gris);
 	font-size: 14px;
 	margin-bottom: 5px;
 }
@@ -823,7 +822,7 @@ section{
 }
 
 .verde{
-	background: #20A217;
+	background: #038207;
 	color: #fff;
 }
 .rojo{
@@ -842,7 +841,7 @@ section{
 }
 .verde:hover{
 	background: #ccc;
-	color: #20A217;
+	color: #038207;
 }
 .rojo:hover{
 	background: #ccc;
@@ -1182,7 +1181,7 @@ ul{
    padding: 0 15px;
 }
 /*el espacio que le da a las palabras con su color*/
-.footer-col h4{
+.footer-col p{
 	font-size: 18px;
 	color: #ffffff;
 	text-transform: capitalize;
@@ -1191,7 +1190,7 @@ ul{
 	position: relative;
 }
 /*la linea que aparece abajo del titulo*/
-.footer-col h4::before{
+.footer-col p::before{
 	content: '';
 	position: absolute;
 	left:0;
@@ -1252,83 +1251,3 @@ ul{
 }
 }
 
-
-/*Contenedor de Alerta emergente*/
-.AlertaFactura{
-	z-index: 100;
-	position: fixed;
-	width: 290px;
-	height: 140px;
-	right: 0px;
-	top:750px;
-	background:#f2f2f4;
-	box-shadow: 5px 10px 3px rgba(0,0,0,.3);
-	transition: right 0.4s ease;
-}
-
-.AlertaFactura .ContadorAlerta .MensajeAlertaF .BotonesAlertaF{
-	width: 100%;
-}
-
-.ContadorAlerta h1{
-	background: #fff;
-box-shadow: 5px 10px 3px rgba(78, 100, 140, 0.3);
-	margin-left:75px;
-	margin-right:75px;
-	height: 30px;
-	font-size:26px;
-	text-align: center;
-	border-radius:10px; 
-}
-
-.MensajeAlertaF h1{
-	font-size: 20px;
-	margin-top:20px;
-	margin-left:5px;
-	margin-right:5px; 
-}
-
-.BotonesAlertaF{
-	height: 35px;
-	margin-top:15px; 
-	
-	
-}
-
-.BotonesAlertaF .BotonAlertaSI, .BotonAlertaNO{
-	font-size: 25px;
-	width: 100px;
-	margin-left:25px; 
-}
-
-.BotonesAlertaF .BotonAlertaSI{
-	background:#20A217;
-	color: white;
-	font-weight: 100;
-	cursor: pointer;
-	border:none;
-	transition:0.4s ease;
-}
-.BotonesAlertaF .BotonAlertaNO{
-	background:var(--rojo-principal);
-	color: white;
-	font-weight: 100;
-	cursor: pointer;
-	border:none;
-	transition:0.4s ease;
-}
-
-.BotonesAlertaF .BotonAlertaSI:hover{
-	background:green;
-	transition:0.4s ease; 
-}
-.BotonesAlertaF .BotonAlertaNO:hover{
-	background:red;
-	transition:0.4s ease; 
-}
-
-.AlertaFactura.desaparecer{
-	right:-290px;
-	transition: right 0.4s ease;
-}
-/*Fin Alerta emergente*/

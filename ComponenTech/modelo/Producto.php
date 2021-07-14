@@ -126,7 +126,7 @@ class Producto {
 	}
 
 	public function getProductos($startpage,$endpage){
-		$sql = "select * from producto where ESTADO_idEstado = 1 limit $startpage,$endpage";
+		$sql = "select * from producto,categoria where CATEGORIA_idCategoria = idCategoria and ESTADO_idEstado = 1 limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -174,7 +174,7 @@ class Producto {
 	}
 
 	public function getProductosSearch($s){
-		$sql = "SELECT * from producto where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and ESTADO_idEstado = 1";
+		$sql = "SELECT * from producto,categoria where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and (CATEGORIA_idCategoria = idCategoria and  ESTADO_idEstado = 1";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -190,7 +190,7 @@ class Producto {
 	}
 
 	public function getProductosCat($cat,$startpage,$endpage){
-		$sql = "select * from producto where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat limit $startpage,$endpage";
+		$sql = "select * from producto,categoria where ESTADO_idEstado = 1 and CATEGORIA_idCategoria = $cat and CATEGORIA_idCategoria = idCategoria limit $startpage,$endpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();

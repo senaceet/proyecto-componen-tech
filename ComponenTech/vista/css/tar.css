@@ -1,20 +1,7 @@
 /*esta parte es la que le da estilo a la letra de las cartas */
-body{
-	font-family: 'montserrat', serif;
-	background: #f1f1f1;
-	margin-top: 20px;
-	padding: 0;
-}
+
 /*esta parte centra las cartas y les da sus espacios */
-*:focus {
-    outline: none;
-}
-.contenedor{
-	max-width: 1200px;
-	width: 90%;
-	margin: 0 auto;
-	position: relative;
-}
+
 /*esta parte es del boton*/
 .titulo{
 	border-bottom: 3px solid #9751ff;
@@ -55,11 +42,12 @@ body{
 }
 /*esta parte es de los cuadros */
 .producto{
+    transition: .5s;
 	max-width: 280px;
 	vertical-align: top;
 	background: #fff;
 	padding: 10px 0 20px 0;
-	margin-right: 20px;
+	margin-bottom: 20px;
 	border-radius: 10px;
 }
 /*controla la imagen del producto*/

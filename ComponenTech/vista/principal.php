@@ -32,10 +32,13 @@ $con_cats = $objCat->getCategorias();
  ?>
 <head>  
 	<meta charset="UTF-8">
+    <meta name="Description" content="Alguna descripción de esto">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="js/jquery.js"></script>
 	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/tar.css">
+
 	<title>ComponenTech</title>
 </head>
 <body>
@@ -54,6 +57,9 @@ $con_cats = $objCat->getCategorias();
 				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
 					<li><a href="administracion.php">Administración</a> </li>
 				<?php endif ?>
+				<?php if ($_SESSION['user']['CARGO_idCargo']==3): ?>
+					<li><a href="compras.php">Mis compras</a> </li>
+				<?php endif ?>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php else: ?>
 				
@@ -64,7 +70,7 @@ $con_cats = $objCat->getCategorias();
 
 		</nav>
 	</header>
-	 
+	
 
 	<div class="contenedor">
 		<?php 
@@ -91,13 +97,10 @@ $con_cats = $objCat->getCategorias();
 				</ul>
 			</div>
 			<div class="slider">
-				<iframe src="slider.html" frameborder="0"></iframe>
+				<iframe title="slider" src="slider.html" frameborder="0"></iframe>
 			</div>
 		</section>
 		<hr><br>
-
-
-		
 		
 		<section id="recientes" class="recientes">
 			<?php if (isset($_GET['c'])) {
@@ -109,18 +112,55 @@ $con_cats = $objCat->getCategorias();
 			<div class="container-card">
 			<?php 
 				while ($producto = $con_productos->fetch_array()) { ?>
-					<div class="card">
+					<div class="producto item">
+						<div class="contenedor-imagen">
+							<a href="#" class="link"></a>
+							<img src="<?php echo $producto['prodImg'] ?>">
+							<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
+						</div>				
+						<div class="datos">
+							<div class="starrr"></div>
+							<small><a href="?c=<?php echo $producto['idCategoria'] ?>"><?php echo $producto['categoria'] ?></a></small>
+							<h3><a href="producto.php?p=<?php echo $producto['idProducto'] ?>"><?php echo $producto['productoNombre']; ?></a></h3>
+							<small>SKU: <?php echo $producto['idProducto'] ?></small>
+						</div>
+						<div class="precios">
+							<div class="internet">
+								<small>Internet</small>
+								<span>$731.000</span>
+							</div>
+							<div>
+								<small>Normal</small>
+								<span><?php echo "$".number_format($producto['precio'],0,",",".");?></span>
+							</div>
+						</div>
+						<form  action="" method="post">
+							<input type="hidden" name="prodId" value="<?php echo $producto['idProducto'] ?>">
+						
+							<button class="btn-carrito" type="submit" name="addCarrito"><i class="fas fa-shopping-basket"></i> AÑADIR AL CARRITO</button>
+						</form>
+						
+					</div>
+					
+					<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
+					<script src='https://rawcdn.githack.com/UnTipografico/Carrusel-eCommerse/3b4b54cdfd58b5c6bfa29a4239e584a268e5403b/js/starrr.js'></script>
+					<script  src="js/script.js"></script>
+
+					
+
+					<!-- targeta de antes -->
+					<!-- <div class="card">
 						<figure onclick="zoomIn(this)">
 							<img alt="<?php echo $producto['productoNombre']; ?>" src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
-							<h3><?php echo $producto['productoNombre']; ?></h3>
+							<h2><?php echo $producto['productoNombre']; ?></h2>
 					
 							
 							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
 							<a class="verde" href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
 						</div>
-					</div>
+					</div> -->
 			<?php } ?>	
 			</div>	
 			<div class="paginas">
@@ -139,33 +179,13 @@ $con_cats = $objCat->getCategorias();
 		            <?php endif ?>
 
 		        </ul>
-		    </div>
-
+		    </div>	
 		</section>
 		
 	</div>
 	<nav class="BarraCarrito">
 		<?php include 'minicarrito.php'; ?>
-	</nav>
-	<div class="AlertaFactura">
-		 <div class="ContadorAlerta">
-		 	<h1 id="ContadorA">59</h1>
-		 </div>
-		 <div class="MensajeAlertaF">
-		 	<h1>¿Desea cancelar su compra?</h1>
-		 </div>
-
-		 <div class="BotonesAlertaF">
-		 	<button class="BotonAlertaSI">SÍ</button>
-		 	<button class="BotonAlertaNO">NO</button>
-		 </div>
-	   </div>
-
-
-	
-
-
-
+	</nav>	
 	<?php include 'footer.php' ?>
 </body>
 <script>
@@ -180,33 +200,6 @@ $con_cats = $objCat->getCategorias();
 		
 	})
 </script>
-
-<!-- Script de la ventana emergente luego de finalizar una compra -->
-<script type="text/javascript">
-	
-	var counter = 59;
-	setInterval( function(){
-		counter--;
-		if( counter>=0){
-			id = document.getElementById("ContadorA");
-			id.innerHTML = counter;
-		}
-		if( counter==0){
-			$('.AlertaFactura').toggleClass("desaparecer");
-		}
-	},1000);
-
-
-	$('.BotonAlertaSI').click(function(){
-		$('.AlertaFactura').toggleClass("desaparecer");
-	});
-
-	$('.BotonAlertaNO').click(function(){
-		$('.AlertaFactura').toggleClass("desaparecer");
-	});
-</script>
-
-<!-- Fin script ventana emergente -->
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="js/main.js" ></script>

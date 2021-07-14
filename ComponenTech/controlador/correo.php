@@ -40,7 +40,7 @@ try {
 		'ssl' => array(
 		'verify_peer' => false,
 		'verify_peer_name' => false,
-		'allow_self_signed' => true
+		'allow_self_signed' => false
 		)
 	);
 
@@ -221,5 +221,5 @@ try {
 
 
 } catch (Exception $e) {
-    echo "3312 tenemos un 3313: {$mail->ErrorInfo}";
+    echo $mail->ErrorInfo;
 }
