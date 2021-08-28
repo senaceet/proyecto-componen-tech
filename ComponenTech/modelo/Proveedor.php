@@ -57,13 +57,43 @@ class Proveedor{
 		$res = $res->fetch_array();
 		return $res;
 	}
-    
-    public function getProveedores(){
-		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where proveedor.ESTADO_idEstado=estado.idEstado";
+
+	public function getCount(){
+		$sql = "SELECT count(*) as c FROM proveedor";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
-		return $res;
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
+    
+    public function getProveedores($limit,$offset,$estado){
+		if($estado == 4 || $estado == 5)
+			if($limit == 0)
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = $estado ";
+			else
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = $estado limit $offset,$limit";
+			
+		else{
+			if($limit == 0)
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				where proveedor.ESTADO_idEstado=estado.idEstado ";
+			else
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				where proveedor.ESTADO_idEstado=estado.idEstado limit $offset,$limit";
+		}
+		$cn = conectar();
+		$res = $cn->query($sql);
+	
+		$data = new stdClass();
+		$data->data=[];
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		$cn->close();
+		return $data;
 	}
 
 	public function getProveedoresActivos(){

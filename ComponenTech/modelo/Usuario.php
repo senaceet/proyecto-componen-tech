@@ -58,7 +58,7 @@ class Usuario {
 
 	// crear usuario
 
-	public function crearUsuario($_documento,$_nombres,$_apellidos,$_fechaNacimiento,$_edad,$_celular,$_direccion,$_correo,$_cargo,$_tipodocumento,$_estado){
+	public function crearUsuario($_documento,$_nombres,$_apellidos,$_fechaNacimiento,$_edad,$_celular,$_direccion,$_correo,$_cargo,$_tipodocumento,$_estado,$_pass){
 		$this->_documento = $_documento;
 		$this->_nombres = $_nombres;
 		$this->_apellidos = $_apellidos;
@@ -70,11 +70,34 @@ class Usuario {
 		$this->_cargo = $_cargo;
 		$this->_tipodocumento = $_tipodocumento;
 		$this->_estado = $_estado;
+		$this->_pass = $_pass;
 	}
 
-	public function Registrarse() {
+	public function insertar() {
 		$sql = "INSERT INTO usuario values('$this->_documento','$this->_nombres','$this->_apellidos','$this->_fechaNacimiento',
 		'$this->_edad','$this->_celular','$this->_direccion','$this->_correo','$this->_cargo','$this->_tipodocumento','$this->_estado')";
+		$res = new stdClass();
+
+		if( !$this->verifUsuario($this->_documento) ){
+			if( !$this->verifCorreo($this->_correo) ){
+				$cn = conectar();
+				$res->status = $cn->query($sql);
+				$cn->close();
+				$this->registrarClave($this->_correo,$this->_pass);
+			} else {
+				$res->status=false;
+				$res->error="El correo ingresado ya está registrado";
+			}
+		} else {
+			$res->status=false;
+			$res->error="El documento ingresado ya está registrado";
+		}
+		// echo $sql;
+		return $res;
+	}
+
+	public function eliminar($u){
+		$sql = "DELETE from usuario where documento='$u'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -114,21 +137,23 @@ class Usuario {
 	// verificar usuario
 
 	public function verifUsuario($doc){
-		$sql = "SELECT * FROM usuario WHERE documento = $doc";
+		$sql = "SELECT count(*) as c FROM usuario WHERE documento = $doc";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
-		return $res;
+		$res = $res->fetch_array();
+		return $res['c'];
 	}
 
 
 
 	public function verifCorreo($c){
-		$sql = "SELECT * FROM usuario WHERE correo = '$c'";
+		$sql = "SELECT count(*) as c FROM usuario WHERE correo = '$c'";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
-		return $res;
+		$res = $res->fetch_array();
+		return $res['c'];
 	}
 
 
@@ -142,9 +167,9 @@ class Usuario {
 
 	public function getUsuario($u,$tipo){
 		if ($tipo == 1) {
-			$sql = "SELECT * FROM usuario WHERE documento = $u";
+			$sql = "SELECT * FROM usuario,cargo WHERE documento = $u AND idCargo = CARGO_idCargo";
 		} elseif ($tipo == 2) {
-			$sql = "SELECT * FROM usuario WHERE correo = '$u'";
+			$sql = "SELECT * FROM usuario,cargo WHERE correo = '$u' AND idCargo = CARGO_idCargo";
 		}
 		
 		$cn = conectar();
@@ -159,11 +184,41 @@ class Usuario {
 	 * @ReturnType boolean
 	 */
 	public function iniciarSesion($c,$p) {
+		$data = new stdClass();
+		$data->error="";
+		$data->user="";
+		$data->msj="";
+		
 		$sql = "SELECT * FROM clave WHERE correo = '$c' and clave = '$p'";
 		$cn = conectar();
 		$res = $cn->query($sql);
+
+		if($cn->error){
+			$data->error = true;
+			$data->msj = "Error al buscar usuario";
+			return $data;
+		}
+
 		$cn->close();
-		return $res;
+
+		$find_user = $this->getUsuario($c,2);
+
+		if($find_user->num_rows == 1){
+			if($res->num_rows == 1){
+				$data->error = false;
+				$data->msj = "Inicio correcto";
+				$data->user = $find_user->fetch_object();
+			} else {
+				$data->error = true;
+				$data->msj = "Contraseña incorrecta";
+			}
+		} else {
+			$data->error = true;
+			$data->msj = "No existe el usuario";
+		}
+
+		
+		return $data;
 	}
 
 

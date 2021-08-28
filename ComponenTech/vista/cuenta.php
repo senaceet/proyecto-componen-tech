@@ -55,12 +55,12 @@
 			<h1>Modificar datos de la cuenta</h1>
 			<div>
 				<p>Documento</p>
-				<?php switch ($_SESSION['user']['TIPODOCUMENTO_idTipo']) {
+				<?php switch ($_SESSION['user']->TIPODOCUMENTO_idTipo) {
 					case 1:
 						$doc = 'Cedula';
 						break;
 					case 2:
-						$doc = 'Targeta de identidad';
+						$doc = 'Tarjeta de identidad';
 						break;
 					case 3:
 						$doc = 'Cedula de extrangería';
@@ -72,36 +72,36 @@
 					default:
 						$doc = 'error';
 						break;
-				} $doc = $doc.': '.$_SESSION['user']['documento'] ?>
+				} $doc = $doc.': '.$_SESSION['user']->documento?>
 				<input disabled type="text" value="<?php echo $doc; ?>" >
 			</div>
 			<div>
 				<p>Nombres</p>
-				<input name="nombres" maxlength="50" type="text" value="<?php echo $_SESSION['user']['nombres']; ?>">
+				<input name="nombres" maxlength="50" type="text" value="<?php echo $_SESSION['user']->nombres; ?>">
 			</div>
 			<div>
 				<p>Apellidos</p>
-				<input name="apellidos" type="text" maxlength="50" value="<?php echo $_SESSION['user']['apellidos']; ?>">
+				<input name="apellidos" type="text" maxlength="50" value="<?php echo $_SESSION['user']->apellidos; ?>">
 			</div>
 			<div>
 				<p>Fecha de nacimiento</p>
-				<input name="fechaNto" type="date" value="<?php echo $_SESSION['user']['fechaNto']; ?>">
+				<input name="fechaNto" type="date" value="<?php echo $_SESSION['user']->fechaNto; ?>">
 			</div>
 			<div>
 				<p>Edad</p>
-				<input name="edad" type="text" maxlength="2" value="<?php echo $_SESSION['user']['edad']; ?>">
+				<input name="edad" type="text" maxlength="2" value="<?php echo $_SESSION['user']->edad; ?>">
 			</div>
 			<div>
 				<p>Numero celular</p>
-				<input name="celular" type="text" maxlength="15" value="<?php echo $_SESSION['user']['celular']; ?>">
+				<input name="celular" type="text" maxlength="15" value="<?php echo $_SESSION['user']->celular; ?>">
 			</div>
 			<div>
 				<p>Direccion de residencia</p>
-				<input name="direccion" type="text" maxlength="50" value="<?php echo $_SESSION['user']['direccion']; ?>">	
+				<input name="direccion" type="text" maxlength="50" value="<?php echo $_SESSION['user']->direccion; ?>">	
 			</div>
 			<div>
 				<p>Correo electrónico</p>
-				<input disabled="" type="text" maxlength="20" value="<?php echo $_SESSION['user']['correo']; ?>">
+				<input disabled="" type="text" maxlength="20" value="<?php echo $_SESSION['user']->correo; ?>">
 			</div>
 			<input type="hidden" name="uptDatos" value="1">
 			<input class="submitButton" type="button" value="Actualizar" onclick="verifInput(this.form)">

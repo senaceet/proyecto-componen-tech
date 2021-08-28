@@ -385,7 +385,7 @@ section{
 	.navegador ul{
 		flex-wrap: wrap;
 	}
-	.navegador li a{
+	.navegador li a,.navegador li{
 		color:#fff;
 		line-height: 20px
 	}
@@ -975,19 +975,17 @@ section{
 .SeccionFactura{
 	padding: 20px;
 	width: 100%;
-	max-height: calc(100vh - 75px);
 	display: grid;
 	grid-gap: 10px;
 	overflow: hidden;
 	color: var(--texto-gris);
-	grid-template-columns: 50% 50%;
+	grid-template-columns: repeat(auto-fit,minmax(340px,auto));
 }
 .SeccionFactura > div{
 	width: 100%
 }
 
 .ProductosFactura{
-	max-height: calc(100vh - 110px);
 	overflow: auto;
 	background: #FFF;
 }
@@ -1009,6 +1007,7 @@ section{
 	display: flex;
 	flex-wrap: wrap;
 	width: 100% !important;
+	grid-gap: 5px;
 	align-items: center;
 	justify-content: space-between;
 
@@ -1047,7 +1046,6 @@ section{
 
 .MetodosPago{
 	width: 100%;
-	max-height: calc(100vh - 110px);
 	background-color: #fff;
 	padding: 2vw !important;
 	display: flex !important;
@@ -1106,16 +1104,6 @@ section{
 .IniciarPagoFactura.Verificado2 button:hover{
 	background-color: #ea1919;
 	transition: .7s ease;
-}
-
-@media (max-width: 720px) {
-	.SeccionFactura{
-		overflow: visible;
-		grid-template-columns: 100%;
-	}
-	.SeccionFactura > div, .SeccionFactura form{
-		max-height: unset;
-	}
 }
 
 

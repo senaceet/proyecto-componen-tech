@@ -256,6 +256,14 @@ class Movimiento {
 		return $res['c'];
 	}
 
+	public function getCountVentas(){
+		$sql = "SELECT count(*) as c from movimiento where TIPOMOVIMIENTO_idTipoMovimiento = 1";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
 
 
 	public function getMovimientos($startpage,$endpage){

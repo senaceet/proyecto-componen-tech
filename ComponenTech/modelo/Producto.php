@@ -94,7 +94,17 @@ class Producto {
 		$this->setCategoria($categoria);
 		$this->setProveedor($proveedor);
 		$this->setEstado($estado);
-		$this->setProdImg($img);
+
+		$fotoGuardada = $this->guardarFoto($img);
+		if(!$fotoGuardada->error){
+			$this->setProdImg($fotoGuardada->foto);
+
+			return true;
+		} else {
+			$this->setProdImg(false);
+			return $fotoGuardada;
+		}
+		
 	}
 
 	public function getCategoriaText($c){
@@ -109,10 +119,16 @@ class Producto {
 	public function insertar(){
 
 		$sql = "insert into producto values(0,'$this->_nombreProducto','$this->_detalles','$this->_precio','$this->_iva','$this->_categoria','$this->_proveedor','$this->_estado','$this->_prodImg')";
-		$cn = conectar();
+
+		$cn = conectar(); 
 		$res = $cn->query($sql);
+		
 		$cn->close();
-		return $res;
+
+		if(!$res)
+			return '{"error":"Ocurrió un problema con la base de datos"}';
+
+		return '{"error":false,"msj":"producto guardado"}';
 	}
 
 		
@@ -125,13 +141,74 @@ class Producto {
 		return $res;
 	}
 
-	public function getProductos($startpage,$endpage){
-		$sql = "select * from producto,categoria where CATEGORIA_idCategoria = idCategoria and ESTADO_idEstado = 1 limit $startpage,$endpage";
+	public function getProductos($limit,$offset,$estado,$categoria){
+		if($estado == 1 || $estado == 2){
+			$sql = "select idProducto,idCategoria,categoria,nEmpresa,productoNombre,precio,detalles,prodImg
+			from producto,categoria,proveedor 
+			where producto.ESTADO_idESTADO = $estado and (CATEGORIA_idCategoria = idCategoria and PROVEEDOR_idProveedor = idProveedor)
+			order by idProducto desc limit $offset,$limit ";
+			if($categoria!=0)
+				$sql = "select idProducto,idCategoria,categoria,nEmpresa,productoNombre,precio,detalles,prodImg
+				from producto,categoria,proveedor 
+				where (CATEGORIA_idCategoria = idCategoria and PROVEEDOR_idProveedor = idProveedor) and (producto.ESTADO_idESTADO = $estado and idCategoria = $categoria) 
+				order by idProducto desc limit $offset,$limit ";
+		} else {
+			$sql = "select idProducto,idCategoria,categoria,nEmpresa,productoNombre,precio,detalles,prodImg
+			from producto,categoria,proveedor 
+			where  (CATEGORIA_idCategoria = idCategoria and PROVEEDOR_idProveedor = idProveedor) 
+			order by idProducto desc limit $offset,$limit ";
+			if($categoria!=0)
+				$sql = "select idProducto,idCategoria,categoria,nEmpresa,productoNombre,precio,detalles,prodImg
+				from producto,categoria,proveedor 
+				where (CATEGORIA_idCategoria = idCategoria and PROVEEDOR_idProveedor = idProveedor) and idCategoria=$categoria 
+				order by idProducto desc limit $offset,$limit ";
+		}
+			
+
 		$cn = conectar();
 		$res = $cn->query($sql);
+		echo $cn->error;
 		$cn->close();
+		
 		return $res;
 	}
+
+	public function search($s,$estado,$categoria){
+		if($estado == 1 || $estado == 2)
+			if($categoria == 0)
+				$sql = "SELECT * from producto,categoria,proveedor
+					where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') 
+					and (CATEGORIA_idCategoria = idCategoria and  producto.ESTADO_idEstado = $estado and idProveedor = PROVEEDOR_idProveedor)";
+			else
+				$sql = "SELECT * from producto,categoria,proveedor 
+					where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') 
+					and (CATEGORIA_idCategoria = idCategoria and  producto.ESTADO_idEstado = $estado and idCategoria = $categoria and idProveedor = PROVEEDOR_idProveedor)";
+		else
+			if($categoria == 0)
+				$sql = "SELECT * from producto,categoria,proveedor 
+					where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') 
+					and (CATEGORIA_idCategoria = idCategoria and idProveedor = PROVEEDOR_idProveedor)";
+			else
+				$sql = "SELECT * from producto,categoria,proveedor  
+					where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') 
+					and (CATEGORIA_idCategoria = idCategoria and idCategoria = $categoria and idProveedor = PROVEEDOR_idProveedor)";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$data = new StdClass();
+		$data->data = [];
+
+		while ($a = $res->fetch_object()) {
+			array_push($data->data, $a);
+		}
+		
+		$cn->close();
+		return $data;
+	}
+
+
+
+	// --------------------
+
 	public function getProductosInventario($startpage,$endpage){
 		$sql = "select * from producto left join inventario ON idProducto = PRODUCTO_idProducto limit $startpage,$endpage";
 		$cn = conectar();
@@ -196,7 +273,6 @@ class Producto {
 		$cn->close();
 		return $res;
 	}
-	
 
 	public function getProductosInventarioCat($cat,$startpage,$endpage){
 		$sql = "select * from producto left join inventario ON idProducto = PRODUCTO_idProducto where CATEGORIA_idCategoria=$cat limit $startpage,$endpage";
@@ -214,29 +290,48 @@ class Producto {
 		return $res;
 	}
 
-	public function subirFoto($foto,$destino){
-		if (!$foto['error']>0) {
-			if ($foto['size']<8192000){
-				if (substr($foto['type'],0,5) == "image") {
-					if (!file_exists($destino)) {
-						if (move_uploaded_file($foto['tmp_name'], $destino)){
-							$m = "ya se guardo la imagen";
-						} else {
-							$m = "error al guardar imagen";
-						}
-					} else {
-						$m = "El archivo ya existe";
-					}
-				} else {
-					$m = "error tipo de imagen";
-				}
-			} else {
-				$m = "la imagen es muy pesada";
-			}
-		} else {
-			$m = "error al subir imagen";
+	private function guardarFoto($foto){
+		//crear carpeta por proveedor si no existe
+		$ruta = "../img/productos/".$this->_proveedor."/";
+		if (!file_exists($ruta)) {
+			mkdir($ruta,0777,true);
 		}
-		return $m;
+		$destino = $ruta.$foto['name']; 
+
+		$res = new stdClass();
+		$res->error = "";
+		$res->destino = "";
+
+
+		//control de errores de el archivo		 
+		if ($foto['error']>0){
+			$res->error = "Error al cargar imágen";
+			return $res;
+		}
+
+		if( substr($foto['type'],0,5) != "image" ){
+			$res->error = "El tipo de archivo es incorrecto";
+			return $res;
+		}
+
+		if ($foto['size'] > 5*1024*1024){
+			$res->error = "La imagen debe ser menor a 5mb";
+			return $res;
+		}
+
+		if (file_exists($destino)) {
+			$res->error = "Ya existe una foto con ese nombre";
+			return $res;
+		} 
+
+		if (move_uploaded_file($foto['tmp_name'], $destino)){
+			$res->error = false;
+			$res->foto = $destino;
+			return $res;
+		} else {
+			$res->error = "Error al guardar foto";
+			return $res;
+		}
 	}
 
 	public function getEstado($e){
@@ -256,8 +351,44 @@ class Producto {
 		$cn->close();
 		return $res;
 	}
+	public function getCount($estado,$categoria){
+		if($estado == 1 || $estado == 2){
+			$sql = "select count(*) as c from producto where ESTADO_idEstado = $estado";
+			if($categoria != 0)
+				$sql = "select count(*) as c from producto where CATEGORIA_idCategoria = $categoria and ESTADO_idEstado = $estado";
+		} else {
+			$sql = "select count(*) as c from producto";
+			if($categoria != 0)
+			$sql = "select count(*) as c from producto where CATEGORIA_idCategoria = $categoria";
+		} 
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
 
+	public function getCategorias(){
+		$sql = "select * from categoria";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$data = new stdClass();
+		$categorias=[];
+        while ($a = $res->fetch_object()) {
+            array_push($categorias,$a);
+        }
+		$cn->close();
 
+		return $categorias;
+	}
+
+	public function getProductosP($startpage,$endpage){
+		$sql = "select * from producto,categoria where CATEGORIA_idCategoria = idCategoria and ESTADO_idEstado = 1 limit $startpage,$endpage";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
 
 }
 ?>

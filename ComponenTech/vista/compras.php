@@ -13,7 +13,7 @@ require_once '../modelo/Detalles.php';
 
 $objDetalles = new Detalles();
 
-$compras = $objDetalles->getDetallesUsuario($_SESSION['user']['documento']);
+$compras = $objDetalles->getDetallesUsuario($_SESSION['user']->documento);
  ?>
 <head>  
 	<meta charset="UTF-8">
@@ -36,8 +36,8 @@ $compras = $objDetalles->getDetallesUsuario($_SESSION['user']['documento']);
 		<nav class="navegador">
 			<ul>
 			<?php if (isset($_SESSION['user'])): ?>
-				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
-				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
+				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']->correo; ?></a></li>
+				<?php if ($_SESSION['user']->CARGO_idCargo==1): ?>
 					<li><a href="administracion.php">Administración</a> </li>
 				<?php endif ?>
 				<li><a href="principal.php">Inicio</a></li>

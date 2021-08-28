@@ -9,21 +9,22 @@ require_once '../modelo/categoria.php';
 $objProducto = new Producto();
 $objCat = new Categoria();
 
-$limitpage = 20;
+$limit = 20;
 $page = 1;
 if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
-$startpage = 0;
-$endpage = $limitpage;
+
 if($page>1){ 
-    $startpage=($page-1)*$limitpage;
+    $start=($page-1)*$limit;
 }
 
 $prodCount = $objProducto->getProdCantidad();
-$npages = $prodCount/$limitpage;
+$npages = $prodCount/$limit;
+$offset = ($page - 1 ) * $limit;
 
-$con_productos = $objProducto->getProductos($startpage,$endpage);
+$con_productos = $objProducto->getProductos($limit,$offset,9,0);
+
 if (isset($_GET['c'])) {
-	$con_productos = $objProducto->getProductosCat($_GET['c'],$startpage,$endpage);
+	$con_productos = $objProducto->getProductos($limit,$offset,9, $_GET['c']);
 	$con_cat = $objCat->getCategoria($_GET['c']);
 	$actualCat = $con_cat->fetch_array();
 }
@@ -37,6 +38,7 @@ $con_cats = $objCat->getCategorias();
 	<script src="js/jquery.js"></script>
 	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" href="css/tar.css">
 
 	<title>ComponenTech</title>
@@ -53,17 +55,18 @@ $con_cats = $objCat->getCategorias();
 		<nav class="navegador">
 			<ul>
 			<?php if (isset($_SESSION['user'])): ?>
-				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
-				<?php if ($_SESSION['user']['CARGO_idCargo']==1): ?>
-					<li><a href="administracion.php">Administración</a> </li>
+				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']->correo; ?></a></li>
+				<?php if ($_SESSION['user']->CARGO_idCargo==1): ?>
+					<li><a href="dashboard.php">Administración</a> </li>
 				<?php endif ?>
-				<?php if ($_SESSION['user']['CARGO_idCargo']==3): ?>
+				<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
 					<li><a href="compras.php">Mis compras</a> </li>
 				<?php endif ?>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php else: ?>
 				
-				<li><a href="../index.php?r=1">Iniciar sesión / Crear cuenta</a></li>
+				<li onclick="showLogin()">Iniciar sesión</li>
+				<li onclick="showReg()">Crear cuenta</li>
 			<?php endif ?>
 			<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>	
 			</ul>
@@ -187,8 +190,102 @@ $con_cats = $objCat->getCategorias();
 		<?php include 'minicarrito.php'; ?>
 	</nav>	
 	<?php include 'footer.php' ?>
+
+	<input style="display:none" type="checkbox" id="form">
+	<div class="floating-form">
+		
+		<form class="flip-in-hor-bottom" onsubmit="login(event)" action="">
+			<h1>Iniciar sesión</h1>
+			<input placeholder="Correo electrónico" type="email" name="correo" required maxlength="30">
+			<input placeholder="Contraseña" type="password" name="clave" required maxlength="30">
+			<a href="#">¿Olvidaste tu contraseña?</a>
+			<button>Iniciar sesión</button>
+		</form>
+
+		<form class="flip-in-hor-bottom" onsubmit="reg(event)" id="reg" action="">
+			<h1>Registrarse</h1>
+			<div class="inputs">
+				<select name="idTipo" required>
+					<option value="" selected disabled>Tipo de documento</option>
+					<option value="1">Cédula</option>
+					<option value="2">Tarjeta de identidad</option>
+					<option value="3">Cedula de extrangería</option>
+					<option value="4">Pasaporte</option>
+				</select>
+
+				<input placeholder="N° documento" type="text" name="documento"  required maxlength="15">
+				<input placeholder="Nombres" type="text"  name="nombres" required maxlength="25">
+				<input placeholder="Apellidos" type="text"  name="apellidos" required maxlength="25">
+				<input placeholder="Edad" type="number"  name="edad" required min="12" max="90">
+				<input placeholder="Fecha de nacimiento" type="date"  name="fechaNto" required>
+				<input placeholder="N° celular" type="text"  name="celular" required maxlength="15">
+				<input placeholder="Dirección" type="text"  name="direccion" required maxlength="30">
+				<input placeholder="Correo electrónico" type="email"  name="correo" required maxlength="30" style="grid-column: 1 / 3;">
+				<input placeholder="Contraseña" type="password"  name="password" required maxlength="30">
+				<input placeholder="Confirmar contraseña" type="password"  name="password2" required maxlength="30">
+			</div>
+			<button>Registrarse</button>
+		</form>
+
+		<label for="form" class="close-form"></label>
+	</div>
+	<style>
+		
+
+	</style>
 </body>
 <script>
+	const flForm = document.querySelector('.floating-form')
+	function showLogin(){
+		document.querySelector('#form').click()
+		flForm.children[0].style.display = 'flex';
+		flForm.children[1].style.display = 'none';
+	}
+
+	function showReg(){
+		document.querySelector('#form').click()
+		flForm.children[1].style.display = 'flex';
+		flForm.children[0].style.display = 'none';	
+	}
+
+
+
+	async function login(e){
+		e.preventDefault()
+		const data = new FormData(e.target)
+		const res = await fetch('../json/usuario.php?action=login',{
+			method:'post',
+			body:data
+		})
+		res.json()
+		.then(res=>{
+			if(res.error){
+				swal("Error", res.msj, "error");
+			} else{
+				location.reload()
+			}
+		})
+	}
+
+	async function reg(e){
+		e.preventDefault()
+		const data = new FormData(e.target)
+		const res = await fetch('../json/usuario.php?action=reg',{
+			method:'post',
+			body:data
+		})
+		res.text()
+		.then(res=>{
+			console.log(res)
+			// if(res.error){
+			// 	swal("Error", res.msj, "error");
+			// } else{
+			// 	location.reload()
+			// }
+		})
+	}
+
+
 	$('.ListarProductos').click(function(){
           
         $('.BarraCarrito').toggleClass("show");

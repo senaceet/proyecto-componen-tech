@@ -43,7 +43,7 @@ if (isset($_POST['sacarproducto'])) {
 	<nav class="navegador">
 		<ul>
 			<?php if (isset($_SESSION['user'])): ?>
-				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
+				<li><a href="cuenta.php"><?php echo $_SESSION['user']->correo; ?></a></li>
 				<li><a href="principal.php">Inicio</a></li>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				<?php else: ?>

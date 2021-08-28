@@ -59,6 +59,7 @@ if (isset($_GET['m'])) {
             <th>Correo</th>
             <th></th>
             <th></th>
+            <th></th>
         </thead>
         <?php
             require_once '../modelo/Cliente.php';
@@ -121,6 +122,7 @@ if (isset($_GET['m'])) {
                 <input type="hidden" name="tabla" value="clientes">
                 <button type="button" onclick="confirmar(this)"><i class="far fa-trash-alt"></i></button>
             </form></td>
+            <td id="userInfo"><i class="fa fa-eye"></i></td>
         </tbody>
         <?php $num++; } ?>
         
@@ -245,3 +247,4 @@ if (isset($_GET['m'])) {
         }
     </script>
 </div>
+

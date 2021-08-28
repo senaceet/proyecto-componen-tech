@@ -6,19 +6,20 @@ session_start();
 
 require_once '../modelo/Producto.php';
 $objProducto = new Producto();
-$limitpage = 20;
+$limit = 20;
 $page = 1;
 if(isset($_GET["page"]) && $_GET["page"]!=""){ $page=$_GET["page"]; }
-$startpage = 0;
-$endpage = $limitpage;
+
 if($page>1){ 
-    $startpage=($page-1)*$limitpage;
+    $start=($page-1)*$limit;
 }
 
 $prodCount = $objProducto->getProdCantidad();
-$npages = $prodCount/$limitpage;
+$npages = $prodCount/$limit;
 
-$con_productos = $objProducto->getProductos($startpage,$endpage);
+$offset = ($page - 1 ) * $limit;
+$con_productos = $objProducto->getProductos($limit,$offset,9,0);
+
  ?>
 <head>
 	<meta charset="UTF-8">
@@ -48,7 +49,7 @@ $con_productos = $objProducto->getProductos($startpage,$endpage);
 		<nav class="navegador">
 			<ul>
 			<?php if (isset($_SESSION['user'])): ?>
-				<li><a href="cuenta.php"><?php echo $_SESSION['user']['correo']; ?></a></li>
+				<li><a href="cuenta.php"><?php echo $_SESSION['user']->correo; ?></a></li>
 				<li><a href="principal.php">Inicio</a></li>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				

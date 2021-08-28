@@ -5,20 +5,36 @@ require_once('Usuario.php');
  * @author Marlon, Yeren, Jhon, Kevin
  */
 class Cliente extends Usuario {
-	/**
-	 * @access public
-	 */
 
-	public function getClientes($startpage,$limitpage){
-		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 9 limit $startpage,$limitpage";
+	public function getClientes($startpage,$limitpage,$estado){
+		$data = new stdClass();
+		if($estado == 9|| $estado == 10)
+			$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado FROM usuario, estado WHERE (CARGO_idCargo=3 and ESTADO_idEStado = $estado) and idEstado = ESTADO_idEstado limit $startpage,$limitpage";
+		else
+		$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado FROM usuario,estado WHERE CARGO_idCargo=3 and idEstado = ESTADO_idEstado  limit $startpage,$limitpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
+		
+		if($cn->error){
+			$data->error=true;
+			$data->msg=$cn->error;
+		} else {
+			$data->data=[];
+			while ($user = $res->fetch_object()) {
+				array_push($data->data,$user);
+			}
+			$data->count = $this->count($estado);
+		}
 		$cn->close();
-		return $res;
+
+		return $data;
 	}
 
-	public function getClientesCantidad(){
-		$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 9";
+	public function count($estado){
+		if($estado == 9|| $estado == 10)
+			$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = $estado";
+		else
+		$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -27,15 +43,16 @@ class Cliente extends Usuario {
 	}
 
 
-	public function getClientesBusqueda($s){
-		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and (CARGO_idCargo=3 and ESTADO_idEStado = 9)";
+	public function getClientesBusqueda($s,$estado){
+		if($estado == 9|| $estado == 10)
+			$sql = "SELECT * FROM usuario,estado WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and (CARGO_idCargo=3 and ESTADO_idEStado = $estado) and idEstado=Estado_idEstado";
+		else
+			$sql = "SELECT * FROM usuario,estado WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and CARGO_idCargo=3 and idEstado=Estado_idEstado";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
 	}
-
-
 
 	public function getClientesDesac($startpage,$limitpage){
 		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 10 limit $startpage,$limitpage";
