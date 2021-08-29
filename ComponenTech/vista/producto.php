@@ -148,53 +148,23 @@ $con_productos = $objProducto->getProductos($limit,$offset,9,0);
 			<div class="container-card">
 			<?php 
 				while ($producto = $con_productos->fetch_array()) { ?>
-					<div class="producto item">
-						<div class="contenedor-imagen">
-							<a href="#" class="link"></a>
-							<img src="<?php echo $producto['prodImg'] ?>">
-							<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-						</div>				
-						<div class="datos">
-							<div class="starrr"></div>
-							<small><a href="?c=<?php echo $producto['idCategoria'] ?>"><?php echo $producto['categoria'] ?></a></small>
-							<h3><a href="producto.php?p=<?php echo $producto['idProducto'] ?>"><?php echo $producto['productoNombre']; ?></a></h3>
-							<small>SKU: <?php echo $producto['idProducto'] ?></small>
-						</div>
-						<div class="precios">
-							<div class="internet">
-								<small>Internet</small>
-								<span>$731.000</span>
-							</div>
-							<div>
-								<small>Normal</small>
-								<span><?php echo "$".number_format($producto['precio'],0,",",".");?></span>
-							</div>
-						</div>
-						<form  action="?" method="post">
-							<input type="hidden" name="prodId" value="<?php echo $producto['idProducto'] ?>">
-						
-							<button class="btn-carrito" type="submit" name="addCarrito"><i class="fas fa-shopping-basket"></i> AÑADIR AL CARRITO</button>
-						</form>
-						
-					</div>
 					
-					<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
-					<script src='https://rawcdn.githack.com/UnTipografico/Carrusel-eCommerse/3b4b54cdfd58b5c6bfa29a4239e584a268e5403b/js/starrr.js'></script>
-					<script  src="js/script.js"></script>
-					
-					
-					<!-- <div class="card">
+					<div class="card">
 						<figure onclick="zoomIn(this)">
 							<img alt="<?php echo $producto['productoNombre']; ?>" src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
+							<h3><?php echo $producto['categoria']; ?></h3>
 							<h2><?php echo $producto['productoNombre']; ?></h2>
-					
-							
-							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a class="verde" href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
+							<p>SKU: <?php echo $producto['idProducto']; ?></p>
+							<h3>Precio</h3>
+							<h2><?php echo "$".number_format($producto['precio'],0,",",".");?></h2>
 						</div>
-					</div> -->
+						<div class="button">
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">VER DETALLES</a>
+						</div>
+					</div>
+					
 			<?php } ?>	
 			</div>
 			<div class="paginas">

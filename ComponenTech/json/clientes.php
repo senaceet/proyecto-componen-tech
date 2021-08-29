@@ -66,6 +66,10 @@ switch ($_GET['action']) {
         $data->status = true;
         echo json_encode($data);
         break;
+
+    case 'edit':
+        
+        break;
         
     default:
         echo "{}";
