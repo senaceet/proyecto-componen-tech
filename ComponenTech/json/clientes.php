@@ -35,7 +35,8 @@ switch ($_GET['action']) {
             $_POST['correo'],
             3,
             $_POST['tipodocumento'],
-            10
+            10,
+            $_POST['pass1'] 
         );
         if ($_POST['pass1'] == $_POST['pass2']){
             $res = $cliente->insertar();

@@ -47,6 +47,18 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/inventory.svg" alt="#">
                 <p>Inventario</p>
             </a>
+            <a href="#productos" class="item">
+                <img src="icons/business.svg" alt="#">
+                <p>Proveedores</p>
+            </a>
+            <a href="#productos" class="item">
+                <img src="icons/admin.svg" alt="#">
+                <p>Operadores</p>
+            </a>
+            <a href="#productos" class="item">
+                <img src="icons/move.svg" alt="#">
+                <p>Movimientos</p>
+            </a>
         </div>
     </div> 
     <div class="contenido">
@@ -136,15 +148,15 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 </div>
                 <div class="input">
                     <p>Numero de documento</p>
-                    <input required name="numerodocumento" type="text">
+                    <input required maxlength="10" name="numerodocumento" type="text">
                 </div>
                 <div class="input">
                     <p>Nombres</p>
-                    <input required  name="nombres" type="text">
+                    <input required maxlength="30" name="nombres" type="text">
                 </div>
                 <div class="input">
                     <p>Apellidos</p>
-                    <input required  name="apellidos" type="text">
+                    <input required maxlength="30" name="apellidos" type="text">
                 </div>
                 <div class="input">
                     <p>Fecha de nacimiento</p>
@@ -152,27 +164,27 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 </div>
                 <div class="input">
                     <p>Edad</p>
-                    <input required  name="edad" type="number">
+                    <input required min="12" max="90" name="edad" type="number">
                 </div>
                 <div class="input">
                     <p>Numero celular</p>
-                    <input name="celular" type="text">
+                    <input name="celular" maxlength="15" type="text">
                 </div>
                 <div class="input">
                     <p>Dirección de residencia</p>
-                    <input required  name="direccion" type="text">
+                    <input required maxlength="100" name="direccion" type="text">
                 </div>
                 <div class="input">
                     <p>Correo electrónico</p>
-                    <input required  name="correo" type="text">
+                    <input required maxlength="45" name="correo" type="text">
                 </div>
                 <div class="input">
                     <p>Contraseña</p>
-                    <input required  name="pass1" type="text">
+                    <input required minlength="3" name="pass1" type="text">
                 </div>
                 <div class="input">
                     <p>Confirmar contraseña</p>
-                    <input required  name="pass2" type="text">
+                    <input required minlength="3"  name="pass2" type="text">
                 </div>
             </div>
             <button type="submit">Agregar</button>

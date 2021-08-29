@@ -47,6 +47,18 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/inventory.svg" alt="#">
                 <p>Inventario</p>
             </a>
+            <a href="#productos" class="item">
+                <img src="icons/business.svg" alt="#">
+                <p>Proveedores</p>
+            </a>
+            <a href="#productos" class="item">
+                <img src="icons/admin.svg" alt="#">
+                <p>Operadores</p>
+            </a>
+            <a href="#productos" class="item">
+                <img src="icons/move.svg" alt="#">
+                <p>Movimientos</p>
+            </a>
         </div>
     </div> 
     <div class="contenido">

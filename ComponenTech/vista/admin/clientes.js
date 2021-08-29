@@ -141,7 +141,9 @@ function last() {
 }
 
 
-// funciones para usuarios
+// -- funciones para usuarios -- //
+
+// eliminar usuario
 async function delUser(e) {
     if(confirm('¿Está seguro de borrar a este usuario?')){
         const id = e.dataset.id
@@ -163,10 +165,14 @@ async function delUser(e) {
     }
 }
 
+
+// modificar usuairio
 async function modUser(e) {
     console.log(e.dataset.id)
 }
 
+
+// agregar usuario
 async function addUser(e) {
     e.preventDefault()
     const inputs = e.target.querySelectorAll('input')
@@ -177,15 +183,14 @@ async function addUser(e) {
                 method:'post',
                 body:form
             })
-            res.text()
+            res.json()
             .then(res => {
-                // if(res.error){
-                //     e.target.parentElement.style.display='none'
-                //     alert('registrado')
-                // } else {
-                //     alert(res.error)
-                // }
-                console.log(res)
+                if(res.status){
+                    e.target.parentElement.style.display='none'
+                    alert('registrado')
+                } else {
+                    alert(res.error)
+                }
 
             })
         } else {
@@ -197,6 +202,8 @@ async function addUser(e) {
     // console.log(e.dataset.id)
 }
 
+
+// funcion para verficar campos
 function verifyInputs(inputs){
     let vacios = 0;
     inputs.forEach(e=>{
@@ -213,7 +220,6 @@ function verifyInputs(inputs){
 }
 
 // buscar
-
 
 const getUsersSearch = async (text)=>{
     const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
