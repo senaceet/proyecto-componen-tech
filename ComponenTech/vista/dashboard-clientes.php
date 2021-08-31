@@ -190,6 +190,49 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             <button type="submit">Agregar</button>
         </form>
     </div>
+
+
+    <div  class="reporteFlotante">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Producto</td>
+                        <td>Cantidad</td>
+                        <td>Fecha</td>
+                        <td>Total</td>
+                    </tr> 
+                </thead>
+            
+                <tbody id="reporte">
+
+                </tbody>
+            </table>
+            <p align="right" id="reporteTotal"></p>
+        </div>
+        
+        
+        
+    </div>
+
+    <style>
+        .reporteFlotante{
+            position:absolute;
+            left:0;
+            width:100%;
+            height:100vh;
+            background-color:rgba(0,0,0,.5);
+            z-index:900;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            display: none;
+        }
+
+        .reporteFlotante div{
+            background-color:#fff;
+        }
+    </style>
     
 
 </body>

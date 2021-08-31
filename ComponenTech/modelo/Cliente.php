@@ -80,5 +80,29 @@ class Cliente extends Usuario {
 		return $res;
 	}
 
+	public function getReporteCliente($id){
+        $res = new stdClass();
+
+		$sql = "SELECT idProducto,productoNombre,cantidad,fecha,precio 
+				from producto,detalles,factura
+				where (PRODUCTO_idProducto = idProducto and idFactura = FACTURA_idFactura)
+				and USUARIO_documento = '$id'";
+		
+		$cn = conectar();
+
+		$resultado = $cn->query($sql);
+
+		$res->data = [];		
+
+		while($producto = $resultado->fetch_object()){
+			array_push($res->data,$producto);
+		}
+
+		$cn->close();
+
+		return $res;
+		
+	}
+
 }
 ?>

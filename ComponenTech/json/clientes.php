@@ -2,6 +2,9 @@
 require_once '../modelo/Cliente.php';
 
 switch ($_GET['action']) {
+
+    // http://localhost/ctech/json/clientes.php?action=reporte&id=1022322061
+
     case 'get':    
         $limit = 10; $offset = 0; $estado = 0;
 
@@ -69,6 +72,24 @@ switch ($_GET['action']) {
 
     case 'edit':
         
+        break;
+
+    case 'reporte':
+
+        $cliente = new Cliente();
+        
+        $data = new stdClass();
+
+        if(isset($_GET['id'])){
+            $data = $cliente->getReporteCliente($_GET['id']);
+        }else {
+            $cliente->data=[];
+        }
+
+        
+
+        echo json_encode($data);
+
         break;
         
     default:

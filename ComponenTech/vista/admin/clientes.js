@@ -57,6 +57,7 @@ function putUsers(data, count) {
                 <td>
                     <button data-id="${e.documento}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
                     <button data-id="${e.documento}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
+                    <button data-id="${e.documento}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
         num++
@@ -166,10 +167,65 @@ async function delUser(e) {
 }
 
 
-// modificar usuairio
+// modificar usuario
 async function modUser(e) {
     console.log(e.dataset.id)
 }
+1022322061
+//Reporte de usuario
+const contenedorReporte = document.querySelector('.reporteFlotante')
+
+const divReporte = document.querySelector('#reporte')
+
+const totalReporte  = document.querySelector('#reporteTotal')
+
+async function hisUser(e){
+    let id = e.dataset.id
+    contenedorReporte.style.display="flex"
+
+    const res = await fetch("http://localhost/ctech/json/clientes.php?action=reporte&id="+id)
+
+    res.json()
+    .then(data => {
+        // -----
+
+        
+
+        let lista =  data.data
+
+        divReporte.innerHTML = ""
+
+        var total = 0
+
+        lista.forEach(e => {
+            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
+
+            total += parseInt(e.precio) 
+
+            divReporte.innerHTML += `
+                <tr>
+                    <td>${e.productoNombre}</td>
+                    <td>${e.cantidad}</td>
+                    <td>${e.fecha}</td>
+                    <td>$${precio}</td>
+                </tr> 
+            `
+        })
+        
+
+        total =  new Intl.NumberFormat("es-CO").format(total)
+
+        totalReporte.innerHTML = "$ "+total
+       
+
+        // ----
+    })
+
+
+    // http://localhost/ctech/json/clientes.php?action=reporte&id=1022322061
+
+}
+
 
 
 // agregar usuario
