@@ -39,25 +39,29 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/users.svg" alt="#">
                 <p>Clientes</p>
             </a>
-            <a href="#" class="item actual">
+            <a href="dashboard-productos.php" class="item actual">
                 <img src="icons/store.svg" alt="#">
                 <p>Productos</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-inventario.php" class="item">
                 <img src="icons/inventory.svg" alt="#">
                 <p>Inventario</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-proveedores.php" class="item">
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
+            </a>
+            <a href="dashboard-facturas.php" class="item">
+                <img src="icons/factura.svg" alt="#">
+                <p>Facturas</p>
             </a>
         </div>
     </div> 
@@ -75,7 +79,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <div class="user">
                 <p><?php echo $_SESSION['user']->nombres ?></p>
-                <p>*Administrador</p>
+                <p><?php echo $_SESSION['user']->cargo ?></p>
             </div>
         </header>
         

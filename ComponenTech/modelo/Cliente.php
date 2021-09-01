@@ -15,7 +15,7 @@ class Cliente extends Usuario {
 		$cn = conectar();
 		$res = $cn->query($sql);
 		
-		if($cn->error){
+		if($cn->error){ 
 			$data->error=true;
 			$data->msg=$cn->error;
 		} else {
@@ -30,6 +30,7 @@ class Cliente extends Usuario {
 		return $data;
 	}
 
+	
 	public function count($estado){
 		if($estado == 9|| $estado == 10)
 			$sql = "SELECT count(*) as c FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = $estado";

@@ -78,8 +78,52 @@ class Movimiento {
 	 * @return int
 	 * @ReturnType int
 	 */
-	public function getIdMovimiento() {
-		return $this->_idMovimiento;
+
+
+	public function getCount(){
+
+			$sql = "SELECT count(*) as c FROM movimiento ";
+		
+		
+		$cn = conectar();
+		$res = $cn->query($sql);
+	    
+
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
+
+
+	public function getMovimiento($limit, $offset) {
+
+		
+			if($limit == 0)
+				$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento, estado WHERE (PRODUCTO_idProducto=idProducto 
+				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento)";
+			else
+			$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento, estado WHERE (PRODUCTO_idProducto=idProducto 
+			AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento)limit $offset, $limit";
+			
+		 {
+			
+	$cn = conectar();
+	$res = $cn->query($sql);
+
+	$data = new stdClass();
+	$data->data=[];
+
+	$data->count=$this->getCount();
+
+	while($value = $res->fetch_object()) {
+		array_push($data->data,$value);
+	}
+    
+	$cn->close();
+	return $data;
+	}
+
+		//return $this->_idMovimiento;
 	}
 
 	/**

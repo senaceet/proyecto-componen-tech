@@ -35,7 +35,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/dashboard.svg" alt="#">
                 <p>Dashboard</p>
             </a>
-            <a href="#" class="item actual">
+            <a href="dashboard-clientes.php" class="item">
                 <img src="icons/users.svg" alt="#">
                 <p>Clientes</p>
             </a>
@@ -43,7 +43,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/store.svg" alt="#">
                 <p>Productos</p>
             </a>
-            <a href="dashboard-inventario.php" class="item">
+            <a href="dashboard-inventario.php" class="item actual">
                 <img src="icons/inventory.svg" alt="#">
                 <p>Inventario</p>
             </a>
@@ -71,7 +71,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             <div class="section">
                 <label for="toggleMenu"><img src="icons/menu.svg" alt="#"></label>
                 
-                <h1>Clientes</h1>
+                <h1>Inventario</h1>
             </div>
             <div class="search-box">
                 <img src="icons/search.svg" alt="#">
@@ -79,7 +79,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <div class="user">
                 <p><?php echo $_SESSION['user']->nombres ?></p>
-                <p><?php echo $_SESSION['user']->cargo ?></p>
+                <p>*Administrador</p>
             </div>
         </header>
         
@@ -95,8 +95,8 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                     </div>
                     <select onchange="getUsersEstado(this.value,0)">
                         <option selected value="0">Todos</option>
-                        <option value="9">usuarios activos</option>
-                        <option value="10">usuarios desactivados</option>
+                        <option value="1">Productos en venta</option>
+                        <option value="2">Productos agotados</option>
                     </select>
                     <button 
                         onclick="document.querySelector('#insertForm').style.display='flex'">
@@ -107,18 +107,16 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                     <thead>
                         <tr>
                             <td></td>
-                            <td>Nombre</td>
-                            <td>Correo</td>
-                            <td>Edad</td>
-                            <td>Celular</td>
-                            <td>Direccion</td>
-                            <td>Documento</td>
+                            <td>Producto</td>
+                            <td>Categoria</td>
+                            <td>Entradas</td>
+                            <td>Salidas</td>
+                            <td>Saldo</td>
                             <td>Estado</td>
                             <td>Acciones</td>
-                            
                         </tr>
                     </thead>
-                    <tbody id="clientes"></tbody>
+                    <tbody id="inventario"></tbody>
                 </table>
                 <div class="table-nav">
                     <div class="cantidad">
@@ -135,7 +133,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
         </div>
     </div>
 
-    <div id="insertForm" class="floating">
+    <!-- <div id="insertForm" class="floating">
         <div onclick="this.parentElement.style.display='none'" class="close-floating"></div>
         <form onsubmit="addUser(event)" class="form">
             <h1>Agregar usuario</h1>
@@ -193,10 +191,10 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <button type="submit">Agregar</button>
         </form>
-    </div>
+    </div> -->
 
 
-    <div  class="reporteFlotante">
+    <!-- <div  class="reporteFlotante">
         <div>
             <h1>Reporte de Compras</h1>
             <table>
@@ -216,11 +214,11 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             
             <p align="right" class="pReportePrecio" >Total: <span id="reporteTotal"></span> </p>
         </div>
-    </div>
+    </div> -->
 
      
     
 
 </body>
-<script src="admin/clientes.js"></script>
+<script src="admin/inventario.js"></script>
 </html>

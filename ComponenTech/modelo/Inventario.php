@@ -173,8 +173,55 @@ class Inventario {
 	 * @return int
 	 * @ReturnType int
 	 */
-	public function getIdProducto() {
-		return $this->_idProducto;
+
+
+	public function getCount($estado){
+		if($estado == 0){
+			$sql = "SELECT count(*) as c FROM inventario";
+		} else {
+			$sql = "SELECT count(*) as c FROM inventario where ESTADO_idEstado=$estado";
+		}
+		
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+	}
+
+	public function getInventario($limit,$offset,$estado) {
+        if( $estado == 1|| $estado == 2)
+		    if($limit == 0 )
+		        $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
+				FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND idCategoria = CATEGORIA_idCategoria)";
+			else
+			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo idEstado, estado 
+			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND idCategoria = CATEGORIA_idCategoria) limit $offset, $limit";
+
+		else{
+            if($limit == 0 )
+		        $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
+				FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria)";
+			else
+			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
+			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria) limit $offset, $limit";
+	}
+	$cn = conectar();
+	$res = $cn->query($sql);
+
+	$data = new stdClass();
+	$data->data=[];
+
+	$data->count=$this->getCount($estado);
+
+	while($value = $res->fetch_object()) {
+		array_push($data->data,$value);
+	}
+
+	$cn->close();  
+	return $data;
+		
+	//return $this->_idProducto;
 	}
 
 	public function vender($prod,$cant){
@@ -215,5 +262,7 @@ class Inventario {
 		$cn->close();
 		return $res; 
 	}
+
+
 }
 ?>

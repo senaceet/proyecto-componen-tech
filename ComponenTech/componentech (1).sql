@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2021 a las 01:31:03
+-- Tiempo de generación: 01-09-2021 a las 03:10:51
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -97,10 +97,15 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 ('gnevinc@jugem.jp', 'Gradeigh72'),
 ('hfaunchd@miibeian.gov.cn', 'Hercule54'),
 ('hsidsaffa@globo.com', 'Halimeda73'),
+('juan@gmail.com', '321'),
+('kacendales@misena.edu.co', '1234'),
 ('lyakobowitchh@weebly.com', 'Libbey9'),
+('malopez030@misena.edu.co', '1234'),
 ('mpointingf@flavors.me', 'Morlee87'),
 ('pgentile1@exblog.jp', 'Pebrookx22'),
 ('pivanshintsev0@ustream.tv', 'Perrine1'),
+('prueba4@gmail.com', '1234'),
+('rodriguez@gmail.com', '1028'),
 ('rskille@admin.ch', 'Rae32'),
 ('sscrymgeour2@fc2.com', 'Sibylle55'),
 ('swelberry9@whitehouse.gov', 'Sholom34'),
@@ -108,8 +113,13 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 ('tsprules4@weebly.com', 'Tiena32'),
 ('vmacavaddy6@comcast.net', 'Vasili2'),
 ('wtutingb@army.mil', 'Wyatt12'),
-('yeren@gmail.com', '321'),
-('yerenagmt@gmail.com', '1234');
+('yapalacios660@misena.edu.co', '1234'),
+('yeren2@gmail.com', '1234'),
+('yeren@gmail.com', '123'),
+('yeren@gmail.com5', '1234'),
+('yerenagmt2@gmail.com', '123'),
+('yerenagmt@gmail.com', '1234'),
+('yerend@gmail.com', '1234');
 
 -- --------------------------------------------------------
 
@@ -152,7 +162,21 @@ INSERT INTO `detalles` (`idDetalles`, `cantidad`, `totalCantidad`, `FACTURA_idFa
 (44, 1, 3679000, 5272, 1001),
 (45, 1, 502000, 5273, 1016),
 (46, 1, 539000, 5273, 1006),
-(47, 2, 430000, 5273, 1008);
+(47, 2, 430000, 5273, 1008),
+(48, 1, 2869000, 5274, 1002),
+(49, 2, 1462000, 5274, 1003),
+(50, 1, 539000, 5274, 1006),
+(51, 3, 960000, 5274, 1010),
+(52, 5, 2695000, 5275, 1006),
+(53, 3, 1617000, 5276, 1006),
+(54, 2, 5014000, 5277, 1004),
+(55, 2, 1078000, 5277, 1006),
+(56, 2, 5014000, 5278, 1004),
+(57, 2, 1078000, 5278, 1006),
+(58, 2, 5014000, 5279, 1004),
+(59, 2, 1078000, 5279, 1006),
+(60, 2, 520000, 5280, 1009),
+(61, 2, 640000, 5280, 1010);
 
 -- --------------------------------------------------------
 
@@ -219,7 +243,14 @@ INSERT INTO `factura` (`idFactura`, `fecha`, `subtotal`, `total`, `TIPOPAGO_idTi
 (5270, '2021-03-04', 0, 10800000, 1, 1022322061, 8),
 (5271, '2021-03-04', 0, 2869000, 3, 1022322061, 8),
 (5272, '2021-03-04', 0, 3679000, 4, 1022322061, 8),
-(5273, '2021-03-05', 0, 1471000, 3, 1022322055, 8);
+(5273, '2021-03-05', 0, 1471000, 3, 1022322055, 8),
+(5274, '2021-03-10', 0, 5830000, 2, 1000257626, 8),
+(5275, '2021-03-10', 0, 2695000, 1, 1000257626, 8),
+(5276, '2021-03-10', 0, 1617000, 3, 1000257626, 8),
+(5277, '2021-04-05', 0, 6092000, 4, 1022322061, 8),
+(5278, '2021-04-05', 0, 6092000, 4, 1022322061, 8),
+(5279, '2021-04-05', 0, 6092000, 4, 1022322061, 8),
+(5280, '2021-04-05', 0, 1160000, 4, 1022322061, 8);
 
 -- --------------------------------------------------------
 
@@ -240,18 +271,18 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODUCTO_idProducto`) VALUES
-(1, 33, 23, 10, 1000),
+(1, 37, 23, 14, 1000),
 (2, 22, 9, 13, 1001),
-(3, 10, 9, 1, 1002),
-(4, 10, 13, 0, 1003),
-(5, 30, 15, 15, 1004),
+(3, 10, 10, 0, 1002),
+(4, 10, 15, 0, 1003),
+(5, 30, 21, 9, 1004),
 (6, 60, 23, 37, 1005),
-(7, 20, 11, 9, 1006),
+(7, 28, 26, 2, 1006),
 (8, 50, 20, 30, 1007),
 (9, 6, 6, 0, 1008),
 (10, 6, 6, 0, 1008),
-(11, 10, 5, 5, 1009),
-(12, 5, 3, 2, 1010),
+(11, 10, 7, 3, 1009),
+(12, 5, 8, 0, 1010),
 (13, 70, 40, 30, 1011),
 (14, 85, 10, 75, 1012),
 (15, 45, 5, 40, 1013),
@@ -314,7 +345,23 @@ INSERT INTO `movimiento` (`idMovimiento`, `fecha`, `cantidad`, `TIPOMOVIMIENTO_i
 (40, '2021-03-05', 2, 1, 1008, 5273),
 (42, '2021-03-06', 1, 3, 1000, NULL),
 (43, '2021-03-06', 6, 3, 1000, NULL),
-(44, '2021-03-06', 2, 3, 1001, NULL);
+(44, '2021-03-06', 2, 3, 1001, NULL),
+(45, '2021-03-10', 1, 1, 1002, 5274),
+(46, '2021-03-10', 2, 1, 1003, 5274),
+(47, '2021-03-10', 1, 1, 1006, 5274),
+(48, '2021-03-10', 3, 1, 1010, 5274),
+(49, '2021-03-10', 4, 3, 1000, NULL),
+(50, '2021-03-10', 5, 1, 1006, 5275),
+(51, '2021-03-10', 3, 1, 1006, 5276),
+(52, '2021-03-10', 8, 3, 1006, NULL),
+(53, '2021-04-05', 2, 1, 1004, 5277),
+(54, '2021-04-05', 2, 1, 1006, 5277),
+(55, '2021-04-05', 2, 1, 1004, 5278),
+(56, '2021-04-05', 2, 1, 1006, 5278),
+(57, '2021-04-05', 2, 1, 1004, 5279),
+(58, '2021-04-05', 2, 1, 1006, 5279),
+(59, '2021-04-05', 2, 1, 1009, 5280),
+(60, '2021-04-05', 2, 1, 1010, 5280);
 
 -- --------------------------------------------------------
 
@@ -384,7 +431,7 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `iva`, `CATEGORIA_idCategoria`, `PROVEEDOR_idProveedor`, `ESTADO_idEstado`, `prodImg`) VALUES
 (1000, 'Lenovo S340-14IIL', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2645000, 19, 1, 9, 1, '../img/productos/9/1000.jpg'),
 (1001, 'Portátil ASUS VivoBook X413EA-EB249T', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 3679000, 19, 1, 5, 1, '../img/productos/5/1001.jpg'),
-(1002, 'Portátil HP 15-dw1067la', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2869000, 19, 1, 4, 1, '../img/productos/4/1002.jpg'),
+(1002, 'Portátil HP 15-dw1067la', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2869000, 19, 1, 4, 2, '../img/productos/4/1002.jpg'),
 (1003, 'Procesador Ryzen 5 3400g', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 731000, 19, 2, 5, 1, '../img/productos/5/1003.jpg'),
 (1004, 'Procesador Amd Ryzen 9 3900xt', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2507000, 19, 2, 5, 1, '../img/productos/5/1004.jpg'),
 (1005, 'Board Gigabyte B460m Ds3h Ud', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 459000, 19, 3, 10, 1, '../img/productos/10/1005.jpg'),
@@ -398,7 +445,7 @@ INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `i
 (1013, 'Tarjeta De Video Evga Gtx 1650 Super Xc Gamin', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 840000, 19, 5, 6, 1, '../img/productos/6/1013.jpg'),
 (1014, 'Disco Duro Toshiba P300 2 Tb', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 275000, 19, 6, 7, 1, '../img/productos/7/1014.jpg'),
 (1015, 'Ssd Gigabyte Nvme 1tb', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 859000, 19, 6, 12, 1, '../img/productos/12/1015.jpg'),
-(1016, 'Disco Duro Seagate Barracuda 4tb Hdd', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 502000, 19, 6, 4, 1, '../img/productos/4/1016.jpg'),
+(1016, 'Disco Duro Seagate Barracuda 4tb Hdd', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 502000, 19, 6, 11, 2, '../img/productos/4/1016.jpg'),
 (1017, 'Chasis Corsair Carbide Spec Omega', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 871000, 19, 7, 10, 1, '../img/productos/10/1017.jpg'),
 (1018, 'Chasis Thermaltake Core P3 Red', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2256000, 19, 7, 8, 1, '../img/productos/8/1018.jpg'),
 (1019, 'Chasis Thermaltake View 51 Argb', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 940000, 19, 7, 6, 1, '../img/productos/6/1019.jpg'),
@@ -420,7 +467,13 @@ INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `i
 --
 -- Disparadores `producto`
 --
-
+DELIMITER $$
+CREATE TRIGGER `invetario_trigger` AFTER INSERT ON `producto` FOR EACH ROW BEGIN 
+		       INSERT INTO inventario
+		       VALUES (0, 0, 0, 0, NEW.idProducto);
+		    END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -541,21 +594,33 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`documento`, `nombres`, `apellidos`, `fechaNto`, `edad`, `celular`, `direccion`, `correo`, `CARGO_idCargo`, `TIPODOCUMENTO_idTipo`, `ESTADO_idEstado`) VALUES
+(1632873, 'Yeren', 'Palacios', '2021-04-30', 17, '1212388', 'calle 1 ...', 'yapalacios660@misena.edu.co', 3, 2, 9),
+(25251663, 'juan', 'diaz', '2000-12-25', 20, '55252533', 'carrera 4', 'juan@gmail.com', 2, 3, 9),
+(102232202, 'Yeren', 'Palacios', '2021-08-18', 3122, '66265526', 'calle 3', 'yerend@gmail.com', 3, 3, 10),
 (227142548, 'Tiena', 'Sprules', '1989-08-27', 13, '674 787 4516', '77 Dakota Junction', 'tsprules4@weebly.com', 3, 3, 9),
 (339218373, 'Perrine', 'Ivanshintsev', '1998-12-18', 61, '901 901 3365', '459 Dexter Park', 'pivanshintsev0@ustream.tv', 3, 4, 9),
 (427389387, 'Rae', 'Skill', '1998-01-05', 60, '588 348 6757', '0 Ruskin Parkway', 'rskille@admin.ch', 3, 2, 9),
 (607881456, 'Libbey', 'Yakobowitch', '1992-03-30', 53, '592 562 9508', '07 Morning Drive', 'lyakobowitchh@weebly.com', 3, 3, 9),
+(1000257626, 'Miguel', 'Lopez', '2000-02-10', 20, '5553263627', 'calle 20 ...', 'malopez030@misena.edu.co', 3, 2, 10),
+(1000257902, 'jhon ', 'monroy', '2001-06-10', 20, '3143564218', 'cr3aeste', 'rodriguez@gmail.com', 1, 1, 9),
+(1000456409, 'Kevin ', 'Cendales', '2002-10-08', 18, '3114609836', 'Calle 45 D # 4- 20 este', 'kacendales@misena.edu.co', 1, 1, 9),
 (1014925189, 'Vasili', 'MacAvaddy', '1998-11-11', 43, '748 679 9637', '317 Meadow Valley Parkway', 'vmacavaddy6@comcast.net', 3, 3, 9),
-(1022322055, 'Yeren', 'Palacios', '2003-10-24', 30, '3006961901', 'tv 3 bis este 48 - 20', 'yeren@gmail.com', 1, 2, 9),
+(1022322055, 'Yeren', 'Palacios', '2021-08-10', 12, '66265526', 'calle 3', 'yeren@gmail.com', 1, 2, 9),
 (1022322061, 'Yeren', 'Palacios', '2003-10-24', 17, '55526662', 'calle 1 ...', 'yerenagmt@gmail.com', 3, 2, 10),
+(1022322062, 'Yeren', 'Palacios', '2021-08-19', 3122, '66265526', 'calle 3', 'yeren2@gmail.com', 3, 2, 10),
+(1022322066, 'prueba1', 'prueba1', '2021-08-11', 3122, '66265526', 'prueba1', 'prueba1@gmail.ocm', 3, 1, 10),
 (1022328832, 'Diego', 'Diaz Perez', '1983-02-15', 12, '3006961901', 'tv 3 bis este 48 - 20', 'diego1@gmail.com', 2, 1, 9),
 (1090856204, 'Erna', 'Rudolf', '1988-11-28', 10, '799 187 1933', '1 Valley Edge Alley', 'erudolfg@dyndns.org', 3, 4, 9),
+(1203287361, 'prueba3', 'prueba3', '2021-08-02', 12, '66265526', 'prueba1', 'prueba3@gmail.com', 3, 1, 9),
+(1203287362, 'prueba2', 'prueba2', '2021-08-02', 12, '66265526', 'prueba1', 'prueba2@gmail.com', 3, 1, 9),
+(1203287364, '', '', '0000-00-00', 0, '', '', 'prueba4@gmail.com', 3, 1, 9),
 (1292020212, 'Morlee', 'Pointing', '1992-10-09', 26, '484 225 4881', '22422 Kipling Trail', 'mpointingf@flavors.me', 3, 3, 9),
 (2056910799, 'Sibylle', 'Scrymgeour', '1986-10-21', 12, '498 563 5534', '31 Northland Place', 'sscrymgeour2@fc2.com', 3, 4, 9),
 (2195205439, 'Pebrook', 'Gentile', '1995-01-02', 53, '690 560 1577', '4212 Packers Hill', 'pgentile1@exblog.jp', 3, 1, 9),
 (2219978176, 'Wyatt', 'Tuting', '2004-08-30', 37, '200 354 3934', '89905 Artisan Place', 'wtutingb@army.mil', 3, 3, 9),
 (2773619313, 'Alex', 'Boxhall', '2005-04-15', 56, '457 615 0899', '0136 Pankratz Center', 'aboxhall8@lycos.com', 3, 2, 9),
 (2864316033, 'Sholom', 'Welberry', '1990-07-07', 38, '643 189 2686', '2725 Reinke Hill', 'swelberry9@whitehouse.gov', 3, 1, 9),
+(2938722122, 'prueba1', 'prueba1', '2021-08-02', 12, '66265526', 'prueba1', 'prueba1@gmail.ocd', 3, 1, 9),
 (3019400478, 'Gradeigh', 'Nevin', '1991-08-10', 64, '743 379 9038', '8131 Maple Way', 'gnevinc@jugem.jp', 3, 1, 9),
 (3467715564, 'Blane', 'Sandry', '1990-08-20', 16, '616 998 4626', '7 Melody Terrace', 'bsandryi@histats.com', 3, 1, 9),
 (3616514451, 'Halimeda', 'Sidsaff', '2002-04-07', 19, '960 472 8070', '5 Thompson Park', 'hsidsaffa@globo.com', 3, 2, 9),
@@ -705,7 +770,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -717,19 +782,19 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5274;
+  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5281;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `idInventario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idInventario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de la tabla `movimiento`
 --
 ALTER TABLE `movimiento`
-  MODIFY `idMovimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idMovimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -747,7 +812,7 @@ ALTER TABLE `pedidoorden`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1056;
+  MODIFY `idProducto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1117;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -840,12 +905,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-DELIMITER $$
-CREATE TRIGGER `invetario_trigger` AFTER INSERT ON `producto` FOR EACH ROW BEGIN 
-		       INSERT INTO inventario
-		       VALUES (0, 0, 0, 0, NEW.idProducto);
-		    END
-$$
-DELIMITER ;

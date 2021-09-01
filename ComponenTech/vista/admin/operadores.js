@@ -1,4 +1,4 @@
-const clientes = document.querySelector('#clientes')
+const operadores = document.querySelector('#operadores')
 const desde = document.querySelector('#desde')
 const cantidad = document.querySelector('#cantidad')
 const hasta = document.querySelector('#hasta')
@@ -9,23 +9,23 @@ var limit = 10, offset = 0, estado = 0, page = 1
 
 
 
-async function getUsersLimit(num) {
+async function getOperadorLimit(num) {
     limit = num
     search.value=""
-    getUsers()
+    getOperadores()
 }
 
-async function getUsersEstado(num) {
+async function getOperadorEstado(num) {
     page=1
     estado = num
     search.value=""
-    getUsers()
+    getOperadores()
 }
 
-async function getUsers() {
+async function getOperadores() {
     offset = (page - 1) * limit
-    clientes.innerHTML = '<div class="loading"><div class="spinner"></div></div>'
-    let url = `../json/clientes.php?action=get&limit=${limit}&offset=${offset}&estado=${estado}`
+    operadores.innerHTML = '<div class="loading"><div class="spinner"></div></div>'
+    let url = `../json/operadores.php?action=get&limit=${limit}&offset=${offset}&estado=${estado}`
 
     let res = await fetch(url)
     res.json()
@@ -35,17 +35,17 @@ async function getUsers() {
                 alert('Error en la base de datos')
                 console.log(res)
 
-            } else putUsers(res.data, res.count)
+            } else putOperadores(res.data, res.count)
         })
 }
-getUsers()
+getOperadores()
 
-function putUsers(data, count) {
-    clientes.innerHTML = ''
+function putOperadores(data, count) {
+    operadores.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-
-        clientes.innerHTML += `<tr>
+        console.log(e)
+        operadores.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.nombres} ${e.apellidos}</td>
                 <td>${e.correo}</td>
@@ -53,11 +53,10 @@ function putUsers(data, count) {
                 <td>${e.celular}</td>
                 <td>${e.direccion}</td>
                 <td>${e.documento}</td>
-                <td>${e.estado}</td>
                 <td>
-                    <button data-id="${e.documento}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.documento}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.documento}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                    <button data-id="${e.documento}" onclick="modOperador(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+                    <button data-id="${e.documento}" onclick="delOperador(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
+                    <button data-id="${e.documento}" onclick="hisOperador(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
         num++
@@ -110,7 +109,7 @@ function putUsers(data, count) {
     }
     
     if(data.length == 0){
-        clientes.innerHTML = `<tr>
+        inventario.innerHTML = `<tr>
             <td align="center" colspan="9">Sin resultados</td>
         </tr>`
     }
@@ -119,32 +118,32 @@ function putUsers(data, count) {
 function first() {
     if(page!=1){
         page = 1
-        getUsers()
+        getOperadores()
     }    
 }
 function back() {
     if(page>1){
         page--
-        getUsers()
+        getOperadores()
     }
 }
 function next() {
     if(page < Math.ceil(parseInt(cantidad.innerHTML) / limit)){
         page++
-        getUsers()
+        getOperadores()
     }
 }
 function last() {
     if(page!=Math.ceil(parseInt(cantidad.innerHTML) / limit)){
         page = Math.ceil(parseInt(cantidad.innerHTML) / limit)
-        getUsers()
+        getOperadores()
     }
 }
 
 
 // -- funciones para usuarios -- //
 
-// eliminar usuario
+// eliminar operador
 async function delUser(e) {
     if(confirm('¿Está seguro de borrar a este usuario?')){
         const id = e.dataset.id
@@ -158,7 +157,7 @@ async function delUser(e) {
         .then(res=> {
 
             if(res.status){
-                getUsers()
+                getOperadores()
             } else {
                 alert('Error al eliminar usuario')
             }
@@ -168,10 +167,10 @@ async function delUser(e) {
 
 
 // modificar usuario
-async function modUser(e) {
+async function modOperador(e) {
     console.log(e.dataset.id)
 }
-1022322061
+
 //Reporte de usuario
 const contenedorReporte = document.querySelector('.reporteFlotante')
 
@@ -277,10 +276,10 @@ function verifyInputs(inputs){
 
 // buscar
 
-const getUsersSearch = async (text)=>{
+const getOperadorSearch = async (text)=>{
     const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putUsers(res.clientes,0))
+    .then(res => putOperadores(res.clientes,0))
 
 }
 
@@ -290,7 +289,7 @@ search.addEventListener('keydown',e=>{
         e.target.disabled=true
         e.target.parentElement.style.backgroundColor='#efefef'
         let text = e.target.value
-        getUsersSearch(text).then(()=>{
+        getOperadorSearch(text).then(()=>{
             e.target.disabled=false
             e.target.parentElement.style.backgroundColor='#fff'
         })

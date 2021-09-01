@@ -35,7 +35,7 @@ switch ($_GET['lista']) {
         $clientes = $objCliente->count(0);
 
         $objProveedor = new Proveedor();
-        $proveedores = $objProveedor->getCount();
+        $proveedores = $objProveedor->getCount(0);
 
         $data = new stdClass();
         

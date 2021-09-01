@@ -79,57 +79,57 @@ class Factura {
 	}
 
 
-	public function getFacturasCantidad(){
-		$sql = "SELECT count(*) as c from factura";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$res = $res->fetch_array();
-		$cn->close();
-		//echo $res['c'];
-		return $res['c'];
-	}
+	// public function getFacturasCantidad(){
+	// 	$sql = "SELECT count(*) as c from factura";
+	// 	$cn = conectar();
+	// 	$res = $cn->query($sql);
+	// 	$res = $res->fetch_array();
+	// 	$cn->close();
+	// 	//echo $res['c'];
+	// 	return $res['c'];
+	// }
 
 
-	public function getFacturas($startpage,$limitpage){
-		$sql = "SELECT idFactura,fecha,subtotal,total,tipo,documento,TIPODOCUMENTO_idTipo,estado from factura,usuario,estado,tipopago where
-		tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago and
-		usuario.documento = factura.USUARIO_documento and
-		estado.idEstado = factura.ESTADO_idEstado and
-		tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago
-		order by fecha desc limit $startpage,$limitpage
-		";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$cn->close();
-		//echo $res['c'];
-		return $res;
-	}
+	// public function getFacturas($startpage,$limitpage){
+	// 	$sql = "SELECT idFactura,fecha,subtotal,total,tipo,documento,TIPODOCUMENTO_idTipo,estado from factura,usuario,estado,tipopago where
+	// 	tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago and
+	// 	usuario.documento = factura.USUARIO_documento and
+	// 	estado.idEstado = factura.ESTADO_idEstado and
+	// 	tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago
+	// 	order by fecha desc limit $startpage,$limitpage
+	// 	";
+	// 	$cn = conectar();
+	// 	$res = $cn->query($sql);
+	// 	$cn->close();
+	// 	//echo $res['c'];
+	// 	return $res;
+	// }
 
-	public function getFacturasBusqueda($s){
-		$sql = "SELECT idFactura,fecha,subtotal,total,tipo,documento,TIPODOCUMENTO_idTipo,estado from factura,usuario,estado,tipopago where
-		tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago and
-		usuario.documento = factura.USUARIO_documento and
-		estado.idEstado = factura.ESTADO_idEstado and
-		tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago
-		and (idFactura like '%$s%' or fecha like '%$s%' or subtotal like '%$s%' or total like '%$s%' or tipo like '%$s%' or documento like '%$s%' or TIPODOCUMENTO_idTipo like '%$s%' or estado like '%$s%')
-		order by fecha desc
-		";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$cn->close();
-		//echo $res['c'];
-		return $res;
-	}
+	// public function getFacturasBusqueda($s){
+	// 	$sql = "SELECT idFactura,fecha,subtotal,total,tipo,documento,TIPODOCUMENTO_idTipo,estado from factura,usuario,estado,tipopago where
+	// 	tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago and
+	// 	usuario.documento = factura.USUARIO_documento and
+	// 	estado.idEstado = factura.ESTADO_idEstado and
+	// 	tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago
+	// 	and (idFactura like '%$s%' or fecha like '%$s%' or subtotal like '%$s%' or total like '%$s%' or tipo like '%$s%' or documento like '%$s%' or TIPODOCUMENTO_idTipo like '%$s%' or estado like '%$s%')
+	// 	order by fecha desc
+	// 	";
+	// 	$cn = conectar();
+	// 	$res = $cn->query($sql);
+	// 	$cn->close();
+	// 	//echo $res['c'];
+	// 	return $res;
+	// }
 
 
-	public function getFactura($fac){
-		$sql = "SELECT * from factura where idFactura= '$fac'";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$cn->close();
-		//echo $res['c'];
-		return $res;
-	}
+	// public function getFactura($fac){
+	// 	$sql = "SELECT * from factura where idFactura= '$fac'";
+	// 	$cn = conectar();
+	// 	$res = $cn->query($sql);
+	// 	$cn->close();
+	// 	//echo $res['c'];
+	// 	return $res;
+	// }
 
 	/**
 	 * /**
@@ -155,9 +155,68 @@ class Factura {
 	 * @return int
 	 * @ReturnType int
 	 */
-	public function getIdFactura() {
-		return $this->_idFactura;
+
+
+
+	 
+	public function getCount(){
+
+		$sql = "SELECT count(*) as c FROM Factura ";
+	
+		$cn = conectar();
+		$res = $cn->query($sql);
+	
+        
+		$cn->close();
+		$res = $res->fetch_array();
+		return $res['c'];
+
 	}
+
+
+
+	public function getFacturas($limit,$offset,$estado){
+		if($estado == 7 || $estado == 8){
+			if($limit == 0)
+				$sql ="SELECT idFactura, fecha, subtotal, total, tipo, USUARIO_documento, nombres, apellidos, estado FROM factura, usuario, tipopago, estado 
+					WHERE (USUARIO_documento = documento AND TIPOPAGO_idTipoPago = idTipoPago AND factura.ESTADO_idEstado = $estado AND factura.ESTADO_idEstado = estado.idEstado) ORDER BY fecha  DESC ";
+			else
+				$sql ="SELECT idFactura, fecha, subtotal, total, tipo, USUARIO_documento, nombres, apellidos, estado FROM factura, usuario, tipopago, estado 
+					WHERE (USUARIO_documento = documento AND TIPOPAGO_idTipoPago = idTipoPago AND factura.ESTADO_idEstado = $estado AND factura.ESTADO_idEstado = estado.idEstado) ORDER BY fecha  DESC limit $offset, $limit";
+		}else{
+
+			if ($limit == 0)
+				$sql ="SELECT idFactura, fecha, subtotal, total, tipo, USUARIO_documento, nombres, apellidos, estado FROM factura, usuario, tipopago, estado 
+				WHERE (USUARIO_documento = documento AND TIPOPAGO_idTipoPago = idTipoPago AND factura.ESTADO_idEstado = estado.idEstado) ORDER BY fecha DESC ";
+			else 
+				$sql ="SELECT idFactura, fecha, subtotal, total, tipo, USUARIO_documento, nombres, apellidos, estado FROM factura, usuario, tipopago, estado 
+				WHERE (USUARIO_documento = documento AND TIPOPAGO_idTipoPago = idTipoPago AND factura.ESTADO_idEstado = estado.idEstado) ORDER BY fecha DESC limit $offset, $limit";
+			
+		}
+
+		$cn = conectar();
+		$res = $cn->query($sql);
+	
+		$data = new stdClass();
+		$data->data=[];
+		
+		$data->count=$this->getCount($estado);
+	
+
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		
+	   
+		$cn->close();  
+		return $data;
+
+
+			
+	}
+
+		
+
 
 	/**
 	 * /**

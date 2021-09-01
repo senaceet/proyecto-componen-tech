@@ -1,4 +1,4 @@
-const clientes = document.querySelector('#clientes')
+const inventario = document.querySelector('#inventario')
 const desde = document.querySelector('#desde')
 const cantidad = document.querySelector('#cantidad')
 const hasta = document.querySelector('#hasta')
@@ -9,23 +9,23 @@ var limit = 10, offset = 0, estado = 0, page = 1
 
 
 
-async function getUsersLimit(num) {
+async function getInventarioLimit(num) {
     limit = num
     search.value=""
-    getUsers()
+    getInventario()
 }
 
-async function getUsersEstado(num) {
+async function getInventarioEstado(num) {
     page=1
     estado = num
     search.value=""
-    getUsers()
+    getInventario()
 }
 
-async function getUsers() {
+async function getInventario() {
     offset = (page - 1) * limit
-    clientes.innerHTML = '<div class="loading"><div class="spinner"></div></div>'
-    let url = `../json/clientes.php?action=get&limit=${limit}&offset=${offset}&estado=${estado}`
+    inventario.innerHTML = '<div class="loading"><div class="spinner"></div></div>'
+    let url = `../json/inventario.php?action=get&limit=${limit}&offset=${offset}&estado=${estado}`
 
     let res = await fetch(url)
     res.json()
@@ -35,29 +35,29 @@ async function getUsers() {
                 alert('Error en la base de datos')
                 console.log(res)
 
-            } else putUsers(res.data, res.count)
+            } else putInventario(res.data, res.count)
         })
 }
-getUsers()
+getInventario()
 
-function putUsers(data, count) {
-    clientes.innerHTML = ''
+function putInventario(data, count) {
+    inventario.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-
-        clientes.innerHTML += `<tr>
+        console.log(e)
+        inventario.innerHTML += `<tr>
                 <td>${num}</td>
-                <td>${e.nombres} ${e.apellidos}</td>
-                <td>${e.correo}</td>
-                <td>${e.edad}</td>
-                <td>${e.celular}</td>
-                <td>${e.direccion}</td>
-                <td>${e.documento}</td>
+                <td>${e.productoNombre}</td>
+                <td>${e.categoria}</td>
+                <td>${e.entradas}</td>
+                <td>${e.Salidas}</td>
+                <td>${e.Saldo}</td>
                 <td>${e.estado}</td>
+                
                 <td>
-                    <button data-id="${e.documento}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.documento}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.documento}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                    <button data-id="${e.idInventario}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+                    <button data-id="${e.idInventario}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
+                    <button data-id="${e.idInventario}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
         num++
@@ -110,7 +110,7 @@ function putUsers(data, count) {
     }
     
     if(data.length == 0){
-        clientes.innerHTML = `<tr>
+        inventario.innerHTML = `<tr>
             <td align="center" colspan="9">Sin resultados</td>
         </tr>`
     }
@@ -119,25 +119,25 @@ function putUsers(data, count) {
 function first() {
     if(page!=1){
         page = 1
-        getUsers()
+        getInventario()
     }    
 }
 function back() {
     if(page>1){
         page--
-        getUsers()
+        getInventario()
     }
 }
 function next() {
     if(page < Math.ceil(parseInt(cantidad.innerHTML) / limit)){
         page++
-        getUsers()
+        getInventario()
     }
 }
 function last() {
     if(page!=Math.ceil(parseInt(cantidad.innerHTML) / limit)){
         page = Math.ceil(parseInt(cantidad.innerHTML) / limit)
-        getUsers()
+        getInventario()
     }
 }
 
@@ -158,7 +158,7 @@ async function delUser(e) {
         .then(res=> {
 
             if(res.status){
-                getUsers()
+                getInventario()
             } else {
                 alert('Error al eliminar usuario')
             }
@@ -277,10 +277,10 @@ function verifyInputs(inputs){
 
 // buscar
 
-const getUsersSearch = async (text)=>{
+const getInventarioSearch = async (text)=>{
     const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putUsers(res.clientes,0))
+    .then(res => putInventario(res.clientes,0))
 
 }
 
@@ -290,7 +290,7 @@ search.addEventListener('keydown',e=>{
         e.target.disabled=true
         e.target.parentElement.style.backgroundColor='#efefef'
         let text = e.target.value
-        getUsersSearch(text).then(()=>{
+        getInventarioSearch(text).then(()=>{
             e.target.disabled=false
             e.target.parentElement.style.backgroundColor='#fff'
         })

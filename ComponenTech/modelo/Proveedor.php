@@ -58,8 +58,13 @@ class Proveedor{
 		return $res;
 	}
 
-	public function getCount(){
-		$sql = "SELECT count(*) as c FROM proveedor";
+	public function getCount($estado){
+		if($estado == 0){
+			$sql = "SELECT count(*) as c FROM proveedor";
+		} else {
+			$sql = "SELECT count(*) as c FROM proveedor where ESTADO_idEstado=$estado";
+		}
+		
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
@@ -87,12 +92,18 @@ class Proveedor{
 		$cn = conectar();
 		$res = $cn->query($sql);
 	
+	
 		$data = new stdClass();
 		$data->data=[];
+
+		$data->count=$this->getCount($estado);
+
 		while($value = $res->fetch_object()) {
 			array_push($data->data,$value);
 		}
-		$cn->close();
+
+
+		$cn->close();  
 		return $data;
 	}
 

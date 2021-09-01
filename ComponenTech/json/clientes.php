@@ -41,6 +41,7 @@ switch ($_GET['action']) {
             10,
             $_POST['pass1'] 
         );
+        
         if ($_POST['pass1'] == $_POST['pass2']){
             $res = $cliente->insertar();
             echo json_encode($res);

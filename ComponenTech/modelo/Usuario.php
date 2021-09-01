@@ -73,6 +73,7 @@ class Usuario {
 		$this->_pass = $_pass;
 	}
 
+
 	public function insertar() {
 		$sql = "INSERT INTO usuario values('$this->_documento','$this->_nombres','$this->_apellidos','$this->_fechaNacimiento',
 		'$this->_edad','$this->_celular','$this->_direccion','$this->_correo','$this->_cargo','$this->_tipodocumento','$this->_estado')";
@@ -81,7 +82,7 @@ class Usuario {
 		if( !$this->verifUsuario($this->_documento) ){
 			if( !$this->verifCorreo($this->_correo) ){
 				$cn = conectar();
-				$res->status = $cn->query($sql);
+					$res->status = $cn->query($sql);
 				$cn->close();
 				$this->registrarClave($this->_correo,$this->_pass);
 			} else {

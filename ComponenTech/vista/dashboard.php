@@ -42,21 +42,25 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/store.svg" alt="#">
                 <p>Productos</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-inventario.php" class="item">
                 <img src="icons/inventory.svg" alt="#">
                 <p>Inventario</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-proveedores.php" class="item">
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
-            <a href="#productos" class="item">
+            <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
+            </a>
+            <a href="dashboard-facturas.php" class="item">
+                <img src="icons/factura.svg" alt="#">
+                <p>Facturas</p>
             </a>
         </div>
     </div> 
@@ -176,12 +180,13 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
         numProveedores.innerHTML = '<div class="spinner"></div>'
         numProductos.innerHTML = '<div class="spinner"></div>'
         let res = await fetch("../json/dashboard.php?lista=resumen")
-        res.json()
+        res.text()
         .then(res => {
-            numClientes.innerHTML = res.clientes
-            numVentas.innerHTML = res.ventas
-            numProveedores.innerHTML = res.proveedores
-            numProductos.innerHTML = res.productos
+            console.log(res)
+            // numClientes.innerHTML = res.clientes
+            // numVentas.innerHTML = res.ventas
+            // numProveedores.innerHTML = res.proveedores
+            // numProductos.innerHTML = res.productos
         })
     }
     getResumen()
