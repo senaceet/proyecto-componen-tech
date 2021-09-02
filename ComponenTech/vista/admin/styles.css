@@ -322,6 +322,11 @@ header{
     flex-wrap: wrap;
     justify-content: space-between;
 }
+.tabla-datos .filtro{
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
 .tabla-datos .rows{
     display: flex;
     align-items: center;
@@ -488,13 +493,14 @@ header{
     display: none;
 }
 
-.reporteFlotante div{
+.reporteFlotante > div{
+    position:relative;
     max-height: 90vh;
     overflow: auto;
     padding:15px;
     border-radius: 4px;
     background-color:#fff;
-    
+    z-index: 910
 }
 
 .reporteFlotante table{

@@ -190,13 +190,13 @@ class Usuario {
 		$data->user="";
 		$data->msj="";
 		
-		$sql = "SELECT * FROM clave WHERE correo = '$c' and clave = '$p'";
+		$sql = "SELECT * FROM clave WHERE (correo = '$c' and clave = '$p')";
 		$cn = conectar();
 		$res = $cn->query($sql);
 
 		if($cn->error){
 			$data->error = true;
-			$data->msj = "Error al buscar usuario";
+			$data->msj = "Error al buscar usuario";      
 			return $data;
 		}
 

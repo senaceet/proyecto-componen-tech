@@ -197,6 +197,14 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
 
 
     <div  class="reporteFlotante">
+        <p style="
+            position:absolute;
+            width:100%;
+            height:100vh;
+
+        " onclick="
+            this.parentElement.style.display='none'
+        "></p>
         <div>
             <h1>Reporte de Compras</h1>
             <table>

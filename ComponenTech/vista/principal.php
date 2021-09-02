@@ -21,7 +21,7 @@ $prodCount = $objProducto->getProdCantidad();
 $npages = $prodCount/$limit;
 $offset = ($page - 1 ) * $limit;
 
-$con_productos = $objProducto->getProductos($limit,$offset,9,0);
+$con_productos = $objProducto->getProductos($limit,$offset,1,0);
 
 if (isset($_GET['c'])) {
 	$con_productos = $objProducto->getProductos($limit,$offset,9, $_GET['c']);
@@ -59,8 +59,10 @@ $con_cats = $objCat->getCategorias();
 				<?php if ($_SESSION['user']->CARGO_idCargo==1): ?>
 					<li><a href="dashboard.php">Administración</a> </li>
 				<?php endif ?>
+				
 				<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
 					<li><a href="compras.php">Mis compras</a> </li>
+					<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
 				<?php endif ?>
 				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 			<?php else: ?>
@@ -68,7 +70,7 @@ $con_cats = $objCat->getCategorias();
 				<li onclick="showLogin()">Iniciar sesión</li>
 				<li onclick="showReg()">Crear cuenta</li>
 			<?php endif ?>
-			<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>	
+				
 			</ul>
 
 		</nav>

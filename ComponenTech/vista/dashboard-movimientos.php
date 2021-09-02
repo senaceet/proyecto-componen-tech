@@ -93,15 +93,18 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                             <option value="20">20</option>
                         </select>
                     </div>
-                    <select onchange="getUsersEstado(this.value,0)">
-                        <option selected value="0">Todos</option>
-                        <option value="1">Productos en venta</option>
-                        <option value="2">Productos agotados</option>
-                    </select>
-                    <button 
-                        onclick="document.querySelector('#insertForm').style.display='flex'">
-                        Agregar +
-                    </button>
+                    
+                   
+                    <div class="filtro">
+                        Desde
+                        <input type="date" name="" id="inputDesde">
+                    </div>
+                    <div class="filtro">
+                        Hasta
+                        <input type="date" name="" id="inputHasta">
+                    </div>
+                    
+                    
                 </h1>
                 <table>
                     <thead>
@@ -112,7 +115,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                             <td>Cantidad</td>
                             <td>Fecha</td>
                             <td>Factura</td>
-                            <td>Acciones</td>
+                            
                         </tr>
                     </thead>
                     <tbody id="movimientos"></tbody>

@@ -735,6 +735,7 @@ section {
 .contenedor h1 {
 	color: var(--texto-gris);
 	font-weight: 100;
+	
 }
 
 /*CARTAS DE PRODUCTOS*/
@@ -1343,4 +1344,43 @@ ul {
 	.footer-col {
 		width: 100%;
 	}
+}
+
+/* Tabla historial de compras de los clientes */
+
+.contenedorHistorial{
+	padding: 20px 3vw;
+	
+}
+.contenedorHistorial h1{
+	text-align: center;
+	color: black;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.tabla-historial{
+	background-color:rgb(255, 255, 255);
+	border-collapse: collapse;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
+}
+
+.tabla-historial td{
+	
+	width: 100px;
+}
+
+.tabla-historial #enunciadoHistorial{
+	margin:0px;
+	padding: 10px 6px;
+	color: whitesmoke;
+	background-color:#aa0b2b;
+	font-weight: 600;
+	text-align:Center;
+	
+}
+
+.tabla-historial #productoHistorial{
+	text-align:Center;
+	padding: 6px;
 }

@@ -133,77 +133,27 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
         </div>
     </div>
 
-    <!-- <div id="insertForm" class="floating">
-        <div onclick="this.parentElement.style.display='none'" class="close-floating"></div>
-        <form onsubmit="addUser(event)" class="form">
-            <h1>Agregar usuario</h1>
-            <div class="inputs">
-                <div class="input">
-                    <p>Tipo de documento</p>
-                    <select required  name="tipodocumento">
-                        <option value="" selected disabled>Tipo de documento *</option>
-                        <option value="1">Cédula</option>
-                        <option value="2">Targeta de identidad</option>
-                        <option value="3">Cedula de extrangería</option>
-                        <option value="4">Pasaporte</option>
-                    </select>
-                </div>
-                <div class="input">
-                    <p>Numero de documento</p>
-                    <input required maxlength="10" name="numerodocumento" type="text">
-                </div>
-                <div class="input">
-                    <p>Nombres</p>
-                    <input required maxlength="30" name="nombres" type="text">
-                </div>
-                <div class="input">
-                    <p>Apellidos</p>
-                    <input required maxlength="30" name="apellidos" type="text">
-                </div>
-                <div class="input">
-                    <p>Fecha de nacimiento</p>
-                    <input required  name="fnacimiento" type="date">
-                </div>
-                <div class="input">
-                    <p>Edad</p>
-                    <input required min="12" max="90" name="edad" type="number">
-                </div>
-                <div class="input">
-                    <p>Numero celular</p>
-                    <input name="celular" maxlength="15" type="text">
-                </div>
-                <div class="input">
-                    <p>Dirección de residencia</p>
-                    <input required maxlength="100" name="direccion" type="text">
-                </div>
-                <div class="input">
-                    <p>Correo electrónico</p>
-                    <input required maxlength="45" name="correo" type="text">
-                </div>
-                <div class="input">
-                    <p>Contraseña</p>
-                    <input required minlength="3" name="pass1" type="text">
-                </div>
-                <div class="input">
-                    <p>Confirmar contraseña</p>
-                    <input required minlength="3"  name="pass2" type="text">
-                </div>
-            </div>
-            <button type="submit">Agregar</button>
-        </form>
-    </div> -->
+  
 
+    <div  class="reporteFlotante">
+        <p style="
+            position:absolute;
+            width:100%;
+            height:100vh;
 
-    <!-- <div  class="reporteFlotante">
+        " onclick="
+            this.parentElement.style.display='none'
+        "></p>
         <div>
-            <h1>Reporte de Compras</h1>
+            <h1>Reporte de Ventas </h1>
             <table>
                 <thead>
                     <tr class="tableHead">
                         <td>Producto</td>
                         <td>Cantidad</td>
                         <td>Fecha</td>
-                        <td>Precio</td>
+                        <td>Nombre comprador</td>
+                        <td>Valor</td>
                     </tr> 
                 </thead>
             
@@ -214,7 +164,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             
             <p align="right" class="pReportePrecio" >Total: <span id="reporteTotal"></span> </p>
         </div>
-    </div> -->
+    </div>
 
      
     

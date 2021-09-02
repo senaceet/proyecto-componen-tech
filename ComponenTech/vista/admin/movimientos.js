@@ -52,11 +52,6 @@ function putMovimientos(data, count) {
                 <td>${e.cantidad}</td>
                 <td>${e.fecha}</td>
                 <td>${e.FACTURA_idFactura}</td>
-                <td>
-                    <button data-id="${e.idMovimiento}" onclick="modOperador(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.idMovimiento}" onclick="delOperador(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.idMovimiento}" onclick="hisOperador(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
-                </td>
             </tr>`
         num++
     })

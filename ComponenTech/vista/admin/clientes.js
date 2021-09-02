@@ -171,7 +171,7 @@ async function delUser(e) {
 async function modUser(e) {
     console.log(e.dataset.id)
 }
-1022322061
+
 //Reporte de usuario
 const contenedorReporte = document.querySelector('.reporteFlotante')
 
@@ -179,23 +179,27 @@ const divReporte = document.querySelector('#reporte')
 
 const totalReporte  = document.querySelector('#reporteTotal')
 
+
+
 async function hisUser(e){
     let id = e.dataset.id
     contenedorReporte.style.display="flex"
 
-    const res = await fetch("../json/clientes.php?action=reporte&id="+id)
+    divReporte.innerHTML='<div style="position:absolute" class="loading"><div class="spinner"></div></div>'
 
+    const res = await fetch("../json/clientes.php?action=reporte&id="+id)
+    
     res.json()
     .then(data => {
         // -----
-
+        divReporte.innerHTML=""
         
 
         let lista =  data.data
 
-        divReporte.innerHTML = ""
-
         var total = 0
+
+        
 
         lista.forEach(e => {
             let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
@@ -211,6 +215,14 @@ async function hisUser(e){
                 </tr> 
             `
         })
+
+        if(lista.length==0){
+            divReporte.innerHTML += `
+                <tr>
+                    <td align="center" colspan="5">Sin resultados</td>
+                </tr> 
+            `
+        }
         
 
         total =  new Intl.NumberFormat("es-CO").format(total)

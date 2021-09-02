@@ -1,6 +1,7 @@
 <?php 
 require_once '../modelo/Inventario.php';
 switch ($_GET['action']) {
+
     case 'get':
         $objInventario = new Inventario();
         $limit = 10; $offset = 0; $estado = 0;
@@ -12,8 +13,20 @@ switch ($_GET['action']) {
 
         echo json_encode($data);
         break;
-    
+
+    case 'reporte':
+        $objInventario = new Inventario();
+        $id = $_GET['id'];
+        $data = $objInventario->getReporteIventario($id);
+
+        echo json_encode($data);
+        break;
+
+
     default:
         echo "{}";
         break;
+
+
+        
 }

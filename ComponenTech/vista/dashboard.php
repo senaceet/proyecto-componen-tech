@@ -180,13 +180,13 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
         numProveedores.innerHTML = '<div class="spinner"></div>'
         numProductos.innerHTML = '<div class="spinner"></div>'
         let res = await fetch("../json/dashboard.php?lista=resumen")
-        res.text()
+        res.json()
         .then(res => {
-            console.log(res)
-            // numClientes.innerHTML = res.clientes
-            // numVentas.innerHTML = res.ventas
-            // numProveedores.innerHTML = res.proveedores
-            // numProductos.innerHTML = res.productos
+            // console.log(res)
+            numClientes.innerHTML = res.clientes
+            numVentas.innerHTML = res.ventas
+            numProveedores.innerHTML = res.proveedores
+            numProductos.innerHTML = res.productos
         })
     }
     getResumen()

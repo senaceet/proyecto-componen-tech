@@ -168,7 +168,23 @@ async function delUser(e) {
 
 // modificar usuario
 async function modOperador(e) {
-    console.log(e.dataset.id)
+    var id = e.dataset.id
+
+    const datos = {
+        "nombre":"juan",
+        "apellido":"perez",
+    }
+
+    const res = await fetch("../json/operadores.php",{
+        method:"POST",
+        body:datos
+    })
+    res.json()
+    .then(res=>{
+        
+    })
+
+
 }
 
 //Reporte de usuario

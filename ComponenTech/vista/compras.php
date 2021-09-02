@@ -54,32 +54,32 @@ $compras = $objDetalles->getDetallesUsuario($_SESSION['user']->documento);
 	</header>
 	
 
-	<div class="contenedor">
+	<div class="contenedorHistorial">
 		<!-- <div class="filtros">
 			
 		</div> -->
 		<h1>Compras</h1>
 		<table class="tabla-historial" width="80%" style="margin:auto">
 			<thead>
-				<td></td>
-				<td>Producto</td>
-				<td>Precio unitario</td>
-				<td>Cantidad</td>
-				<td>Total</td>
-				<td>Fecha de compra</td>
+				<td id="enunciadoHistorial"></td>
+				<td id="enunciadoHistorial">Producto</td>
+				<td id="enunciadoHistorial">Precio unitario</td>
+				<td id="enunciadoHistorial">Cantidad</td>
+				<td id="enunciadoHistorial">Total</td>
+				<td id="enunciadoHistorial">Fecha de compra</td>
 			</thead>
 		<?php while ($compra = $compras->fetch_array()): 
-			$fecha = new DateTime($compra['fecha']);
 			setlocale(LC_ALL,"es_ES");
-			
+			$fecha = new DateTime($compra['fecha']);
+				
 			?>
 			<tr>
-				<td><img width="120px" src="<?php echo $compra['prodImg']; ?>" alt=""></td>
-				<td><?php echo $compra['productoNombre']; ?></td>
-				<td><?php echo fPrecio($compra['precio']); ?></td>
-				<td><?php echo $compra['cantidad']; ?></td>
-				<td><?php echo fPrecio($compra['totalCantidad']); ?></td>
-				<td><?php  echo $fecha->format('D-d-F-Y'); ?></td>
+				<td id="productoHistorial"><img width="120px" src="<?php echo $compra['prodImg']; ?>" alt=""></td>
+				<td id="productoHistorial"><?php echo $compra['productoNombre']; ?></td>
+				<td id="productoHistorial"><?php echo fPrecio($compra['precio']); ?></td>
+				<td id="productoHistorial"><?php echo $compra['cantidad']; ?></td>
+				<td id="productoHistorial"><?php echo fPrecio($compra['totalCantidad']); ?></td>
+				<td id="productoHistorial"><?php  echo $fecha->format('d-m-Y'); ?></td>
 			</tr>
 		<?php endwhile ?>
 			

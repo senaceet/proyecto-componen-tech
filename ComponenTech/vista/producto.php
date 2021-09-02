@@ -18,7 +18,7 @@ $prodCount = $objProducto->getProdCantidad();
 $npages = $prodCount/$limit;
 
 $offset = ($page - 1 ) * $limit;
-$con_productos = $objProducto->getProductos($limit,$offset,9,0);
+$con_productos = $objProducto->getProductos($limit,$offset,1,0);
 
  ?>
 <head>
@@ -51,14 +51,17 @@ $con_productos = $objProducto->getProductos($limit,$offset,9,0);
 			<?php if (isset($_SESSION['user'])): ?>
 				<li><a href="cuenta.php"><?php echo $_SESSION['user']->correo; ?></a></li>
 				<li><a href="principal.php">Inicio</a></li>
-				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				
+				<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
+					<li><a href="compras.php">Mis compras</a> </li>
+					<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
+				<?php endif ?>
 			<?php else: ?>
 
 				<li><a href="../index.php?r=1">Iniciar sesión / Crear cuenta</a></li>
 				
 			<?php endif ?>
-			<li><a href="#" class="ListarProductos" ><i class="fas fa-shopping-cart"></i></a></li>
+			<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				
 			</ul>
 		</nav>
@@ -91,10 +94,14 @@ $con_productos = $objProducto->getProductos($limit,$offset,9,0);
 
 					<div class="botonesDetalles">
 						<a href="principal.php"><input type="button" class="rojo" value="ATRAS"></a>
+					<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
+						
 						<form action="producto.php?p=<?php echo $_GET['p'] ?>" method="post">
 							<input type="hidden" name="prodId" value="<?php echo $productoActual['idProducto'] ?>">
 							<input class="verde" type="submit" name="addCarrito" value="AÑADIR AL CARRITO">
 						</form>
+					<?php endif ?>
+						
 						<?php if (isset($_POST['addCarrito'])) {
 							$_SESSION['carrito'][$_POST['prodId']]['img'] = $productoActual['prodImg'];
 							$_SESSION['carrito'][$_POST['prodId']]['nombre'] = $productoActual['productoNombre'];

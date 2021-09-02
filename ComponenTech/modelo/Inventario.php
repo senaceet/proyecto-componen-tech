@@ -224,12 +224,47 @@ class Inventario {
 	//return $this->_idProducto;
 	}
 
+
+	public function getReporteIventario($id){
+        $res = new stdClass();
+
+
+		$sql = "SELECT idProducto, productoNombre, cantidad, factura.fecha, documento, nombres, total 
+		FROM usuario, producto, movimiento, factura 
+		WHERE (USUARIO_documento = documento 
+		AND  idProducto=PRODUCTO_idProducto 
+		AND FACTURA_idFactura = idFactura AND idProducto='$id')";
+
+		
+		
+		$cn = conectar();
+
+		$resultado = $cn->query($sql);
+
+		$res->data = [];		
+
+		while($producto = $resultado->fetch_object()){
+			array_push($res->data,$producto);
+		}
+
+		$cn->close();
+
+		return $res;
+		
+	}
+
+
+
+	
+
 	public function vender($prod,$cant){
 		$sql = "SELECT * from inventario where PRODUCTO_idProducto = $prod";
 		$cn = conectar();
+		echo $cn->error;
 		$res = $cn->query($sql);
 
 		$res = $res->fetch_array();
+
 		$entradas = $res['entradas'];
 		$salidas = $res['Salidas'];
 		$salidas = $salidas + $cant;

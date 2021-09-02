@@ -228,6 +228,11 @@ class Factura {
 	 * @param string aFecha
 	 * @ParamType aFecha string
 	 */
+	public function getIdFactura() {
+		return $this->_idFactura;
+	}
+
+
 	public function setFecha($aFecha) {
 		$this->_fecha = $aFecha;
 	}

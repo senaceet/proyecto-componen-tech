@@ -33,7 +33,7 @@ async function getInventario() {
         .then(res => {
             if(res.error){
                 alert('Error en la base de datos')
-                console.log(res)
+                //console.log(res)
 
             } else putInventario(res.data, res.count)
         })
@@ -57,7 +57,7 @@ function putInventario(data, count) {
                 <td>
                     <button data-id="${e.idInventario}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
                     <button data-id="${e.idInventario}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.idInventario}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                    <button data-id="${e.PRODUCTO_idProducto}" onclick="hisReporte(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
         num++
@@ -171,7 +171,7 @@ async function delUser(e) {
 async function modUser(e) {
     console.log(e.dataset.id)
 }
-1022322061
+
 //Reporte de usuario
 const contenedorReporte = document.querySelector('.reporteFlotante')
 
@@ -179,15 +179,20 @@ const divReporte = document.querySelector('#reporte')
 
 const totalReporte  = document.querySelector('#reporteTotal')
 
-async function hisUser(e){
+
+
+
+async function hisReporte(e){
     let id = e.dataset.id
+    console.log(id)
     contenedorReporte.style.display="flex"
 
-    const res = await fetch("../json/clientes.php?action=reporte&id="+id)
+    const res = await fetch("../json/inventario.php?action=reporte&id="+id)
 
     res.json()
     .then(data => {
-        // -----
+        console.log(data)
+        // // -----
 
         
 
@@ -198,15 +203,16 @@ async function hisUser(e){
         var total = 0
 
         lista.forEach(e => {
-            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
+            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.total))
 
-            total += parseInt(e.precio) 
+            total += parseInt(e.total) 
 
             divReporte.innerHTML += `
                 <tr>
                     <td>${e.productoNombre}</td>
                     <td class="cantidad">${e.cantidad}</td>
                     <td>${e.fecha}</td>
+                    <td>${e.nombres}</td>
                     <td>$${precio}</td>
                 </tr> 
             `
@@ -218,7 +224,7 @@ async function hisUser(e){
         totalReporte.innerHTML = "$ "+total
        
 
-        // ----
+        // // ----
     })
 
 
