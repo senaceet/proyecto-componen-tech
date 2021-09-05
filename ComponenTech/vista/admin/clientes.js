@@ -199,7 +199,7 @@ async function hisUser(e){
 
         var total = 0
 
-        
+        contenedorReporte.querySelector('#descargaReporte').href = "../json/clientes.php?action=descargaReporte&id="+id
 
         lista.forEach(e => {
             let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))

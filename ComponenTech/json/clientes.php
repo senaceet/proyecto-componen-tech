@@ -92,6 +92,42 @@ switch ($_GET['action']) {
         echo json_encode($data);
 
         break;
+
+    case 'descargaReporte':
+        $cliente = new Cliente();
+        
+        $data = new stdClass();
+
+        if(isset($_GET['id'])){
+            $data = $cliente->getReporteCliente($_GET['id']);
+        }else {
+            $cliente->data=[];
+        }
+
+       
+        require_once '../controlador/reportepdf.php';
+
+        $pdf = new PDF();
+
+        $pdf -> AliasNbpages();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',16);
+        // $pdf->Cell(40,20,utf8_decode('¡Hola, Mundo!'));
+        $pdf->Head($data->user->nombres." ".$data->user->apellidos,"N° ".$data->user->documento);
+        $head = array(
+            array("texto" => "Precio", "ancho"=>"96"),
+            array("texto" => "Cantidad", "ancho"=>"21"),
+            array("texto" => "Fecha", "ancho"=>"30"),
+            array("texto" => "Precio", "ancho"=>"43")
+        );
+        $body = $data->data;
+        $pdf->tablaHorizontal($head,$body);
+        $pdf->Output("Reporte_".$data->user->documento.".pdf","I");
+       
+
+        // echo json_encode($data);
+
+        break;
         
     default:
         echo "{}";

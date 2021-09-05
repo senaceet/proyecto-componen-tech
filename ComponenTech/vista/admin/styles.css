@@ -504,6 +504,7 @@ header{
 }
 
 .reporteFlotante table{
+    width:100%;
     border-collapse: collapse;
 }
 
@@ -525,17 +526,29 @@ header{
     text-align: center;
     
 }
-.reporteFlotante div .pReportePrecio{
+.reporteFlotante div .pReportePrecio { 
     margin-top: 10px;
 }
 
-.reporteFlotante div .pReportePrecio{
+.reporteFlotante div .pReportePrecio {
     padding:4px 20px;
     color:#fff;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bold;
     font-size: 20px;
     background-color: #CE3F3F;
+}
+.pReportePrecio a{
+    
+    margin-right: 180px;
+    color: #CE3F3F;
+    padding: 2px 5px;
+    background-color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration:none;
+    border-radius: 4px;
 }
 .reporteFlotante span{
     padding-left:10px;

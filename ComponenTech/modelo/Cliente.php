@@ -88,12 +88,19 @@ class Cliente extends Usuario {
 				from producto,detalles,factura
 				where (PRODUCTO_idProducto = idProducto and idFactura = FACTURA_idFactura)
 				and USUARIO_documento = '$id'";
+
+		$sqlUsuario = "select * from usuario where documento = '$id'";
+		
 		
 		$cn = conectar();
 
+		$usuario = $cn->query($sqlUsuario);
+		$usuario = $usuario->fetch_object();
+
 		$resultado = $cn->query($sql);
 
-		$res->data = [];		
+		$res->data = [];
+		$res->user = $usuario;	
 
 		while($producto = $resultado->fetch_object()){
 			array_push($res->data,$producto);

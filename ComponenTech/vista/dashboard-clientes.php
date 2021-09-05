@@ -221,8 +221,13 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
 
                 </tbody>
             </table>
+
+           <div>
             
-            <p align="right" class="pReportePrecio" >Total: <span id="reporteTotal"></span> </p>
+            
+            <p align="right" class="pReportePrecio" > <a target="_blank" id="descargaReporte" href="#" >Reporte PDF </a> Total: <span id="reporteTotal"></span> </p>
+            </div>
+            
         </div>
     </div>
 
