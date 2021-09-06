@@ -107,19 +107,38 @@ class Proveedor{
 		return $data;
 	}
 
-	public function getProveedoresActivos(){
+	public function getProveedoresActivos($text,$estado){
 		$sql = "SELECT * FROM proveedor where ESTADO_idEstado = 4";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
 	}
-	public function getProveedoresSearch($s){
-		$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado where (proveedor.ESTADO_idEstado=estado.idEstado) and (idProveedor like '%$s%' or nEmpresa like '%$s%' or cNombre like '%$s%' or cApellido like '%$s%' or cCelular like '%$s%' or eTelefono like '%$s%' or estado like '%$s%')";
+	public function getProveedoresSearch($text,$estado){
+		if($estado == 4 || $estado == 5)
+			$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = $estado and (nEmpresa like '%$text%' or cNombre like '%$text%' or cApellido like '%$text%' or cCelular like '%$text%' or eTelefono like '%$text%')";
+			
+		else{
+			$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				where proveedor.ESTADO_idEstado=estado.idEstado and (nEmpresa like '%$text%' or cNombre like '%$text%' or cApellido like '%$text%' or cCelular like '%$text%' or eTelefono like '%$text%')";
+			
+		}
 		$cn = conectar();
 		$res = $cn->query($sql);
-		$cn->close();
-		return $res;
+	
+		$data = new stdClass();
+		$data->data=[];
+
+		$data->count=$this->getCount($estado);
+
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+
+
+		$cn->close();  
+		return $data;
 	}
 
 }

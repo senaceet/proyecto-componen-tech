@@ -87,16 +87,16 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             <div class="tabla-datos">
                 <h1>
                     <div class="rows">
-                        Filas: <select onchange="getUsersLimit(this.value,0)">
+                        Filas: <select onchange="getOperadoresLimit(this.value,0)">
                             <option value="5">5</option>
                             <option selected value="10">10</option>
                             <option value="20">20</option>
                         </select>
                     </div>
-                    <select onchange="getUsersEstado(this.value,0)">
+                    <select onchange="getOperadoresEstado(this.value,0)">
                         <option selected value="0">Todos</option>
-                        <option value="1">Productos en venta</option>
-                        <option value="2">Productos agotados</option>
+                        <option value="9">Operadores activos</option>
+                        <option value="10">Operadores desactivados</option>
                     </select>
                     <button 
                         onclick="document.querySelector('#insertForm').style.display='flex'">
@@ -112,6 +112,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                             <td>edad</td>
                             <td>Celular</td>
                             <td>Dirección</td>
+                            <td>Documento</td>
                             <td>Estado</td>
                             <td>Acciones</td>
                         </tr>

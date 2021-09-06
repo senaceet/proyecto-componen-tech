@@ -9,13 +9,13 @@ var limit = 10, offset = 0, estado = 0, page = 1
 
 
 
-async function getOperadorLimit(num) {
+async function getOperadoresLimit(num) {
     limit = num
     search.value=""
     getOperadores()
 }
 
-async function getOperadorEstado(num) {
+async function getOperadoresEstado(num) {
     page=1
     estado = num
     search.value=""
@@ -53,6 +53,7 @@ function putOperadores(data, count) {
                 <td>${e.celular}</td>
                 <td>${e.direccion}</td>
                 <td>${e.documento}</td>
+                <td>${e.estado}</td>
                 <td>
                     <button data-id="${e.documento}" onclick="modOperador(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
                     <button data-id="${e.documento}" onclick="delOperador(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
@@ -109,7 +110,7 @@ function putOperadores(data, count) {
     }
     
     if(data.length == 0){
-        inventario.innerHTML = `<tr>
+        operadores.innerHTML = `<tr>
             <td align="center" colspan="9">Sin resultados</td>
         </tr>`
     }
@@ -198,7 +199,7 @@ async function hisUser(e){
     let id = e.dataset.id
     contenedorReporte.style.display="flex"
 
-    const res = await fetch("../json/clientes.php?action=reporte&id="+id)
+    const res = await fetch("../json/operadores.php?action=reporte&id="+id)
 
     res.json()
     .then(data => {
@@ -293,9 +294,9 @@ function verifyInputs(inputs){
 // buscar
 
 const getOperadorSearch = async (text)=>{
-    const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
+    const res = await fetch(`../json/operadores.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putOperadores(res.clientes,0))
+    .then(res => putOperadores(res.data,0))
 
 }
 

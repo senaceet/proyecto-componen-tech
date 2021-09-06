@@ -3,19 +3,19 @@ const desde = document.querySelector('#desde')
 const cantidad = document.querySelector('#cantidad')
 const hasta = document.querySelector('#hasta')
 
-const search = document.querySelector('#clientSearch')
+const search = document.querySelector('#proveedoresSearch')
 
 var limit = 10, offset = 0, estado = 0, page = 1
 
 
 
-async function getProveedorLimit(num) {
+async function getProveedoresLimit(num) {
     limit = num
     search.value=""
     getProveedor()
 }
 
-async function getProveedorEstado(num) {
+async function getProveedoresEstado(num) {
     page=1
     estado = num
     search.value=""
@@ -108,7 +108,7 @@ function putProveedor(data, count) {
     }
     
     if(data.length == 0){
-        inventario.innerHTML = `<tr>
+        proveedores.innerHTML = `<tr>
             <td align="center" colspan="9">Sin resultados</td>
         </tr>`
     }
@@ -169,7 +169,7 @@ async function delUser(e) {
 async function modUser(e) {
     console.log(e.dataset.id)
 }
-1022322061
+
 //Reporte de usuario
 const contenedorReporte = document.querySelector('.reporteFlotante')
 
@@ -275,10 +275,10 @@ function verifyInputs(inputs){
 
 // buscar
 
-const getProveedorSearch = async (text)=>{
-    const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
+const getProveedoresSearch = async (text)=>{
+    const res = await fetch(`../json/proveedores.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putProveedor(res.clientes,0))
+    .then(res => putProveedor(res.data,0))
 
 }
 
@@ -288,7 +288,7 @@ search.addEventListener('keydown',e=>{
         e.target.disabled=true
         e.target.parentElement.style.backgroundColor='#efefef'
         let text = e.target.value
-        getProveedorSearch(text).then(()=>{
+        getProveedoresSearch(text).then(()=>{
             e.target.disabled=false
             e.target.parentElement.style.backgroundColor='#fff'
         })

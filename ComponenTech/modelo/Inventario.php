@@ -179,11 +179,12 @@ class Inventario {
 		if($estado == 0){
 			$sql = "SELECT count(*) as c FROM inventario";
 		} else {
-			$sql = "SELECT count(*) as c FROM inventario where ESTADO_idEstado=$estado";
+			$sql = "SELECT count(*) as c FROM inventario, producto where ESTADO_idEstado=$estado and PRODUCTO_idProducto=idProducto";
 		}
 		
 		$cn = conectar();
 		$res = $cn->query($sql);
+		
 		$cn->close();
 		$res = $res->fetch_array();
 		return $res['c'];
@@ -195,7 +196,7 @@ class Inventario {
 		        $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
 				FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND idCategoria = CATEGORIA_idCategoria)";
 			else
-			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo idEstado, estado 
+			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
 			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND idCategoria = CATEGORIA_idCategoria) limit $offset, $limit";
 
 		else{
@@ -205,25 +206,54 @@ class Inventario {
 			else
 			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
 			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria) limit $offset, $limit";
-	}
-	$cn = conectar();
-	$res = $cn->query($sql);
+		}
+		$cn = conectar();
+		$res = $cn->query($sql);
+		
+		$data = new stdClass();
+		$data->data=[];
 
-	$data = new stdClass();
-	$data->data=[];
+		$data->count=$this->getCount($estado);
 
-	$data->count=$this->getCount($estado);
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
 
-	while($value = $res->fetch_object()) {
-		array_push($data->data,$value);
-	}
-
-	$cn->close();  
-	return $data;
+		$cn->close();  
+		return $data;
 		
 	//return $this->_idProducto;
 	}
 
+
+	public function getInventarioSearch($text,$estado) {
+        if( $estado == 1|| $estado == 2)
+		    $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
+			FROM inventario, producto, estado, categoria where ESTADO_idEstado = $estado and (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria) and (productoNombre like '%$text%' or categoria like '%$text%')";
+			
+		else{
+			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
+			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria) and (productoNombre like '%$text%' or categoria like '%$text%')";
+		}
+		$cn = conectar();
+		$res = $cn->query($sql);
+		
+		$data = new stdClass();
+		$data->data=[];
+		// echo $sql."<br>";
+
+
+		$data->count=$this->getCount($estado);
+
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+
+		$cn->close();  
+		return $data;
+		
+
+	}
 
 	public function getReporteIventario($id){
         $res = new stdClass();

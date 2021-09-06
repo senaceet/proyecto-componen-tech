@@ -3,7 +3,7 @@ const desde = document.querySelector('#desde')
 const cantidad = document.querySelector('#cantidad')
 const hasta = document.querySelector('#hasta')
 
-const search = document.querySelector('#clientSearch')
+const search = document.querySelector('#inventarioSearch')
 
 var limit = 10, offset = 0, estado = 0, page = 1
 
@@ -44,7 +44,6 @@ function putInventario(data, count) {
     inventario.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-        console.log(e)
         inventario.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.productoNombre}</td>
@@ -284,14 +283,14 @@ function verifyInputs(inputs){
 // buscar
 
 const getInventarioSearch = async (text)=>{
-    const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
+    const res = await fetch(`../json/inventario.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putInventario(res.clientes,0))
+    .then(res => putInventario(res.data,0))
 
 }
 
 search.addEventListener('keydown',e=>{
-    
+
     if(e.keyCode === 13){
         e.target.disabled=true
         e.target.parentElement.style.backgroundColor='#efefef'

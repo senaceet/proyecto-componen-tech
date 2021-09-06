@@ -14,6 +14,14 @@ switch ($_GET['action']) {
         echo json_encode($data);
         break;
 
+    case 'search':
+        $objInventario = new Inventario();
+        $text = $_GET['text']; $estado = $_GET['estado'];
+
+        $data = $objInventario->getInventarioSearch($text,$estado);
+        echo json_encode($data);
+        break;
+
     case 'reporte':
         $objInventario = new Inventario();
         $id = $_GET['id'];

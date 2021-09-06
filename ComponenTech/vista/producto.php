@@ -54,21 +54,21 @@ $con_productos = $objProducto->getProductos($limit,$offset,1,0);
 				
 				<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
 					<li><a href="compras.php">Mis compras</a> </li>
+					<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 					<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
 				<?php endif ?>
 			<?php else: ?>
 
-				<li><a href="../index.php?r=1">Iniciar sesión / Crear cuenta</a></li>
-				
+				<li><a href="../index.php">Inicio</a></li>
+				<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
 			<?php endif ?>
-			<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				
 			</ul>
 		</nav>
 	</header>
 
 
-	<!---CONTENEDOR DE PRODUCTOS (-ETALLES)--->
+	<!---CONTENEDOR DE PRODUCTOS (-DETALLES)--->
 	<div class="contenedor">
 		<?php if (isset($_GET['p'])): 
 			$producto = $objProducto->getProducto($_GET['p']);
@@ -94,12 +94,21 @@ $con_productos = $objProducto->getProductos($limit,$offset,1,0);
 
 					<div class="botonesDetalles">
 						<a href="principal.php"><input type="button" class="rojo" value="ATRAS"></a>
-					<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
+					<?php if(isset($_SESSION['user'])):
+						if ($_SESSION['user']->CARGO_idCargo==3 ): ?>
 						
+							<form action="producto.php?p=<?php echo $_GET['p'] ?>" method="post">
+								<input type="hidden" name="prodId" value="<?php echo $productoActual['idProducto'] ?>">
+								<input class="verde" type="submit" name="addCarrito" value="AÑADIR AL CARRITO">
+							</form>
+
+					<?php endif;
+					 else: ?>
+
 						<form action="producto.php?p=<?php echo $_GET['p'] ?>" method="post">
-							<input type="hidden" name="prodId" value="<?php echo $productoActual['idProducto'] ?>">
-							<input class="verde" type="submit" name="addCarrito" value="AÑADIR AL CARRITO">
-						</form>
+								<input type="hidden" name="prodId" value="<?php echo $productoActual['idProducto'] ?>">
+								<input class="verde" type="submit" name="addCarrito" value="AÑADIR AL CARRITO">
+							</form>
 					<?php endif ?>
 						
 						<?php if (isset($_POST['addCarrito'])) {

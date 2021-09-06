@@ -58,17 +58,20 @@ $con_cats = $objCat->getCategorias();
 				<li class="CuentaCorreo"><a href="cuenta.php"><?php echo $_SESSION['user']->correo; ?></a></li>
 				<?php if ($_SESSION['user']->CARGO_idCargo==1): ?>
 					<li><a href="dashboard.php">Administración</a> </li>
+					<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 				<?php endif ?>
 				
 				<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
 					<li><a href="compras.php">Mis compras</a> </li>
+					<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 					<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
 				<?php endif ?>
-				<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
+				
 			<?php else: ?>
 				
 				<li onclick="showLogin()">Iniciar sesión</li>
 				<li onclick="showReg()">Crear cuenta</li>
+				<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
 			<?php endif ?>
 				
 			</ul>

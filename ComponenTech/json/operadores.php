@@ -12,6 +12,14 @@ switch ($_GET['action']) {
 
         echo json_encode($data);
         break;
+
+    case 'search':
+        $objOperador = new Operador();
+        $data = $objOperador->getOperadoresBusqueda($_GET['text'],$_GET['estado']);
+
+        echo json_encode($data);
+        break;
+
     
     default:
         # code...

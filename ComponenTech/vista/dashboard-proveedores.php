@@ -75,7 +75,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <div class="search-box">
                 <img src="icons/search.svg" alt="#">
-                <input id="clientSearch" on size="26" type="text" placeholder="Buscar">
+                <input id="proveedoresSearch" on size="26" type="text" placeholder="Buscar">
             </div>
             <div class="user">
                 <p><?php echo $_SESSION['user']->nombres ?></p>
@@ -87,16 +87,16 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             <div class="tabla-datos">
                 <h1>
                     <div class="rows">
-                        Filas: <select onchange="getUsersLimit(this.value,0)">
+                        Filas: <select onchange="getProveedoresLimit(this.value,0)">
                             <option value="5">5</option>
                             <option selected value="10">10</option>
                             <option value="20">20</option>
                         </select>
                     </div>
-                    <select onchange="getUsersEstado(this.value,0)">
+                    <select onchange="getProveedoresEstado(this.value,0)">
                         <option selected value="0">Todos</option>
-                        <option value="1">Productos en venta</option>
-                        <option value="2">Productos agotados</option>
+                        <option value="4">Proveedores activo</option>
+                        <option value="5">Proveedores inactivos</option>
                     </select>
                     <button 
                         onclick="document.querySelector('#insertForm').style.display='flex'">

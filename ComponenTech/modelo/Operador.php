@@ -24,12 +24,34 @@ class Operador extends Usuario {
 		return $res['c'];
 	}
 
-	public function getOperadoresBusqueda($s){
-		$sql = "SELECT * FROM usuario WHERE (documento like '%$s%' or nombres like '%$s%' or apellidos like '%$s%' or fechaNto like '%$s%' or edad like '%$s%' or celular like '%$s%' or direccion like '%$s%' or correo like '%$s%') and (CARGO_idCargo=2 and ESTADO_idEStado = 9)";
+	public function getOperadoresBusqueda($text,$estado){
+		if($estado == 10 || $estado == 9)
+			$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo) and 
+			(
+				documento like '%$text%' or nombres like '%$text%' or apellidos like '%$text%' or edad like '%$text%' or celular like '%$text%' or direccion like '%$text%' or correo like '%$text%'
+			)and ESTADO_idEstado = $estado";
+		else{
+			$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo) and 
+			(
+				documento like '%$text%' or nombres like '%$text%' or apellidos like '%$text%' or edad like '%$text%' or celular like '%$text%' or direccion like '%$text%' or correo like '%$text%'
+			) ";
+		}
+		
 		$cn = conectar();
 		$res = $cn->query($sql);
+
+		$data = new stdClass();
+		$data->data=[];
+
+		$data->count=$this->getCount($estado);
+
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		
 		$cn->close();
-		return $res;
+		return $data;
+		
 	}
 	
 
@@ -51,42 +73,34 @@ class Operador extends Usuario {
 
 	public function getOperador($limit,$offset,$estado){
 		if($estado == 10 || $estado == 9)
-		if($limit = 0)
-		   $sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND idEstado = $estado AND CARGO_idCargo = idCargo)";
-		else
-		$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND idEstado = $estado AND CARGO_idCargo = idCargo)limit $offset, $limit";
-		
+			if($limit == 0)
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND ESTADO_idEstado = $estado AND CARGO_idCargo = idCargo)";
+			else
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND ESTADO_idEstado = $estado AND CARGO_idCargo = idCargo)limit $offset, $limit";
+			
 		else{
-		if ($limit == 0)
-		$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)";
-		else
-		$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)limit $offset, $limit";
+			if ($limit == 0)
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)";
+			else
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)limit $offset, $limit";
+			}
+		$cn = conectar();
+		$res = $cn->query($sql);
+
+		$data = new stdClass();
+		$data->data=[];
+
+		$data->count=$this->getCount($estado);
+
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
 		}
-	$cn = conectar();
-	$res = $cn->query($sql);
-
-	$data = new stdClass();
-	$data->data=[];
-
-	$data->count=$this->getCount($estado);
-
-	while($value = $res->fetch_object()) {
-		array_push($data->data,$value);
+		
+		$cn->close();
+		return $data;
 	}
-    
-	$cn->close();
-	return $data;
-	}
-	/**
-	 * @access RGO
-		// Not yet implemented
-	}
+	
 
-	/**
-	 * @access public
-	 * @return boolean
-	 * @ReturnType boolean
-	 */
 	public function ModificarProducto() {
 		// Not yet implemented
 	}
