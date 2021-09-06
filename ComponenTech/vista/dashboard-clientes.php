@@ -206,7 +206,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             this.parentElement.style.display='none'
         "></p>
         <div>
-            <h1>Reporte de Compras</h1>
+            <h1><div>Reporte de Compras</div> <div> <input title="desde" type="date" id="desdeReporte"></div></h1>
             <table>
                 <thead>
                     <tr class="tableHead">
@@ -222,11 +222,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 </tbody>
             </table>
 
-           <div>
+           
+                <div align="right" class="pReportePrecio" >
+                    <a target="_blank" id="descargaReporte" href="#" >Reporte PDF </a>
+                    <div>Total: <span id="reporteTotal"></span></div>
+                </div>
             
-            
-            <p align="right" class="pReportePrecio" > <a target="_blank" id="descargaReporte" href="#" >Reporte PDF </a> Total: <span id="reporteTotal"></span> </p>
-            </div>
             
         </div>
     </div>

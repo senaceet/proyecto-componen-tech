@@ -3,6 +3,8 @@ const desde = document.querySelector('#desde')
 const cantidad = document.querySelector('#cantidad')
 const hasta = document.querySelector('#hasta')
 
+const inputDate = document.querySelector('#desdeReporte')
+
 const search = document.querySelector('#clientSearch')
 
 var limit = 10, offset = 0, estado = 0, page = 1
@@ -193,49 +195,46 @@ async function hisUser(e){
     .then(data => {
         // -----
         divReporte.innerHTML=""
-        
-
+    
         let lista =  data.data
-
-        var total = 0
-
-        contenedorReporte.querySelector('#descargaReporte').href = "../json/clientes.php?action=descargaReporte&id="+id
-
-        lista.forEach(e => {
-            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
-
-            total += parseInt(e.precio) 
-
-            divReporte.innerHTML += `
-                <tr>
-                    <td>${e.productoNombre}</td>
-                    <td class="cantidad">${e.cantidad}</td>
-                    <td>${e.fecha}</td>
-                    <td>$${precio}</td>
-                </tr> 
-            `
-        })
-
-        if(lista.length==0){
-            divReporte.innerHTML += `
-                <tr>
-                    <td align="center" colspan="5">Sin resultados</td>
-                </tr> 
-            `
-        }
+        putReporte(lista, id)
         
-
-        total =  new Intl.NumberFormat("es-CO").format(total)
-
-        totalReporte.innerHTML = "$ "+total
-       
-
         // ----
     })
 
+}
 
-    // http://localhost/ctech/json/clientes.php?action=reporte&id=1022322061
+function putReporte(lista, id){
+    var total = 0
+    
+    contenedorReporte.querySelector('#descargaReporte').href = "../json/clientes.php?action=descargaReporte&id="+id
 
+    lista.forEach(e => {
+        let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
+
+        total += parseInt(e.precio) 
+
+        divReporte.innerHTML += `
+            <tr>
+                <td>${e.productoNombre}</td>
+                <td class="cantidad">${e.cantidad}</td>
+                <td>${e.fecha}</td>
+                <td>$${precio}</td>
+            </tr> 
+        `
+    })
+
+    if(lista.length==0){
+        divReporte.innerHTML += `
+            <tr>
+                <td align="center" colspan="5">Sin resultados</td>
+            </tr> 
+        `
+    }
+    
+    total =  new Intl.NumberFormat("es-CO").format(total)
+
+    totalReporte.innerHTML = "$ "+total
 }
 
 
@@ -307,4 +306,29 @@ search.addEventListener('keydown',e=>{
             e.target.parentElement.style.backgroundColor='#fff'
         })
     }
+})
+
+
+// filtro fecha
+inputDate.addEventListener('change',e=>{
+
+    divReporte.innerHTML='<div style="position:absolute" class="loading"><div class="spinner"></div></div>'
+    setTimeout(() => {
+        divReporte.innerHTML = "uuuuu";
+    }, 2000);
+    console.log(e.target.value)
+    // var date = e.target.value;
+
+    // const res = await fetch("../json/clientes.php?action=reporte&id="+id+"&desde="+date)
+    
+    // res.json()
+    // .then(data => {
+    //     // -----
+    //     divReporte.innerHTML=""
+    
+    //     let lista =  data.data
+    //     putReporte(lista, id)
+        
+    //     // ----
+    // })
 })

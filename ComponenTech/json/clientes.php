@@ -92,6 +92,8 @@ switch ($_GET['action']) {
         echo json_encode($data);
 
         break;
+        
+           
 
     case 'descargaReporte':
         $cliente = new Cliente();
@@ -100,6 +102,9 @@ switch ($_GET['action']) {
 
         if(isset($_GET['id'])){
             $data = $cliente->getReporteCliente($_GET['id']);
+            if(isset($_GET['fecha'])){
+                $data = $cliente->getReporteClienteFecha($_GET['id'],$_GET['fecha']);
+            }
         }else {
             $cliente->data=[];
         }

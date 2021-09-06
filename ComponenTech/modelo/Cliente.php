@@ -55,6 +55,39 @@ class Cliente extends Usuario {
 		return $res;
 	}
 
+	public function getReportexFecha($id,$fecha){
+		$res = new stdClass();
+
+		$sql = "SELECT idProducto,productoNombre,cantidad,fecha,precio 
+				from producto,detalles,factura
+				where (PRODUCTO_idProducto = idProducto and idFactura = FACTURA_idFactura)
+				and USUARIO_documento = '$id' and '$fecha'<=CURDATE()";
+
+		$sqlUsuario = "select * from usuario where documento = '$id'";
+		fecha
+		
+		$cn = conectar();
+
+		// ahi iban
+
+		$usuario = $cn->query($sqlUsuario);
+		$usuario = $usuario->fetch_object();
+
+		$resultado = $cn->query($sql);
+
+		$res->data = [];
+		$res->user = $usuario;	
+
+		while($producto = $resultado->fetch_object()){
+			array_push($res->data,$producto);
+		}
+
+		$cn->close();
+
+		return $res;
+
+	}
+
 	public function getClientesDesac($startpage,$limitpage){
 		$sql = "SELECT * FROM usuario WHERE CARGO_idCargo=3 and ESTADO_idEStado = 10 limit $startpage,$limitpage";
 		$cn = conectar();
