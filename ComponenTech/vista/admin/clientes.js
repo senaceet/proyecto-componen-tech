@@ -224,6 +224,9 @@ function putReporte(lista, id){
         `
     })
 
+    contenedorReporte.parentElement.parentElement.querySelector('input').className=id
+    contenedorReporte.querySelector('input').className=id
+
     if(lista.length==0){
         divReporte.innerHTML += `
             <tr>
@@ -310,25 +313,29 @@ search.addEventListener('keydown',e=>{
 
 
 // filtro fecha
-inputDate.addEventListener('change',e=>{
+inputDate.addEventListener('change',async e=>{
+
+    var id = e.target.className
 
     divReporte.innerHTML='<div style="position:absolute" class="loading"><div class="spinner"></div></div>'
-    setTimeout(() => {
-        divReporte.innerHTML = "uuuuu";
-    }, 2000);
-    console.log(e.target.value)
-    // var date = e.target.value;
+    
+    var date = e.target.value;
 
-    // const res = await fetch("../json/clientes.php?action=reporte&id="+id+"&desde="+date)
+    var url = "../json/clientes.php?action=reporte&id="+id+"&fecha="+date
+
+    const res = await fetch(url)
     
-    // res.json()
-    // .then(data => {
-    //     // -----
-    //     divReporte.innerHTML=""
-    
-    //     let lista =  data.data
-    //     putReporte(lista, id)
+    res.json()
+    .then(data => {
         
-    //     // ----
-    // })
+        // -----
+
+        divReporte.innerHTML=""
+    
+        let lista =  data.data
+
+        putReporte(lista, id)
+        
+        // ----
+    })
 })

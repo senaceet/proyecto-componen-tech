@@ -15,7 +15,7 @@ class Cliente extends Usuario {
 		$cn = conectar();
 		$res = $cn->query($sql);
 		
-		if($cn->error){ 
+		if($cn->error){   
 			$data->error=true;
 			$data->msg=$cn->error;
 		} else {
@@ -59,17 +59,16 @@ class Cliente extends Usuario {
 		$res = new stdClass();
 
 		$sql = "SELECT idProducto,productoNombre,cantidad,fecha,precio 
-				from producto,detalles,factura
-				where (PRODUCTO_idProducto = idProducto and idFactura = FACTURA_idFactura)
-				and USUARIO_documento = '$id' and '$fecha'<=CURDATE()";
+				from producto,detalles,factura,usuario
+				where (PRODUCTO_idProducto = idProducto and idFactura = FACTURA_idFactura and documento=USUARIO_documento)
+				and USUARIO_documento = '$id' and fecha>='$fecha' ";
 
 		$sqlUsuario = "select * from usuario where documento = '$id'";
-		fecha
+		
 		
 		$cn = conectar();
 
-		// ahi iban
-
+	
 		$usuario = $cn->query($sqlUsuario);
 		$usuario = $usuario->fetch_object();
 
@@ -77,7 +76,7 @@ class Cliente extends Usuario {
 
 		$res->data = [];
 		$res->user = $usuario;	
-
+      
 		while($producto = $resultado->fetch_object()){
 			array_push($res->data,$producto);
 		}
@@ -120,7 +119,7 @@ class Cliente extends Usuario {
 		$sql = "SELECT idProducto,productoNombre,cantidad,fecha,precio 
 				from producto,detalles,factura
 				where (PRODUCTO_idProducto = idProducto and idFactura = FACTURA_idFactura)
-				and USUARIO_documento = '$id'";
+				and USUARIO_documento = '$id' ORDER BY fecha DESC";
 
 		$sqlUsuario = "select * from usuario where documento = '$id'";
 		

@@ -83,6 +83,9 @@ switch ($_GET['action']) {
 
         if(isset($_GET['id'])){
             $data = $cliente->getReporteCliente($_GET['id']);
+            if(isset($_GET['fecha'])){
+                $data = $cliente->getReportexFecha($_GET['id'],$_GET['fecha']);
+            }
         }else {
             $cliente->data=[];
         }
@@ -102,9 +105,6 @@ switch ($_GET['action']) {
 
         if(isset($_GET['id'])){
             $data = $cliente->getReporteCliente($_GET['id']);
-            if(isset($_GET['fecha'])){
-                $data = $cliente->getReporteClienteFecha($_GET['id'],$_GET['fecha']);
-            }
         }else {
             $cliente->data=[];
         }
