@@ -239,7 +239,7 @@ try {
          <br>                   
    </div>';
 
- echo $mail->Body;
+//  echo $mail->Body;
 
   $mail->send();
 

@@ -8,8 +8,10 @@
 <body>
 
   <footer class="footer">
-     <div class="container">
-      <div class="row">
+  <p><a href="#">Ayuda</a></p>
+  <p>©ComponenTech |  2021</p>
+     <!-- <div class="container">
+       <div class="row">
         <div class="footer-col">
           <p>Compañia</p>
           <ul>
@@ -19,15 +21,7 @@
             <li><a href="#">componen tech</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <p>Ayuda</p>
-          <ul>
-            <li><a href="#">Envio</a></li>
-            <li><a href="#">Devoluciones</a></li>
-            <li><a href="#">estado de pedido</a></li>
-            <li><a href="#">opciones de pago</a></li>
-          </ul>
-        </div>
+        
         <div class="footer-col">
           <p>Contactanos</p>
           <div class="social-links">
@@ -36,8 +30,15 @@
             <a href="http://componentech.epizy.com/"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
-      </div>
-     </div>
+      </div> 
+
+      <div class="footer-col">
+          <p>Ayuda</p>
+          <ul>
+          <p>©ComponenTech | 2021</p>
+         </ul>
+        </div>
+     </div> -->
   </footer>
 
 </body>

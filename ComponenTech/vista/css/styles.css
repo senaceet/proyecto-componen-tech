@@ -1250,8 +1250,26 @@ ul {
 	margin-top: 10px;
 	background-color: var(--texto-gris);
 	/*background-color: #24262b;*/
-	padding: 50px 0;
+	padding:10px 0;
+	justify-content: center;
+	display: flex;
+	grid-gap: 15px;
 }
+
+.footer a{
+	text-decoration: none;
+	color: white;
+}
+
+.footer p {
+	color: white;
+	text-align: center;
+	font-weight: 500;
+}
+
+
+	
+
 
 /*separa las columnas*/
 
@@ -1269,6 +1287,8 @@ ul {
 	margin-bottom: 35px;
 	font-weight: 500;
 	position: relative;
+	margin-top: 20px;
+	margin-left: 500px;
 }
 
 /*la linea que aparece abajo del titulo*/
