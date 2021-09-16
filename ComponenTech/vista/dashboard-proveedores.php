@@ -35,10 +35,14 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/dashboard.svg" alt="#">
                 <p>Dashboard</p>
             </a>
-            <a href="dashboard-clientes.php" class="item">
-                <img src="icons/users.svg" alt="#">
-                <p>Clientes</p>
-            </a>
+
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>  
+                <a href="dashboard-clientes.php" class="item">
+                    <img src="icons/users.svg" alt="#">
+                    <p>Clientes</p>
+                </a>
+            <?php endif ?>  
+
             <a href="dashboard-productos.php" class="item">
                 <img src="icons/store.svg" alt="#">
                 <p>Productos</p>
@@ -51,10 +55,14 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
-            <a href="dashboard-operadores.php" class="item">
-                <img src="icons/admin.svg" alt="#">
-                <p>Operadores</p>
-            </a>
+
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?> 
+                <a href="dashboard-operadores.php" class="item">
+                    <img src="icons/admin.svg" alt="#">
+                    <p>Operadores</p>
+                </a>
+            <?php endif ?>  
+
             <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>

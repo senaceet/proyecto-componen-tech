@@ -206,9 +206,18 @@ class Usuario {
 
 		if($find_user->num_rows == 1){
 			if($res->num_rows == 1){
-				$data->error = false;
-				$data->msj = "Inicio correcto";
-				$data->user = $find_user->fetch_object();
+				$user = $find_user->fetch_object();
+
+				if($user->ESTADO_idEstado == 10) {
+					$data->error = true;
+					$data->msj = "El usuario se encuentra desactivado";
+				} else {
+					$data->error = false;
+					$data->msj = "Inicio correcto";
+					$data->user = $user;
+				}
+
+				
 			} else {
 				$data->error = true;
 				$data->msj = "Contraseña incorrecta";
@@ -224,28 +233,20 @@ class Usuario {
 
 
 	public function desactivar($u) {
-		if($this->getUsuario($u,1)->num_rows!=0){
-			$sql = "UPDATE usuario set ESTADO_idEstado = 10 where documento = $u";
-			$cn = conectar();
-			$res = $cn->query($sql);
-			$cn->close();
-		} else {
-			$res = 2;
-		}
-		
+		$sql = "UPDATE usuario set ESTADO_idEstado=10 where documento='$u'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
 		return $res;
 	}
 
+
+
 	public function activar($u) {
-		if($this->getUsuario($u,1)->num_rows!=0){
-			$sql = "UPDATE usuario set ESTADO_idEstado = 9 where documento = $u";
-			$cn = conectar();
-			$res = $cn->query($sql);
-			$cn->close();
-		} else {
-			$res = 2;
-		}
-		
+		$sql = "UPDATE usuario set ESTADO_idEstado=9 where documento='$u'";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
 		return $res;
 	}
 
@@ -255,6 +256,22 @@ class Usuario {
 		$res = $cn->query($sql);
 		$cn->close();
 		return $res;
+	}
+
+	public function editar($u,array $d){
+		$data = new stdClass();
+		$sql = "UPDATE usuario set nombres='".$d['nombres']."',apellidos='".$d['apellidos']."',fechaNto='".$d['fnacimiento']."',edad='".$d['edad']."',celular='".$d['celular']."',direccion='".$d['direccion']."', correo = '".$d['correo']."' where documento = $u";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		if($cn->error){
+			$data->status = false;
+			$data->error = $cn->error;
+		} else {
+			$data->status = true;
+			$data->data = $res;
+		}
+		$cn->close();
+		return $data;
 	}
 
 	public function cambiarClave($u,$p){

@@ -1,4 +1,16 @@
-<?php 
+<?php
+
+
+
+session_start();
+if (!$_SESSION['user']) {
+	header('location:../index.php');
+}
+if ($_SESSION['user']->CARGO_idCargo==3) {
+	header('location:../index.php');
+}
+
+
 require_once '../modelo/Cliente.php';
 
 switch ($_GET['action']) {
@@ -24,6 +36,18 @@ switch ($_GET['action']) {
         echo(json_encode($clientes));
         
         break;
+
+    case 'get1':    
+            $id = $_GET['id'];
+    
+            $objCliente = new Cliente();
+    
+            $cliente = $objCliente->getCliente($id);
+      
+            echo(json_encode($cliente));
+            
+            break;
+        
     
     case 'add':
         $cliente = new Cliente();
@@ -52,7 +76,16 @@ switch ($_GET['action']) {
     
     case 'delete':
         $cliente = new Cliente();
-        if($cliente->eliminar($_POST['id'])){
+        if($cliente->desactivar($_POST['id'])){
+            echo '{"status":true}';
+        } else{
+            echo '{"status":false}';
+        }
+        break;
+
+    case 'restore':
+        $cliente = new Cliente();
+        if($cliente->activar($_POST['id'])){
             echo '{"status":true}';
         } else{
             echo '{"status":false}';
@@ -72,6 +105,11 @@ switch ($_GET['action']) {
         break;
 
     case 'edit':
+        $cliente = new Cliente();
+
+        $data = $cliente->editar($_POST['documento'],$_POST);
+   
+        echo json_encode($data);
         
         break;
 

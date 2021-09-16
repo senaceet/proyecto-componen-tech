@@ -9,9 +9,9 @@ class Cliente extends Usuario {
 	public function getClientes($startpage,$limitpage,$estado){
 		$data = new stdClass();
 		if($estado == 9|| $estado == 10)
-			$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado FROM usuario, estado WHERE (CARGO_idCargo=3 and ESTADO_idEStado = $estado) and idEstado = ESTADO_idEstado limit $startpage,$limitpage";
+			$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado, idEstado FROM usuario, estado WHERE (CARGO_idCargo=3 and ESTADO_idEStado = $estado) and idEstado = ESTADO_idEstado limit $startpage,$limitpage";
 		else
-		$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado FROM usuario,estado WHERE CARGO_idCargo=3 and idEstado = ESTADO_idEstado  limit $startpage,$limitpage";
+		$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado, idEstado FROM usuario,estado WHERE CARGO_idCargo=3 and idEstado = ESTADO_idEstado  limit $startpage,$limitpage";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		
@@ -24,6 +24,23 @@ class Cliente extends Usuario {
 				array_push($data->data,$user);
 			}
 			$data->count = $this->count($estado);
+		}
+		$cn->close();
+
+		return $data;
+	}
+
+	public function getCliente($id){
+		$data = new stdClass();
+		$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado, idEstado FROM usuario, estado WHERE (CARGO_idCargo=3 and documento = $id) and idEstado = ESTADO_idEstado ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		
+		if($cn->error){   
+			$data->error=true;
+			$data->msg=$cn->error;
+		} else {
+			$data->data = $res->fetch_object();
 		}
 		$cn->close();
 

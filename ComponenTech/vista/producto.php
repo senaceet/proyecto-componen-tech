@@ -136,21 +136,27 @@ $con_productos = $objProducto->getProductos($limit,$offset,1,0);
 			<?php }
 
 		?>
+		
+
+
 		<section>
 			
 			<div class="container-card">
 			<?php 
 				while ($producto = $busqRes->fetch_array()) { ?>
 					<div class="card">
-						<figure>
-							<img alt="<?php echo $producto['productoNombre']; ?>"src="<?php echo $producto['prodImg'] ?>">
+						<figure onclick="zoomIn(this)">
+							<img alt="<?php echo $producto['productoNombre']; ?>" src="<?php echo $producto['prodImg'] ?>">
 						</figure>
 						<div class="contenido-card">
+							<h3><?php echo $producto['categoria']; ?></h3>
 							<h2><?php echo $producto['productoNombre']; ?></h2>
-					
-							
-							<p><?php echo "$".number_format($producto['precio'],0,",",".");?></p>
-							<a class="verde" href="producto.php?p=<?php echo $producto['idProducto'] ?>">Ver producto</a>
+							<p>SKU: <?php echo $producto['idProducto']; ?></p>
+							<h3>Precio</h3>
+							<h2><?php echo "$".number_format($producto['precio'],0,",",".");?></h2>
+						</div>
+						<div class="button">
+							<a href="producto.php?p=<?php echo $producto['idProducto'] ?>">VER DETALLES</a>
 						</div>
 					</div>
 			<?php } ?>	

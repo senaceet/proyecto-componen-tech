@@ -251,9 +251,11 @@ class Producto {
 	}
 
 	public function getProductosSearch($s){
-		$sql = "SELECT * from producto,categoria where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and (CATEGORIA_idCategoria = idCategoria and  ESTADO_idEstado = 1";
+		$sql = "SELECT * from producto,categoria where (productoNombre like '%$s%' or detalles like '%$s%' or precio like '%$s%') and (CATEGORIA_idCategoria = idCategoria and  ESTADO_idEstado = 1)";
 		$cn = conectar();
 		$res = $cn->query($sql);
+		echo $cn->error;
+		
 		$cn->close();
 		return $res;
 	}

@@ -1,4 +1,13 @@
 <?php 
+
+session_start();
+if (!$_SESSION['user']) {
+	header('location:../index.php');
+}
+if ($_SESSION['user']->CARGO_idCargo==3) {
+	header('location:../index.php');
+}
+
 require_once '../modelo/Inventario.php';
 switch ($_GET['action']) {
 
@@ -25,24 +34,25 @@ switch ($_GET['action']) {
     case 'reporte':
         $objInventario = new Inventario();
         $id = $_GET['id'];
-        $data = $objInventario->getReporteIventario($id);
+        $data = $objInventario->getReporteInventario($id);
 
         echo json_encode($data);
         break;
 
     case 'descargaReporte':
-        $cliente = new Cliente();
+        $inventario = new Inventario();
             
         $data = new stdClass();
     
         if(isset($_GET['id'])){
-                $data = $cliente->getReporteCliente($_GET['id']);
+                $data = $inventario->getReporteInventario($_GET['id']);
         }else {
-                $cliente->data=[];
+                $inventario->data=[];
         }
-    
-           
-        require_once '../controlador/reportepdf.php';
+        
+        // echo json_encode($data);
+        
+        require_once '../controlador/pdfinventario.php';
     
         $pdf = new PDF();
     
@@ -50,16 +60,16 @@ switch ($_GET['action']) {
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',16);
         // $pdf->Cell(40,20,utf8_decode('¡Hola, Mundo!'));
-        $pdf->Head($data->user->nombres." ".$data->user->apellidos,"N° ".$data->user->documento);
+        $pdf->Head($data->producto->idProducto,$data->producto->productoNombre);
         $head = array(
-                array("texto" => "Precio", "ancho"=>"96"),
-                array("texto" => "Cantidad", "ancho"=>"21"),
-                array("texto" => "Fecha", "ancho"=>"30"),
-                array("texto" => "Precio", "ancho"=>"43")
+                 array("texto" => "Nombre", "ancho"=>"47"),
+                array("texto" => "Cantidad", "ancho"=>"47"),
+                array("texto" => "Fecha", "ancho"=>"47"),
+                array("texto" => "Precio", "ancho"=>"47")
         );
         $body = $data->data;
         $pdf->tablaHorizontal($head,$body);
-        $pdf->Output("Reporte_".$data->user->documento.".pdf","I");  
+        $pdf->Output("Reporte_".$data->producto->idProducto.".pdf","I");  
         
         break;  
 

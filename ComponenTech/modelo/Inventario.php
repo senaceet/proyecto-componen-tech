@@ -255,15 +255,17 @@ class Inventario {
 
 	}
 
-	public function getReporteIventario($id){
+	public function getReporteInventario($id){
         $res = new stdClass();
 
 
-		$sql = "SELECT idProducto, productoNombre, cantidad, factura.fecha, documento, nombres, total 
+		$sql = "SELECT idProducto, productoNombre, apellidos, cantidad, factura.fecha, documento, nombres, total 
 		FROM usuario, producto, movimiento, factura 
 		WHERE (USUARIO_documento = documento 
 		AND  idProducto=PRODUCTO_idProducto 
 		AND FACTURA_idFactura = idFactura AND idProducto='$id')";
+		
+		
 
 		
 		
@@ -271,13 +273,24 @@ class Inventario {
 
 		$resultado = $cn->query($sql);
 
-		$res->data = [];		
+		$res->data = [];
+		$res->producto = '';
+		
+
+		$sq1Producto = "SELECT idProducto, productoNombre from producto where idProducto='$id'";
+		$resultadoProducto = $cn->query($sq1Producto);
+
+		$resultadoProducto = $resultadoProducto -> fetch_object();
+		$res->producto = $resultadoProducto;
+
 
 		while($producto = $resultado->fetch_object()){
 			array_push($res->data,$producto);
 		}
 
 		$cn->close();
+
+		// var_dump("hola");
 
 		return $res;
 		

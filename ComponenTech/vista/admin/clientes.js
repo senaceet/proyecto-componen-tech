@@ -46,6 +46,17 @@ function putUsers(data, count) {
     clientes.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
+        var botones = `
+        <button data-id="${e.documento}" onclick="modUserForm(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+        <button data-id="${e.documento}" onclick="delUser(this)" title="Desactivar"><img src="icons/delete.svg" alt="Eliminar"></button>
+        <button data-id="${e.documento}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>`
+
+        if(e.idEstado == 10){
+            botones =  `
+            <button data-id="${e.documento}" onclick="modUserForm(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+            <button data-id="${e.documento}" onclick="activarUser(this)" title="Activar"><img src="icons/restore.svg" alt="Eliminar"></button>
+            <button data-id="${e.documento}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>`
+        }
 
         clientes.innerHTML += `<tr>
                 <td>${num}</td>
@@ -57,9 +68,7 @@ function putUsers(data, count) {
                 <td>${e.documento}</td>
                 <td>${e.estado}</td>
                 <td>
-                    <button data-id="${e.documento}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.documento}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.documento}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                   ${botones} 
                 </td>
             </tr>`
         num++
@@ -148,7 +157,7 @@ function last() {
 
 // eliminar usuario
 async function delUser(e) {
-    if(confirm('¿Está seguro de borrar a este usuario?')){
+    if(confirm('¿Está seguro de desactivar a este usuario?')){
         const id = e.dataset.id
         const data = new FormData()
         data.append('id',id)
@@ -158,21 +167,105 @@ async function delUser(e) {
         })
         res.json()
         .then(res=> {
-
             if(res.status){
+                swal('Usuario desactivado','El usuario se desactivó correctamente','info')
                 getUsers()
             } else {
-                alert('Error al eliminar usuario')
+                alert('Error al desactivar usuario')
+            }
+        })
+    }
+}
+
+// activar usuario
+async function activarUser(e) {
+    if(confirm('¿Está seguro de activar a este usuario?')){
+        const id = e.dataset.id
+        const data = new FormData()
+        data.append('id',id)
+        const res = await fetch('../json/clientes.php?action=restore',{
+            method:'post',
+            body:data
+        })
+        res.json()
+        .then(res=> {
+            if(res.status){
+                swal('Usuario activado','El usuario se activó correctamente','success')
+                getUsers()
+            } else {
+                alert('Error al activar usuario')
             }
         })
     }
 }
 
 
-// modificar usuario
-async function modUser(e) {
-    console.log(e.dataset.id)
+// mostrar formulario de actualizar
+const editForm = document.querySelector('#editForm')
+const showEditForm = (data)=>{
+    const documento = editForm.querySelector('input[name="documento"]')
+    const nombres = editForm.querySelector('input[name="nombres"]')
+    const apellidos = editForm.querySelector('input[name="apellidos"]')
+    const fnacimiento = editForm.querySelector('input[name="fnacimiento"]')
+    const edad = editForm.querySelector('input[name="edad"')
+    const celular = editForm.querySelector('input[name="celular"')
+    const direccion = editForm.querySelector('input[name="direccion"]')
+    const correo = editForm.querySelector('input[name="correo"]')
+
+    console.log(data)  
+    
+    documento.value = data.documento
+    nombres.value = data.nombres
+    apellidos.value = data.apellidos
+    fnacimiento.value = data.fechaNto
+    edad.value = data.edad
+    celular.value = data.celular
+    direccion.value = data.direccion
+    correo.value = data.correo
+
+    editForm.style.display='flex'
 }
+
+// boton de modificar usuario
+async function modUserForm(e) {
+    const id = e.dataset.id
+    // obtener datos
+    const res = await fetch(`../json/clientes.php?action=get1&id=${id}`)
+    res.json()
+    .then(data=>{
+        if(data.error){
+            alert('Error con la base de datos')
+        }else {
+            // console.log(data)
+            showEditForm(data.data)
+
+        }
+    })
+}
+
+// modificar usuario
+
+async function modUser(e) {
+    e.preventDefault()
+    const form = new FormData(e.target)
+   
+    const res = await fetch(`../json/clientes.php?action=edit`,{
+        method:"POST",
+        body:form
+    })
+    res.json()
+    .then(data=>{
+        if(data.status){
+            e.target.parentElement.style.display = 'none'
+            getUsers()
+        } else {
+            alert("error al modificar")
+        }
+        
+    })
+}
+
+
 
 //Reporte de usuario
 const contenedorReporte = document.querySelector('.reporteFlotante')
@@ -203,7 +296,7 @@ async function hisUser(e){
     })
 
 }
-
+//Reporte PDF Clientes
 function putReporte(lista, id){
     var total = 0
     

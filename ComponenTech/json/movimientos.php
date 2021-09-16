@@ -1,4 +1,14 @@
 <?php 
+
+
+session_start();
+if (!$_SESSION['user']) {
+	header('location:../index.php');
+}
+if ($_SESSION['user']->CARGO_idCargo==3) {
+	header('location:../index.php');
+}
+
 require_once '../modelo/Movimiento.php';
 switch ($_GET['action']) {
     case 'get':

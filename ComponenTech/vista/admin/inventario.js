@@ -55,12 +55,14 @@ function putInventario(data, count) {
                 
                 <td>
                     <button data-id="${e.idInventario}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.idInventario}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
+                    
                     <button data-id="${e.PRODUCTO_idProducto}" onclick="hisReporte(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
         num++
     })
+
+    
     cantidad.innerHTML = count
     desde.innerHTML = offset
     hasta.innerHTML = parseInt(offset) + parseInt(limit)
@@ -114,6 +116,47 @@ function putInventario(data, count) {
         </tr>`
     }
 }
+
+
+//REPORTE DEL INVENTARIO
+function putReporte(lista, id){
+    var total = 0
+    
+    const boton = contenedorReporte.querySelector('#descargaReporte')
+    boton.href = "../json/inventario.php?action=descargaReporte&id="+id
+    console.log(boton)
+    alert('hola')
+    // lista.forEach(e => {
+    //     let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
+
+    //     total += parseInt(e.precio) 
+
+    //     divReporte.innerHTML += `
+    //         <tr>
+    //             <td>${e.productoNombre}</td>
+    //             <td class="cantidad">${e.cantidad}</td>
+    //             <td>${e.fecha}</td>
+    //             <td>$${precio}</td>
+    //         </tr> 
+    //     `
+    // })
+
+    // contenedorReporte.parentElement.parentElement.querySelector('input').className=id
+    // contenedorReporte.querySelector('input').className=id
+
+    // if(lista.length==0){
+    //     divReporte.innerHTML += `
+    //         <tr>
+    //             <td align="center" colspan="5">Sin resultados</td>
+    //         </tr> 
+    //     `
+    // }
+    
+    // total =  new Intl.NumberFormat("es-CO").format(total)
+
+    // totalReporte.innerHTML = "$ "+total
+}
+
 
 function first() {
     if(page!=1){
@@ -180,11 +223,15 @@ const totalReporte  = document.querySelector('#reporteTotal')
 
 
 
-
+ 
 async function hisReporte(e){
     let id = e.dataset.id
     console.log(id)
     contenedorReporte.style.display="flex"
+    divReporte.innerHTML='<div style="position:absolute" class="loading"><div class="spinner"></div></div>'
+
+    const boton = contenedorReporte.querySelector('#descargaReporte')
+    boton.href = "../json/inventario.php?action=descargaReporte&id="+id
 
     const res = await fetch("../json/inventario.php?action=reporte&id="+id)
 
@@ -211,7 +258,7 @@ async function hisReporte(e){
                     <td>${e.productoNombre}</td>
                     <td class="cantidad">${e.cantidad}</td>
                     <td>${e.fecha}</td>
-                    <td>${e.nombres}</td>
+                    <td>${e.nombres} ${e.apellidos}</td>
                     <td>$${precio}</td>
                 </tr> 
             `
