@@ -131,6 +131,11 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                         <img onclick="next()" id="tableNext" src="icons/table-next.svg" alt="next">
                         <img onclick="last()" id="tableLast" src="icons/table-last.svg" alt="last">
                     </div>
+                    
+                    <div align="right" class="pReportePrecio" >
+                    <a target="_blank" id="descargaReporte" href="#" >Reporte PDF </a>
+                    <div>Total: <span id="reporteTotal"></span></div>
+            </div>
                 </div>
             </div>
         </div>
