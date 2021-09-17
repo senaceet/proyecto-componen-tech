@@ -118,7 +118,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                             <td>Estado</td>
                             
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody id="facturas"></tbody>
                 </table>
                 <div class="table-nav">
@@ -131,11 +131,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                         <img onclick="next()" id="tableNext" src="icons/table-next.svg" alt="next">
                         <img onclick="last()" id="tableLast" src="icons/table-last.svg" alt="last">
                     </div>
-                    
-                    <div align="right" class="pReportePrecio" >
-                    <a target="_blank" id="descargaReporte" href="#" >Reporte PDF </a>
-                    <div>Total: <span id="reporteTotal"></span></div>
-            </div>
+                
                 </div>
             </div>
         </div>
@@ -202,27 +198,52 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
     </div> -->
 
 
-    <!-- <div  class="reporteFlotante">
+    <div  class="reporteFlotante">
+    <p style="
+            position:absolute;
+            width:100%;
+            height:100vh;
+
+        " onclick="
+            this.parentElement.style.display='none'
+        "></p>
         <div>
-            <h1>Reporte de Compras</h1>
+            <h1 style="justify-content:left">Detalles factura: <span id="idFacturaVentana"></span></h1>
+            <table>
+                <thead>
+                    <tr class="tableHead">
+                        <td>Nombre</td>
+                        <td>Documento</td>
+                        <td>Dirección</td>
+                        <td>Correo</td>
+                    </tr> 
+                </thead>
+            
+                <tbody id="facturaUsuario">
+
+                </tbody>
+            </table>
+            <hr style="margin:5px 0; border:1px dashed #ccc">
             <table>
                 <thead>
                     <tr class="tableHead">
                         <td>Producto</td>
+                        <td>Precio unitario</td>
                         <td>Cantidad</td>
-                        <td>Fecha</td>
-                        <td>Precio</td>
+                        <td>Total</td>
                     </tr> 
                 </thead>
             
-                <tbody id="reporte">
+                <tbody id="facturaDetalles">
 
                 </tbody>
             </table>
             
-            <p align="right" class="pReportePrecio" >Total: <span id="reporteTotal"></span> </p>
+            <div align="right" class="pReportePrecio" >
+                <a target="_blank" id="descargaReporte" href="#" >Reporte PDF </a>
+                <p>Total: <span id="reporteTotal"></span> </p></div>
         </div>
-    </div> -->
+    </div>
 
      
     

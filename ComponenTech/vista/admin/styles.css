@@ -496,6 +496,7 @@ header{
 .reporteFlotante > div{
     position:relative;
     max-height: 90vh;
+    max-width: 95vw;
     overflow: auto;
     padding:15px;
     border-radius: 4px;
@@ -520,6 +521,10 @@ header{
 
 .reporteFlotante table td{
     padding:5px 10px;
+    max-width: 300px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .reporteFlotante table .cantidad{

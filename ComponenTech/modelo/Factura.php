@@ -174,6 +174,57 @@ class Factura {
 	}
 
 
+	public function getDetalles($id_fac){
+		$data = new stdClass();
+		$data->error = false;
+		$data->msj = null;
+		$cn = conectar();
+
+		// consulta de factura
+		$sql_fac = "SELECT * from factura where idFactura = $id_fac";
+		$fac = $cn->query($sql_fac);
+		
+		if($fac->num_rows!=1){
+			$data->error = true;
+			$data->msj = "no existe la factura";
+			return $data;
+		}
+		$fac = $fac->fetch_object();
+
+		
+		
+		// consulta de usuario
+		$id_usuario = $fac->USUARIO_documento;
+
+		$sql_user = "SELECT * from usuario where documento = $id_usuario";
+		$user = $cn->query($sql_user);
+		if($user->num_rows!=1){
+			$data->error = true;
+			$data->msj = "no existe el usuario";
+			return $data;
+		}
+		$user = $user->fetch_object();
+
+		// consulta detalles
+		
+		$sql_det = "select * from detalles,producto where FACTURA_idFactura = $id_fac and PRODUCTO_idProducto = idProducto";
+		$detalles = $cn->query($sql_det);
+
+		$data->detalles = [];
+
+		foreach ($detalles as $detalle) {
+			array_push($data->detalles,$detalle);
+		}
+
+		$data->factura = $fac;  
+		$data->user = $user;
+		
+
+		return $data;
+
+	}
+
+
 
 	public function getFacturas($limit,$offset,$estado){
 		if($estado == 7 || $estado == 8){

@@ -21,7 +21,53 @@ switch ($_GET['action']) {
 
         echo json_encode($data);
         break;
-    
+    case 'detalles':
+        $id = $_GET['id'];
+        
+        $objFactura = new Factura();
+        $data = $objFactura->getDetalles($id);
+        echo json_encode($data);
+        break;
+
+    case 'descargaReporte':
+        $id = $_GET['id'];
+        
+        $objFactura = new Factura();
+        $data = $objFactura->getDetalles($id);
+
+        require_once '../controlador/Reportefact.php';
+
+        $pdf = new PDF();
+
+        $pdf -> AliasNbpages();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',16);
+        // $pdf->Cell(40,20,utf8_decode('¡Hola, Mundo!'));
+        $pdf->Head(
+            $data->user->nombres." ".$data->user->apellidos,
+            $data->user->celular,
+            $data->user->direccion
+        );
+        $pdf->Tabla();
+        $pdf->Contendio($data->detalles);
+        $pdf->Factura();
+
+        $pdf->Factura_conte($data->factura->idFactura,$data->factura->fecha);
+        $pdf->usuario();
+        $pdf->usuario_conte($data->user->documento,$data->factura->TIPOPAGO_idTipoPago);
+
+        $head = array(
+            array("texto" => "Precio", "ancho"=>"96"),
+            array("texto" => "Cantidad", "ancho"=>"21"),
+            array("texto" => "Fecha", "ancho"=>"30"),
+            array("texto" => "Precio", "ancho"=>"43")
+        );
+      //  $body = $data->data;
+        //$pdf->tablaHorizontal($head,$body);
+        $pdf->Output("Reporte_holasasa.pdf","I");
+       
+
+        break;
     default:
         echo "{}";
         break;

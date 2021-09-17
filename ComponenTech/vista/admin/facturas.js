@@ -33,7 +33,7 @@ async function getFacturas() {
         .then(res => {
             if(res.error){
                 alert('Error en la base de datos')
-                console.log(res)
+                // console.log(res)
 
             } else putFacturas(res.data, res.count)
         })
@@ -44,7 +44,7 @@ function putFacturas(data, count) {
     facturas.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-        console.log(e)
+        // console.log(e)
         facturas.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.idFactura}</td>
@@ -57,7 +57,7 @@ function putFacturas(data, count) {
                 
                 <td>
                     
-                    <button data-id="${e.idInventario}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                    <button data-id="${e.idFactura}" onclick="hisDetalles(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
         num++
@@ -171,7 +171,7 @@ async function delUser(e) {
 async function modUser(e) {
     console.log(e.dataset.id)
 }
-1022322061
+
 //Reporte de usuario
 const contenedorReporte = document.querySelector('.reporteFlotante')
 
@@ -179,43 +179,90 @@ const divReporte = document.querySelector('#reporte')
 
 const totalReporte  = document.querySelector('#reporteTotal')
 
-async function hisUser(e){
+async function hisDetalles(e){
     let id = e.dataset.id
     contenedorReporte.style.display="flex"
 
-    const res = await fetch("../json/clientes.php?action=reporte&id="+id)
+    const usuario = contenedorReporte.querySelector('#facturaUsuario')
+    const detalles = contenedorReporte.querySelector('#facturaDetalles')
+    usuario.innerHTML ='<div class="loading"><div class="spinner"></div></div>'
+    detalles.innerHTML = ""
 
+    const reporte = contenedorReporte.querySelector('#descargaReporte')
+    const totalVentana = contenedorReporte.querySelector('#reporteTotal')
+    const idFacturaVentana = contenedorReporte.querySelector('#idFacturaVentana')
+
+    const botonReporte = contenedorReporte.querySelector('#descargaReporte')
+
+    const res = await fetch("../json/factura.php?action=detalles&id="+id)
+ 
+    
     res.json()
     .then(data => {
+        console.log(data)
+        if(data.error){
+            alert("Error en la base de datos")
+        } else {
+            idFacturaVentana.innerHTML = data.factura.idFactura
+            totalPrecio = 0
+
+            usuario.innerHTML =`
+                     <tr>
+                         <td>${data.user.nombres}</td>
+                         <td class="cantidad">${data.user.documento}</td>
+                         <td>${data.user.direccion}</td>
+                         <td>${data.user.correo}</td>
+                     </tr> 
+                 `
+
+            data.detalles.forEach(e=>{
+                let precio_u = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
+                let totalProd = new Intl.NumberFormat("es-CO").format(parseInt(e.precio) * e.cantidad)
+                
+                detalles.innerHTML +=`
+                     <tr>
+                         <td>${e.productoNombre}</td>
+                         <td class="cantidad">$${precio_u}</td>
+                         <td>${e.cantidad}</td>
+                         <td>$${totalProd}</td>
+                     </tr> 
+                 `
+                 totalPrecio += parseInt(e.precio)
+            })
+            totalPrecio = new Intl.NumberFormat("es-CO").format(totalPrecio)
+            
+            totalVentana.innerHTML = "$"+totalPrecio
+
+            botonReporte.href = "../json/factura.php?action=descargaReporte&id="+data.factura.idFactura
+
+        }
+
         // -----
+        // let lista =  data.data
 
+        // divReporte.innerHTML = ""
+
+        // var total = 0
+
+        // lista.forEach(e => {
+        //     let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
+
+        //     total += parseInt(e.precio) 
+
+        //     divReporte.innerHTML += `
+        //         <tr>
+        //             <td>${e.productoNombre}</td>
+        //             <td class="cantidad">${e.cantidad}</td>
+        //             <td>${e.fecha}</td>
+        //             <td>$${precio}</td>
+        //         </tr> 
+        //     `
+        // })
         
 
-        let lista =  data.data
+        // total =  new Intl.NumberFormat("es-CO").format(total)
 
-        divReporte.innerHTML = ""
-
-        var total = 0
-
-        lista.forEach(e => {
-            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
-
-            total += parseInt(e.precio) 
-
-            divReporte.innerHTML += `
-                <tr>
-                    <td>${e.productoNombre}</td>
-                    <td class="cantidad">${e.cantidad}</td>
-                    <td>${e.fecha}</td>
-                    <td>$${precio}</td>
-                </tr> 
-            `
-        })
-        
-
-        total =  new Intl.NumberFormat("es-CO").format(total)
-
-        totalReporte.innerHTML = "$ "+total
+        // totalReporte.innerHTML = "$ "+total
        
 
         // ----
