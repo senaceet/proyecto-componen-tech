@@ -53,10 +53,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>
             <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
+            <?php endif ?>
             <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>

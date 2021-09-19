@@ -43,6 +43,15 @@ switch ($_GET['action']) {
         
         break;
 
+     case 'get1':
+        $objProducto = new Producto();
+
+        $data = $objProducto->getProducto($_GET['id']);
+        
+        echo json_encode($data);
+        
+        break;
+
     case 'categorias':
         $objProducto = new Producto();
         $categorias = $objProducto->getCategorias();
@@ -53,6 +62,31 @@ switch ($_GET['action']) {
         $objProducto = new Producto();
         $data = $objProducto->search($_GET['text'],$_GET['estado'],$_GET['categoria']);
         echo json_encode($data);
+        break;
+
+    case 'edit':
+        $producto = new Producto();
+ 
+        $foto = 0;
+        if(!$_FILES['foto']['error']){
+            $foto = $_FILES['foto'];
+        }
+
+        $creado = $producto->crearProducto(
+            $_POST['producto'],
+            $_POST['detalles'],
+            $_POST['precio'],
+            $_POST['categoria'],
+            $_POST['proveedor'],
+            2,
+            $foto
+        );
+        if($creado !== true){
+            echo '{"error":"'.$creado->error.'"}';
+        } else {
+            $res =  $producto->actualizar($_POST['idProducto']);
+            echo json_encode($res);
+        }
         break;
 
     case 'add':

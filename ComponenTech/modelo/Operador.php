@@ -26,12 +26,12 @@ class Operador extends Usuario {
 
 	public function getOperadoresBusqueda($text,$estado){
 		if($estado == 10 || $estado == 9)
-			$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo) and 
+			$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo, idEstado FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo) and 
 			(
 				documento like '%$text%' or nombres like '%$text%' or apellidos like '%$text%' or edad like '%$text%' or celular like '%$text%' or direccion like '%$text%' or correo like '%$text%'
 			)and ESTADO_idEstado = $estado";
 		else{
-			$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo) and 
+			$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo, idEstado FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo) and 
 			(
 				documento like '%$text%' or nombres like '%$text%' or apellidos like '%$text%' or edad like '%$text%' or celular like '%$text%' or direccion like '%$text%' or correo like '%$text%'
 			) ";
@@ -74,15 +74,15 @@ class Operador extends Usuario {
 	public function getOperador($limit,$offset,$estado){
 		if($estado == 10 || $estado == 9)
 			if($limit == 0)
-				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND ESTADO_idEstado = $estado AND CARGO_idCargo = idCargo)";
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo, idEstado FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND ESTADO_idEstado = $estado AND CARGO_idCargo = idCargo)";
 			else
-				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND ESTADO_idEstado = $estado AND CARGO_idCargo = idCargo)limit $offset, $limit";
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo, idEstado FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND ESTADO_idEstado = $estado AND CARGO_idCargo = idCargo)limit $offset, $limit";
 			
 		else{
 			if ($limit == 0)
-				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)";
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo, idEstado FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)";
 			else
-				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)limit $offset, $limit";
+				$sql =" SELECT documento, nombres, apellidos, fechaNto, edad, celular, direccion, correo, estado, cargo, idEstado FROM usuario, cargo, estado where (CARGO_idCargo!=3 AND ESTADO_idEstado = idEstado AND CARGO_idCargo = idCargo)limit $offset, $limit";
 			}
 		$cn = conectar();
 		$res = $cn->query($sql);
@@ -99,10 +99,25 @@ class Operador extends Usuario {
 		$cn->close();
 		return $data;
 	}
+
+	public function getOperadorId($id){
+		$data = new stdClass();
+		$sql = "SELECT documento,nombres,apellidos,fechaNto, edad, celular, direccion, correo, estado, idEstado FROM usuario, estado WHERE (CARGO_idCargo!=3 and documento = $id) and idEstado = ESTADO_idEstado ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		
+		if($cn->error){   
+			$data->error=true;
+			$data->msg=$cn->error;
+		} else {
+			$data->data = $res->fetch_object();
+		}
+		$cn->close();
+
+		return $data;
+	}
 	
 
-	public function ModificarProducto() {
-		// Not yet implemented
-	}
+	
 }
 ?>

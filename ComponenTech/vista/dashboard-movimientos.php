@@ -53,10 +53,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>
             <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
+            <?php endif ?>
             <a href="dashboard-movimientos.php" class="item actual">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
@@ -89,7 +91,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             <div class="tabla-datos">
                 <h1>
                     <div class="rows">
-                        Filas: <select onchange="getUsersLimit(this.value,0)">
+                        Filas: <select onchange="getMovimientosLimit(this.value,0)">
                             <option value="5">5</option>
                             <option selected value="10">10</option>
                             <option value="20">20</option>
@@ -99,11 +101,11 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                    
                     <div class="filtro">
                         Desde
-                        <input type="date" name="" id="inputDesde">
+                        <input type="date" onchange="getMovimientosDesde(this)">
                     </div>
                     <div class="filtro">
                         Hasta
-                        <input type="date" name="" id="inputHasta">
+                        <input type="date" onchange="getMovimientosHasta(this)">
                     </div>
                     
                     

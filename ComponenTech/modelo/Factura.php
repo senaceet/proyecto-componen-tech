@@ -227,7 +227,7 @@ class Factura {
 
 
 	public function getFacturas($limit,$offset,$estado){
-		if($estado == 7 || $estado == 8){
+		if($estado == 7 || $estado == 8 || $estado == 6){
 			if($limit == 0)
 				$sql ="SELECT idFactura, fecha, subtotal, total, tipo, USUARIO_documento, nombres, apellidos, estado FROM factura, usuario, tipopago, estado 
 					WHERE (USUARIO_documento = documento AND TIPOPAGO_idTipoPago = idTipoPago AND factura.ESTADO_idEstado = $estado AND factura.ESTADO_idEstado = estado.idEstado) ORDER BY fecha  DESC ";
@@ -261,11 +261,32 @@ class Factura {
 	   
 		$cn->close();  
 		return $data;
-
-
-			
+		
 	}
 
+	public function getFacturasBusqueda($s){
+		
+		$sql = "SELECT idFactura, fecha, subtotal, total, tipo, USUARIO_documento, nombres, apellidos, estado FROM factura, usuario, tipopago, estado  where
+		tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago and
+		usuario.documento = factura.USUARIO_documento and
+		estado.idEstado = factura.ESTADO_idEstado and
+		tipopago.idTipoPago = factura.TIPOPAGO_idTipoPago
+		and (idFactura like '%$s%' or fecha like '%$s%' or subtotal like '%$s%' or total like '%$s%' or tipo like '%$s%' or documento like '%$s%' or TIPODOCUMENTO_idTipo like '%$s%' or estado like '%$s%')
+		order by fecha desc
+		";
+		$cn = conectar();
+		$res = $cn->query($sql);
+
+		$data = new stdClass();
+		$data->data=[];
+		
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		$cn->close();
+		//echo $res['c'];
+		return $data;
+	}
 		
 
 

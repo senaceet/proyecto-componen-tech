@@ -53,10 +53,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>
             <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
+            <?php endif ?>
             <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
@@ -152,6 +154,34 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 </div>
             </div>
             <button type="submit">Agregar</button>
+        </form>
+    </div>
+
+    <div class="floating" id="editForm">
+        <div onclick="this.parentElement.style.display='none'" class="close-floating"></div>
+        <form onsubmit="modProducto(event)" enctype="multipart/form-data" class="form">
+            <h1>Modificar producto</h1>
+            <input type="hidden" name="idProducto">
+            <div class="producto-form">
+                <input name="foto" onchange="setImg(event)" accept="image/png, image/jpeg, image/gif" style="display:none" type="file" id="foto2">
+                <label style="cursor:pointer" for="foto2">
+                    <div class="img">
+                        <img class="holas" id="prodImgTag" src="icons/placeholder.jpg" alt="">
+                    </div>
+                </label>
+                <div>
+                    <input name="producto"  type="text" placeholder="Producto">
+                    <select name="categoria" id="categoriasForm">
+                        <option value="" selected disabled>-- Categoria --</option>
+                    </select>
+                    <input name="precio" type="text" placeholder="Precio">
+                    <select name="proveedor" id="proveedoresForm">
+                        <option value="" selected disabled>-- Proveedor --</option>
+                    </select>
+                    <textarea placeholder="Descripción" rows="5" name="detalles" ></textarea>
+                </div>
+            </div>
+            <button type="submit">Modificar</button>
         </form>
     </div>
 

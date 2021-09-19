@@ -133,12 +133,28 @@ class Producto {
 
 		
 	public function actualizar($id){
-		$sql = "update producto set productoNombre='$this->_nombreProducto', detalles='$this->_detalles', precio='$this->_precio', CATEGORIA_idCategoria='$this->_categoria', PROVEEDOR_idProveedor='$this->_proveedor', ESTADO_idEStado='$this->_estado', prodImg='$this->_prodImg'
+		$data = new stdClass();
+
+		if($this->_prodImg == false){
+			$sql = "update producto set productoNombre='$this->_nombreProducto', detalles='$this->_detalles', precio='$this->_precio', CATEGORIA_idCategoria='$this->_categoria', PROVEEDOR_idProveedor='$this->_proveedor'
 				where idProducto='$id'";
+		} else {
+			$sql = "update producto set productoNombre='$this->_nombreProducto', detalles='$this->_detalles', precio='$this->_precio', CATEGORIA_idCategoria='$this->_categoria', PROVEEDOR_idProveedor='$this->_proveedor', prodImg='$this->_prodImg'
+				where idProducto='$id'";
+		}
+		
 		$cn = conectar();
 		$res = $cn->query($sql);
+		if($res){
+			$data->status=true;
+			$data->message="Producto actualizado";
+		} else {
+			$data->status=false;
+			$data->message="Error al actualizar producto";
+		}
+
 		$cn->close();
-		return $res;
+		return $data;
 	}
 
 	public function getProductos($limit,$offset,$estado,$categoria){
@@ -218,11 +234,19 @@ class Producto {
 	}
 
 	public function getProducto($p){
-		$sql = "select * from producto where idProducto = '$p' and ESTADO_idEstado = 1";
+		$data = new stdClass();
+		$sql = "select * from producto,categoria where CATEGORIA_idCategoria = idCategoria and idProducto = '$p' ";
 		$cn = conectar();
 		$res = $cn->query($sql);
+		if($res){
+			$data->status = true;
+			$data->data = $res->fetch_object();
+		} else {
+			$data->status = false;
+			$data->data = "No se encontró el producto";
+		}
 		$cn->close();
-		return $res;
+		return $data;
 	}
 
 	public function getProductoInventario($p){
@@ -293,6 +317,7 @@ class Producto {
 	}
 
 	private function guardarFoto($foto){
+
 		//crear carpeta por proveedor si no existe
 		$ruta = "../img/productos/".$this->_proveedor."/";
 		if (!file_exists($ruta)) {
@@ -303,6 +328,12 @@ class Producto {
 		$res = new stdClass();
 		$res->error = "";
 		$res->destino = "";
+
+		if($foto == 0){
+			$res->error = false;
+			$res->foto = false;
+			return $res;
+		}
 
 
 		//control de errores de el archivo		 

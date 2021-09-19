@@ -44,7 +44,17 @@ function putProveedor(data, count) {
     proveedores.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-        console.log(e)
+        // console.log(e)
+        var botones = `
+        <button data-id="${e.idProveedor}" onclick="modUserForm(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+        <button data-id="${e.idProveedor}" onclick="delProveedor(this)" title="Desactivar"><img src="icons/delete.svg" alt="Eliminar"></button>`
+
+        if(e.idEstado == 5){
+            botones =  `
+            <button data-id="${e.idProveedor}" onclick="modUserForm(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+            <button data-id="${e.idProveedor}" onclick="activarProveedor(this)" title="Activar"><img src="icons/restore.svg" alt="Eliminar"></button>`
+        }
+
         proveedores.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.nEmpresa}</td>
@@ -53,9 +63,7 @@ function putProveedor(data, count) {
                 <td>${e.cCelular}</td>
                 <td>${e.estado}</td>
                 <td>
-                    <button data-id="${e.idProveedor}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.idProveedor}" onclick="delUser(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.idProveedor}" onclick="hisUser(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                   ${botones}
                 </td>
             </tr>`
         num++
@@ -140,34 +148,111 @@ function last() {
 }
 
 
-// -- funciones para usuarios -- //
+// -- funciones para proveedores -- //
 
-// eliminar usuario
-async function delUser(e) {
-    if(confirm('¿Está seguro de borrar a este usuario?')){
+// desactivar proveedor
+async function delProveedor(e) {
+    if(confirm('¿Está seguro de desactivar a este proveedor?')){
         const id = e.dataset.id
         const data = new FormData()
         data.append('id',id)
-        const res = await fetch('../json/clientes.php?action=delete',{
+        const res = await fetch('../json/proveedores.php?action=delete',{
             method:'post',
             body:data
         })
         res.json()
         .then(res=> {
-
+            
             if(res.status){
+                swal(res.message,"El proveedor se desactivó correctamente",'info')
                 getProveedor()
             } else {
-                alert('Error al eliminar usuario')
+                swal(res.message,"Ocurrio un error al desactivar proveedor",'error')
+                console.log(res.message)
             }
         })
     }
 }
 
+async function activarProveedor(e) {
+    if(confirm('¿Está seguro de activar a este proveedor?')){
+        const id = e.dataset.id
+        const data = new FormData()
+        data.append('id',id)
+        const res = await fetch('../json/proveedores.php?action=restore',{
+            method:'post',
+            body:data
+        })
+        res.json()
+        .then(res=> {
+            if(res.status){
+                swal(res.message,"El proveedor se activó correctamente",'success')
+                getProveedor()
+            } else {
+                swal(res.message,"Ocurrio un error al activar proveedor",'error')
+                console.log(res.message)
+            }
+        })
+    }
+}
 
-// modificar usuario
+// modificar proveedor
+
+const editForm = document.querySelector('#editForm')
+const showEditForm = (data)=>{
+    const idProveedor = editForm.querySelector('input[name="idProveedor"]')
+    const nEmpresa = editForm.querySelector('input[name="nEmpresa"]')
+    const eTelefono = editForm.querySelector('input[name="eTelefono"]')
+    const cNombre = editForm.querySelector('input[name="cNombre"]')
+    const cApellido = editForm.querySelector('input[name="cApellido"]')
+    const cCelular = editForm.querySelector('input[name="cCelular"')
+    // console.log(data)  
+    
+    idProveedor.value = data.idProveedor
+    nEmpresa.value = data.nEmpresa
+    cNombre.value = data.cNombre
+    cApellido.value = data.cApellido
+    cCelular.value = data.cCelular
+    eTelefono.value = data.eTelefono
+
+    editForm.style.display='flex'
+}
+
+async function modUserForm(e) {
+    const id = e.dataset.id
+    // obtener datos
+    const res = await fetch(`../json/proveedores.php?action=get1&id=${id}`)
+    res.json()
+    .then(data=>{
+        if(!data.status){
+            alert('Error con la base de datos')
+        }else {
+            console.log(data)
+            showEditForm(data.data)
+
+        }
+    })
+}
+
 async function modUser(e) {
-    console.log(e.dataset.id)
+    e.preventDefault()
+    const form = new FormData(e.target)
+   
+    const res = await fetch(`../json/proveedores.php?action=edit`,{
+        method:"POST",
+        body:form
+    })
+    res.json()
+    .then(data=>{
+        // console.log(data)
+        if(data.status){
+            e.target.parentElement.style.display = 'none'
+            getProveedor()
+        } else {
+            alert("error al modificar")
+        }
+        
+    })
 }
 
 //Reporte de usuario
@@ -226,30 +311,29 @@ async function hisUser(e){
 
 
 
-// agregar usuario
-async function addUser(e) {
+// agregar proveedor
+async function addProveedor(e) {
     e.preventDefault()
     const inputs = e.target.querySelectorAll('input')
     if(verifyInputs(inputs)){
         const form = new FormData(e.target)
-        if(form.get('pass1') === form.get('pass2')){
-            const res = await fetch('../json/clientes.php?action=add',{
-                method:'post',
-                body:form
-            })
-            res.json()
-            .then(res => {
-                if(res.status){
-                    e.target.parentElement.style.display='none'
-                    alert('registrado')
-                } else {
-                    alert(res.error)
-                }
+        
+        const res = await fetch('../json/proveedores.php?action=add',{
+            method:'post',
+            body:form
+        })
+        res.json()
+        .then(res => {
+            // console.log(res)
+            if(res.status){
+                e.target.parentElement.style.display='none'
+                alert('Proveedor registrado')
+            } else {
+                alert(res.error)
+            }
 
-            })
-        } else {
-            alert('las contraseñas deben ser identicas')
-        }        
+        })
+               
     } else alert('Hay campos vacios')
     
     

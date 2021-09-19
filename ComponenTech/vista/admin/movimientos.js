@@ -5,7 +5,7 @@ const hasta = document.querySelector('#hasta')
 
 const search = document.querySelector('#clientSearch')
 
-var limit = 10, offset = 0, estado = 0, page = 1
+var limit = 10, offset = 0, estado = 0, page = 1, filterdesde = 0,filterhasta=0
 
 
 
@@ -22,15 +22,33 @@ async function getMovimientosEstado(num) {
     getMovimientos()
 }
 
+async function getMovimientosDesde(e) {
+    page=1
+    filterdesde = e.value
+    search.value=""
+    getMovimientos()
+}
+async function getMovimientosHasta(e) {
+    page=1
+    filterhasta = e.value
+    search.value=""
+    getMovimientos()
+}
+
+
+
+
+
 async function getMovimientos() {
     offset = (page - 1) * limit
     movimientos.innerHTML = '<div class="loading"><div class="spinner"></div></div>'
-    let url = `../json/movimientos.php?action=get&limit=${limit}&offset=${offset}&estado=${estado}`
-
+    let url = `../json/movimientos.php?action=get&limit=${limit}&offset=${offset}&estado=${estado}&desde=${filterdesde}&hasta=${filterhasta}`
+console.log(url)
     let res = await fetch(url)
     res.json()
 
         .then(res => {
+            // console.log(res)
             if(res.error){
                 alert('Error en la base de datos')
                 console.log(res)
@@ -44,7 +62,7 @@ function putMovimientos(data, count) {
     movimientos.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-        console.log(e)
+        // console.log(e)
         movimientos.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.productoNombre}</td>
@@ -103,7 +121,7 @@ function putMovimientos(data, count) {
     }
     
     if(data.length == 0){
-        inventario.innerHTML = `<tr>
+        movimientos.innerHTML = `<tr>
             <td align="center" colspan="9">Sin resultados</td>
         </tr>`
     }
@@ -135,145 +153,16 @@ function last() {
 }
 
 
-// -- funciones para usuarios -- //
-
-// eliminar usuario
-async function delUser(e) {
-    if(confirm('¿Está seguro de borrar a este usuario?')){
-        const id = e.dataset.id
-        const data = new FormData()
-        data.append('id',id)
-        const res = await fetch('../json/clientes.php?action=delete',{
-            method:'post',
-            body:data
-        })
-        res.json()
-        .then(res=> {
-
-            if(res.status){
-                getMovimientos()
-            } else {
-                alert('Error al eliminar usuario')
-            }
-        })
-    }
-}
-
-
-// modificar usuario
-async function modUser(e) {
-    console.log(e.dataset.id)
-}
-1022322061
-//Reporte de usuario
-const contenedorReporte = document.querySelector('.reporteFlotante')
-
-const divReporte = document.querySelector('#reporte')
-
-const totalReporte  = document.querySelector('#reporteTotal')
-
-async function hisUser(e){
-    let id = e.dataset.id
-    contenedorReporte.style.display="flex"
-
-    const res = await fetch("../json/clientes.php?action=reporte&id="+id)
-
-    res.json()
-    .then(data => {
-        // -----
-
-        
-
-        let lista =  data.data
-
-        divReporte.innerHTML = ""
-
-        var total = 0
-
-        lista.forEach(e => {
-            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
-
-            total += parseInt(e.precio) 
-
-            divReporte.innerHTML += `
-                <tr>
-                    <td>${e.productoNombre}</td>
-                    <td class="cantidad">${e.cantidad}</td>
-                    <td>${e.fecha}</td>
-                    <td>$${precio}</td>
-                </tr> 
-            `
-        })
-        
-
-        total =  new Intl.NumberFormat("es-CO").format(total)
-
-        totalReporte.innerHTML = "$ "+total
-       
-
-        // ----
-    })
-
-
-    // http://localhost/ctech/json/clientes.php?action=reporte&id=1022322061
-
-}
 
 
 
-// agregar usuario
-async function addUser(e) {
-    e.preventDefault()
-    const inputs = e.target.querySelectorAll('input')
-    if(verifyInputs(inputs)){
-        const form = new FormData(e.target)
-        if(form.get('pass1') === form.get('pass2')){
-            const res = await fetch('../json/clientes.php?action=add',{
-                method:'post',
-                body:form
-            })
-            res.json()
-            .then(res => {
-                if(res.status){
-                    e.target.parentElement.style.display='none'
-                    alert('registrado')
-                } else {
-                    alert(res.error)
-                }
-
-            })
-        } else {
-            alert('las contraseñas deben ser identicas')
-        }        
-    } else alert('Hay campos vacios')
-    
-    
-    // console.log(e.dataset.id)
-}
-
-
-// funcion para verficar campos
-function verifyInputs(inputs){
-    let vacios = 0;
-    inputs.forEach(e=>{
-        if(e.value==""){
-            e.style.backgroundColor="#00c"
-            vacios++
-        } else {
-            e.style.backgroundColor="#ddd"
-        }
-    })
-    if(vacios===0){
-        return true
-    } return false
-}
 
 // buscar
 
-const getOperadorSearch = async (text)=>{
-    const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
+const getMovimientosSearch = async (text)=>{
+    const res = await fetch(`../json/movimientos.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putMovimientos(res.clientes,0))
+    .then(res => putMovimientos(res.data,0))
 
 }
 
@@ -283,7 +172,7 @@ search.addEventListener('keydown',e=>{
         e.target.disabled=true
         e.target.parentElement.style.backgroundColor='#efefef'
         let text = e.target.value
-        getOperadorSearch(text).then(()=>{
+        getMovimientosSearch(text).then(()=>{
             e.target.disabled=false
             e.target.parentElement.style.backgroundColor='#fff'
         })

@@ -53,10 +53,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>
             <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
+            <?php endif ?>
             <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
@@ -81,7 +83,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <div class="user">
                 <p><?php echo $_SESSION['user']->nombres ?></p>
-                <p>*Administrador</p>
+                <p><?php echo $_SESSION['user']->cargo ?></p>
             </div>
         </header>
         
@@ -89,21 +91,22 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             <div class="tabla-datos">
                 <h1>
                     <div class="rows">
-                        Filas: <select onchange="getUsersLimit(this.value,0)">
+                        Filas: <select onchange="getFacturasLimit(this.value,0)">
                             <option value="5">5</option>
                             <option selected value="10">10</option>
                             <option value="20">20</option>
                         </select>
                     </div>
-                    <select onchange="getUsersEstado(this.value,0)">
+                    <select onchange="getFacturasEstado(this.value,0)">
                         <option selected value="0">Todos</option>
-                        <option value="1">Productos en venta</option>
-                        <option value="2">Productos agotados</option>
+                        <option value="8">Factura pagada</option>
+                        <option value="6">Factura en proceso</option>
+                        <option value="7">Factura cancelada</option>
                     </select>
-                    <button 
+                    <!-- <button 
                         onclick="document.querySelector('#insertForm').style.display='flex'">
                         Agregar +
-                    </button>
+                    </button> -->
                 </h1>
                 <table>
                     <thead>

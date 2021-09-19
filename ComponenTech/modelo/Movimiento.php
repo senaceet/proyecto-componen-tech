@@ -95,45 +95,66 @@ class Movimiento {
 	}
 
 
-	public function getMovimiento($limit, $offset, $desde, $hasta) {
+	public function getMovimiento($limit, $offset) {
 
-		// if($hasta == 0){
 			if($limit == 0)
-				$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento, estado WHERE (PRODUCTO_idProducto=idProducto 
-				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento)";
+				$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento WHERE (PRODUCTO_idProducto=idProducto 
+				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento) order by fecha desc ";
 			else
-				$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento, estado WHERE (PRODUCTO_idProducto=idProducto 
-				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento)limit $offset, $limit";
-			
-		// } else {		
-		// 		$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento, estado WHERE (PRODUCTO_idProducto=idProducto 
-		// 		AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento)";
-		// 	else
-		// 	$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento, estado WHERE (PRODUCTO_idProducto=idProducto 
-		// 	AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento)limit $offset, $limit";
-			
-		// }
-			
-		 
-			
-	$cn = conectar();
-	$res = $cn->query($sql);
+				$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento WHERE (PRODUCTO_idProducto=idProducto 
+				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento) order by movimiento.fecha desc limit $offset, $limit ";
 
-	$data = new stdClass();
-	$data->data=[];
-
-	$data->count=$this->getCount();
-
-	while($value = $res->fetch_object()) {
-		array_push($data->data,$value);
-	}
-    
-	$cn->close();
-	return $data;
 	
+		$cn = conectar();
+		$res = $cn->query($sql);
 
-		//return $this->_idMovimiento;
+		$data = new stdClass();
+		$data->data=[];
+
+		$data->count=$this->getCount();
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		
+		$cn->close();
+		return $data;
 	}
+
+	public function getMovimientoDate($desde, $hasta) {
+
+		if($desde == 0){
+			$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento WHERE (PRODUCTO_idProducto=idProducto 
+				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento) and fecha <= '$hasta' order by fecha desc";
+		} 
+
+		if($hasta == 0){
+			$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento WHERE (PRODUCTO_idProducto=idProducto 
+				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento) and fecha >= '$desde' order by fecha desc";
+		} 
+
+		if($hasta != 0 && $desde != 0){
+			$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento WHERE (PRODUCTO_idProducto=idProducto 
+				AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento) and fecha between '$desde' and '$hasta' order by fecha desc";
+		} 
+
+
+		// echo $sql;
+		$cn = conectar();
+		$res = $cn->query($sql);
+
+		$data = new stdClass();
+		$data->data=[];
+
+		$data->count=0;
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		
+		$cn->close();
+		return $data;
+	}
+
+	
 
 	/**
 	 * /**

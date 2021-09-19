@@ -110,7 +110,7 @@ function putFacturas(data, count) {
     }
     
     if(data.length == 0){
-        inventario.innerHTML = `<tr>
+        facturas.innerHTML = `<tr>
             <td align="center" colspan="9">Sin resultados</td>
         </tr>`
     }
@@ -233,7 +233,7 @@ async function hisDetalles(e){
             
             totalVentana.innerHTML = "$"+totalPrecio
 
-            botonReporte.href = "../json/factura.php?action=descargaReporte&id="+data.factura.idFactura
+            botonReporte.href = "../json/facturas.php?action=descargaReporte&id="+data.factura.idFactura
 
         }
 
@@ -275,37 +275,6 @@ async function hisDetalles(e){
 
 
 
-// agregar usuario
-async function addUser(e) {
-    e.preventDefault()
-    const inputs = e.target.querySelectorAll('input')
-    if(verifyInputs(inputs)){
-        const form = new FormData(e.target)
-        if(form.get('pass1') === form.get('pass2')){
-            const res = await fetch('../json/clientes.php?action=add',{
-                method:'post',
-                body:form
-            })
-            res.json()
-            .then(res => {
-                if(res.status){
-                    e.target.parentElement.style.display='none'
-                    alert('registrado')
-                } else {
-                    alert(res.error)
-                }
-
-            })
-        } else {
-            alert('las contraseñas deben ser identicas')
-        }        
-    } else alert('Hay campos vacios')
-    
-    
-    // console.log(e.dataset.id)
-}
-
-
 // funcion para verficar campos
 function verifyInputs(inputs){
     let vacios = 0;
@@ -325,9 +294,9 @@ function verifyInputs(inputs){
 // buscar
 
 const getFacturasSearch = async (text)=>{
-    const res = await fetch(`../json/clientes.php?action=search&text=${text}&estado=${estado}`)
+    const res = await fetch(`../json/facturas.php?action=search&text=${text}&estado=${estado}`)
     res.json()
-    .then(res => putFacturas(res.clientes,0))
+    .then(res => putFacturas(res.data, 0))
 
 }
 

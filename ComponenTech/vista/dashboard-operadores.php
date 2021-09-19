@@ -53,10 +53,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>
             <a href="dashboard-operadores.php" class="item actual">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
+            <?php endif ?>
             <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
@@ -81,7 +83,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <div class="user">
                 <p><?php echo $_SESSION['user']->nombres ?></p>
-                <p>*Administrador</p>
+                <p><?php echo $_SESSION['user']->cargo ?></p>
             </div>
         </header>
         
@@ -136,10 +138,10 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
         </div>
     </div>
 
-    <!-- <div id="insertForm" class="floating">
+    <div id="insertForm" class="floating">
         <div onclick="this.parentElement.style.display='none'" class="close-floating"></div>
         <form onsubmit="addUser(event)" class="form">
-            <h1>Agregar usuario</h1>
+            <h1>Agregar operador</h1>
             <div class="inputs">
                 <div class="input">
                     <p>Tipo de documento</p>
@@ -194,7 +196,57 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <button type="submit">Agregar</button>
         </form>
-    </div> -->
+    </div>
+
+
+    <div id="editForm" class="floating">
+        <div onclick="this.parentElement.style.display='none'" class="close-floating"></div>
+        <form onsubmit="modUser(event)" class="form">
+            <h1>Modificar usuario</h1>
+            <div class="inputs">
+                <input type="hidden" name="documento">
+                <div class="input">
+                    <p>Nombres</p>
+                    <input required maxlength="30" name="nombres" type="text">
+                </div>
+                <div class="input">
+                    <p>Apellidos</p>
+                    <input required maxlength="30" name="apellidos" type="text">
+                </div>
+                <div class="input">
+                    <p>Fecha de nacimiento</p>
+                    <input required  name="fnacimiento" type="date">
+                </div>
+                <div class="input">
+                    <p>Edad</p>
+                    <input required min="12" max="90" name="edad" type="number">
+                </div>
+                <div class="input">
+                    <p>Numero celular</p>
+                    <input name="celular" maxlength="15" type="text">
+                </div>
+                <div class="input">
+                    <p>Dirección de residencia</p>
+                    <input required maxlength="100" name="direccion" type="text">
+                </div>
+                <div class="input">
+                    <p>Correo electrónico</p>
+                    <input required maxlength="45" name="correo" type="text">
+                </div>
+                
+                <!-- <div class="input">
+                    <p>Contraseña</p>
+                    <input required minlength="3" name="pass1" type="text">
+                </div>
+                <div class="input">
+                    <p>Confirmar contraseña</p>
+                    <input required minlength="3"  name="pass2" type="text">
+                </div> -->
+            </div>
+            <button type="submit">Modificar</button>
+        </form>
+    </div>
+
 
 
     <!-- <div  class="reporteFlotante">
@@ -223,5 +275,6 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
     
 
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="admin/operadores.js"></script>
 </html>

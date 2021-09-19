@@ -274,7 +274,7 @@ const divReporte = document.querySelector('#reporte')
 
 const totalReporte  = document.querySelector('#reporteTotal')
 
-
+ 
 
 async function hisUser(e){
     let id = e.dataset.id

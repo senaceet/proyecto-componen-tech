@@ -23,13 +23,24 @@ class Proveedor{
     }
 
     public function actualizar() {
+		$data = new stdClass();
+
 		$sql = "UPDATE proveedor SET idProveedor='$this->idProveedor', nEmpresa='$this->nEmpresa', 
-        cNombre='$this->cNombre', cApellido='$this->cApellido', cCelular='$this->cCelular', eTelefono='$this->eTelefono', 
-        ESTADO_idEstado='$this->ESTADO_idEstado' WHERE idProveedor = '$this->idProveedor'";
+        cNombre='$this->cNombre', cApellido='$this->cApellido', cCelular='$this->cCelular', eTelefono='$this->eTelefono' 
+		WHERE idProveedor = '$this->idProveedor'";
 		$cn = conectar();
 		$res = $cn->query($sql);
+
+		if($res){
+			$data->status = true;
+			$data->message = "proveedor actualizado";
+		}else{
+			$data->status = false;
+			$data->message = $cn->error;
+		}
+
 		$cn->close();
-		return $res;
+		return $data;
     }
 
     public function insertar(){
@@ -40,22 +51,55 @@ class Proveedor{
 		return $res;
 	}
 
-	public function eliminar($p){
-    	$sql = "delete from proveedores where idProveedor=$p";
+	public function desactivar($p){
+		$data = new stdClass();
+    	$sql = "UPDATE proveedor set ESTADO_idEstado = 5 where idProveedor=$p";
 		$cn = conectar();
 		echo $cn->error;
 		$res = $cn->query($sql);
+		if($res){
+			$data->status = true;
+			$data->message = "Proveedor desactivado";
+		} else {
+			$data->status = false;
+			$data->message = $cn->error;
+		}
 		$cn->close();
-		return $res;
+		return $data;
 	}
 	
+	public function activar($p){
+		$data = new stdClass();
+    	$sql = "UPDATE proveedor set ESTADO_idEstado = 4 where idProveedor=$p";
+		$cn = conectar();
+		echo $cn->error;
+		$res = $cn->query($sql);
+		if($res){
+			$data->status = true;
+			$data->message = "Proveedor activado";
+		} else {
+			$data->status = false;
+			$data->message = $cn->error;
+		}
+		$cn->close();
+		return $data;
+	}
+
 	public function getProveedor($p){
+		$data = new stdClass();
 		$sql = "SELECT * FROM proveedor where idproveedor = $p";
 		$cn = conectar();
 		$res = $cn->query($sql);
 		$cn->close();
+		if($res){
+			$data->status = true;
+			$data->data = $res->fetch_object();
+		} else {
+			$data->status = false;
+			$data->data = "No existe el usuario";
+		}
 		$res = $res->fetch_array();
-		return $res;
+		return $data;
 	}
 
 	public function getCount($estado){
@@ -75,18 +119,18 @@ class Proveedor{
     public function getProveedores($limit,$offset,$estado){
 		if($estado == 4 || $estado == 5)
 			if($limit == 0)
-				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado, idEstado FROM proveedor,estado 
 				where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = $estado ";
 			else
-				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado, idEstado FROM proveedor,estado 
 				where proveedor.ESTADO_idEstado=estado.idEstado and ESTADO_idEstado = $estado limit $offset,$limit";
 			
 		else{
 			if($limit == 0)
-				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado, idEstado FROM proveedor,estado 
 				where proveedor.ESTADO_idEstado=estado.idEstado ";
 			else
-				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 
+				$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado, idEstado FROM proveedor,estado 
 				where proveedor.ESTADO_idEstado=estado.idEstado limit $offset,$limit";
 		}
 		$cn = conectar();
@@ -107,13 +151,13 @@ class Proveedor{
 		return $data;
 	}
 
-	public function getProveedoresActivos($text,$estado){
-		$sql = "SELECT * FROM proveedor where ESTADO_idEstado = 4";
-		$cn = conectar();
-		$res = $cn->query($sql);
-		$cn->close();
-		return $res;
-	}
+	// public function getProveedoresActivos($text,$estado){
+	// 	$sql = "SELECT * FROM proveedor where ESTADO_idEstado = 4";
+	// 	$cn = conectar();
+	// 	$res = $cn->query($sql);
+	// 	$cn->close();
+	// 	return $res;
+	// }
 	public function getProveedoresSearch($text,$estado){
 		if($estado == 4 || $estado == 5)
 			$sql = "SELECT idProveedor, nEmpresa, cNombre, cApellido, cCelular, eTelefono, estado FROM proveedor,estado 

@@ -36,6 +36,7 @@ $con_cats = $objCat->getCategorias();
     <meta name="Description" content="Alguna descripción de esto">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="js/jquery.js"></script>
+	<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
 	<script src="https://kit.fontawesome.com/0b32f2b0be.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/login.css">
@@ -62,7 +63,7 @@ $con_cats = $objCat->getCategorias();
 				<?php endif ?>
 				
 				<?php if ($_SESSION['user']->CARGO_idCargo==3): ?>
-					<!-- <li><a href="compras.php">Mis compras</a> </li> -->
+					<li><a href="compras.php">Mis compras</a> </li>
 					<li><a href="../controlador/salir.php"><i class="fas fa-sign-out-alt"></i></a></li>
 					<li><a href="#" class="ListarProductos" ><i class="fa fa-shopping-cart"></i></a></li>
 				<?php endif ?>

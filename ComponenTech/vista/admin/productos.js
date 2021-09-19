@@ -6,6 +6,7 @@ const hasta = document.querySelector('#hasta')
 const search = document.querySelector('#productoSearch')
 const categorias = document.querySelector('#categorias')
 const categoriasForm = document.querySelector('#categoriasForm')
+const editForm = document.querySelector('#editForm');
 
 var limit = 10, offset = 0, estado = 1, page = 1, categoria = 0
 
@@ -14,6 +15,7 @@ async function getCategorias(){
     const res = await fetch(`../json/productos.php?action=categorias`)
     res.json()
     .then(res => res.forEach(e => {
+        editForm.querySelector('select[name="categoria"]').innerHTML += `<option value="${e.idCategoria}">${e.categoria}</option>`
         categorias.innerHTML += `<option value="${e.idCategoria}">${e.categoria}</option>`
         categoriasForm.innerHTML += `<option value="${e.idCategoria}">${e.categoria}</option>`
     }))
@@ -89,8 +91,8 @@ function putProductos(data, count) {
                                     <p>${e.detalles}</p>
                                 </div>
                                 <div>
-                                    <button data-id="${e.documento}" onclick="modProducto(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                                    <button data-id="${e.documento}" onclick="delProducto(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
+                                    <button data-id="${e.idProducto}" onclick="modProductoButton(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+                                    <button data-id="${e.idProducto}" onclick="delProducto(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
                                 </div>
                             </div>
                             
@@ -203,14 +205,16 @@ getProductos()
 function setImg(e) {
     const archivos = e.target.files;
     const prevImg = e.target.parentElement.querySelector('img')
+    // console.log(e.target.parentElement.querySelector('img'))
     if (!archivos || !archivos.length) {
-        $prevImg.src = "";
+        prevImg.src = "icons/placeholder.jpg";
         return;
     }
     const primerArchivo = archivos[0];
     const objectURL = URL.createObjectURL(primerArchivo);
     prevImg.src = objectURL;
 }
+
 
 
 // agregar producto
@@ -245,7 +249,90 @@ async function addProducto(e){
         alert('hay campos vacios')
     }
 
+}  
+
+
+
+async function modProductoButton(e){
+    const id = e.dataset.id
+
+    const res = await fetch(`../json/productos.php?action=get1&id=${id}`)
+    res.json()
+    .then(data=>{
+        if(data.error){
+            alert('Error con la base de datos')
+        }else {
+            console.log(data)
+            showEditForm(data.data)
+
+        }
+    })
 }
+
+function showEditForm(data){
+    const imgTag = editForm.querySelector('#prodImgTag')
+
+    const idProducto = editForm.querySelector('input[name="idProducto"]')
+    const producto = editForm.querySelector('input[name="producto"]')
+    const categoria = editForm.querySelector('select[name="categoria"]')
+    const precio = editForm.querySelector('input[name="precio"]')
+    const proveedor = editForm.querySelector('select[name="proveedor"]')
+    const descripcion = editForm.querySelector('textarea[name="detalles"]')
+
+    const inpFoto = editForm.querySelector('input[name="foto"]')
+
+    inpFoto.value = ''
+
+    idProducto.value = data.idProducto
+    producto.value = data.productoNombre
+    categoria.value = data.idCategoria
+    precio.value = data.precio
+    proveedor.value = data.PROVEEDOR_idProveedor
+    descripcion.value = data.detalles
+
+
+    imgTag.src = data.prodImg
+
+    editForm.style.display = 'flex'
+}
+
+
+
+
+
+async function modProducto(e){
+    e.preventDefault()
+    const inputs = e.target.querySelectorAll('input[type="text"],textarea,select')
+    inputs.forEach(e=>{
+        e.addEventListener('input',()=>{
+            if(e.value.length > 0){
+                e.style.backgroundColor="#ddd";
+            }
+        })
+    })
+    if(verifyInputs(inputs)){
+        const form = new FormData(e.target)
+        const res = await fetch('../json/productos.php?action=edit',{
+            method:"POST",
+            body:form
+        })
+        res.json()
+        .then(res=>{
+            if(res.error){
+                alert(res.error)
+            }else{
+                getProductos()
+                document.querySelector('#editForm').style.display="none"
+            }
+        })
+    } else {
+        alert('hay campos vacios')
+    }
+
+}
+
+
+
 
 
 
@@ -255,6 +342,7 @@ async function getProveedores(){
     const res = await fetch('../json/proveedores.php?action=get&estado=4')
     res.json()
     .then(res=>res.data.forEach(e=>{
+        editForm.querySelector('select[name="proveedor"]').innerHTML+=`<option value="${e.idProveedor}">${e.nEmpresa}</option>`
         proveedores.innerHTML+=`<option value="${e.idProveedor}">${e.nEmpresa}</option>`
     }))
 }
@@ -263,7 +351,7 @@ getProveedores()
 // verificación de campos
 function verifyInputs(inputs){
     let vacios = 0;
-    console.log(inputs)
+    // console.log(inputs)
     inputs.forEach(e=>{
         if(e.value==""){
             e.style.backgroundColor="#f77"

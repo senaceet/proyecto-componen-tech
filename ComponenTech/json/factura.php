@@ -68,7 +68,19 @@ switch ($_GET['action']) {
        
 
         break;
+    case 'search':
+        $objFactura = new Factura();
+
+    
+
+        $data = $cliente->getFacturasBusqueda($_GET['text'],$_GET['estado']);
+
+        echo json_encode($data);
+        echo $_GET['action'];
+
+        break;
     default:
-        echo "{}";
+    // echo $_GET['action'];
+        echo "{sss}";
         break;
 }

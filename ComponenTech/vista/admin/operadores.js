@@ -44,7 +44,20 @@ function putOperadores(data, count) {
     operadores.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
-        console.log(e)
+        
+        var botones = `
+        <button data-id="${e.documento}" onclick="modUserForm(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+        <button data-id="${e.documento}" onclick="delUser(this)" title="Desactivar"><img src="icons/delete.svg" alt="Eliminar"></button>
+        `
+
+        if(e.idEstado == 10){
+            botones =  `
+            <button data-id="${e.documento}" onclick="modUserForm(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
+            <button data-id="${e.documento}" onclick="activarUser(this)" title="Activar"><img src="icons/restore.svg" alt="Eliminar"></button>
+            `
+        }
+
+        console.log(e.idEstado)
         operadores.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.nombres} ${e.apellidos}</td>
@@ -55,9 +68,7 @@ function putOperadores(data, count) {
                 <td>${e.documento}</td>
                 <td>${e.estado}</td>
                 <td>
-                    <button data-id="${e.documento}" onclick="modOperador(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    <button data-id="${e.documento}" onclick="delOperador(this)" title="Eliminar"><img src="icons/delete.svg" alt="Eliminar"></button>
-                    <button data-id="${e.documento}" onclick="hisOperador(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
+                    ${botones}
                 </td>
             </tr>`
         num++
@@ -146,7 +157,7 @@ function last() {
 
 // eliminar operador
 async function delUser(e) {
-    if(confirm('¿Está seguro de borrar a este usuario?')){
+    if(confirm('¿Está seguro de desactivar a este operador?')){
         const id = e.dataset.id
         const data = new FormData()
         data.append('id',id)
@@ -156,11 +167,33 @@ async function delUser(e) {
         })
         res.json()
         .then(res=> {
-
             if(res.status){
+                swal('Operador desactivado','El operador se desactivó correctamente','info')
                 getOperadores()
             } else {
-                alert('Error al eliminar usuario')
+                alert('Error al desactivar operador')
+            }
+        })
+    }
+}
+
+// activar usuario
+async function activarUser(e) {
+    if(confirm('¿Está seguro de activar a este operador?')){
+        const id = e.dataset.id
+        const data = new FormData()
+        data.append('id',id)
+        const res = await fetch('../json/clientes.php?action=restore',{
+            method:'post',
+            body:data
+        })
+        res.json()
+        .then(res=> {
+            if(res.status){
+                swal('Operador activado','El operador se activó correctamente','success')
+                getOperadores()
+            } else {
+                alert('Error al activar operador')
             }
         })
     }
@@ -168,78 +201,68 @@ async function delUser(e) {
 
 
 // modificar usuario
-async function modOperador(e) {
-    var id = e.dataset.id
+const editForm = document.querySelector('#editForm')
+const showEditForm = (data)=>{
+    const documento = editForm.querySelector('input[name="documento"]')
+    const nombres = editForm.querySelector('input[name="nombres"]')
+    const apellidos = editForm.querySelector('input[name="apellidos"]')
+    const fnacimiento = editForm.querySelector('input[name="fnacimiento"]')
+    const edad = editForm.querySelector('input[name="edad"')
+    const celular = editForm.querySelector('input[name="celular"')
+    const direccion = editForm.querySelector('input[name="direccion"]')
+    const correo = editForm.querySelector('input[name="correo"]')
 
-    const datos = {
-        "nombre":"juan",
-        "apellido":"perez",
-    }
+    console.log(data)  
+    
+    documento.value = data.documento
+    nombres.value = data.nombres
+    apellidos.value = data.apellidos
+    fnacimiento.value = data.fechaNto
+    edad.value = data.edad
+    celular.value = data.celular
+    direccion.value = data.direccion
+    correo.value = data.correo
 
-    const res = await fetch("../json/operadores.php",{
-        method:"POST",
-        body:datos
-    })
-    res.json()
-    .then(res=>{
-        
-    })
-
-
+    editForm.style.display='flex'
 }
 
-//Reporte de usuario
-const contenedorReporte = document.querySelector('.reporteFlotante')
-
-const divReporte = document.querySelector('#reporte')
-
-const totalReporte  = document.querySelector('#reporteTotal')
-
-async function hisUser(e){
-    let id = e.dataset.id
-    contenedorReporte.style.display="flex"
-
-    const res = await fetch("../json/operadores.php?action=reporte&id="+id)
-
+// boton de modificar usuario
+async function modUserForm(e) {
+    const id = e.dataset.id
+    // obtener datos
+    const res = await fetch(`../json/operadores.php?action=get1&id=${id}`)
     res.json()
-    .then(data => {
-        // -----
+    .then(data=>{
+        if(data.error){
+            alert('Error con la base de datos')
+        }else {
+            // console.log(data)
+            showEditForm(data.data)
 
-        
-
-        let lista =  data.data
-
-        divReporte.innerHTML = ""
-
-        var total = 0
-
-        lista.forEach(e => {
-            let precio = new Intl.NumberFormat("es-CO").format(parseInt(e.precio))
-
-            total += parseInt(e.precio) 
-
-            divReporte.innerHTML += `
-                <tr>
-                    <td>${e.productoNombre}</td>
-                    <td class="cantidad">${e.cantidad}</td>
-                    <td>${e.fecha}</td>
-                    <td>$${precio}</td>
-                </tr> 
-            `
-        })
-        
-
-        total =  new Intl.NumberFormat("es-CO").format(total)
-
-        totalReporte.innerHTML = "$ "+total
-       
-
-        // ----
+        }
     })
+}
 
+// modificar usuario
 
-    // http://localhost/ctech/json/clientes.php?action=reporte&id=1022322061
-
+async function modUser(e) {
+    e.preventDefault()
+    const form = new FormData(e.target)
+   
+    const res = await fetch(`../json/clientes.php?action=edit`,{
+        method:"POST",
+        body:form
+    })
+    res.json()
+    .then(data=>{
+        if(data.status){
+            e.target.parentElement.style.display = 'none'
+            getOperadores()
+        } else {
+            alert("error al modificar")
+        }
+        
+    })
 }
 
 
@@ -251,7 +274,7 @@ async function addUser(e) {
     if(verifyInputs(inputs)){
         const form = new FormData(e.target)
         if(form.get('pass1') === form.get('pass2')){
-            const res = await fetch('../json/clientes.php?action=add',{
+            const res = await fetch('../json/operadores.php?action=add',{
                 method:'post',
                 body:form
             })
@@ -289,7 +312,7 @@ function verifyInputs(inputs){
     if(vacios===0){
         return true
     } return false
-}
+} 
 
 // buscar
 

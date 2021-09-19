@@ -28,7 +28,60 @@ switch ($_GET['action']) {
 
         echo json_encode($data);
         break;
+        
+    case 'get1':    
+        $id = $_GET['id'];
 
+        $objOperador = new Operador();
+
+        $operador = $objOperador->getOperadorId($id);
+  
+        echo(json_encode($operador ));
+        
+        break;
+        
+    case 'add';
+        $operador = new Operador();
+        $operador->crearUsuario(
+            $_POST['numerodocumento'],
+            $_POST['nombres'],
+            $_POST['apellidos'],
+            $_POST['fnacimiento'],
+            $_POST['edad'],
+            $_POST['celular'],
+            $_POST['direccion'],
+            $_POST['correo'],
+            2,
+            $_POST['tipodocumento'],
+            10,
+            $_POST['pass1'] 
+        );
+        
+        if ($_POST['pass1'] == $_POST['pass2']){
+            $res = $operador->insertar();
+            echo json_encode($res);
+        } else echo '{"status":false,"error":"La constaseña es incorrecta"';
+
+        break;
+
+    case 'delete':
+        $cliente = new Cliente();
+        if($cliente->desactivar($_POST['id'])){
+            echo '{"status":true}';
+        } else{
+            echo '{"status":false}';
+        }
+        break;
+
+    case 'restore':
+        $cliente = new Cliente();
+        if($cliente->activar($_POST['id'])){
+            echo '{"status":true}';
+        } else{
+            echo '{"status":false}';
+        }
+        break;
+        
     
     default:
         # code...

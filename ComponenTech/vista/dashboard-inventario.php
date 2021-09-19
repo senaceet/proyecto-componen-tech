@@ -53,10 +53,12 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <img src="icons/business.svg" alt="#">
                 <p>Proveedores</p>
             </a>
+            <?php if($_SESSION['user']->CARGO_idCargo == 1): ?>
             <a href="dashboard-operadores.php" class="item">
                 <img src="icons/admin.svg" alt="#">
                 <p>Operadores</p>
             </a>
+            <?php endif ?>
             <a href="dashboard-movimientos.php" class="item">
                 <img src="icons/move.svg" alt="#">
                 <p>Movimientos</p>
@@ -81,7 +83,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             </div>
             <div class="user">
                 <p><?php echo $_SESSION['user']->nombres ?></p>
-                <p>*Administrador</p>
+                <p><?php echo $_SESSION['user']->cargo ?></p>
             </div>
         </header>
         
@@ -100,10 +102,10 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                         <option value="1">Productos en venta</option>
                         <option value="2">Productos agotados</option>
                     </select>
-                    <button 
+                    <!-- <button 
                         onclick="document.querySelector('#insertForm').style.display='flex'">
                         Agregar +
-                    </button>
+                    </button> -->
                 </h1>
                 <table>
                     <thead>

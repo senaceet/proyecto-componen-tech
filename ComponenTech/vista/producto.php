@@ -28,6 +28,7 @@ $con_productos = $objProducto->getProductos($limit,$offset,1,0);
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/Admin.css">
 	<link rel="stylesheet" href="css/tar.css">
+	<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
   
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/jquery.js"></script>
