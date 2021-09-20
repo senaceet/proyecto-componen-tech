@@ -72,7 +72,7 @@ $con_productos = $objProducto->getProductos($limit,$offset,1,0);
 	<!---CONTENEDOR DE PRODUCTOS (-DETALLES)--->
 	<div class="contenedor">
 		<?php if (isset($_GET['p'])): 
-			$producto = $objProducto->getProducto($_GET['p']);
+			$producto = $objProducto->getProducto1($_GET['p']);
 			if ($producto->num_rows == 0) {
 				header('location:principal.php');
 			}

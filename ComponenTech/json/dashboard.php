@@ -12,7 +12,7 @@ switch ($_GET['lista']) {
     case 'clientes':
         require_once '../modelo/Cliente.php';
         $objCliente = new Cliente();
-        $clientes = $objCliente->getClientes(0,6,0);
+        $clientes = $objCliente->getClientes(0,10,0);
 
         echo(json_encode($clientes));
         break;

@@ -32,6 +32,12 @@ switch ($_GET['action']) {
 
         echo json_encode($data);
         break;
+
+    case 'search':
+        $objMovimiento = new Movimiento();
+        $data = $objMovimiento->search($_GET['text']); 
+        echo json_encode($data);
+        break;
     
     default:
         echo "{}";

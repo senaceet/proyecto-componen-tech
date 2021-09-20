@@ -67,6 +67,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <p>Facturas</p>
             </a>
         </div>
+        <a href="op-help.html" class="help"><img src="icons/help.svg" alt=""></a>
     </div> 
     <div class="contenido">
         <header>
@@ -120,7 +121,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
             
             <div class="productos-resumen">
                 <h1><span>Productos recientes</span><a href="dashboard-productos.php">Ver todos ►</a></h1>
-                <div id="productos"></div>
+                <div style="padding-top:5px" id="productos"></div>
             </div>
             
         </div>

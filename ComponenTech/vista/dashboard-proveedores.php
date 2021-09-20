@@ -72,6 +72,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                 <p>Facturas</p>
             </a>
         </div>
+        <a href="op-help.html" class="help"><img src="icons/help.svg" alt=""></a>
     </div> 
     <div class="contenido">
         <header>

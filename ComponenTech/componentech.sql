@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2021 a las 03:30:23
+-- Tiempo de generación: 18-09-2021 a las 20:54:40
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -101,6 +101,7 @@ INSERT INTO `clave` (`correo`, `clave`) VALUES
 ('kacendales@misena.edu.co', '1234'),
 ('lyakobowitchh@weebly.com', 'Libbey9'),
 ('malopez030@misena.edu.co', '1234'),
+('marlonjaramillo23441@gmail.com', '123'),
 ('mpointingf@flavors.me', 'Morlee87'),
 ('pgentile1@exblog.jp', 'Pebrookx22'),
 ('pivanshintsev0@ustream.tv', 'Perrine1'),
@@ -238,7 +239,11 @@ INSERT INTO `detalles` (`idDetalles`, `cantidad`, `totalCantidad`, `FACTURA_idFa
 (133, 1, 123123, 5341, 1055),
 (134, 1, 123123, 5343, 1055),
 (135, 2, 278000, 5344, 1027),
-(136, 2, 2844000, 5344, 1031);
+(136, 2, 2844000, 5344, 1031),
+(137, 2, 1439800, 5345, 1032),
+(138, 1, 629000, 5345, 1026),
+(139, 1, 1599000, 5345, 1029),
+(140, 1, 513890, 5345, 1023);
 
 -- --------------------------------------------------------
 
@@ -363,7 +368,8 @@ INSERT INTO `factura` (`idFactura`, `fecha`, `subtotal`, `total`, `TIPOPAGO_idTi
 (5340, '2021-09-01', 0, 0, 4, 1000456409, 8),
 (5341, '2021-09-01', 0, 3761123, 4, 1000456409, 8),
 (5343, '2021-09-03', 0, 123123, 1, 1022322061, 8),
-(5344, '2021-09-10', 0, 3122000, 4, 1022322061, 8);
+(5344, '2021-09-10', 0, 3122000, 4, 1022322061, 8),
+(5345, '2021-09-17', 0, 4181690, 4, 2773619313, 8);
 
 -- --------------------------------------------------------
 
@@ -407,16 +413,16 @@ INSERT INTO `inventario` (`idInventario`, `entradas`, `Salidas`, `Saldo`, `PRODU
 (21, 20, 0, 20, 1020),
 (22, 20, 0, 20, 1021),
 (23, 20, 0, 20, 1022),
-(24, 20, 0, 20, 1023),
+(24, 20, 1, 19, 1023),
 (25, 20, 0, 20, 1024),
 (26, 20, 0, 20, 1025),
-(27, 20, 0, 20, 1026),
+(27, 20, 1, 19, 1026),
 (28, 20, 2, 18, 1027),
 (29, 20, 0, 20, 1028),
-(30, 20, 0, 20, 1029),
+(30, 20, 1, 19, 1029),
 (31, 20, 0, 20, 1030),
 (32, 20, 2, 18, 1031),
-(33, 20, 0, 20, 1032),
+(33, 20, 2, 18, 1032),
 (34, 20, 0, 20, 1055);
 
 -- --------------------------------------------------------
@@ -542,7 +548,11 @@ INSERT INTO `movimiento` (`idMovimiento`, `fecha`, `cantidad`, `TIPOMOVIMIENTO_i
 (119, '2021-09-01', 1, 1, 1055, 5341),
 (120, '2021-09-03', 1, 1, 1055, 5343),
 (121, '2021-09-10', 2, 1, 1027, 5344),
-(122, '2021-09-10', 2, 1, 1031, 5344);
+(122, '2021-09-10', 2, 1, 1031, 5344),
+(123, '2021-09-17', 2, 1, 1032, 5345),
+(124, '2021-09-17', 1, 1, 1026, 5345),
+(125, '2021-09-17', 1, 1, 1029, 5345),
+(126, '2021-09-17', 1, 1, 1023, 5345);
 
 -- --------------------------------------------------------
 
@@ -610,40 +620,40 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `productoNombre`, `detalles`, `precio`, `iva`, `CATEGORIA_idCategoria`, `PROVEEDOR_idProveedor`, `ESTADO_idEstado`, `prodImg`) VALUES
-(1000, 'Lenovo S340-14IIL', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2645000, 19, 1, 9, 1, '../img/productos/9/1000.jpg'),
-(1001, 'Portátil ASUS VivoBook X413EA-EB249T', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 3679000, 19, 1, 5, 1, '../img/productos/5/1001.jpg'),
-(1002, 'Portátil HP 15-dw1067la', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2869000, 19, 1, 4, 2, '../img/productos/4/1002.jpg'),
-(1003, 'Procesador Ryzen 5 3400g', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 731000, 19, 2, 5, 1, '../img/productos/5/1003.jpg'),
-(1004, 'Procesador Amd Ryzen 9 3900xt', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2507000, 19, 2, 5, 1, '../img/productos/5/1004.jpg'),
-(1005, 'Board Gigabyte B460m Ds3h Ud', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 459000, 19, 3, 10, 1, '../img/productos/10/1005.jpg'),
-(1006, 'Board Msi Mag B460m Mortar', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.<br>dajkshdjksfnacsjfkmcmnaskdmklasd<br>daksjfnckdsjnfmñrelkfmdsdkmfñas', 539000, 19, 3, 8, 1, '../img/productos/8/1006.jpg'),
-(1007, 'Board Asrock B450 Gaming Itx Ac', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 625000, 19, 3, 6, 1, '../img/productos/6/1007.jpg'),
-(1008, 'Memoria Ram Corsair Vengeance Lpx 8gb (1x8gb)', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 215000, 19, 4, 9, 2, '../img/productos/9/1008.jpg'),
-(1009, 'Memoria Ram Adata Xpg Spectrix D60g Ddr4 8gb ', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 260000, 19, 4, 11, 2, '../img/productos/11/1009.jpg'),
-(1010, 'Memoria Ram Adata Xpg Spectrix D80 8gb 3600 M', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 320000, 19, 4, 6, 1, '../img/productos/6/1010.jpg'),
-(1011, 'Tarjeta De Video Msi Radeon Rx 5500 Xt Mech O', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 971000, 19, 5, 10, 1, '../img/productos/10/1011.jpg'),
-(1012, 'Tarjeta De Video Asrock Radeon RTX 5600 XT Ch', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1256000, 19, 5, 8, 1, '../img/productos/8/1012.jpg'),
-(1013, 'Tarjeta De Video Evga Gtx 1650 Super Xc Gamin', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 840000, 19, 5, 6, 1, '../img/productos/6/1013.jpg'),
-(1014, 'Disco Duro Toshiba P300 2 Tb', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 275000, 19, 6, 7, 1, '../img/productos/7/1014.jpg'),
-(1015, 'Ssd Gigabyte Nvme 1tb', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 859000, 19, 6, 12, 2, '../img/productos/12/1015.jpg'),
-(1016, 'Disco Duro Seagate Barracuda 4tb Hdd', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 502000, 19, 6, 11, 2, '../img/productos/4/1016.jpg'),
-(1017, 'Chasis Corsair Carbide Spec Omega', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 871000, 19, 7, 10, 1, '../img/productos/10/1017.jpg'),
-(1018, 'Chasis Thermaltake Core P3 Red', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 2256000, 19, 7, 8, 1, '../img/productos/8/1018.jpg'),
-(1019, 'Chasis Thermaltake View 51 Argb', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 940000, 19, 7, 6, 1, '../img/productos/6/1019.jpg'),
-(1020, 'Monitor Lg 24mp59g-p Full Hd', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 871000, 19, 9, 10, 1, '../img/productos/10/1020.jpg'),
-(1021, 'Monitor Gaming Lg 34 34gl750 144hz ', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1256000, 19, 9, 8, 1, '../img/productos/8/1021.jpg'),
-(1022, 'Monitor Samsung 24 Led Hdmi', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1256000, 19, 9, 6, 1, '../img/productos/6/1022.jpg'),
-(1023, 'Fuente De Poder Rm850 850w 80plus Gold', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 639000, 19, 8, 5, 1, '../img/productos/5/1023.jpg'),
-(1024, 'Fuente De Poder Evga Supernova 1300w G2 Gold', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1559000, 19, 8, 11, 1, '../img/productos/11/1024.jpg'),
-(1025, 'Fuente De Poder Thermaltake Smart Bx1 750w 80', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 422000, 19, 8, 9, 1, '../img/productos/9/1025.jpg'),
-(1026, 'Refrigeracion Liquida Xpg Levante 240', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 629000, 19, 10, 7, 1, '../img/productos/7/1026.jpg'),
-(1027, 'Ventilador Thermaltake Pure 12', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 139000, 19, 10, 7, 1, '../img/productos/7/1027.jpg'),
-(1028, 'Pasta Termica Corsair Xtm50', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 72000, 19, 10, 7, 1, '../img/productos/7/1028.jpg'),
-(1029, 'Timon Logitech G923 Xbox One Pc Trueforce', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1499000, 19, 11, 7, 1, '../img/productos/7/1029.jpg'),
-(1030, 'Combo Mouse G203 Y Pad Mouse G240 Logitech', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 178000, 19, 11, 8, 1, '../img/productos/8/1030.jpg'),
-(1031, 'Silla Gamer Corsair T2 Road Warrior Morado/Ve', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1422000, 19, 12, 7, 1, '../img/productos/7/1031.jpg'),
-(1032, 'Silla Gamer Corsair Silver Edition T12', 'Es simplemente el texto de relleno de las imprentas y archivos de texto.', 1622000, 19, 12, 7, 2, '../img/productos/7/1032.jpg'),
-(1055, 'Computador negro', 'detalle1<br>☛\r\ndetalle2', 123123, 19, 1, 11, 1, '../img/productos/11/Computador negro.jpg');
+(1000, 'Lenovo S340-14IIL', 'Pantalla de 14 pulgadas <br>\r\n\r\nModelo Slim  <br>\r\n\r\nWindows 10 Home <br>', 2645000, 19, 1, 9, 1, '../img/productos/9/1000.jpg'),
+(1001, 'Portátil ASUS VivoBook X413EA-EB249T', 'Modelo Marca: ASUS <br> Serie: VivoBook Modelo: F515JA <br> Color: Gris <br> Número de parte:   F515JA-Ci38G256WP-01 <br> Tipo: Notebook Procesador  <br> Marca: Intel <br> Línea: Core i3 <br> Modelo: 1005G1 <br> Generación: 10ma Generación <br>  Velocidad: (hasta 3.40 GHz) <br>  Cache: 4 MB Memoria <br> Capacidad: 8GB Tipo: DDR4 Unidad', 3679000, 19, 1, 5, 1, '../img/productos/5/1001.jpg'),
+(1002, 'Portátil HP 15-dw1085la', 'Procesador Intel® Core™ i3 de 10.ª generación <br>\r\nWindows 10 Home 64 <br>\r\n4 GB de RAM DDR4-2666 MHz (1 x 4 GB) <br>\r\nPantalla HD (1366 x 768) de 15,6\" (39,6 cm) en diagonal con microbordes, BrightView, 220 nits, 45 % de NTSC <br>', 1599000, 19, 1, 4, 1, '../img/productos/4/1002.jpg'),
+(1003, 'Procesador Ryzen 5 3400g', 'Es ideal para jugadores y creadores de contenido que requieran un instrumento de gran ejecución. <br>\r\nMemoria caché de 4 MB, rápida y volátil. <br>\r\nProcesador gráfico Radeon RX Vega 11 Graphics. <br>\r\nSoporta memoria RAM DDR4. <br>\r\nSu potencia es de 65 W. <br>\r\nCuenta con 8 hilos que favorecen la ejecución de múltiples programas a la vez. <br>\r\nIncluye air cooler. air cooler. <br>\r\nProducto en empaque original. <br>\r\nProcesador innovador desarrollado bajo altos estándares de calidad <br>', 1290000, 19, 2, 5, 1, '../img/productos/5/1003.jpg'),
+(1004, 'Procesador Amd Ryzen 9 3900xt', '# de núcleos de CPU: 16 <br>\r\n\r\n# de hilos: 32 <br>\r\n\r\nReloj base: 3,4 GH <br>', 2683000, 19, 2, 5, 1, '../img/productos/5/1004.jpg'),
+(1005, 'Board Gigabyte B460m Ds3h Ud', 'Marca:	Gigabyte <br> \r\nLínea:	Ultra Durable <br> \r\nModelo:	B460M DS3H V2 <br> \r\nVersión: rev. 1.0 <br> ', 469900, 19, 3, 10, 1, '../img/productos/10/1005.jpg'),
+(1006, 'Placa Base Para Juegos Msi Mag B460m Mortar (', 'Marca:	MSI <br>\r\nLínea:	MORTAR <br>\r\nModelo:	B460m mortar <br>', 1038900, 19, 3, 8, 1, '../img/productos/8/1006.jpg'),
+(1007, 'Board Asrock B450 Gaming Itx Ac', 'Marca:	ASRock <br>\r\nLínea:	B450 <br>\r\nModelo:	Fatality <br>\r\nPlataforma: AMD <br>\r\nCapacidad máxima soportada de la memoria RAM: 32 GB <br>\r\nChipset: b450 <br>\r\nSocket: AM4 <br>\r\nCon procesador: No <br>\r\nCPU: AMD Ryzen <br>\r\nAplicaciones: Desktop <br>\r\nTipo de memoria RAM: DDR4 <br>\r\nEs gamer: Sí <br>', 565000, 19, 3, 6, 1, '../img/productos/6/1007.jpg'),
+(1008, 'Memoria Ram Corsair Vengeance Lpx 8gb (1x8gb)', 'Optimiza el rendimiento de tu máquina con la tecnología DDR4 DRAM. <br>\r\nMemoria con formato UDIMM. <br>\r\nAlcanza una velocidad de 3000 MHz. <br>\r\nApta para Computadoras de escritorio. <br>\r\nLínea Vengeance LPX. <br>\r\nCuenta con una tasa de transferencia de 24000 MB/s. <br>\r\nCompatible con Intel. <br>', 230000, 19, 4, 9, 1, '../img/productos/9/1008.jpg'),
+(1009, 'Memoria Ram Adata Xpg Spectrix D60g Ddr4 8gb ', 'Capacidad total: 8 GB <br>\r\n\r\nEs gamer: Sí <br>\r\n\r\nFormato: DIMM <br>\r\n\r\nTecnología: DDR4 <br>\r\n \r\nVelocidad: 3600 MHz <br>\r\n\r\nAplicación: Computadoras de escritorio <br>', 320000, 19, 4, 11, 1, '../img/productos/11/1009.jpg'),
+(1010, 'Memoria Ram Adata Xpg Spectrix D80 8gb 3600 M', 'Capacidad total: 8 GB <br>\r\n\r\nVelocidad: 3600 MHz <br>\r\n\r\nAplicación: Computadoras de escritorio <br>\r\n\r\nTecnología: DDR4 <br>', 297000, 19, 4, 6, 1, '../img/productos/6/1010.jpg'),
+(1011, 'Tarjeta De Video Asrock Radeon Rx 5500 Xt 8 G', 'Fabricante: AMD <br>\r\n\r\nTipo de memoria gráfica: GDDR6 <br>\r\n\r\nInterfaz con la placa madre: PCI-Express 4.0 <br>\r\n\r\nTamaño de memoria: 8 GB <br>\r\n\r\nContectividad: HDMI,DisplayPort <br>', 3500000, 19, 5, 10, 1, '../img/productos/10/1011.jpg'),
+(1012, 'Radeon Rx 5600 Xt Windforce Oc 6g', 'Desarrollado por AMD Radeon ™ RX 5600 XT <br>\r\nIntegrado con 6 GB de interfaz de memoria GDDR6 de 192 bits <br>\r\nSistema de enfriamiento WINDFORCE 2X con ventiladores giratorios alternativos <br>\r\nPlaca trasera de protección <br>\r\nSoporte PCI-Express 4.0 <br>\r\nReloj de núcleo <br>\r\nReloj de refuerzo: hasta 1620 MHz <br>\r\nReloj de juego *: 1460 MHz <br>', 3500000, 19, 5, 8, 1, '../img/productos/8/1012.jpg'),
+(1013, 'Evga Geforce Gtx 1660 Xc Gaming 6gb Gddr5', 'Real Boost Clock: 1830 MHz <br>\r\nDetalle de la memoria:6144MB GDDR5 <br>\r\nCompatibilidad con el sistema operativo: Windows 10 de 64 bits, Windows 7 de 64 bits<br>\r\n* El ventilador HDB único ofrece un enfriamiento de mayor rendimiento y un ruido acústico mucho más silencioso<br>\r\n* Diseñado para EVGA Precision x1 <br>', 5368000, 19, 5, 6, 1, '../img/productos/6/1013.jpg'),
+(1014, 'Disco Duro Sata Pc Interno 2 Teras Toshiba', 'Marca: Toshiba <br>\r\nCapacidad: 2 Teras <br>\r\nDimensiones: 101.6x26.1x147mm <br>\r\nPeso: 450grm <br> \r\nInterfaz sata de 6 gb/seg <br>\r\nInterfaz: serial ata <br>\r\nInterfaces estándar admitidas: ata-8 serial ata 3.0 <br>\r\nCompatibilidad: Windows xp/vista/7/8 o superior, Mac os 10.6 o superior, Linux kernel 2.4 o superior <br>', 245000, 19, 6, 7, 1, '../img/productos/7/1014.jpg'),
+(1015, 'Ssd Gigabyte Nvme 1tb', 'Capacidad: 1 TB<br>\r\n\r\nFactor de forma: M.2 2280<br>\r\n\r\nAplicaciones: portatiles,pcs <br>Tecnología de almacenamiento: SSHD<br>\r\n\r\nInterfaces: NVMe 1.3', 859000, 19, 6, 12, 1, '../img/productos/12/1015.jpg'),
+(1016, 'Disco Duro Seagate Barracuda 4tb Hdd', 'Capacidad: 4 TB<br>\r\n\r\nFactor de forma: 3.5 \"<br>\r\n\r\nAplicaciones: PC<br>\r\n\r\nTecnología de almacenamiento: HDD<br>\r\n\r\nInterfaces: SATA II', 502000, 19, 6, 11, 1, '../img/productos/4/1016.jpg'),
+(1017, 'Chasis Corsair Carbide Spec Omega', 'Marca	Corsair<br>\r\nLínea	Carbide<br>\r\nModelo	SPEC-OMEGA <br> Incluye fuente de alimentación: No <br>\r\nTipo de estructura: Mid tower<br>\r\nPuertos: USB 2.0,USB 3.0,Audio<br>\r\nBahías: 2.5 in,3.5 in<br>\r\nAltura x Ancho x Largo: 495 mm x 232 mm x 516 mm<br>\r\nEs gamer: No<br>\r\nPlacas madre compatibles: Micro-ATX,Mini-ITX,ATX', 871000, 19, 7, 10, 1, '../img/productos/10/1017.jpg'),
+(1018, 'Chasis Thermaltake Core P3 Red', 'Marca	Thermaltake<br>\r\nLínea	Core <br>\r\nModelo	P3<br>\r\nColor	Negro', 2256000, 19, 7, 8, 1, '../img/productos/8/1018.jpg'),
+(1019, 'Chasis Thermaltake View 51 Argb', 'LA SERIE: View snow <br>\r\nTIPO DE CASO: Torre media<br>\r\nPANEL LATERAL: 3 x vidrio templado (espesor de 4 mm)<br>\r\nCOLOR: Exterior e interior: blanco', 940000, 19, 7, 6, 1, '../img/productos/6/1019.jpg'),
+(1020, 'Monitor Lg 24mp59g-p Full Hd', '    Pantalla led de 24 \" <br>\r\n    Tiene una resolución de 1920px-1080px <br>\r\n    Relación de aspecto de 16:9 <br>\r\n    Panel IPS <br>\r\n    Su brillo es de 250cd/m² <br>\r\n    Tipos de conexión: DisplayPort 1.2, HDMI 1.4, D-Sub, Jack 3.5 mm', 871000, 19, 9, 10, 1, '../img/productos/10/1020.jpg'),
+(1021, 'Monitor Gaming Lg 34 34gl750 144hz ', 'Pantalla led de 34 \" <br>\r\nCurvo. <br>\r\nTiene una resolución de 2560px-1080px <br>\r\nRelación de aspecto de 21:9 <br>\r\nPanel IPS <br>\r\nSu brillo es de 300cd/m² <br>\r\nTipos de conexión: 2 HDMI 2.0, DisplayPort 1.4 Jack 3.5 mm.', 2750000, 19, 9, 8, 1, '../img/productos/8/1021.jpg'),
+(1022, 'Monitor Samsung 24 Led Hdmi', 'Tamaño de la pantalla: 24 \" <br>\r\n\r\nEs reclinable: Sí <br>\r\n\r\nEs curvo: No <br>\r\n\r\nCon altavoces incorporados: No', 636242, 19, 9, 6, 1, '../img/productos/6/1022.jpg'),
+(1023, 'Fuente De Poder Rm850 850w 80plus Gold', 'Series 	RM Series\r\nMarca 	Corsair\r\nPotencia de salida 	850 <br>\r\nFactor de forma 	ATX <br>\r\nPotencia 	850 vatios', 513890, 19, 8, 5, 1, '../img/productos/5/1023.jpg'),
+(1024, 'Fuente De Poder Evga Supernova 1300w G2 Gold', 'Marca	Evga <br>\r\nLínea	SuperNOVA <br>\r\nModelo	120-G2-1300-X <br>\r\nPotencia de salida	1300 W', 2344000, 19, 8, 11, 1, '../img/productos/11/1024.jpg'),
+(1025, 'Fuente De Poder Thermaltake Smart Bx1 750w 80', 'Marca	Thermaltake Technology<br>\r\nLínea	Smart Series<br>\r\nModelo	PS-SPD-0750NNFABU-1<br>\r\nPotencia de salida	750 W', 422000, 19, 8, 9, 1, '../img/productos/9/1025.jpg'),
+(1026, 'Refrigeracion Liquida Xpg Levante 240', 'Dimensión del bloque de agua (H W D): 86 x 72 x 36 mm <br>\r\nMaterial de bloque de agua: Cobre<br>\r\nCPU Socket Support: Intel LGA 1366,115x 2066,2011 AMD AM4<br>\r\nGrasa térmica: Pre-aplicado<br>\r\nDimensión del radiador: 272 x 121 x 27 mm<br>\r\nMaterial del radiador: Aluminio', 629000, 19, 10, 7, 1, '../img/productos/7/1026.jpg'),
+(1027, 'Ventilador Thermaltake Pure 12', 'Marca	Thermaltake<br>\r\n\r\nLínea	Pure<br>\r\n\r\nModelo	12 <br> Tipo de cooler: Air cooling<br>\r\nTamaño del ventilador: 120 mm<br>\r\nEs gamer: Sí<br>', 139000, 19, 10, 7, 1, '../img/productos/7/1027.jpg'),
+(1028, 'Pasta Termica Corsair Xtm50', 'Brand: Corsair <br>\r\n- Número de modelo del producto: CT--WW <br>\r\n- Peso del producto: 0.353 onzas <br>\r\n- Dimensiones del producto: 5.19 x 4.33 x 5.19 pulgadas <br>\r\n- Dimensiones del artículo Largo x Ancho x Altura: 5.19 x 4.33 x 5.19 pulgadas', 120000, 19, 10, 7, 1, '../img/productos/7/1028.jpg'),
+(1029, 'Timon Logitech G923 Xbox One Pc Trueforce', '\r\n    TRUEFORCE <br>\r\n    Tecnología Force Feedback de próxima generación <br>\r\n    PEDAL DEL FRENO PROGRESIVO <br>\r\n    Mejor respuesta, mayor precisión <br>\r\n    Controles Xbox Series X|S, Xbox One, PS5 y PS4 integrados\r\n', 1599000, 19, 11, 7, 1, '../img/productos/7/1029.jpg'),
+(1030, 'Combo Mouse G203 Y Pad Mouse G240 Logitech', 'Máximo desempeño para juegos, esto debido a las 1.000 señales por segundo del G203 que representan una rapidez 8 veces superior a la de los mouse estándar. Por eso al moverlo o hacer click, la respuesta en pantalla es casi instantánea.', 194000, 19, 11, 8, 1, '../img/productos/8/1030.jpg'),
+(1031, 'Silla Gamer Corsair T2 Road Warrior Morado/Ve', '- Ideal para los apasionados de los video juegos y también es utilizada como silla de oficina. Esta silla está pensada para largas horas de juego o trabajo en, permite varios ángulos de reclinación hasta los 180 grados. <br><br> - Es ergonómica y flexible para proteger tu ergonomía postural. <br>  Cuenta con un cojín lumbar y uno en el cabecero. <br><br> - Es giratoria, puedes graduar la altura de los apoya brazos y de la silla según tus necesidades. ', 728200, 19, 12, 7, 1, '../img/productos/7/1031.jpg'),
+(1032, 'Silla Gamer Corsair Silver Edition T12', 'Presenta un asiento ancho, respaldo alto y tonos de color personalizados en dos capas para ofrecerle el estilo, la comodidad y la resistencia que necesita para largas sesiones de juego.', 719900, 19, 12, 7, 1, '../img/productos/7/1032.jpg'),
+(1055, 'COMPUTADOR DE MESA PC CLON GAMER 1 RYZEN 5', 'Procesador Amd <br>\r\nFuente Atx Generica <br>\r\nProcesador Ryzen 5 <br>\r\nVelocidad 3.6Ghz <br>\r\nMother Board Standar (Aud/Vid/Red) <br>\r\nMemoria 8 Gb <br>\r\nDisco Duro SSD 240 GB <br>\r\nPantalla 22\" <br>\r\nMarca Acer ', 2307000, 19, 1, 11, 1, '../img/productos/11/Computador negro.jpg');
 
 --
 -- Disparadores `producto`
@@ -775,17 +785,18 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`documento`, `nombres`, `apellidos`, `fechaNto`, `edad`, `celular`, `direccion`, `correo`, `CARGO_idCargo`, `TIPODOCUMENTO_idTipo`, `ESTADO_idEstado`) VALUES
-(1632873, 'Yeren', 'Palacios', '2021-04-30', 17, '1212388', 'calle 1 ...', 'yapalacios660@misena.edu.co', 3, 2, 9),
+(1632873, 'Juan', 'Palacios', '2021-04-30', 45, '1212388', 'tv 3 bis este nzss', 'yapalacios660@misena.edu.co', 3, 2, 9),
 (25251663, 'juan', 'diaz', '2000-12-25', 20, '55252533', 'carrera 4', 'juan@gmail.com', 2, 3, 9),
-(227142548, 'Tiena', 'Sprules', '1989-08-27', 13, '674 787 4516', '77 Dakota Junction', 'tsprules4@weebly.com', 3, 3, 9),
+(227142548, 'Tiena', 'Sprules', '1989-08-27', 13, '674 787 4516', '77 Dakota Junction', 'tsprules4@weebly.com', 3, 3, 10),
 (339218373, 'Perrine', 'Ivanshintsev', '1998-12-18', 61, '901 901 3365', '459 Dexter Park', 'pivanshintsev0@ustream.tv', 3, 4, 9),
 (427389387, 'Rae', 'Skill', '1998-01-05', 60, '588 348 6757', '0 Ruskin Parkway', 'rskille@admin.ch', 3, 2, 9),
 (607881456, 'Libbey', 'Yakobowitch', '1992-03-30', 53, '592 562 9508', '07 Morning Drive', 'lyakobowitchh@weebly.com', 3, 3, 9),
+(1000035428, 'Marlon', 'Jaramillo', '2003-06-09', 18, '3212855600', 'Diagonal 43 # 1a 20 este', 'marlonjaramillo23441@gmail.com', 3, 1, 9),
 (1000257626, 'Miguel', 'Lopez', '2000-02-10', 20, '5553263627', 'calle 20 ...', 'malopez030@misena.edu.co', 3, 2, 10),
 (1000257902, 'jhon ', 'monroy', '2001-06-10', 20, '3143564218', 'cr3aeste', 'rodriguez@gmail.com', 1, 1, 9),
 (1000456409, 'Kevin ', 'Cendales', '2002-10-08', 18, '3114609836', 'Calle 45 D # 4- 20 este', 'kacendales@misena.edu.co', 1, 1, 9),
 (1014925189, 'Vasili', 'MacAvaddy', '1998-11-11', 43, '748 679 9637', '317 Meadow Valley Parkway', 'vmacavaddy6@comcast.net', 3, 3, 9),
-(1022322055, 'Yeren', 'Palacios', '2021-08-10', 12, '66265526', 'calle 3', 'yeren@gmail.com', 1, 2, 9),
+(1022322055, 'Yeren', 'Palacios2', '2021-08-10', 12, '66265526', 'calle 3', 'yeren@gmail.com', 1, 2, 9),
 (1022322061, 'Yeren', 'Palacios', '2003-10-24', 17, '55526662', 'calle 1 ...', 'yerenagmt@gmail.com', 3, 2, 10),
 (1022322062, 'Yeren', 'Palacios', '2021-08-19', 3122, '66265526', 'calle 3', 'yeren2@gmail.com', 3, 2, 10),
 (1022322066, 'prueba1', 'prueba1', '2021-08-11', 3122, '66265526', 'prueba1', 'prueba1@gmail.ocm', 3, 1, 10),
@@ -950,7 +961,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `idDetalles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -962,7 +973,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5345;
+  MODIFY `idFactura` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5346;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
@@ -974,7 +985,7 @@ ALTER TABLE `inventario`
 -- AUTO_INCREMENT de la tabla `movimiento`
 --
 ALTER TABLE `movimiento`
-  MODIFY `idMovimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `idMovimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`

@@ -25,14 +25,18 @@ html{
     background-color: var(--main);
     color:#fff;
     padding: 15px 0 15px 10px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     z-index: 100;
+    position: relative;
+    overflow: AUTO;
+    max-height: 100vh;
 }
 .menu-head{
     display: flex;
+    align-self: flex-start;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 0 15px;
     text-decoration: none;
     color:#fff
@@ -45,7 +49,10 @@ html{
     margin-left: 10px;
     margin-right: 15px;
 }
-
+.items{
+    align-self: flex-start;
+    padding-bottom: 10px;
+}
 .item{
     display: flex;
     align-items: center;
@@ -93,6 +100,16 @@ html{
     display: none;
 }
 
+/* help */
+.help{
+    width: fit-content;
+    justify-self: center;
+    padding-right: 10px;
+    text-align: center;
+    transform: scale(.75);
+    opacity: .8;
+    align-self: flex-end;
+}
 
 @media(max-width:810px){
     .menu{position: absolute;height: 100vh;left: 0;}
@@ -298,11 +315,21 @@ header{
     position: relative;
 }
 .producto-resumen .texto{
+    
     align-self: center;
     font-size: 13px;
     display: grid;
     grid-gap: 10px;
 }
+
+.producto-resumen .texto h3{
+    /* width: 60%; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .producto-resumen .img {
     width: 80px;
     margin-right: 10px;
@@ -446,6 +473,14 @@ header{
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fit,minmax(100px,auto) );
+}
+.producto .descripcion p{
+    max-height: 30px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .producto .descripcion div:last-child{
     display: grid;

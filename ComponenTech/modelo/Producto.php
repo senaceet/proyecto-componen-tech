@@ -249,6 +249,15 @@ class Producto {
 		return $data;
 	}
 
+
+	public function getProducto1($p){
+		$sql = "select * from producto,categoria where CATEGORIA_idCategoria = idCategoria and idProducto = '$p' ";
+		$cn = conectar();
+		$res = $cn->query($sql);
+		$cn->close();
+		return $res;
+	}
+
 	public function getProductoInventario($p){
 		$sql = "select * from producto where idProducto = '$p'";
 		$cn = conectar();

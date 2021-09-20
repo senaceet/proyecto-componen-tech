@@ -120,6 +120,29 @@ class Movimiento {
 		return $data;
 	}
 
+	public function search($text) {
+
+			$sql ="SELECT idMovimiento, fecha, cantidad, tipoMovimiento, productoNombre, FACTURA_idFactura FROM movimiento,producto, tipomovimiento 
+			WHERE (PRODUCTO_idProducto=idProducto AND TIPOMOVIMIENTO_idTipoMovimiento=idTipoMovimiento) and (productoNombre like '%$text%' or tipoMovimiento like '%$text%' or FACTURA_idFactura like '%$text%') order by fecha desc ";
+	
+
+		$cn = conectar();
+		$res = $cn->query($sql);
+
+		echo $cn->error;
+
+		$data = new stdClass();
+		$data->data=[];
+
+		$data->count=$this->getCount();
+		while($value = $res->fetch_object()) {
+			array_push($data->data,$value);
+		}
+		
+		$cn->close();
+		return $data;
+	}
+
 	public function getMovimientoDate($desde, $hasta) {
 
 		if($desde == 0){

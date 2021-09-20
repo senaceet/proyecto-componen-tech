@@ -160,7 +160,7 @@ function last() {
 // buscar
 
 const getMovimientosSearch = async (text)=>{
-    const res = await fetch(`../json/movimientos.php?action=search&text=${text}&estado=${estado}`)
+    const res = await fetch(`../json/movimientos.php?action=search&text=${text}`)
     res.json()
     .then(res => putMovimientos(res.data,0))
 
