@@ -239,7 +239,7 @@ $con_cats = $objCat->getCategorias();
 			}
 		})
 	}
-
+ 
 	async function reg(e){
 		e.preventDefault()
 		const data = new FormData(e.target)
@@ -251,9 +251,13 @@ $con_cats = $objCat->getCategorias();
 		.then(res=>{
 			// console.log(res)
 			if(res.error){
-				swal("Error", res.msj, "error");
+				swal("Error", res.error, "error");
 			} else{
-				location.reload()
+				swal("Registro completado", "El usuario se registró correctamente", "success")
+				.then(e=>{
+					location.reload()
+				})
+				
 			}
 		})
 	}

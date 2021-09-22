@@ -297,6 +297,18 @@ header{
     white-space: nowrap;
     padding: 7px 15px;
 }
+
+.contenedor table td input[type=number]{
+    width: 50px;
+    padding:5px;
+    border: none;
+    outline:none;
+    color:var(--gris1)
+}
+.contenedor table td input[type=number]:focus{
+    outline:1px solid #888;
+}
+
 .contenedor td button{
     background-color: var(--main);
     border-radius: 4px;

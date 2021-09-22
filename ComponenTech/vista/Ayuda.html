@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/tar.css">
+
+	<title>ComponenTech</title>
+</head>
+<style>
+	.navegador a {
+		color: black;
+		text-decoration: none;
+	}
+
+	.ayuda {
+		width: 90%;
+		height: 740px;
+		margin-top: 30px;
+		margin-left: 50px;
+		text-align: center;
+		padding-left: 20px;
+		padding-right: 20px;
+		display: grid;
+		grid-template-columns: auto auto;
+
+	}
+
+	.ayuda a {
+		color: blue;
+		margin: auto;
+
+	}
+
+	.bot-ayudas {
+		height: 700px;
+		align-items: left;
+		display: block;
+		overflow-y: auto;
+	}
+
+	.bot-ayudas a {
+		width: 100%;
+		border-radius: 6px;
+		padding: 18px 15px;
+		text-align: center;
+		display: block;
+		font-size: 12px;
+		margin-top: 35px;
+		-webkit-transition-duration: 0.4s;
+		/* Safari */
+		transition-duration: 0.4s;
+		cursor: pointer;
+		text-decoration: none;
+		text-transform: uppercase;
+		background-color: #CE3F3F;
+		color: white;
+		border: 2px solid #CE3F3F;
+		font-weight: bolder;
+	}
+
+	.bot-ayudas a:hover {
+		background-color: white;
+		color: #CE3F3F;
+		font-weight: bolder;
+
+	}
+
+	.ayuda .inst {
+		width: 100%;
+		height: 100%;
+		background-color: rgb(224, 223, 224);
+
+
+
+	}
+
+	.inst {
+		display: inline-block;
+		background-color: red;
+		height: 800px;
+		scroll-behavior: smooth;
+
+	}
+
+
+	.img {
+		margin: 10px auto;
+		border-radius: 5px;
+		padding: 13px;
+		width: 100%;
+		height: 400px;
+		background-size: 100% 100%;
+		display: inline-block;
+		background-size: cover;
+	}
+
+	.img img {
+		width: 100%;
+	}
+
+	scroll-container {
+
+		border-radius: 5px;
+
+		width: 100%;
+		height: 735px;
+		background-size: 100% 100%;
+		display: inline-block;
+		background-size: cover;
+		display: block;
+		overflow-y: hidden;
+		scroll-behavior: smooth;
+	}
+
+	scroll-page {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		font-size: 5em;
+		background-color: white;
+	}
+
+	scroll-page p {
+		font-size: 20px;
+		color: black;
+		text-align: justify;
+		margin: 5px;
+
+
+	}
+</style>
+
+<body>
+	<header>
+		<div class="logo"><a href="#recientes"><img src="../img/logo.png" alt="l"></a></div>
+
+
+		</div>
+		<nav class="navegador">
+
+
+			<ul>
+				<a href="principal.php">Regresar</a>
+			</ul>
+
+		</nav>
+	</header>
+
+
+
+
+
+
+
+	<div class="ayuda">
+
+		<div class="bot-ayudas">
+			<a href="#Pantalla1">Ingreso al sistema</a>
+			<a href="#Pantalla2">Registro</a>
+			<a href="#Pantalla3">Iniciar Sesión</a>
+			<a href="#Pantalla4">Interfaz Gráfica</a>
+			<a href="#Pantalla5">Mapa de navegación</a>
+			<a href="#Pantalla6">actualizar datos </a>
+			<a href="#Pantalla7">Carrito de compras</a>
+			<a href="#Pantalla8">Vaciar carrito</a>
+			<a href="#Pantalla9">Metodos de pago</a>
+			<a href="#Pantalla10">ver compras</a>
+			<a href="#Pantalla11">Mis compras</a>
+			<a href="#Pantalla12">cerrar sesión</a>
+
+
+		</div>
+
+		<div class="inst">
+
+			<scroll-container>
+				<scroll-page id="Pantalla1">
+					<div>
+						<p>Para ingresar al sistema de ComponenTech, deberemos registrarnos con el botón que está en la parte superior derecha de la barra navegación al botón "Crear cuenta". 👇</p>
+						<div class="img"><img src="img ayuda/ingreso al sistema.PNG" alt="Ingreso al sistema">
+						</div>
+					</div>
+
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla2">
+					<div>
+						<p>Para registrarnos deberémos de ingresar los datos en los campos correspondientes, deberemos de tener en cuenta no dejar ningún campo vacío. El número de documento no debe ser superior a 10 dígitos y en "Fecha" pondremos nuestra fecha de nacimiento, al llenar todos los campos daremos a "Registrarse"  </p>
+						<div class="img"><img src="img ayuda/Registrarse.jpg" alt="Registrarse"> </div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla3">
+					<div>
+						<p>Una vez creada la cuenta, deberemos de ingresar respectivamente el correo que vinculamos en nuestra cuenta y la contraseña, y finalmente le daremos a "Iniciar sesión" </p>
+						<div class="img"><img src="img ayuda/inicio sesion.PNG" alt="Inicio de sesión"></div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla4">
+					<div>
+						<p>Esta es la interfaz de ComponenTech al momento de iniciar sesión, la <span style="color:#8e0000; font-weight:bolder;"> barra</span> es desde donde podras hacer busquedas especificas, las <span style="color:purple; font-weight:bolder;">categorías</span> es donde podrás hacer una busqueda por tipo de componente y finalmente, las <span style="color:#bd8900; font-weight:bolder;">tarjetas</span> desde donde podrás ver los componentes más recientes. </p>
+						<div class="img"><img src="img ayuda/interfaz grafica.PNG" alt="Interfaz grafica"></div>
+					</div>
+				</scroll-page>
+
+
+
+				<scroll-page id="Pantalla5">
+					<div>
+						<p>Por otro lado en la barra de navegación tenemos el <span style="color:#8e0000; font-weight:bolder;"> logo</span>, el cual si le das click siempre te llevará a la interfaz principal de la página, el <span style="color:#7c0f28; font-weight:bolder;">correo</span> donde si le das click te llevará a la interfaz donde puedes actualizar tus datos, el <span style="color:blue; font-weight:bolder;">carrito de compras</span> en donde se te despliegará una ventana desde donde podrás ver los componentes almacenados con su precio total respectivo, y finalmente el botón de <span style="color:orange; font-weight:bolder;">cerrar sesión</span></p>
+
+						<div class="img"><img src="img ayuda/mapa de navegacion1.PNG" alt="Mapa de navegación">
+						</div>
+					</div>
+				</scroll-page>
+
+
+
+				<scroll-page id="Pantalla6">
+					<div>
+						<p>Teniendo en cuenta el anteriór punto, cuando le damos click al botón del <span style="color:#7c0f28; font-weight:bolder;">correo</span> nos llevará a esta interfaz desde donde podremos actualizar nuestros datos, simplemente deberemos seleccionar el campo a editar y le daremos al botón de "Actualizar", lo mismo pasa con el apartado desde donde podremos actualizar la contraseña.</p>
+						<div class="img"><img src="img ayuda/actualizar datos.PNG"></div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla7">
+					<div>
+						<p>Al momento de añadir un componente al carrito le daremos al botón de "Añadir al carrito", al instante en el carrito de compras se guardará dicho componente con su total. Si lo deseamos comprar solo le daremos al botón de "Comprar". </p>
+						<div class="img"><img src="img ayuda/producto.PNG">
+						</div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla8">
+					<div>
+						<p>Cuando le demos al botón de "Vaciar carrito" se eliminarán todos los productos que estaban en el carrito así mismo se eliminará el valor de los componentes.</p>
+						<div class="img"><img src="img ayuda/vaciar carrito.PNG">
+						</div>
+					</div>
+				</scroll-page>
+
+
+
+				<scroll-page id="Pantalla9">
+					<div>
+						<p>Una vez hecho esto, nos llevará a la interfaz de metodos de pago en donde aparecerá nuestro producto elegido desde podremos cambiarle la cantidad unitaria, cuando ya estemos seguros de comprarlo elegiremos el metodo de pago y aceptaremos los términos, acto seguido le daremos al botón de "Finalizar compra", luego de esto nos llegará al correo el recibo respectivo hecho por el sistema de ComponenTech.</p>
+						<div class="img"><img src="img ayuda/pago.PNG">
+						</div>
+					</div>
+				</scroll-page>
+
+
+
+				<scroll-page id="Pantalla10">
+					<div>
+						<p>Para ver el historial de nuestras compras solo deberemos de darle al botón de"<span style="color:red; font-weight:bolder;">Mis compras</span>" ubicado en la parte superior derecha de la barra de navegación.</p>
+						<div class="img"><img src="img ayuda/ver producto.PNG"></div>
+					</div>
+				</scroll-page>
+
+				<scroll-page id="Pantalla11">
+					<div>
+						<p>Aquí estará el historial de tus ultimas compras en el sistema con la cual contendra, el nombre del prodructo,precio unitaro,cantidad,total,fecha de la compra.</p>
+						<div class="img"><img src="img ayuda/mis compras.PNG"></div>
+					</div>
+				</scroll-page>
+
+				<scroll-page id="Pantalla12">
+					<div>
+						<p>Una vez en esta pantalla para poder cerrar sesión daremos en el boton que esta señalado daremos click despues de darle ya estaremos afuera y ya habremos cerrado sesión.</p>
+						<div class="img"><img src="img ayuda/cerrar sesion.PNG"></div>
+					</div>
+				</scroll-page>
+
+
+			</scroll-container>
+
+		</div>
+	</div>
+
+</body>
+
+</html>

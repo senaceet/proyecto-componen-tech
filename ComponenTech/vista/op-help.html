@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/tar.css">
+
+	<title>ComponenTech</title>
+</head>
+<style>
+	.navegador a {
+		color: black;
+		text-decoration: none;
+	}
+
+	.ayuda {
+		width: 90%;
+		height: 740px;
+		margin-top: 30px;
+		margin-left: 50px;
+		text-align: center;
+		padding-left: 20px;
+		padding-right: 20px;
+		display: grid;
+		grid-template-columns: auto auto;
+	}
+
+	.ayuda a {
+		color: blue;
+		margin: auto;
+
+	}
+
+	.bot-ayudas {
+		height: 700px;
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		overflow-y: scroll;
+
+	}
+
+	.bot-ayudas a {
+		width: 100%;
+		border-radius: 6px;
+		padding:18px 15px ;
+		text-align: center;
+		display: block;
+		font-size: 12px;
+		margin-top: 35px;
+		-webkit-transition-duration: 0.4s;
+		/* Safari */
+		transition-duration: 0.4s;
+		cursor: pointer;
+		text-decoration: none;
+		text-transform: uppercase;
+		background-color: #CE3F3F;
+		color: white;
+		border: 2px solid #CE3F3F;
+		font-weight: bolder;
+	}
+
+	.bot-ayudas a:hover {
+		background-color: white;
+		color: #CE3F3F;
+		font-weight: bolder;
+
+	}
+
+	.ayuda .inst {
+		width: 100%;
+		height: 100%;
+		background-color: rgb(224, 223, 224);
+
+
+
+	}
+
+	.inst {
+		display: inline-block;
+		background-color: red;
+		height: 800px;
+		scroll-behavior: smooth;
+
+	}
+
+
+	.img {
+		margin: 10px auto;
+		border-radius: 5px;
+		padding: 13px;
+		width: 100%;
+		height: 400px;
+		background-size: 100% 100%;
+		display: inline-block;
+		background-size: cover;
+	}
+
+	.img img {
+		width: 100%;
+	}
+
+	scroll-container {
+
+		border-radius: 5px;
+
+		width: 100%;
+		height: 735px;
+		background-size: 100% 100%;
+		display: inline-block;
+		background-size: cover;
+		display: block;
+		overflow-y: hidden;
+		scroll-behavior: smooth;
+	}
+
+	scroll-page {
+		display: flex;
+		padding: 10px;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		font-size: 5em;
+		background-color: white;
+	}
+
+	scroll-page p {
+		font-size: 20px;
+		color: black;
+		text-align: justify;
+		margin: 5px;
+
+
+	}
+</style>
+
+<body>
+	<header>
+		<div class="logo"><a href="#recientes"><img src="../img/logo.png" alt="l"></a></div>
+
+
+		</div>
+		<nav class="navegador">
+
+
+			<ul>
+				<a href="dashboard.php">Volver</a>
+			</ul>
+
+		</nav>
+	</header>
+
+
+
+
+
+
+
+	<div class="ayuda">
+
+		<div class="bot-ayudas">
+			<a href="#Pantalla1">Ingreso Dashboard</a>
+			<a href="#Pantalla2">Dashboard</a>
+			<a href="#Pantalla3">Producto</a>
+			<a href="#Pantalla4">Agregar producto</a>
+			<a href="#Pantalla5">Inventario</a>
+			<a href="#Pantalla6">Reporte Inventario </a>
+			<a href="#Pantalla7">Proveedores</a>
+			<a href="#Pantalla8">Movimientos</a>
+			<a href="#Pantalla9">Facturas</a>
+			<a href="#Pantalla10">Reporte factura</a>
+
+
+		</div>
+
+		<div class="inst">
+
+			<scroll-container>
+				<scroll-page id="Pantalla1">
+					<div>
+						<p>Inicialmente para ingresar al panel del Operador deberemos de darle click al botón de "<span
+								style=" color:red; font-weight:bolder;">Administración</span>" el cual nos llevará al
+							interfaz del dashboard.</p>
+						<div class="img"><img src="img ayuda/administracion inicio.PNG" alt="Ingreso al dashboard">
+						</div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla2">
+					<div>
+						<p>Esta es la intefaz del operador, en donde en la parte izquieda tendrémos una barra vertical
+							donde estará el dashboard, con las distintas funciones del operador, también saldran datos
+							acerca de los productos vendidos recientes, productos en inventario, ventas realizadas entre
+							otros datos a tiempo real.</p>
+						<div class="img"><img src="img ayuda/administracion dashboard.PNG" alt="Dashboard"> </div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla3">
+					<div>
+						<p> En la función de "Productos", el operador puede interactuar con los componentes por medio de
+							la opción de <span style=" color:red; font-weight:bolder;">Filas</span> desde donde podrá
+							elegir la cantidad de componentes que apárezcan en la pantalla, el filtro de "<span
+								style=" color:#FF9B00; font-weight:bolder;">todos</span>" donde podremos hacer que
+							aparezcan los componentes por estado, y "<span
+								style=" color:#815004; font-weight:bolder;">todas</span>" es donde podremos hacer que
+							aparezcan los componentes por sus categorías. Y finalmente <span
+								style=" color:black; font-weight:bolder;">editar y desactivar</span> donde podremos
+							desactivar el componente o editarlo.</p>
+						<div class="img"><img src="img ayuda/editar productos.PNG" alt="editar producto"></div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla4">
+					<div>
+						<p> Al momento de <span style=" color:red; font-weight:bolder;">Agregar</span> un componente
+							nuevo, deberemos completar los datos que nos piden, desde añadir una imagen, el nombre del
+							producto, depues seleccionan la categoria, el precio lo tendran que poner en pesos
+							seleccionan el proveedor, y se tendra que poner una descripción sobre el producto para poder
+							crear el producto por ultimo daremos en "<span
+								style=" color:red; font-weight:bolder;">agregar</span>".</p>
+						<div class="img"><img src="img ayuda/agregar producto.PNG" alt="Agregar producto"></div>
+					</div>
+				</scroll-page>
+
+
+
+				<scroll-page id="Pantalla5">
+					<div>
+						<p>En la función de "Inventario", saldrán en una tabla los productos en el aplicativo, el
+							operador podrá elegir la cantidad de inventario mostrados por medio del filtro por <span
+								style=" color:#FFB801; font-weight:bolder;">Filas</span> y también por el filtro por
+							<span style=" color:#FFB801; font-weight:bolder;">estado</span> donde se filtrarán los
+							productos por estado. Adicionalmente están los botones de <span
+								style=" color:black; font-weight:bolder;">Desactivar y ver reporte</span> desde donde
+							podremos cambiarle el estado al producto o ver el reporte del mismo.
+						</p>
+						<div class="img"><img src="img ayuda/inventario.PNG" alt="Inventario"> </div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla6">
+					<div>
+						<p>Cuando le damos al botón de <span style=" color:black; font-weight:bolder;"> Ver
+								reporte</span> nos saldrá una ventana con el reporte de ventas, desde donde podremos
+							filtrar por fechas, desde una fecha especifica hasta la actual, y finalmente si le damos al
+							botón de "<span style=" color:red; font-weight:bolder;">Reporte PDF</span>" podremos
+							descargar el reporte en formato <span style=" color:black; font-weight:bolder;">PDF</span>.
+						</p>
+						<div class="img"><img src="img ayuda/reportepdf.PNG" alt="Reporte inventario"></div>
+					</div>
+				</scroll-page>
+
+				<scroll-page id="Pantalla7">
+					<div>
+						<p>En la función de "Proveedores", saldrán en una tabla los proveedores respectivos con respecto
+							al producto involucrado, el operador podrá elegir la cantidad de inventario mostrados por
+							medio del filtro por <span style=" color:blue; font-weight:bolder;">Filas</span> y también
+							por el filtro por <span style=" color:#FFB801; font-weight:bolder;">estado del
+								proveedor</span> donde se filtrarán los proveedores por su estado. Adicionalmente están
+							los botones de <span style=" color:black; font-weight:bolder;">Desactivar y editar</span>
+							desde donde podremos cambiarle el estado al proveedor o editarlo.</p>
+						<div class="img"><img src="img ayuda/proveedores.PNG" alt="Proveedores"></div>
+					</div>
+				</scroll-page>
+
+				<scroll-page id="Pantalla8">
+					<div>
+						<p>La función de "Movimientos" nos mostrará una tabla donde estarán los movimientos desde el más
+							reciente hasta el más antiguo, desde donde podremos filtrar con el botón de "<span
+								style=" color:red; font-weight:bolder;">Filas</span>", como también está implementado el
+							método de filtramiento por fechas "<span style=" color:#6B4100; font-weight:bolder;">desde
+							</span>" y "<span style=" color:#6B4100; font-weight:bolder;"> hasta </span>", con el fin de
+							filtrar los movimientos desde una fecha en especifico.</p>
+						<div class="img"><img src="img ayuda/movimientos.PNG" alt="Movimientos"></div>
+					</div>
+				</scroll-page>
+
+
+				<scroll-page id="Pantalla9">
+					<div>
+						<p>En la función de "Facturas" podremos encontrar una tabla con las ultimas facturas
+							registradas, desde donde podremos filtrar por "<span
+								style=" color:#6b4100; font-weight:bolder;">filas</span>", como también por el "<span
+								style=" color:blue; font-weight:bolder;">estado de la factura</span>". Adicionalmente
+							con el botón de "<span style=" color:red; font-weight:bolder;">Ver reporte </span>" podremos
+							ver el reporte respectivo.</p>
+						<div class="img"><img src="img ayuda/factura.PNG" alt="Facturas"></div>
+					</div>
+				</scroll-page>
+
+				<scroll-page id="Pantalla10">
+					<div>
+						<p>Cuando le damos al botón de "<span style=" color:red; font-weight:bolder;">Ver
+								reporte</span>" en la tabla de facturas, nos aparecerá un reporte respectivo donde
+							muestrán los productos comprados por el cliente. Y finalmente si le damos al botón "
+							<span	style=" color:crimson; font-weight:bolder;">Reporte PDF </span>" podrémos descargar
+							dicho reporte en formaro <span style="font-weight:bolder;">PDF</span>.</p>
+						<div class="img"><img src="img ayuda/reportefactura.PNG" alt="Reporte Facturas"></div>
+					</div>
+				</scroll-page>
+
+
+			</scroll-container>
+		</div>
+	</div>
+</body>
+
+</html>
+
+</body>
+
+</html>

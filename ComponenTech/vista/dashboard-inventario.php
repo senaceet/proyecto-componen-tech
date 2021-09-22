@@ -118,7 +118,7 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                             <td>Salidas</td>
                             <td>Saldo</td>
                             <td>Estado</td>
-                            <td>Acciones</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="inventario"></tbody>

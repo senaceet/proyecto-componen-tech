@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title></title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-</head>
-<body>
 
   <footer class="footer">
-  <p><a href="#">Ayuda</a></p>
+  <p><a href="ayuda.html">Ayuda</a></p>
   <p>©ComponenTech |  2021</p>
      <!-- <div class="container">
        <div class="row">
@@ -41,5 +33,3 @@
      </div> -->
   </footer>
 
-</body>
-</html>

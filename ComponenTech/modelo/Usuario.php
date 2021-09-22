@@ -82,9 +82,10 @@ class Usuario {
 		if( !$this->verifUsuario($this->_documento) ){
 			if( !$this->verifCorreo($this->_correo) ){
 				$cn = conectar();
-					$res->status = $cn->query($sql);
+				$res->status = $cn->query($sql);
 				$cn->close();
 				$this->registrarClave($this->_correo,$this->_pass);
+				$res->status=true;
 			} else {
 				$res->status=false;
 				$res->error="El correo ingresado ya está registrado";

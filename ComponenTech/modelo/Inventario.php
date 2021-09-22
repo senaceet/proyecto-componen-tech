@@ -194,10 +194,10 @@ class Inventario {
         if( $estado == 1|| $estado == 2)
 		    if($limit == 0 )
 		        $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
-				FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND idCategoria = CATEGORIA_idCategoria)";
+				FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria)";
 			else
 			  $sql ="SELECT idInventario, PRODUCTO_idProducto, productoNombre,CATEGORIA_idCategoria, categoria, entradas, Salidas, Saldo, idEstado, estado 
-			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND idCategoria = CATEGORIA_idCategoria) limit $offset, $limit";
+			  FROM inventario, producto, estado, categoria where (PRODUCTO_idProducto = idProducto AND ESTADO_idEstado = $estado AND ESTADO_idEstado = idEstado AND idCategoria = CATEGORIA_idCategoria) limit $offset, $limit";
 
 		else{
             if($limit == 0 )
@@ -250,8 +250,40 @@ class Inventario {
 		}
 
 		$cn->close();  
-		return $data;
+		return $data;	
+
+	}
+
+	public function agregarEntradas($id,$entradas) {
+		$cn = conectar();
+		$data = new stdClass();
+
+		$sql1 = "select * from inventario where idInventario = $id";
+		$inventario = $cn->query($sql1);
+		if(!$inventario){
+			$data->status = false;
+			$data->mensaje="No existe el elemento seleccionado";
+			return $data;
+		}
+
+		$inventario = $inventario->fetch_object();
 		
+		$nuevosaldo = $entradas - $inventario->Salidas;
+
+		$sql2 = "update inventario set entradas = $entradas, saldo=$nuevosaldo where idInventario = $id";
+		$res = $cn->query($sql2);
+		if(!$res){
+			$data->status =false;
+			$data->mensaje="Error: ".$cn->error;
+			return $data;
+		}
+
+		
+
+		$data->status = true;
+		$data->mensaje="Inventario actualizado";
+		 
+		return $data;	
 
 	}
 

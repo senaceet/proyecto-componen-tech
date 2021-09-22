@@ -117,13 +117,14 @@ if (isset($_POST['sacarproducto'])) {
 			<div>
 				<h1>Metodos de pago</h1>
 				<div class="totales">
-					<h2 class="SubtotalTitulo">Subtotal:</h2>
+					<!-- este era el subtotal -->
+					<h2 class="SubtotalTitulo">Total:</h2> 
 					<h2 class="SubtotalMP"></h2>
 				</div>
-				<div class="totales">
+				<!-- <div class="totales">
 					<h2 class="TotalTitulo">Total:</h2>
 					<h2 class="TotalMP"> </h2>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="OpcionMetodoPago">
@@ -161,7 +162,7 @@ if (isset($_POST['sacarproducto'])) {
 		facturaSubtotal.innerHTML = "$" + new Intl.NumberFormat().format(subtotal);
 		total = subtotal + (subtotal * 0.19);
 
-		facturaTotal.innerHTML = "$" + new Intl.NumberFormat().format(total);
+		// facturaTotal.innerHTML = "$" + new Intl.NumberFormat().format(total);
 
 		subtotal = 0; 
 

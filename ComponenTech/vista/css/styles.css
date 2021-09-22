@@ -1395,7 +1395,7 @@ ul {
 	margin:0px;
 	padding: 10px 6px;
 	color: whitesmoke;
-	background-color:#aa0b2b;
+	background-color:var(--rojo-principal);
 	font-weight: 600;
 	text-align:Center;
 	

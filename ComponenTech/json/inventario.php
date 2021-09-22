@@ -72,7 +72,16 @@ switch ($_GET['action']) {
         $pdf->Output("Reporte_".$data->producto->idProducto.".pdf","I");  
         
         break;  
+    
+    case 'add_entradas':
 
+        $inventario = new Inventario();
+
+        $data = $inventario->agregarEntradas($_POST['id'],$_POST['entradas']);
+
+        echo json_encode($data);
+
+        break;
 
     default:
         echo "{}";

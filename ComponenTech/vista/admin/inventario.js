@@ -48,14 +48,14 @@ function putInventario(data, count) {
                 <td>${num}</td>
                 <td>${e.productoNombre}</td>
                 <td>${e.categoria}</td>
-                <td>${e.entradas}</td>
+                
+                <td><input type="number" data-producto="${e.productoNombre}" data-id="${e.idInventario}" onblur="addEntradas(this)" value="${e.entradas}" min="${e.entradas}"></td>
+            
                 <td>${e.Salidas}</td>
                 <td>${e.Saldo}</td>
                 <td>${e.estado}</td>
                 
                 <td>
-                    <button data-id="${e.idInventario}" onclick="modUser(this)" title="Modificar"><img src="icons/edit.svg" alt="Actualizar"></button>
-                    
                     <button data-id="${e.PRODUCTO_idProducto}" onclick="hisReporte(this)" title="Ver reporte"><img src="icons/window.svg" alt="Actualizar"></button>
                 </td>
             </tr>`
@@ -325,6 +325,39 @@ function verifyInputs(inputs){
     if(vacios===0){
         return true
     } return false
+}
+
+
+
+// modificar entradas
+
+async function addEntradas(input){
+    
+
+    const id = input.dataset.id
+
+    var entradas = input.value
+    var producto = input.dataset.producto
+    
+    if(confirm(`¿Desea confirmar cambios?\n\n Producto: ${producto}\n Entradas: ${entradas}`)){
+        const data = new FormData()
+        data.append('id',id)
+        data.append('entradas',entradas)
+
+        const res = await fetch('../json/inventario.php?action=add_entradas',{
+            method:"post",
+            body:data
+        })
+        
+        res.json()
+        .then(res=>{
+            if(res.status){
+                getInventario()
+            }else{
+                alert("Error al actualizar inventario")
+            }
+        })
+    } 
 }
 
 // buscar
