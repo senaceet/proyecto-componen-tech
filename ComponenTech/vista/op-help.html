@@ -17,7 +17,7 @@
 
 	.ayuda {
 		width: 90%;
-		height: 740px;
+		height: 740px; 
 		margin-top: 30px;
 		margin-left: 50px;
 		text-align: center;
@@ -166,6 +166,7 @@
 			<a href="#Pantalla3">Producto</a>
 			<a href="#Pantalla4">Agregar producto</a>
 			<a href="#Pantalla5">Inventario</a>
+			<a href="#Pantalla5.1">Modificar entradas</a>
 			<a href="#Pantalla6">Reporte Inventario </a>
 			<a href="#Pantalla7">Proveedores</a>
 			<a href="#Pantalla8">Movimientos</a>
@@ -191,10 +192,10 @@
 
 				<scroll-page id="Pantalla2">
 					<div>
-						<p>Esta es la intefaz del operador, en donde en la parte izquieda tendrémos una barra vertical
-							donde estará el dashboard, con las distintas funciones del operador, también saldran datos
-							acerca de los productos vendidos recientes, productos en inventario, ventas realizadas entre
-							otros datos a tiempo real.</p>
+						<p>En la parte izquieda tendrémos una barra vertical
+							donde estará el dashboard, con las distintas funciones del operador, también nos mostrara 
+							cuantos clientes tenemos registrados, cuantos productos hay en el sistema, cuantas venta han sido realizadas, y los cuantos proveedores hay activos, 
+							también nos saldra en tiempo real los clientes recientes y productos recientes añadidos en el sistema.</p>
 						<div class="img"><img src="img ayuda/administracion dashboard.PNG" alt="Dashboard"> </div>
 					</div>
 				</scroll-page>
@@ -208,9 +209,10 @@
 								style=" color:#FF9B00; font-weight:bolder;">todos</span>" donde podremos hacer que
 							aparezcan los componentes por estado, y "<span
 								style=" color:#815004; font-weight:bolder;">todas</span>" es donde podremos hacer que
-							aparezcan los componentes por sus categorías. Y finalmente <span
-								style=" color:black; font-weight:bolder;">editar y desactivar</span> donde podremos
-							desactivar el componente o editarlo.</p>
+							aparezcan los componentes por sus categorías, el botón de <span style=" color:red; font-weight:bolder;">agregar</span> con el cual podremos añadir 
+							un producto nuevo. Y finalmente <span
+								style=" color:black; font-weight:bolder;">editar y desactivar</span> donde aparece la pantalla 
+								podremos desactivar el producto y poder editarlo.</p>
 						<div class="img"><img src="img ayuda/editar productos.PNG" alt="editar producto"></div>
 					</div>
 				</scroll-page>
@@ -220,9 +222,10 @@
 					<div>
 						<p> Al momento de <span style=" color:red; font-weight:bolder;">Agregar</span> un componente
 							nuevo, deberemos completar los datos que nos piden, desde añadir una imagen, el nombre del
-							producto, depues seleccionan la categoria, el precio lo tendran que poner en pesos
-							seleccionan el proveedor, y se tendra que poner una descripción sobre el producto para poder
-							crear el producto por ultimo daremos en "<span
+							producto, categoría respectiva, el precio  el cual se tendra que digitar sin puntos 
+							ni sombolos solo numeros ya que el precio tendrá su formato respectivo al finalizar,
+							seleccionan el proveedor, y finalmente se tendra que poner una descripción para poder
+							crear el producto, por ultimo daremos en "<span
 								style=" color:red; font-weight:bolder;">agregar</span>".</p>
 						<div class="img"><img src="img ayuda/agregar producto.PNG" alt="Agregar producto"></div>
 					</div>
@@ -232,24 +235,38 @@
 
 				<scroll-page id="Pantalla5">
 					<div>
-						<p>En la función de "Inventario", saldrán en una tabla los productos en el aplicativo, el
+						<p>En la función de "Inventario", saldrán en una tabla con todos los productos en el aplicativo, el
 							operador podrá elegir la cantidad de inventario mostrados por medio del filtro por <span
-								style=" color:#FFB801; font-weight:bolder;">Filas</span> y también por el filtro por
+							style=" color:#FFB801; font-weight:bolder;">Filas</span> y también por el filtro por
 							<span style=" color:#FFB801; font-weight:bolder;">estado</span> donde se filtrarán los
-							productos por estado. Adicionalmente están los botones de <span
-								style=" color:black; font-weight:bolder;">Desactivar y ver reporte</span> desde donde
-							podremos cambiarle el estado al producto o ver el reporte del mismo.
+							productos por estado, en <span style=" color:rgb(255, 150, 225); font-weight:bolder;">entradas</span> 
+							el operario podrá modificarlas. Adicionalmente están los botones de <span
+							style=" color:black; font-weight:bolder;">Desactivar y ver reporte</span> desde donde
+							podremos cambiarle el estado ya que si le cambiamos el estado saldria producto agotado, también 
+							si la damos ver reporte nos dara más detalle sobre los productos.
 						</p>
 						<div class="img"><img src="img ayuda/inventario.PNG" alt="Inventario"> </div>
 					</div>
 				</scroll-page>
+				
+				<scroll-page id="Pantalla5.1">
+					<div>
+						<p>Para modificar las <span style=" color:rgb(255, 150, 225); font-weight:bolder;">entradas</span> podremos modificarlo con las flechas,
+							 luego de haber modificado la entrada le deberemos de dar click al fondo, acto seguido nos saldrá una ventana de confirmación tal y 
+							 como se muestra en la pantalla, cabe resaltar que la ventana cambia con base al navegador que estamos utilizando. Para aceptar la modificación le daremos a aceptar. </p>
+						<div class="img"><img src="img ayuda/entradas.PNG" alt="Inventario"> </div>
+					</div>
+				</scroll-page>
+
+		
 
 
 				<scroll-page id="Pantalla6">
 					<div>
 						<p>Cuando le damos al botón de <span style=" color:black; font-weight:bolder;"> Ver
 								reporte</span> nos saldrá una ventana con el reporte de ventas, desde donde podremos
-							filtrar por fechas, desde una fecha especifica hasta la actual, y finalmente si le damos al
+							filtrar por fechas, desde una fecha especifica hasta la actual, también nos arrojara el nombre 
+							del producto, la cantidad, nombre del comprador, valor  y finalmente si le damos al
 							botón de "<span style=" color:red; font-weight:bolder;">Reporte PDF</span>" podremos
 							descargar el reporte en formato <span style=" color:black; font-weight:bolder;">PDF</span>.
 						</p>
@@ -259,25 +276,28 @@
 
 				<scroll-page id="Pantalla7">
 					<div>
-						<p>En la función de "Proveedores", saldrán en una tabla los proveedores respectivos con respecto
+						<p>En la función de "Proveedores", saldrán en una tabla con todos los  proveedores respectivos con respecto
 							al producto involucrado, el operador podrá elegir la cantidad de inventario mostrados por
 							medio del filtro por <span style=" color:blue; font-weight:bolder;">Filas</span> y también
 							por el filtro por <span style=" color:#FFB801; font-weight:bolder;">estado del
 								proveedor</span> donde se filtrarán los proveedores por su estado. Adicionalmente están
 							los botones de <span style=" color:black; font-weight:bolder;">Desactivar y editar</span>
-							desde donde podremos cambiarle el estado al proveedor o editarlo.</p>
+							también nos mostrara el nombre de la empresa, telefono, contacto, celular, estado, y por ultimo 
+							las acciones donde mencionado antes se podra Desactivar y poder editar los proveedores.
+						</p>
 						<div class="img"><img src="img ayuda/proveedores.PNG" alt="Proveedores"></div>
 					</div>
 				</scroll-page>
 
 				<scroll-page id="Pantalla8">
 					<div>
-						<p>La función de "Movimientos" nos mostrará una tabla donde estarán los movimientos desde el más
+						<p>La función de "Movimientos" nos mostrará una tabla donde estarán todos los  movimientos desde el más
 							reciente hasta el más antiguo, desde donde podremos filtrar con el botón de "<span
 								style=" color:red; font-weight:bolder;">Filas</span>", como también está implementado el
 							método de filtramiento por fechas "<span style=" color:#6B4100; font-weight:bolder;">desde
 							</span>" y "<span style=" color:#6B4100; font-weight:bolder;"> hasta </span>", con el fin de
-							filtrar los movimientos desde una fecha en especifico.</p>
+							filtrar los movimientos desde una fecha en especifico también nos arrojara el nombre del producto,
+							 tipo, cantidad, fecha y por ultimo el id de la factura con el cual se reconocerá la compra.</p>
 						<div class="img"><img src="img ayuda/movimientos.PNG" alt="Movimientos"></div>
 					</div>
 				</scroll-page>
@@ -285,12 +305,12 @@
 
 				<scroll-page id="Pantalla9">
 					<div>
-						<p>En la función de "Facturas" podremos encontrar una tabla con las ultimas facturas
+						<p>En la función de "Facturas" podremos encontrar una tabla con todas  las ultimas facturas
 							registradas, desde donde podremos filtrar por "<span
 								style=" color:#6b4100; font-weight:bolder;">filas</span>", como también por el "<span
 								style=" color:blue; font-weight:bolder;">estado de la factura</span>". Adicionalmente
-							con el botón de "<span style=" color:red; font-weight:bolder;">Ver reporte </span>" podremos
-							ver el reporte respectivo.</p>
+							con el botón de "<span style=" color:red; font-weight:bolder;">Ver reporte</span>" podremos
+							ver el reporte respectivo también nos mostrara los datos más a detalle de las factura.</p>
 						<div class="img"><img src="img ayuda/factura.PNG" alt="Facturas"></div>
 					</div>
 				</scroll-page>
@@ -298,10 +318,11 @@
 				<scroll-page id="Pantalla10">
 					<div>
 						<p>Cuando le damos al botón de "<span style=" color:red; font-weight:bolder;">Ver
-								reporte</span>" en la tabla de facturas, nos aparecerá un reporte respectivo donde
+								reporte</span>" en la tabla de facturas, nos aparecerá un reporte respectivo donde nos
 							muestrán los productos comprados por el cliente. Y finalmente si le damos al botón "
 							<span	style=" color:crimson; font-weight:bolder;">Reporte PDF </span>" podrémos descargar
-							dicho reporte en formaro <span style="font-weight:bolder;">PDF</span>.</p>
+							dicho reporte en formato <span style="font-weight:bolder;">PDF</span> también nos mostrara los 
+							datos del cliente como el nombre, documento, direccion, correo y por ultimo los datos más a detalle de la compra.</p>
 						<div class="img"><img src="img ayuda/reportefactura.PNG" alt="Reporte Facturas"></div>
 					</div>
 				</scroll-page>
