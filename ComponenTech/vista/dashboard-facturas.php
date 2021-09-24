@@ -115,7 +115,6 @@ if ($_SESSION['user']->CARGO_idCargo==3) {
                             <td></td>
                             <td>ID</td>
                             <td>Fecha</td>
-                            <td>Subtotal</td>
                             <td>Total</td>
                             <td>Tipo de pago</td>
                             <td>Usuario</td>

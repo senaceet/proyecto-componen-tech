@@ -44,13 +44,14 @@ function putFacturas(data, count) {
     facturas.innerHTML = ''
     let num = offset + 1
     data.forEach(e => {
+        total = new Intl.NumberFormat("es-CO").format(parseInt(e.total))
         // console.log(e)
         facturas.innerHTML += `<tr>
                 <td>${num}</td>
                 <td>${e.idFactura}</td>
                 <td>${e.fecha}</td>
-                <td>${e.subtotal}</td>
-                <td>${e.total}</td>
+
+                <td>$${total}</td>
                 <td>${e.tipo}</td>
                 <td>${e.USUARIO_documento}</td>
                 <td>${e.estado}</td>
